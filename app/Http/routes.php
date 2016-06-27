@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['apisurveylitbang']], function () {
+    Route::resource('user', 'UserController', ['only' => [
+        'store', 'destroy', 'update', 'show'
+    ]]);
 });
