@@ -37,7 +37,7 @@ class UserController extends Controller
         if(empty($user) || count($user) === 0){
             return response()->json([
                 'status' => 'error',
-                'message' => 'user tidak ditemukan'
+                'message' => trans('errors.data_not_found', ['dataname' => 'user'])
             ], 400);
         }
         return response()->json($user);
