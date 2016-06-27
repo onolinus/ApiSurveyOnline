@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\UserModel;
+
 class UserController extends Controller
 {
     /**
@@ -16,7 +18,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new UserModel();
+        $user->type = $request->type;
+        $user->username = $request->username;
+        $user->password = $request->password;
+        $user->save();
     }
 
     /**
@@ -27,7 +33,14 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = UserModel::where('id', $id)->get();
+        if(empty($user) || count($user) === 0){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'user tidak ditemukan'
+            ], 400);
+        }
+        return response()->json($user);
     }
 
     /**
