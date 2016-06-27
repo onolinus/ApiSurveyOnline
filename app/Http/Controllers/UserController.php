@@ -8,8 +8,37 @@ use App\Http\Requests;
 
 use App\UserModel;
 
+use Illuminate\Support\Facades\Validator;
+
 class UserController extends Controller
 {
+    private $validator;
+
+    private function validationRules($event){
+        $rules = [
+            'type' => 'in:admin,correspondent,validator',
+            'username' => 'max:50|unique:users,username',
+            'password' => 'min:5',
+        ];
+
+        if($event === 'store'){
+            foreach($rules as &$rule){
+                $rule = 'required|' . $rule;
+            }
+        }
+
+        return $rules;
+    }
+
+    private function runValidation($request, $event){
+        $this->validator = Validator::make($request->all(), $this->validationRules($event));
+        if($this->validator->fails()){
+            return false;
+        }
+
+        return true;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -18,6 +47,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        if(!$this->runValidation($request, 'store')){
+            return response()->json([
+                'status' => 'errors',
+                'errors' => $this->validator->errors()->all()
+            ], 400);
+        }
+
         $user = new UserModel();
         $user->type = $request->type;
         $user->username = $request->username;
@@ -58,6 +94,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(!$this->runValidation($request, 'update')){
+            return response()->json([
+                'status' => 'errors',
+                'errors' => $this->validator->errors()->all()
+            ], 400);
+        }
+
         /** @var UserModel $user */
         $user = UserModel::find($id);
         if(empty($user) || count($user) === 0){
