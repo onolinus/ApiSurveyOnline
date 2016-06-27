@@ -53,6 +53,12 @@ return [
         ],
 
         'mysql' => [
+            'read' => [
+                'host' => env('DB_READ_HOST', 'localhost'),
+            ],
+            'write' => [
+                'host' => env('DB_WRITE_HOST', 'localhost'),
+            ],
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '3306'),
