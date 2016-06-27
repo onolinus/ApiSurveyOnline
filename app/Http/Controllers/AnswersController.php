@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\UserModel;
+
 
 class UserController extends Controller
 {
@@ -22,13 +22,7 @@ class UserController extends Controller
         $user->type = $request->type;
         $user->username = $request->username;
         $user->password = $request->password;
-
-        if($user->save()){
-            return response()->json([
-                'status' => 'success',
-                'message' => trans('success.data_saved', ['dataname' => 'user'])
-            ], 201);
-        }
+        $user->save();
     }
 
     /**
@@ -58,25 +52,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /** @var UserModel $user */
-        $user = UserModel::find($id);
-        if(empty($user) || count($user) === 0){
-            return response()->json([
-                'status' => 'error',
-                'message' => trans('errors.data_not_found', ['dataname' => 'user'])
-            ], 404);
-        }
-
-        $user->type = $request->type;
-        $user->username = $request->username;
-        $user->password = $request->password;
-
-        if($user->save()){
-            return response()->json([
-                'status' => 'success',
-                'message' => trans('success.data_updated', ['dataname' => 'user'])
-            ], 201);
-        }
+        //
     }
 
     /**
@@ -87,20 +63,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        /** @var UserModel $user */
-        $user = UserModel::find($id);
-        if(empty($user) || count($user) === 0){
-            return response()->json([
-                'status' => 'error',
-                'message' => trans('errors.data_not_found', ['dataname' => 'user'])
-            ], 404);
-        }
-
-        if($user->delete()){
-            return response()->json([
-                'status' => 'success',
-                'message' => trans('success.data_deleted', ['dataname' => 'user'])
-            ], 200);
-        }
+        //
     }
 }
