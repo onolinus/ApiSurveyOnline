@@ -1,11 +1,9 @@
 /vendor
-/node_modules
 /public/storage
 /public/tmp
 Homestead.yaml
 Homestead.json
 .env
 .idea/
-/resources/assets/bower
 npm-debug.log
 /notes
