@@ -24,9 +24,9 @@ For `production` mode running composer using `--no-dev` option
 ```
 $ composer install --no-dev
 ```
-Then start your web server : php artisan serve --port=8000
+Then start your web server
 ```
-$ php artisan serve
+$ php artisan serve --port=8000
 Laravel development server started on http://localhost:8000/
 ```
 
