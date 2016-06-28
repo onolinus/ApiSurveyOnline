@@ -1,6 +1,6 @@
 <?php
 
-namespace Helper\Questions\Chapter;
+namespace app\Helper\Questions\Chapter;
 
 if (! function_exists('getChaptersData')) {
     function getChaptersData($chapter_number = null){

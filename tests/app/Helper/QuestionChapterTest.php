@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\app\Libraries\Helper;
+namespace tests\app\Helper;
 
-use function Helper\Questions\Chapter\getChaptersData;
+use function app\Helper\Questions\Chapter\getChaptersData;
 
 class QuestionChapterTest extends \PHPUnit_Framework_TestCase{
 
