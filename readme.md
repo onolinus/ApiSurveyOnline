@@ -30,6 +30,11 @@ $ php artisan serve
 Laravel development server started on http://localhost:8000/
 ```
 
+## How to run the unit test
+After successfully run `composer install` without using `--no-dev` option, then try run this command below
+```
+$  ./vendor/bin/phpunit -c phpunit.xml --debug tests/app/
+```
 
 ## About
 
