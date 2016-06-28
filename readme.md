@@ -19,6 +19,11 @@ Generating autoload files
 > php artisan optimize
 Generating optimized class loader
 ```
+#### Note
+For `production` mode running composer using `--no-dev` option
+```
+$ composer install --no-dev
+```
 Then start your web server : php artisan serve --port=8000
 ```
 $ php artisan serve
