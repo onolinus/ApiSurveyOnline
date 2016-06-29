@@ -9,7 +9,7 @@ interface InterfaceQuestions{
 
     public function getChapterTitle();
 
-    public function isValidAnswer($answer);
+    public function isValidAnswer();
 
     public function getErrors();
 

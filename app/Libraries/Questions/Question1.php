@@ -11,6 +11,14 @@ class Question1 implements InterfaceQuestions{
     CONST NUMBER = 1;
     CONST CHAPTER_NUMBER = 1;
 
+    private $total, $percentage;
+
+    public function __construct($total, $percentage)
+    {
+        $this->total = $total;
+        $this->percentage = $percentage;
+    }
+
     /**
      * @var \Illuminate\Validation\Validator
      */
@@ -31,9 +39,9 @@ class Question1 implements InterfaceQuestions{
         return self::NUMBER;
     }
 
-    public function isValidAnswer($answer)
+    public function isValidAnswer()
     {
-        $this->validator = Validator::make($answer, [
+        $this->validator = Validator::make($this->getAnswer(), [
             'total' => 'required|numeric',
             'percentage' => 'required|numeric|max:100',
         ]);
@@ -47,6 +55,9 @@ class Question1 implements InterfaceQuestions{
 
     public function getAnswer()
     {
-        // TODO: Implement getAnswer() method.
+        return [
+            'total' => $this->total,
+            'percentage' => $this->percentage,
+        ];
     }
 }
