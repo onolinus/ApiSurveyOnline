@@ -60,4 +60,22 @@ class Question1 implements InterfaceQuestions{
             'percentage' => $this->percentage,
         ];
     }
+
+    /**
+     * @param mixed $total
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+        return $this;
+    }
+
+    /**
+     * @param mixed $percentage
+     */
+    public function setPercentage($percentage)
+    {
+        $this->percentage = $percentage;
+        return $this;
+    }
 }
