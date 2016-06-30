@@ -13,5 +13,7 @@ interface InterfaceQuestions{
 
     public function getErrors();
 
-    public function getAnswer();
+    public function getValidatedAnswer();
+
+    public function getRules();
 }

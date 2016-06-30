@@ -2,11 +2,8 @@
 
 namespace app\Libraries\Questions;
 
-use function app\Helper\Questions\Chapter\getChaptersData;
 
-use Illuminate\Support\Facades\Validator;
-
-class Question1 implements InterfaceQuestions{
+class Question1 extends AbstractQuestion{
 
     CONST NUMBER = 1;
     CONST CHAPTER_NUMBER = 1;
@@ -15,46 +12,10 @@ class Question1 implements InterfaceQuestions{
 
     public function __construct($total, $percentage)
     {
-        $this->total = $total;
-        $this->percentage = $percentage;
+        $this->setTotal($total)->setPercentage($percentage);
     }
 
-    /**
-     * @var \Illuminate\Validation\Validator
-     */
-    private $validator;
-
-    public function getChapterNumber()
-    {
-        return self::CHAPTER_NUMBER;
-    }
-
-    public function getChapterTitle()
-    {
-        return getChaptersData(self::CHAPTER_NUMBER);
-    }
-
-    public function getNumber()
-    {
-        return self::NUMBER;
-    }
-
-    public function isValidAnswer()
-    {
-        $this->validator = Validator::make($this->getAnswer(), [
-            'total' => 'required|numeric',
-            'percentage' => 'required|numeric|max:100',
-        ]);
-
-        return !$this->validator->fails();
-    }
-
-    public function getErrors(){
-        return $this->validator->errors()->all();
-    }
-
-    public function getAnswer()
-    {
+    protected function getAnswer(){
         return [
             'total' => $this->total,
             'percentage' => $this->percentage,
@@ -67,6 +28,7 @@ class Question1 implements InterfaceQuestions{
     public function setTotal($total)
     {
         $this->total = $total;
+        $this->postSetter();
         return $this;
     }
 
@@ -76,6 +38,15 @@ class Question1 implements InterfaceQuestions{
     public function setPercentage($percentage)
     {
         $this->percentage = $percentage;
+        $this->postSetter();
         return $this;
+    }
+
+    public function getRules()
+    {
+        return [
+            'total' => 'required|numeric',
+            'percentage' => 'required|numeric|max:100',
+        ];
     }
 }

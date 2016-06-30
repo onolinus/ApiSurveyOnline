@@ -14,7 +14,25 @@ class Question1Test extends \TestCase{
     public function test_isValidAnswer_return_true(){
         $Question1 = new Question1(100.9, 100);
         $this->assertTrue($Question1->isValidAnswer());
+        $this->assertEquals([
+            'total' => 100.9,
+            'percentage' => 100,
+        ], $Question1->getValidatedAnswer());
     }
+
+
+    public function test_getValidatedAnswer_skip_isValidAnswer_then_throw_exception(){
+        $Question1 = new Question1(100.9, 100);
+        try{
+            $this->assertEquals([
+                'total' => 100.9,
+                'percentage' => 100,
+            ], $Question1->getValidatedAnswer());
+        }catch(\Exception $e){
+            $this->assertEquals('You must run the `isValidAnswer` after update the attribute', $e->getMessage());
+        }
+    }
+
 
     public function test_isValidAnswer_where_total_and_percentage_is_null(){
         $Question1 = new Question1(null, null);
