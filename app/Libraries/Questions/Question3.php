@@ -63,6 +63,9 @@ class Question3 extends AbstractQuestion{
 
     public function getRules()
     {
-        // TODO: Implement getRules() method.
+        return [
+            'dipa.*' => 'required|numeric',
+            'dana_lainnya.*' => 'required|numeric',
+        ];
     }
 }
