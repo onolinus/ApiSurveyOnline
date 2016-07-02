@@ -10,7 +10,7 @@ class Question1 extends AbstractQuestion{
 
     private $total, $percentage;
 
-    public function __construct($total, $percentage)
+    public function __construct($total = null, $percentage = null)
     {
         $this->setTotal($total)->setPercentage($percentage);
     }

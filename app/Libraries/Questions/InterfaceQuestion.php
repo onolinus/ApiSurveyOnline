@@ -2,7 +2,7 @@
 
 namespace app\Libraries\Questions;
 
-interface InterfaceQuestions{
+interface InterfaceQuestion{
     public function getChapterNumber();
 
     public function getNumber();

@@ -5,7 +5,7 @@ namespace app\Libraries\Questions;
 use function app\Helper\Questions\Chapter\getChaptersData;
 use Illuminate\Support\Facades\Validator;
 
-abstract class AbstractQuestion implements InterfaceQuestions{
+abstract class AbstractQuestion implements InterfaceQuestion{
     /**
      * @var \Illuminate\Validation\Validator
      */

@@ -14,7 +14,7 @@ class Question3 extends AbstractQuestion{
     private $dipa_keys = ['dana_pemerintah', 'PNBP', 'PHLN'];
     private $dana_lainnya_keys = ['perusahaan_swasta', 'instansi_pemerintah', 'swasta_non_profit', 'luar_negeri'];
 
-    public function __construct($dipa, $dana_lainnya)
+    public function __construct($dipa = null, $dana_lainnya = null)
     {
         $this->setDipa($dipa)->setDanaLainnya($dana_lainnya);
     }
@@ -63,9 +63,16 @@ class Question3 extends AbstractQuestion{
 
     public function getRules()
     {
-        return [
-            'dipa.*' => 'required|numeric',
-            'dana_lainnya.*' => 'required|numeric',
-        ];
+        $rules = [];
+
+        foreach($this->dipa_keys as $value) {
+            $rules['dipa.' . $value] = 'required|numeric';
+        }
+
+        foreach($this->dana_lainnya_keys as $value){
+            $rules['dana_lainnya.' . $value] = 'required|numeric';
+        }
+
+        return $rules;
     }
 }

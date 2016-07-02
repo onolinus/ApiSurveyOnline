@@ -11,7 +11,7 @@ class Question2 extends AbstractQuestion{
 
     private $jumlah;
 
-    public function __construct($jumlah)
+    public function __construct($jumlah = null)
     {
         $this->setJumlah($jumlah);
     }
