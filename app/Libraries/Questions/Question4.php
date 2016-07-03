@@ -13,7 +13,7 @@ class Question4 extends AbstractQuestion{
 
     private $belanja_pegawai_keys = ['gaji_upah_honor_proyek'];
     private $belanja_modal_keys = ['tanah_gedung_bangunan', 'kendaraan_mesin_peralatan'];
-    private $belanja_operasional_keys = ['pemeliharaan', 'perbaikan'];
+    private $belanja_operasional_keys = ['pemeliharaan_perbaikan'];
 
     public function __construct($belanja_pegawai = null, $belanja_modal = null, $belanja_operasional = null)
     {
