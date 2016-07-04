@@ -17,6 +17,18 @@ class Question3Test extends \TestCase{
         ], $Question3->getValidatedAnswer());
     }
 
+    public function test_isValidAnswer_where_all_belanja_is_null(){
+        $Question3 = new Question3();
+        $this->assertFalse($Question3->isValidAnswer());
+        $this->assertEquals("The dipa.dana pemerintah field is required.", $Question3->getErrors()[0]);
+        $this->assertEquals("The dipa. p n b p field is required.", $Question3->getErrors()[1]);
+        $this->assertEquals("The dipa. p h l n field is required.", $Question3->getErrors()[2]);
+        $this->assertEquals("The dana lainnya.perusahaan swasta field is required.", $Question3->getErrors()[3]);
+        $this->assertEquals("The dana lainnya.instansi pemerintah field is required.", $Question3->getErrors()[4]);
+        $this->assertEquals("The dana lainnya.swasta non profit field is required.", $Question3->getErrors()[5]);
+        $this->assertEquals("The dana lainnya.luar negeri field is required.", $Question3->getErrors()[6]);
+    }
+
     public function test_value_is_not_numeric(){
         $dipa = ['dana_pemerintah' => 'dana_pemerintah', 'PNBP' => 'PNBP', 'PHLN' => 100];
         $dana_lainnya = ['perusahaan_swasta' => 100, 'instansi_pemerintah' => 100, 'swasta_non_profit' => 100, 'luar_negeri' => 100];

@@ -19,6 +19,16 @@ class Question4Test extends \TestCase{
         ], $Question4->getValidatedAnswer());
     }
 
+    public function test_isValidAnswer_where_all_belanja_is_null(){
+        $Question4 = new Question4();
+        $this->assertFalse($Question4->isValidAnswer());
+        $this->assertEquals('The belanja pegawai.gaji upah honor proyek field is required.', $Question4->getErrors()[0]);
+        $this->assertEquals('The belanja modal.tanah gedung bangunan field is required.', $Question4->getErrors()[1]);
+        $this->assertEquals('The belanja modal.kendaraan mesin peralatan field is required.', $Question4->getErrors()[2]);
+        $this->assertEquals('The belanja operasional.pemeliharaan perbaikan field is required.', $Question4->getErrors()[3]);
+
+    }
+
     public function test_value_is_not_numeric(){
         $belanja_pegawai = ['gaji_upah_honor_proyek' => 'gaji_upah_honor_proyek'];
         $belanja_modal = ['tanah_gedung_bangunan' => 100, 'kendaraan_mesin_peralatan' => 'kendaraan_mesin_peralatan'];

@@ -19,8 +19,15 @@ class Question5Test extends \TestCase
                     'B' => 30,
                     'C' => 20,
                 ),
+            'count_dana' => 3,
             'total_percentage' => 100,
         ), $Question5->getValidatedAnswer());
+    }
+
+    public function test_isValidAnswer_where_all_dana_is_null_then_return_error_count_dana(){
+        $Question5 = new Question5();
+        $this->assertFalse($Question5->isValidAnswer());
+        $this->assertEquals('The count dana must be at least 1.', $Question5->getErrors()[0]);
     }
 
     public function test_isValidAnswer_where_total_percentage_size_is_not_100()
@@ -37,6 +44,7 @@ class Question5Test extends \TestCase
         $Question5->setPersentaseDana('A', null)->setPersentaseDana('B', 30)->setPersentaseDana('C', 10);
         $this->assertFalse($Question5->isValidAnswer());
         $this->assertEquals('The dana. a field is required.', $Question5->getErrors()[0]);
+        $this->assertEquals('The total percentage must be 100.', $Question5->getErrors()[1]);
     }
 
     public function test_isValidAnswer_where_dana_is_noy_numeric()
@@ -45,5 +53,6 @@ class Question5Test extends \TestCase
         $Question5->setPersentaseDana('A', 'A')->setPersentaseDana('B', 30)->setPersentaseDana('C', 10);
         $this->assertFalse($Question5->isValidAnswer());
         $this->assertEquals('The dana. a must be a number.', $Question5->getErrors()[0]);
+        $this->assertEquals('The total percentage must be 100.', $Question5->getErrors()[1]);
     }
 }
