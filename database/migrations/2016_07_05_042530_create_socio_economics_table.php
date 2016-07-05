@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateResearchFieldsTable extends Migration
+class CreateSocioEconomicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,13 @@ class CreateResearchFieldsTable extends Migration
      */
     public function up()
     {
-        Schema::create('research_fields', function (Blueprint $table) {
+        Schema::create('socio_economics', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->string('code', 5)->unique();
-            $table->string('subject', 100);
-            $table->string('area', 100);
-            $table->string('sub_area', 100);
+            $table->string('division', 100);
+            $table->integer('division_number')->unsigned();
+            $table->string('category', 100);
+            $table->string('group', 100);
             $table->primary('code');
         });
     }
@@ -29,6 +30,6 @@ class CreateResearchFieldsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('research_fields');
+        Schema::drop('socio_economics');
     }
 }

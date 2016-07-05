@@ -43,6 +43,13 @@ class Question5 extends AbstractQuestion{
         /** @var  \Illuminate\Validation\Validator */
         $this->validator = Validator::make($this->getAnswer(), $this->getRules());
 
+//        foreach(){
+//            $this->validator->sometimes('total_percentage', 'required|numeric|size:100', function($input) {
+//                return $this->getPercentageTotal() > 0;
+//            });
+//        }
+
+
         $this->validator->sometimes('total_percentage', 'required|numeric|size:100', function($input) {
             return $this->getPercentageTotal() > 0;
         });
