@@ -27,6 +27,10 @@ abstract class AbstractQuestion implements InterfaceQuestion{
         return static::CHAPTER_NUMBER;
     }
 
+    public function getChapterRomanicNumber(){
+        return \app\Helper\Number\simple_romanic_number($this->getChapterNumber());
+    }
+
     public function getNumber(){
         return static::NUMBER;
     }
