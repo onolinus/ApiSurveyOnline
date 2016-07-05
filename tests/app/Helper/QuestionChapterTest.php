@@ -26,6 +26,10 @@ class QuestionChapterTest extends \PHPUnit_Framework_TestCase{
 
     public function test_getChaptersData_when_parameter_chapter_number_is_not_null(){
         $this->assertEquals($this->chapters[1], getChaptersData(1));
+        $this->assertEquals($this->chapters[2], getChaptersData(2));
+        $this->assertEquals($this->chapters[3], getChaptersData(3));
+        $this->assertEquals($this->chapters[4], getChaptersData(4));
+        $this->assertEquals($this->chapters[5], getChaptersData(5));
     }
 
     public function test_getChaptersData_when_parameter_chapter_number_is_not_exist(){
