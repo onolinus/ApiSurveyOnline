@@ -68,9 +68,51 @@ class ResearchFieldsSeeder extends Seeder
             ],
             [
                 'code' => '02.08',
+                'subject' => 'Physical Chemistry',
+                'area' => 'NATURAL SCIENCES',
+                'sub_area' => 'Chemical Sciences'
+            ],
+            [
+                'code' => '03.01',
                 'subject' => 'Other Physical Sciences',
                 'area' => 'NATURAL SCIENCES',
-                'sub_area' => 'Physical Sciences'
+                'sub_area' => 'Chemical Sciences'
+            ],
+            [
+                'code' => '03.02',
+                'subject' => 'Inorganic Chemistry',
+                'area' => 'NATURAL SCIENCES',
+                'sub_area' => 'Chemical Sciences'
+            ],
+            [
+                'code' => '03.03',
+                'subject' => 'Organic Chemistry',
+                'area' => 'NATURAL SCIENCES',
+                'sub_area' => 'Chemical Sciences'
+            ],
+            [
+                'code' => '03.04',
+                'subject' => 'Analytical Chemistry',
+                'area' => 'NATURAL SCIENCES',
+                'sub_area' => 'Chemical Sciences'
+            ],
+            [
+                'code' => '03.05',
+                'subject' => 'Macromolecular Chemistry',
+                'area' => 'NATURAL SCIENCES',
+                'sub_area' => 'Chemical Sciences'
+            ],
+            [
+                'code' => '03.06',
+                'subject' => 'Theoretical and Computational Chemistry',
+                'area' => 'NATURAL SCIENCES',
+                'sub_area' => 'Chemical Sciences'
+            ],
+            [
+                'code' => '03.07',
+                'subject' => 'Other Chemical Sciences',
+                'area' => 'NATURAL SCIENCES',
+                'sub_area' => 'Chemical Sciences'
             ],
         ]);
     }
