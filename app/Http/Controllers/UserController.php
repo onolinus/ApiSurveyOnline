@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\UserModel;
+use App\Users;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -54,7 +54,7 @@ class UserController extends Controller
             ], 400);
         }
 
-        $user = new UserModel();
+        $user = new Users();
         $user->type = $request->type;
         $user->username = $request->username;
         $user->password = $request->password;
@@ -75,7 +75,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = UserModel::where('id', $id)->get();
+        $user = Users::where('id', $id)->get();
         if(empty($user) || count($user) === 0){
             return response()->json([
                 'status' => 'error',
@@ -101,8 +101,8 @@ class UserController extends Controller
             ], 400);
         }
 
-        /** @var UserModel $user */
-        $user = UserModel::find($id);
+        /** @var Users $user */
+        $user = Users::find($id);
         if(empty($user) || count($user) === 0){
             return response()->json([
                 'status' => 'error',
@@ -130,8 +130,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        /** @var UserModel $user */
-        $user = UserModel::find($id);
+        /** @var Users $user */
+        $user = Users::find($id);
         if(empty($user) || count($user) === 0){
             return response()->json([
                 'status' => 'error',

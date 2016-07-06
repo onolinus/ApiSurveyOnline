@@ -18,9 +18,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new UserModel();
+        $user = new Users();
         $user->type = $request->type;
-        $user->username = $request->username;
+        $user->email = $request->username;
         $user->password = $request->password;
         $user->save();
     }
@@ -33,7 +33,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = UserModel::where('id', $id)->get();
+        $user = Users::where('id', $id)->get();
         if(empty($user) || count($user) === 0){
             return response()->json([
                 'status' => 'error',
