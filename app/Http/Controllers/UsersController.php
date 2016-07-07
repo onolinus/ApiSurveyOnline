@@ -10,7 +10,7 @@ use App\Users;
 
 use Illuminate\Support\Facades\Validator;
 
-class UserController extends Controller
+class UsersController extends Controller
 {
     private $validator;
 

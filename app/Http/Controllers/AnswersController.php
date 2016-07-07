@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Users;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 
 
 
-class UserController extends Controller
+class AnswersController extends Controller
 {
     /**
      * Store a newly created resource in storage.

@@ -12,7 +12,7 @@
 */
 
 Route::group(['middleware' => ['apisurveylitbang']], function () {
-    Route::resource('user', 'UserController', ['only' => [
+    Route::resource('user', 'UsersController', ['only' => [
         'store', 'destroy', 'update', 'show'
     ]]);
 });
