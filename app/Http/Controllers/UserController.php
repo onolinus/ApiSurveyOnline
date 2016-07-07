@@ -17,7 +17,7 @@ class UserController extends Controller
     private function validationRules($event){
         $rules = [
             'type' => 'in:admin,correspondent,validator',
-            'username' => 'max:50|unique:users,username',
+            'email' => 'max:50|unique:users,email',
             'password' => 'min:5',
         ];
 
@@ -56,7 +56,7 @@ class UserController extends Controller
 
         $user = new Users();
         $user->type = $request->type;
-        $user->username = $request->username;
+        $user->email = $request->email;
         $user->password = $request->password;
 
         if($user->save()){
@@ -111,7 +111,7 @@ class UserController extends Controller
         }
 
         $user->type = $request->type;
-        $user->username = $request->username;
+        $user->email = $request->email;
         $user->password = $request->password;
 
         if($user->save()){

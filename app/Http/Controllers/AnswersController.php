@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         $user = new Users();
         $user->type = $request->type;
-        $user->email = $request->username;
+        $user->email = $request->email;
         $user->password = $request->password;
         $user->save();
     }
