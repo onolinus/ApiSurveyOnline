@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SocioEconomic extends Model
+class SocioEconomics extends Model
 {
-    protected $table = 'socio_economic';
+    protected $table = 'socio_economics';
 
     protected $primaryKey = 'code';
 
