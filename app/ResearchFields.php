@@ -15,4 +15,6 @@ class ResearchFields extends Model
     protected $connection = 'mysql';
 
     protected $fillable = ['code', 'subject', 'area', 'sub_area'];
+
+    public $incrementing = false;
 }

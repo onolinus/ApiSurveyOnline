@@ -15,4 +15,6 @@ class SocioEconomics extends Model
     protected $connection = 'mysql';
 
     protected $fillable = ['code', 'division', 'division_number', 'category', 'group'];
+
+    public $incrementing = false;
 }
