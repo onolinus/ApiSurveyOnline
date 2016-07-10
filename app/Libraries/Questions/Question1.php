@@ -1,7 +1,7 @@
 <?php
 
 namespace app\Libraries\Questions;
-
+use PluginSimpleValidate\Field;
 
 class Question1 extends AbstractQuestion{
 
@@ -42,11 +42,10 @@ class Question1 extends AbstractQuestion{
         return $this;
     }
 
-    public function getRules()
+    public function setValidationRules()
     {
-        return [
-            'total' => 'required|numeric',
-            'percentage' => 'required|numeric|max:100',
-        ];
+        $this->validator
+            ->addField((new Field('total', $this->total, 'Total Realisasi Anggaran'))->is_required()->is_numeric())
+            ->addField((new Field('percentage', $this->percentage, 'Persentase Realisasi Anggaran'))->is_required()->is_integer()->max(100));
     }
 }

@@ -3,11 +3,11 @@
 namespace app\Libraries\Questions;
 
 use function app\Helper\Questions\Chapter\getChaptersData;
-use Illuminate\Support\Facades\Validator;
+use PluginSimpleValidate\Validation;
 
 abstract class AbstractQuestion implements InterfaceQuestion{
     /**
-     * @var \Illuminate\Validation\Validator
+     * @var Validation
      */
     protected $validator;
 
@@ -17,10 +17,6 @@ abstract class AbstractQuestion implements InterfaceQuestion{
 
     protected function postSetter(){
         $this->resetValidator();
-    }
-
-    public function getErrors(){
-        return $this->validator->errors()->all();
     }
 
     public function getChapterNumber(){
@@ -39,6 +35,10 @@ abstract class AbstractQuestion implements InterfaceQuestion{
         return getChaptersData($this->getChapterNumber());
     }
 
+    public function getErrors(){
+        return $this->validator->getErrors();
+    }
+
     public function getValidatedAnswer()
     {
         if($this->validator === null){
@@ -50,12 +50,16 @@ abstract class AbstractQuestion implements InterfaceQuestion{
 
     public function isValidAnswer()
     {
-        $this->validator = Validator::make($this->getAnswer(), $this->getRules());
+        $this->validator = new Validation();
 
-        return !$this->validator->fails();
+        $this->setValidationRules();
+
+        $this->validator->run();
+
+        return empty($this->validator->getErrors());
     }
 
     abstract protected function getAnswer();
 
-    abstract public function getRules();
+    abstract public function setValidationRules();
 }

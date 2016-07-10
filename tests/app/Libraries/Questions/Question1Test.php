@@ -37,38 +37,38 @@ class Question1Test extends \TestCase{
     public function test_isValidAnswer_where_total_and_percentage_is_null(){
         $Question1 = new Question1(null, null);
         $this->assertFalse($Question1->isValidAnswer());
-        $this->assertEquals($Question1->getErrors()[0], 'The total field is required.');
-        $this->assertEquals($Question1->getErrors()[1], 'The percentage field is required.');
+        $this->assertEquals('The Total Realisasi Anggaran field is required.', $Question1->getErrors()['total']);
+        $this->assertEquals('The Persentase Realisasi Anggaran field is required.', $Question1->getErrors()['percentage']);
     }
 
     public function test_isValidAnswer_where_percentage_is_null(){
         $Question1 = new Question1(1, null);
         $this->assertFalse($Question1->isValidAnswer());
-        $this->assertEquals($Question1->getErrors()[0], 'The percentage field is required.');
+        $this->assertEquals('The Persentase Realisasi Anggaran field is required.', $Question1->getErrors()['percentage']);
     }
 
     public function test_isValidAnswer_where_total_is_null(){
         $Question1 = new Question1(null, 100);
         $this->assertFalse($Question1->isValidAnswer());
-        $this->assertEquals($Question1->getErrors()[0], 'The total field is required.');
+        $this->assertEquals('The Total Realisasi Anggaran field is required.', $Question1->getErrors()['total']);
     }
 
     public function test_isValidAnswer_where_percentage_greater_than_100(){
         $Question1 = new Question1(1, 105);
         $this->assertFalse($Question1->isValidAnswer());
-        $this->assertEquals($Question1->getErrors()[0], 'The percentage may not be greater than 100.');
+        $this->assertEquals('The Persentase Realisasi Anggaran field may not be greater than 100.', $Question1->getErrors()['percentage']);
     }
 
     public function test_is_not_numeric_total(){
         $Question1 = new Question1('total', 101);
         $this->assertFalse($Question1->isValidAnswer());
-        $this->assertEquals($Question1->getErrors()[0], 'The total must be a number.');
-        $this->assertEquals($Question1->getErrors()[1], 'The percentage may not be greater than 100.');
+        $this->assertEquals('The Total Realisasi Anggaran field must be a number.', $Question1->getErrors()['total']);
+        $this->assertEquals('The Persentase Realisasi Anggaran field may not be greater than 100.', $Question1->getErrors()['percentage']);
     }
 
     public function test_is_not_numeric_percentage(){
         $Question1 = new Question1(1, 'percentage');
         $this->assertFalse($Question1->isValidAnswer());
-        $this->assertEquals($Question1->getErrors()[0], 'The percentage must be a number.');
+        $this->assertEquals('The Persentase Realisasi Anggaran field must be an integer.', $Question1->getErrors()['percentage']);
     }
 }

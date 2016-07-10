@@ -17,5 +17,5 @@ interface InterfaceQuestion{
 
     public function getValidatedAnswer();
 
-    public function getRules();
+    public function setValidationRules();
 }
