@@ -179,14 +179,7 @@ class SocioEconomicSeeder extends Seeder
                 'division_number' => '2',
                 'category' => 'Energy resources',
                 'group' => 'Exploration'
-            ], 
-            [
-                'code' => '05.01',
-                'division' => 'ECONOMIC DEVELOPMENT',
-                'division_number' => '2',
-                'category' => 'Energy resources',
-                'group' => 'Exploration'
-            ], 
+            ],
             [
                 'code' => '05.02',
                 'division' => 'ECONOMIC DEVELOPMENT',
