@@ -30,12 +30,12 @@ class Question2Test extends \TestCase{
     public function test_isValidAnswer_where_jumlah_is_null(){
         $Question2 = new Question2(null);
         $this->assertFalse($Question2->isValidAnswer());
-        $this->assertEquals($Question2->getErrors()[0], 'The jumlah field is required.');
+        $this->assertEquals('The Jumlah belanja kegiatan litbang field is required.', $Question2->getErrors()['jumlah']);
     }
 
     public function test_is_not_numeric_jumlah(){
         $Question2 = new Question2('jumlah');
         $this->assertFalse($Question2->isValidAnswer());
-        $this->assertEquals($Question2->getErrors()[0], 'The jumlah must be a number.');
+        $this->assertEquals('The Jumlah belanja kegiatan litbang field must be a number.', $Question2->getErrors()['jumlah']);
     }
 }

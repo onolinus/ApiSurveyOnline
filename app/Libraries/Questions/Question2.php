@@ -3,6 +3,7 @@
 namespace app\Libraries\Questions;
 
 use function app\Helper\Questions\Chapter\getChaptersData;
+use PluginSimpleValidate\Field;
 
 class Question2 extends AbstractQuestion{
 
@@ -26,11 +27,10 @@ class Question2 extends AbstractQuestion{
         return $this;
     }
 
-    public function getRules()
+    public function setValidationRules()
     {
-        return [
-            'jumlah' => 'required|numeric',
-        ];
+        $this->validator
+            ->addField((new Field('jumlah', $this->jumlah, 'Jumlah belanja kegiatan litbang'))->is_required()->is_numeric());
     }
 
     protected function getAnswer()
