@@ -3,11 +3,13 @@
 namespace App\Console\Commands;
 
 use App\ResearchFields;
-use App\SocioEconomic;
 use App\SocioEconomics;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use app\Libraries\SurveyCacheKey;
+use app\Libraries\ResearchFields as LibResearchFields;
+use app\Libraries\SocioEconomics as LibSocioEconomics;
+
 
 class WarmUp extends Command
 {
@@ -49,14 +51,14 @@ class WarmUp extends Command
         $cacheGenerated = [];
 
 
-        if($this->argument('cachename') === 'all' || $this->argument('cachename') === 'researchfields'){
+        if($this->argument('cachename') === 'all' || $this->argument('cachename') === LibResearchFields::CACHE_PREFIKS){
             $this->getResearchFields($reset_option, $keepoldcache_option);
-            $cacheGenerated[] = 'researchfields';
+            $cacheGenerated[] = LibResearchFields::CACHE_PREFIKS;
         }
 
-        if($this->argument('cachename') === 'all' || $this->argument('cachename') === 'socioeconomics') {
+        if($this->argument('cachename') === 'all' || $this->argument('cachename') === LibSocioEconomics::CACHE_PREFIKS) {
             $this->getSocioEconomics($reset_option, $keepoldcache_option);
-            $cacheGenerated[] = 'socioeconomics';
+            $cacheGenerated[] = LibSocioEconomics::CACHE_PREFIKS;
         }
 
 
@@ -69,8 +71,8 @@ class WarmUp extends Command
 
     protected function getResearchFields($reset = false, $keepoldcache_option = true)
     {
-        $key = SurveyCacheKey::getInstance()->generateCacheKey('researchfields');
-        $oldkey = SurveyCacheKey::getInstance()->generateOldCacheKey('researchfields');
+        $key = SurveyCacheKey::getInstance()->generateCacheKey(LibResearchFields::CACHE_PREFIKS);
+        $oldkey = SurveyCacheKey::getInstance()->generateOldCacheKey(LibResearchFields::CACHE_PREFIKS);
 
         if($keepoldcache_option === false && $oldkey){
             Cache::pull($oldkey); // delete old cache key
@@ -89,8 +91,8 @@ class WarmUp extends Command
 
     protected function getSocioEconomics($reset = false, $keepoldcache_option = true)
     {
-        $key = SurveyCacheKey::getInstance()->generateCacheKey('socioeconomics');
-        $oldkey = SurveyCacheKey::getInstance()->generateOldCacheKey('socioeconomics');
+        $key = SurveyCacheKey::getInstance()->generateCacheKey(LibSocioEconomics::CACHE_PREFIKS);
+        $oldkey = SurveyCacheKey::getInstance()->generateOldCacheKey(LibSocioEconomics::CACHE_PREFIKS);
 
         if($keepoldcache_option === false && $oldkey){
             Cache::pull($oldkey); // delete old cache key
