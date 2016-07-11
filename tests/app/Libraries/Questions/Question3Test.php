@@ -20,13 +20,13 @@ class Question3Test extends \TestCase{
     public function test_isValidAnswer_where_all_belanja_is_null(){
         $Question3 = new Question3();
         $this->assertFalse($Question3->isValidAnswer());
-        $this->assertEquals("The dipa.dana pemerintah field is required.", $Question3->getErrors()[0]);
-        $this->assertEquals("The dipa. p n b p field is required.", $Question3->getErrors()[1]);
-        $this->assertEquals("The dipa. p h l n field is required.", $Question3->getErrors()[2]);
-        $this->assertEquals("The dana lainnya.perusahaan swasta field is required.", $Question3->getErrors()[3]);
-        $this->assertEquals("The dana lainnya.instansi pemerintah field is required.", $Question3->getErrors()[4]);
-        $this->assertEquals("The dana lainnya.swasta non profit field is required.", $Question3->getErrors()[5]);
-        $this->assertEquals("The dana lainnya.luar negeri field is required.", $Question3->getErrors()[6]);
+        $this->assertEquals("Kolom Dana dari Pemerintah harus diisi.", $Question3->getErrors()['dipa.dana_pemerintah']);
+        $this->assertEquals("Kolom PNBP harus diisi.", $Question3->getErrors()['dipa.PNBP']);
+        $this->assertEquals("Kolom PHLN harus diisi.", $Question3->getErrors()['dipa.PHLN']);
+        $this->assertEquals("Kolom Perusahaan Swasta harus diisi.", $Question3->getErrors()['dana_lainnya.perusahaan_swasta']);
+        $this->assertEquals("Kolom Instansi Pemerintah harus diisi.", $Question3->getErrors()['dana_lainnya.instansi_pemerintah']);
+        $this->assertEquals("Kolom Swasta non profit harus diisi.", $Question3->getErrors()['dana_lainnya.swasta_non_profit']);
+        $this->assertEquals("Kolom Dari Luar Negeri harus diisi.", $Question3->getErrors()['dana_lainnya.luar_negeri']);
     }
 
     public function test_value_is_not_numeric(){
@@ -34,8 +34,8 @@ class Question3Test extends \TestCase{
         $dana_lainnya = ['perusahaan_swasta' => 100, 'instansi_pemerintah' => 100, 'swasta_non_profit' => 100, 'luar_negeri' => 100];
         $Question3 = new Question3($dipa, $dana_lainnya);
         $this->assertFalse($Question3->isValidAnswer());
-        $this->assertEquals('The dipa.dana pemerintah must be a number.', $Question3->getErrors()[0]);
-        $this->assertEquals('The dipa. p n b p must be a number.', $Question3->getErrors()[1]);
+        $this->assertEquals('Kolom Dana dari Pemerintah harus berisi angka.', $Question3->getErrors()['dipa.dana_pemerintah']);
+        $this->assertEquals('Kolom PNBP harus berisi angka.', $Question3->getErrors()['dipa.PNBP']);
     }
 
     public function test_value_is_null_then_get_error_required(){
@@ -43,7 +43,7 @@ class Question3Test extends \TestCase{
         $dana_lainnya = ['perusahaan_swasta' => null, 'instansi_pemerintah' => 100, 'swasta_non_profit' => 100, 'luar_negeri' => 100];
         $Question3 = new Question3($dipa, $dana_lainnya);
         $this->assertFalse($Question3->isValidAnswer());
-        $this->assertEquals('The dipa.dana pemerintah field is required.', $Question3->getErrors()[0]);
-        $this->assertEquals('The dana lainnya.perusahaan swasta field is required.', $Question3->getErrors()[1]);
+        $this->assertEquals('Kolom Dana dari Pemerintah harus diisi.', $Question3->getErrors()['dipa.dana_pemerintah']);
+        $this->assertEquals('Kolom Perusahaan Swasta harus diisi.', $Question3->getErrors()['dana_lainnya.perusahaan_swasta']);
     }
 }

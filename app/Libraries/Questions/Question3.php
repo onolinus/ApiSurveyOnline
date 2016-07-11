@@ -3,6 +3,7 @@
 namespace app\Libraries\Questions;
 
 use function app\Helper\Questions\Chapter\getChaptersData;
+use PluginSimpleValidate\Field;
 
 class Question3 extends AbstractQuestion{
 
@@ -11,8 +12,17 @@ class Question3 extends AbstractQuestion{
 
     private $dipa, $dana_lainnya;
 
-    private $dipa_keys = ['dana_pemerintah', 'PNBP', 'PHLN'];
-    private $dana_lainnya_keys = ['perusahaan_swasta', 'instansi_pemerintah', 'swasta_non_profit', 'luar_negeri'];
+    private $dipa_keys = [
+        'dana_pemerintah' => 'Dana dari Pemerintah',
+        'PNBP' => 'PNBP',
+        'PHLN' => 'PHLN'
+    ];
+    private $dana_lainnya_keys = [
+        'perusahaan_swasta' => 'Perusahaan Swasta',
+        'instansi_pemerintah' => 'Instansi Pemerintah',
+        'swasta_non_profit' => 'Swasta non profit',
+        'luar_negeri' => 'Dari Luar Negeri'
+    ];
 
     public function __construct($dipa = null, $dana_lainnya = null)
     {
@@ -34,7 +44,7 @@ class Question3 extends AbstractQuestion{
     {
         if(is_array($dipa)){
             foreach($dipa as $key => $value){
-                if(in_array($key, $this->dipa_keys)){
+                if(array_key_exists($key, $this->dipa_keys)){
                     $this->dipa[$key] = $value;
                 }
             }
@@ -51,7 +61,7 @@ class Question3 extends AbstractQuestion{
     {
         if(is_array($dana_lainnya)){
             foreach($dana_lainnya as $key => $value){
-                if(in_array($key, $this->dana_lainnya_keys)){
+                if(array_key_exists($key, $this->dana_lainnya_keys)){
                     $this->dana_lainnya[$key] = $value;
                 }
             }
@@ -61,18 +71,16 @@ class Question3 extends AbstractQuestion{
         return $this;
     }
 
-    public function getRules()
+    public function setValidationRules()
     {
-        $rules = [];
-
-        foreach($this->dipa_keys as $value) {
-            $rules['dipa.' . $value] = 'required|numeric';
+        foreach($this->dipa_keys as $key => $label) {
+            $value = isset($this->dipa[$key]) ? $this->dipa[$key] : null;
+            $this->validator->addField((new Field('dipa.' . $key, $value, $label))->is_required()->is_numeric());
         }
 
-        foreach($this->dana_lainnya_keys as $value){
-            $rules['dana_lainnya.' . $value] = 'required|numeric';
+        foreach($this->dana_lainnya_keys as $key => $label){
+            $value = isset($this->dana_lainnya[$key]) ? $this->dana_lainnya[$key] : null;
+            $this->validator->addField((new Field('dana_lainnya.' . $key, $value, $label))->is_required()->is_numeric());
         }
-
-        return $rules;
     }
 }
