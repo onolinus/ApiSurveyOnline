@@ -77,4 +77,10 @@ class Question5Test extends \TestCase
         $this->assertEquals('Kolom Persentase Dana : 01.01 harus berisi angka.', $Question5->getErrors()['persentase_dana.01.01']);
         $this->assertEquals('Kolom Total Persentase Realisasi Anggaran harus bernilai 100.', $Question5->getErrors()['total_percentage']);
     }
+
+    public function tearDown()
+    {
+        parent::tearDown();
+        Mockery::close();
+    }
 }
