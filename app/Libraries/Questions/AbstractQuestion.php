@@ -2,7 +2,7 @@
 
 namespace app\Libraries\Questions;
 
-use function app\Helper\Questions\Chapter\getChaptersData;
+use app\Helper\Questions\Chapter;
 use PluginSimpleValidate\Validation;
 
 abstract class AbstractQuestion implements InterfaceQuestion{
@@ -34,7 +34,7 @@ abstract class AbstractQuestion implements InterfaceQuestion{
     }
 
     public function getChapterTitle(){
-        return getChaptersData($this->getChapterNumber());
+        return Chapter\getChaptersData($this->getChapterNumber());
     }
 
     public function getErrors(){
