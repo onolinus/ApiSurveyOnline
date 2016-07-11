@@ -22,10 +22,10 @@ class Question4Test extends \TestCase{
     public function test_isValidAnswer_where_all_belanja_is_null(){
         $Question4 = new Question4();
         $this->assertFalse($Question4->isValidAnswer());
-        $this->assertEquals('The belanja pegawai.gaji upah honor proyek field is required.', $Question4->getErrors()[0]);
-        $this->assertEquals('The belanja modal.tanah gedung bangunan field is required.', $Question4->getErrors()[1]);
-        $this->assertEquals('The belanja modal.kendaraan mesin peralatan field is required.', $Question4->getErrors()[2]);
-        $this->assertEquals('The belanja operasional.pemeliharaan perbaikan field is required.', $Question4->getErrors()[3]);
+        $this->assertEquals('Kolom Gaji Upah + honor proyek harus diisi.', $Question4->getErrors()['belanja_pegawai.gaji_upah_honor_proyek']);
+        $this->assertEquals('Kolom Tanah, gedung dan bangunan lainnya harus diisi.', $Question4->getErrors()['belanja_modal.tanah_gedung_bangunan']);
+        $this->assertEquals('Kolom Kendaraan, mesin, dan peralatan harus diisi.', $Question4->getErrors()['belanja_modal.kendaraan_mesin_peralatan']);
+        $this->assertEquals('Kolom Barang habis pakai harus diisi.', $Question4->getErrors()['belanja_operasional.pemeliharaan_perbaikan']);
 
     }
 
@@ -35,8 +35,8 @@ class Question4Test extends \TestCase{
         $belanja_operasional = ['pemeliharaan_perbaikan' => 100];
         $Question4 = new Question4($belanja_pegawai, $belanja_modal, $belanja_operasional);
         $this->assertFalse($Question4->isValidAnswer());
-        $this->assertEquals('The belanja pegawai.gaji upah honor proyek must be a number.', $Question4->getErrors()[0]);
-        $this->assertEquals('The belanja modal.kendaraan mesin peralatan must be a number.', $Question4->getErrors()[1]);
+        $this->assertEquals('Kolom Gaji Upah + honor proyek harus berisi angka.', $Question4->getErrors()['belanja_pegawai.gaji_upah_honor_proyek']);
+        $this->assertEquals('Kolom Kendaraan, mesin, dan peralatan harus berisi angka.', $Question4->getErrors()['belanja_modal.kendaraan_mesin_peralatan']);
     }
 
     public function test_value_is_null_then_get_error_required(){
@@ -45,7 +45,7 @@ class Question4Test extends \TestCase{
         $belanja_operasional = ['pemeliharaan_perbaikan' => 100];
         $Question4 = new Question4($belanja_pegawai, $belanja_modal, $belanja_operasional);
         $this->assertFalse($Question4->isValidAnswer());
-        $this->assertEquals('The belanja pegawai.gaji upah honor proyek field is required.', $Question4->getErrors()[0]);
-        $this->assertEquals('The belanja modal.kendaraan mesin peralatan field is required.', $Question4->getErrors()[1]);
+        $this->assertEquals('Kolom Gaji Upah + honor proyek harus diisi.', $Question4->getErrors()['belanja_pegawai.gaji_upah_honor_proyek']);
+        $this->assertEquals('Kolom Kendaraan, mesin, dan peralatan harus diisi.', $Question4->getErrors()['belanja_modal.kendaraan_mesin_peralatan']);
     }
 }
