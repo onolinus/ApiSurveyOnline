@@ -2,72 +2,57 @@
 
 namespace app\Libraries\Questions;
 
-use function app\Helper\Questions\Chapter\getChaptersData;
-use Illuminate\Support\Facades\Validator;
+use app\Libraries\ResearchFields;
+use PluginSimpleValidate\Field;
 
 class Question5 extends AbstractQuestion{
 
     CONST NUMBER = 5;
     CONST CHAPTER_NUMBER = 2;
 
-    private $dana = [];
+    private $persentase_dana = [];
+
+    /**
+     * @var ResearchFields
+     */
+    private $researchFields;
+
+    public function __construct(ResearchFields $researchFields = null)
+    {
+        $this->researchFields = is_null($researchFields) ? ResearchFields::getInstance() : $researchFields;
+    }
 
     public function getAnswer()
     {
         return [
-            'dana' => $this->dana,
-            'count_dana' => count($this->dana),
-            'total_percentage' => $this->getPercentageTotal()
+            'persentase_dana' => $this->persentase_dana,
+            'total_percentage' => $this->getTotalPercentage()
         ];
     }
 
 
     public function setPersentaseDana($kode_penelitian, $percentage)
     {
-        $this->dana[$kode_penelitian] = $percentage;
+        $this->persentase_dana[$kode_penelitian] = $percentage;
         return $this;
     }
 
-    private function getPercentageTotal(){
+    private function getTotalPercentage(){
         $total = 0;
 
-        foreach($this->dana as $kode_penelitian => $percentage){
+        foreach($this->persentase_dana as $kode_penelitian => $percentage){
             $total += $percentage;
         }
 
         return $total;
     }
 
-    public function isValidAnswer()
+    public function setValidationRules()
     {
-        /** @var  \Illuminate\Validation\Validator */
-        $this->validator = Validator::make($this->getAnswer(), $this->getRules());
-
-//        foreach(){
-//            $this->validator->sometimes('total_percentage', 'required|numeric|size:100', function($input) {
-//                return $this->getPercentageTotal() > 0;
-//            });
-//        }
-
-
-        $this->validator->sometimes('total_percentage', 'required|numeric|size:100', function($input) {
-            return $this->getPercentageTotal() > 0;
-        });
-
-        return !$this->validator->fails();
-    }
-
-
-    public function getRules()
-    {
-        $rules = [];
-
-        foreach($this->dana as $kode_penelitian => $percentage){
-            $rules['dana.' . $kode_penelitian] = 'required|numeric|max:100';
+        $this->validator->addField((new Field('persentase_dana', $this->persentase_dana, 'Persentase Dana'))->min(1));
+        foreach($this->persentase_dana as $kode_penelitian => $percentage){
+            $this->validator->addField((new Field('persentase_dana.' . $kode_penelitian, $percentage, 'Persentase Dana : ' . $kode_penelitian))->is_required()->is_true($this->researchFields->isExistCode($kode_penelitian), 'Kode Penelitian tidak valid')->is_numeric()->is_natural_no_zero());
         }
-
-        $rules['count_dana'] = 'required|numeric|min:1';
-
-        return $rules;
+        $this->validator->addField((new Field('total_percentage', $this->getTotalPercentage(), 'Total Persentase Realisasi Anggaran'))->is_required()->is_integer()->exact_length(100));
     }
 }
