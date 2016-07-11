@@ -11,6 +11,8 @@ abstract class AbstractQuestion implements InterfaceQuestion{
      */
     protected $validator;
 
+    CONST LANG = 'id';
+
     protected function resetValidator(){
         $this->validator = null;
     }
@@ -50,7 +52,7 @@ abstract class AbstractQuestion implements InterfaceQuestion{
 
     public function isValidAnswer()
     {
-        $this->validator = new Validation();
+        $this->validator = new Validation(self::LANG);
 
         $this->setValidationRules();
 
