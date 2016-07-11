@@ -167,12 +167,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/harryosmar/plugin-validation.git",
-                "reference": "08a9d6216b740c0547f9823f759b78997300af87"
+                "reference": "3942f91b007e6cb58296bd9dd919d63719d535e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harryosmar/plugin-validation/zipball/08a9d6216b740c0547f9823f759b78997300af87",
-                "reference": "08a9d6216b740c0547f9823f759b78997300af87",
+                "url": "https://api.github.com/repos/harryosmar/plugin-validation/zipball/3942f91b007e6cb58296bd9dd919d63719d535e2",
+                "reference": "3942f91b007e6cb58296bd9dd919d63719d535e2",
                 "shasum": ""
             },
             "require": {
