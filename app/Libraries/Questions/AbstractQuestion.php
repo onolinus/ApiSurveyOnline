@@ -37,16 +37,20 @@ abstract class AbstractQuestion implements InterfaceQuestion{
         return Chapter\getChaptersData($this->getChapterNumber());
     }
 
+    private function checkIsNullValidator(){
+        if($this->validator === null){
+            throw new \Exception('You must run the `isValidAnswer` `after update the attribute` or `before getErrors`');
+        }
+    }
+
     public function getErrors(){
+        $this->checkIsNullValidator();
         return $this->validator->getErrors();
     }
 
     public function getValidatedAnswer()
     {
-        if($this->validator === null){
-            throw new \Exception('You must run the `isValidAnswer` after update the attribute');
-        }
-
+        $this->checkIsNullValidator();
         return $this->getAnswer();
     }
 
