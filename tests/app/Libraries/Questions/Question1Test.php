@@ -29,7 +29,7 @@ class Question1Test extends \TestCase{
                 'percentage' => 100,
             ], $Question1->getValidatedAnswer());
         }catch(\Exception $e){
-            $this->assertEquals('You must run the `isValidAnswer` after update the attribute', $e->getMessage());
+            $this->assertEquals('You must run the `isValidAnswer` `after update the attribute` or `before getErrors`', $e->getMessage());
         }
     }
 

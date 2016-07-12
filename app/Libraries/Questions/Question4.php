@@ -2,7 +2,6 @@
 
 namespace app\Libraries\Questions;
 
-use function app\Helper\Questions\Chapter\getChaptersData;
 use PluginSimpleValidate\Field;
 
 class Question4 extends AbstractQuestion{

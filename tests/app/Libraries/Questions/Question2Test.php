@@ -22,7 +22,7 @@ class Question2Test extends \TestCase{
                 'jumlah' => 100,
             ], $Question2->getValidatedAnswer());
         }catch(\Exception $e){
-            $this->assertEquals('You must run the `isValidAnswer` after update the attribute', $e->getMessage());
+            $this->assertEquals('You must run the `isValidAnswer` `after update the attribute` or `before getErrors`', $e->getMessage());
         }
     }
 
