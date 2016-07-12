@@ -12,7 +12,7 @@ class SocioEconomics{
 
     private $rows;
 
-    private function __construct()
+    public function __construct()
     {
         $key = SurveyCacheKey::getInstance()->generateCacheKey(self::CACHE_PREFIKS);
         $this->rows = Cache::get($key);
