@@ -21,17 +21,6 @@ class WarmUp{
      */
     private $surveyCacheKey;
 
-
-    /**
-     * @var ResearchFields
-     */
-    private $libResearchFields;
-
-    /**
-     * @var SocioEconomics
-     */
-    private $libSocioEconomics;
-
     public function __construct(SurveyCacheKey $surveyCacheKey = null)
     {
         $this->surveyCacheKey = is_null($surveyCacheKey) ? SurveyCacheKey::getInstance() : $surveyCacheKey;
