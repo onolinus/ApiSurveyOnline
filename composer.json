@@ -1,7 +1,7 @@
 {
     "name": "onolinus/ApiSurveyOnline",
     "description": "Api Survey Litbang.",
-    "keywords": ["framework", "laravel"],
+    "keywords": ["framework", "laravel", "api", "survey"],
     "license": "proprietary",
     "type": "project",
     "minimum-stability": "dev",
