@@ -8,11 +8,16 @@ use app\Libraries\Questions\InterfaceQuestion;
 
 class Survey{
 
-    private $questions = [];
+    private $questions = [], $errors = [];
 
-    private $errors = [];
+    CONST COUNT_QUEST = 5;
 
-    CONST COUNT_QUEST = 3;
+    private $bail = false;
+
+    /**
+     * @var self
+     */
+    private static $instance;
 
     /**
      * @var \Illuminate\Validation\Validator
@@ -24,24 +29,43 @@ class Survey{
         $this->setListOfQuestions();
     }
 
+    public static function getInstance(){
+        if(is_null(self::$instance)){
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
     private function setListOfQuestions(){
         for($number = 1; $number <= self::COUNT_QUEST; $number++){
-            /** @var InterfaceQuestion $questionClassName */
             $questionClassName = "\\app\\Libraries\\Questions\\Question" . $number;
-            $this->setQuestion(new $questionClassName());
+
+            /** @var InterfaceQuestion $questionClassName */
+            $question = new $questionClassName();
+
+            $this->setQuestion($question);
         }
 
         return $this;
     }
 
-    public function validate($bail = false){
+    public function setBail($bail){
+        $this->bail = boolval($bail);
+        return $this;
+    }
+
+    public function validate(){
         $valid = true;
 
         /** @var InterfaceQuestion $question */
-        foreach($this->questions as $question){
+        foreach($this->questions as $number => $question){
             if(!$question->isValidAnswer()){
                 $valid = false;
-                if($bail === true){
+
+                $this->errors[$number] = $question->getErrors();
+
+                if($this->bail === true){
                     return false;
                 }
             }
@@ -50,17 +74,13 @@ class Survey{
         return $valid;
     }
 
-    public function getErrors(){
-        $errors = [];
-
-        /** @var InterfaceQuestion $question */
-        foreach($this->questions as $key=>$question){
-            $errors[$key] = $question->getErrors();
-        }
-
-        return $errors;
+    public function isValid(){
+        return empty($this->errors);
     }
 
+    public function getErrors(){
+        return $this->errors;
+    }
 
     public function getQuestions(){
         return true;

@@ -15,25 +15,53 @@ class SurveyTest extends \TestCase{
     public function test_validate_error_when_field_is_required(){
         $Survey = new Survey();
         $Survey->validate();
+        $this->assertFalse($Survey->isValid());
+//        var_export($Survey->getErrors()); die;
         $this->assertEquals(array (
             1 =>
                 array (
-                    0 => 'The total field is required.',
-                    1 => 'The percentage field is required.',
+                    'total' => 'Kolom Total Realisasi Anggaran harus diisi.',
+                    'percentage' => 'Kolom Persentase Realisasi Anggaran harus diisi.',
                 ),
             2 =>
                 array (
-                    0 => 'The jumlah field is required.',
+                    'jumlah' => 'Kolom Jumlah belanja kegiatan litbang harus diisi.',
                 ),
             3 =>
                 array (
-                    0 => 'The dipa.dana pemerintah field is required.',
-                    1 => 'The dipa. p n b p field is required.',
-                    2 => 'The dipa. p h l n field is required.',
-                    3 => 'The dana lainnya.perusahaan swasta field is required.',
-                    4 => 'The dana lainnya.instansi pemerintah field is required.',
-                    5 => 'The dana lainnya.swasta non profit field is required.',
-                    6 => 'The dana lainnya.luar negeri field is required.',
+                    'dipa.dana_pemerintah' => 'Kolom Dana dari Pemerintah harus diisi.',
+                    'dipa.PNBP' => 'Kolom PNBP harus diisi.',
+                    'dipa.PHLN' => 'Kolom PHLN harus diisi.',
+                    'dana_lainnya.perusahaan_swasta' => 'Kolom Perusahaan Swasta harus diisi.',
+                    'dana_lainnya.instansi_pemerintah' => 'Kolom Instansi Pemerintah harus diisi.',
+                    'dana_lainnya.swasta_non_profit' => 'Kolom Swasta non profit harus diisi.',
+                    'dana_lainnya.luar_negeri' => 'Kolom Dari Luar Negeri harus diisi.',
+                ),
+            4 =>
+                array (
+                    'belanja_pegawai.gaji_upah_honor_proyek' => 'Kolom Gaji Upah + honor proyek harus diisi.',
+                    'belanja_modal.tanah_gedung_bangunan' => 'Kolom Tanah, gedung dan bangunan lainnya harus diisi.',
+                    'belanja_modal.kendaraan_mesin_peralatan' => 'Kolom Kendaraan, mesin, dan peralatan harus diisi.',
+                    'belanja_operasional.pemeliharaan_perbaikan' => 'Kolom Barang habis pakai harus diisi.',
+                ),
+            5 =>
+                array (
+                    'persentase_dana' => 'Kolom Persentase Dana harus memiliki jumlah index minimal 1.',
+                    'total_percentage' => 'Kolom Total Persentase Realisasi Anggaran harus diisi.',
+                ),
+        ), $Survey->getErrors());
+    }
+
+    public function test_validate_error_when_field_is_required_where_set_bail_to_true(){
+        $Survey = new Survey();
+        $Survey->setBail(true)->validate();
+        $this->assertFalse($Survey->isValid());
+//        var_export($Survey->getErrors()); die;
+        $this->assertEquals(array (
+            1 =>
+                array (
+                    'total' => 'Kolom Total Realisasi Anggaran harus diisi.',
+                    'percentage' => 'Kolom Persentase Realisasi Anggaran harus diisi.',
                 ),
         ), $Survey->getErrors());
     }
