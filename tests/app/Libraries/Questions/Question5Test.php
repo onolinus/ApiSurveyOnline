@@ -10,7 +10,7 @@ class Question5Test extends \TestCase
 
     public function test_isValidAnswer_return_true()
     {
-        $ResearchFieldsMock = Mockery::mock('\app\Libraries\ResearchFields[getAll]');
+        $ResearchFieldsMock = Mockery::mock('\PluginCommonSurvey\Libraries\ResearchFields[getAll]');
         $ResearchFieldsMock->shouldReceive('getAll')->times(3)->andReturn([
             '01.01' => [],
             '01.02' => [],
@@ -39,7 +39,7 @@ class Question5Test extends \TestCase
 
     public function test_isValidAnswer_where_total_percentage_size_is_not_100()
     {
-        $ResearchFieldsMock = Mockery::mock('\app\Libraries\ResearchFields[getAll]');
+        $ResearchFieldsMock = Mockery::mock('\PluginCommonSurvey\Libraries\ResearchFields[getAll]');
         $ResearchFieldsMock->shouldReceive('getAll')->times(3)->andReturn([
             '01.01' => [],
             '01.02' => [],
@@ -64,7 +64,7 @@ class Question5Test extends \TestCase
 
     public function test_isValidAnswer_where_dana_is_noy_numeric()
     {
-        $ResearchFieldsMock = Mockery::mock('\app\Libraries\ResearchFields[getAll]');
+        $ResearchFieldsMock = Mockery::mock('\PluginCommonSurvey\Libraries\ResearchFields[getAll]');
         $ResearchFieldsMock->shouldReceive('getAll')->times(3)->andReturn([
             '01.01' => [],
             '01.02' => [],

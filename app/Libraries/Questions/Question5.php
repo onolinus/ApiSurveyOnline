@@ -2,7 +2,8 @@
 
 namespace app\Libraries\Questions;
 
-use app\Libraries\ResearchFields;
+
+use PluginCommonSurvey\Libraries\ResearchFields;
 use PluginSimpleValidate\Field;
 
 class Question5 extends AbstractQuestion{

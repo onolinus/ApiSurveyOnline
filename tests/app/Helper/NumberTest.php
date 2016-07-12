@@ -2,7 +2,7 @@
 
 namespace tests\app\Helper;
 
-use \app\Helper\Number;
+use PluginCommonSurvey\Helper\Number;
 
 
 class NumberTest extends \PHPUnit_Framework_TestCase{

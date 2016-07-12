@@ -2,7 +2,8 @@
 
 namespace app\Libraries\Questions;
 
-use app\Libraries\SocioEconomics;
+
+use PluginCommonSurvey\Libraries\SocioEconomics;
 use PluginSimpleValidate\Field;
 
 class Question6 extends AbstractQuestion{

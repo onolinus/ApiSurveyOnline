@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use app\Libraries\WarmUp as LibrariesWarmUp;
+use App\Libraries\WarmUp as LibrariesWarmUp;
 
 class WarmUp extends Command
 {

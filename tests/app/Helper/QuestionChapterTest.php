@@ -2,7 +2,7 @@
 
 namespace tests\app\Helper;
 
-use function app\Helper\Questions\Chapter\getChaptersData;
+use PluginCommonSurvey\Helper\Questions\Chapter;
 
 class QuestionChapterTest extends \PHPUnit_Framework_TestCase{
 
@@ -21,18 +21,18 @@ class QuestionChapterTest extends \PHPUnit_Framework_TestCase{
     }
 
     public function test_getChaptersData_when_parameter_chapter_number_is_null(){
-        $this->assertEquals($this->chapters, getChaptersData());
+        $this->assertEquals($this->chapters, Chapter\getChaptersData());
     }
 
     public function test_getChaptersData_when_parameter_chapter_number_is_not_null(){
-        $this->assertEquals($this->chapters[1], getChaptersData(1));
-        $this->assertEquals($this->chapters[2], getChaptersData(2));
-        $this->assertEquals($this->chapters[3], getChaptersData(3));
-        $this->assertEquals($this->chapters[4], getChaptersData(4));
-        $this->assertEquals($this->chapters[5], getChaptersData(5));
+        $this->assertEquals($this->chapters[1], Chapter\getChaptersData(1));
+        $this->assertEquals($this->chapters[2], Chapter\getChaptersData(2));
+        $this->assertEquals($this->chapters[3], Chapter\getChaptersData(3));
+        $this->assertEquals($this->chapters[4], Chapter\getChaptersData(4));
+        $this->assertEquals($this->chapters[5], Chapter\getChaptersData(5));
     }
 
     public function test_getChaptersData_when_parameter_chapter_number_is_not_exist(){
-        $this->assertNull(getChaptersData(6));
+        $this->assertNull(Chapter\getChaptersData(6));
     }
 }

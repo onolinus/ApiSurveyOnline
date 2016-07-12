@@ -6,20 +6,12 @@ use Illuminate\Support\Facades\Cache;
 
 use App\ResearchFields as ModelResearchFields;
 use App\SocioEconomics as ModelSocioEconomics;
-use app\Libraries\ResearchFields as LibResearchFields;
-use app\Libraries\SocioEconomics as LibSocioEconomics;
+use PluginCommonSurvey\Libraries\ResearchFields as LibResearchFields;
+use PluginCommonSurvey\Libraries\SocioEconomics as LibSocioEconomics;
+use PluginCommonSurvey\Libraries\WarmUp as PluginCommonSurveyWarmUp;
+use PluginCommonSurvey\Libraries\SurveyCacheKey;
 
-class WarmUp{
-
-    /**
-     * @var self
-     */
-    private static $instance;
-
-    /**
-     * @var SurveyCacheKey
-     */
-    private $surveyCacheKey;
+class WarmUp extends PluginCommonSurveyWarmUp{
 
     public function __construct(SurveyCacheKey $surveyCacheKey = null)
     {
@@ -32,32 +24,6 @@ class WarmUp{
         }
 
         return self::$instance;
-    }
-
-
-    public function handle($arguments, $options)
-    {
-        $build_number = $this->surveyCacheKey->setBuildNumber(true);
-
-        $cacheGenerated = [];
-
-
-        if($arguments['cachename'] === 'all' || $arguments['cachename'] === LibResearchFields::CACHE_PREFIKS){
-            $this->getResearchFields($options['reset'], $options['keepoldcache']);
-            $cacheGenerated[] = LibResearchFields::CACHE_PREFIKS;
-        }
-
-        if($arguments['cachename'] === 'all' || $arguments['cachename'] === LibSocioEconomics::CACHE_PREFIKS) {
-            $this->getSocioEconomics($options['reset'], $options['keepoldcache']);
-            $cacheGenerated[] = LibSocioEconomics::CACHE_PREFIKS;
-        }
-
-
-        if(empty($cacheGenerated)){
-            throw new \Exception("Invalid argument parameter, must be : [all]|researchfields|socioeconomics [--reset=0|1] [--keepoldcache=1|0]");
-        }
-
-        return sprintf('Generate Cache build-number:%d for "%s"', $build_number, implode(', ', $cacheGenerated));
     }
 
     protected function getResearchFields($reset = false, $keepoldcache_option = true)
@@ -101,7 +67,7 @@ class WarmUp{
         }
     }
 
-    private function getCustomizeSocioEconomics(){
+    protected function getCustomizeSocioEconomics(){
         $result = [];
 
         // get all data `socio_economics` from database
@@ -118,7 +84,7 @@ class WarmUp{
         return $result;
     }
 
-    private function getCustomizeResearchFields(){
+    protected function getCustomizeResearchFields(){
         $result = [];
 
         // get all data `research_fields` from database

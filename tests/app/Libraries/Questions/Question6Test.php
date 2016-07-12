@@ -10,7 +10,7 @@ class Question6Test extends \TestCase
 
     public function test_isValidAnswer_return_true()
     {
-        $SocioEconomicsMock = Mockery::mock('\app\Libraries\SocioEconomics[getAll]');
+        $SocioEconomicsMock = Mockery::mock('\PluginCommonSurvey\Libraries\SocioEconomics[getAll]');
         $SocioEconomicsMock->shouldReceive('getAll')->times(3)->andReturn([
             '01.01' => [],
             '01.02' => [],
@@ -39,7 +39,7 @@ class Question6Test extends \TestCase
 
     public function test_isValidAnswer_where_total_percentage_size_is_not_100()
     {
-        $SocioEconomicsMock = Mockery::mock('\app\Libraries\SocioEconomics[getAll]');
+        $SocioEconomicsMock = Mockery::mock('\PluginCommonSurvey\Libraries\SocioEconomics[getAll]');
         $SocioEconomicsMock->shouldReceive('getAll')->times(3)->andReturn([
             '01.01' => [],
             '01.02' => [],
@@ -64,7 +64,7 @@ class Question6Test extends \TestCase
 
     public function test_isValidAnswer_where_dana_is_noy_numeric()
     {
-        $SocioEconomicsMock = Mockery::mock('\app\Libraries\SocioEconomics[getAll]');
+        $SocioEconomicsMock = Mockery::mock('\PluginCommonSurvey\Libraries\SocioEconomics[getAll]');
         $SocioEconomicsMock->shouldReceive('getAll')->times(3)->andReturn([
             '01.01' => [],
             '01.02' => [],
