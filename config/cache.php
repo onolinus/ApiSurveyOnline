@@ -78,6 +78,6 @@ return [
     |
     */
 
-    'prefix' => 'surveylitbang',
+    'prefix' => 'apisurveylitbang',
 
 ];
