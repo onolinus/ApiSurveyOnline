@@ -1,6 +1,6 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "name": "onolinus/ApiSurveyOnline",
+    "description": "Api Survey Litbang.",
     "keywords": ["framework", "laravel"],
     "license": "proprietary",
     "type": "project",
