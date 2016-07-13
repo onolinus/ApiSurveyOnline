@@ -5,6 +5,7 @@ Api service used by site <https://github.com/onolinus/SurveyOnline>
 ## Installation
 
 ### Requirements
+- php version > 5.5.9, prefered php 5.6
 - redis-server, <http://redis.io/>
 - composer, <https://getcomposer.org/>
 
