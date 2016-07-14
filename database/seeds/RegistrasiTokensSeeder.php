@@ -4,6 +4,11 @@ use Illuminate\Database\Seeder;
 
 class RegistrasiTokensSeeder extends Seeder
 {
+
+	CONST TOKEN_PREFIX = 'survey-online-litbang-2016';
+
+	CONST TOKEN_SALT = 'PLAKman8*753l;&kasldmanhJyaAKAALlldsj!manHJh2JM2jksl@ksksKJ';
+
     /**
      * Run the database seeds.
      *
@@ -12,20 +17,25 @@ class RegistrasiTokensSeeder extends Seeder
     public function run()
     {
     	$data = [];
+
 		$i = 1;
-
 		while($i <= 300) {
-			$i++;
-
 			// set data di sini setiap looping
 			$data[$i] = [
-                'token' => str_random(10),
+                'token' => $this->generateToken($i),
                 'used' => 0,
             ];
+
+			$i++;
 		}
 
         DB::table('registrasi_tokens')->insert($data);
     }
+
+
+	private function generateToken($token_name){
+		return strtoupper(md5(sprintf('%s:%s:%s', self::TOKEN_PREFIX, self::TOKEN_SALT, $token_name)));
+	}
 }
 
 
