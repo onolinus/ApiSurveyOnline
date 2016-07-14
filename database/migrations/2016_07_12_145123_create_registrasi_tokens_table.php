@@ -14,7 +14,8 @@ class CreateRegistrasiTokensTable extends Migration
     {
         Schema::create('registrasi_tokens', function (Blueprint $table) {
             $table->string('token', 255)->primary('token');
-            $table->boolean('used');
+            $table->integer('correspondent_id');
+            $table->index(['correspondent_id']);
         });
     }
 
