@@ -13,5 +13,6 @@ return [
     |
     */
 
-    'data_not_found' => 'data :dataname tidak ditemukan'
+    'data_not_found' => 'data :dataname tidak ditemukan',
+    'data_empty' => 'data :dataname is empty'
 ];
