@@ -14,5 +14,7 @@ return [
     */
 
     'data_not_found' => 'data :dataname tidak ditemukan',
-    'data_empty' => 'data :dataname is empty'
+    'data_empty' => 'tidak ada data :dataname',
+    'data_save' => 'error ketika menyimpan data :dataname , Silahkan coba lagi',
+    'invalid' => ':dataname Anda tidak valid',
 ];

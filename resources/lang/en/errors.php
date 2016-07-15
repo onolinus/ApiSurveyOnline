@@ -14,5 +14,7 @@ return [
     */
 
     'data_not_found' => 'data :dataname is not found',
-    'data_empty' => 'data :dataname is empty'
+    'data_empty' => 'data :dataname is empty',
+    'data_save' => 'erros when trying to save :dataname data, please try again',
+    'invalid' => ':dataname is not valid',
 ];
