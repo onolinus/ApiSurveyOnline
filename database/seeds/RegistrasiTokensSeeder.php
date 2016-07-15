@@ -23,7 +23,7 @@ class RegistrasiTokensSeeder extends Seeder
 			// set data di sini setiap looping
 			$data[$i] = [
                 'token' => $this->generateToken($i),
-                'correspondent_id' => 0,
+                'user_id' => 0,
             ];
 
 			$i++;
