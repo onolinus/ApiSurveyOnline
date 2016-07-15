@@ -40,6 +40,24 @@ class UsersController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $rows = Users::all();
+        if(empty($rows) || count($rows) === 0){
+            return response()->json([
+                'status' => 'error',
+                'message' => trans('errors.data_empty', ['dataname' => 'user'])
+            ], 400);
+        }
+        return response()->json($rows);
+    }
+
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
