@@ -13,6 +13,14 @@
 
 Route::group(['middleware' => ['apisurveylitbang']], function () {
     Route::resource('user', 'UsersController', ['only' => [
-        'store', 'destroy', 'update', 'show'
+        'store', 'destroy', 'update', 'show', 'index'
+    ]]);
+
+    Route::resource('researchfields', 'ResearchFieldsController', ['only' => [
+        'show', 'index'
+    ]]);
+
+    Route::resource('socioeconomics', 'SocioEconomicsController', ['only' => [
+        'show', 'index'
     ]]);
 });
