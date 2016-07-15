@@ -2,36 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\RegistrasiToken;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-
 use App\Users;
-
 use Illuminate\Support\Facades\Validator;
+use EllipseSynergie\ApiResponse\Contracts\Response;
+use App\Transformer\UserTransformer;
+
 
 class UsersController extends Controller
 {
+    CONST PER_PAGE = 10;
+
     private $validator;
 
-    private function validationRules($event){
-        $rules = [
-            'type' => 'in:admin,correspondent,validator',
-            'email' => 'max:50|unique:users,email',
-            'password' => 'min:5',
-        ];
+    /**
+     * @var Response
+     */
+    private $response;
 
-        if($event === 'store'){
-            foreach($rules as &$rule){
-                $rule = 'required|' . $rule;
-            }
-        }
-
-        return $rules;
+    public function __construct(Response $response)
+    {
+        $this->response = $response;
     }
 
-    private function runValidation($request, $event){
-        $this->validator = Validator::make($request->all(), $this->validationRules($event));
+    private function runValidation($request, $rules){
+        $this->validator = Validator::make($request->all(), $rules);
         if($this->validator->fails()){
             return false;
         }
@@ -44,16 +41,16 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $rows = Users::all();
+        $rows = Users::paginate(self::PER_PAGE);
         if(empty($rows) || count($rows) === 0){
             return response()->json([
                 'status' => 'error',
                 'message' => trans('errors.data_empty', ['dataname' => 'user'])
             ], 400);
         }
-        return response()->json($rows);
+        return $this->response->withPaginator($rows, new UserTransformer);
     }
 
 
@@ -65,24 +62,37 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        if(!$this->runValidation($request, 'store')){
-            return response()->json([
-                'status' => 'errors',
-                'errors' => $this->validator->errors()->all()
-            ], 400);
+        if(!$this->runValidation($request, [
+            'type' => 'required|in:admin,correspondent,validator',
+            'email' => 'required|max:50|email|unique:users,email',
+            'password' => 'required|min:5',
+            'registration_token' => 'required|size:32|exists:registrasi_tokens,token,user_id,0'
+        ])){
+            return $this->response->errorInternalError($this->validator->errors()->all());
         }
 
         $user = new Users();
         $user->type = $request->type;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->save();
 
-        if($user->save()){
-            return response()->json([
-                'status' => 'success',
-                'message' => trans('success.data_saved', ['dataname' => 'user'])
-            ], 201);
+        if(!$user->save()){
+            return $this->response->errorInternalError(trans('errors.data_save', ['dataname' => 'user']));
         }
+
+        $registrasiToken = RegistrasiToken::find($request->registration_token);
+        $registrasiToken->user_id = 0;
+        $registrasiToken->save();
+
+        if(!$registrasiToken->save()){
+            return $this->response->errorInternalError(trans('errors.data_save', ['dataname' => 'registrasi token']));
+        }
+
+        return $this->response->setStatusCode(201)->withArray([
+            'status' => 'success',
+            'message' => trans('success.data_saved', ['dataname' => 'user'])
+        ]);
     }
 
     /**
@@ -93,14 +103,12 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = Users::where('id', $id)->get();
+        $user = Users::find($id);
         if(empty($user) || count($user) === 0){
-            return response()->json([
-                'status' => 'error',
-                'message' => trans('errors.data_not_found', ['dataname' => 'user'])
-            ], 400);
+            return $this->response->errorNotFound(trans('errors.data_not_found', ['dataname' => 'user']));
         }
-        return response()->json($user);
+
+        return $this->response->withItem($user, new UserTransformer);
     }
 
     /**
@@ -112,32 +120,32 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(!$this->runValidation($request, 'update')){
-            return response()->json([
-                'status' => 'errors',
-                'errors' => $this->validator->errors()->all()
-            ], 400);
+        if(!$this->runValidation($request, [
+            'type' => 'in:admin,correspondent,validator',
+            'email' => 'max:50|email|unique:users,email',
+            'password' => 'min:5'
+        ])){
+            return $this->response->errorInternalError($this->validator->errors()->all());
         }
 
         /** @var Users $user */
         $user = Users::find($id);
         if(empty($user) || count($user) === 0){
-            return response()->json([
-                'status' => 'error',
-                'message' => trans('errors.data_not_found', ['dataname' => 'user'])
-            ], 404);
+            return $this->response->errorNotFound(trans('errors.data_not_found', ['dataname' => 'user']));
         }
 
-        $user->type = $request->type;
-        $user->email = $request->email;
-        $user->password = $request->password;
+        $user->type = $request->type ? $request->type : $user->type;
+        $user->email = $request->email ? $request->email : $user->email;
+        $user->password = $request->password ? $request->password : $user->password;
 
-        if($user->save()){
-            return response()->json([
-                'status' => 'success',
-                'message' => trans('success.data_updated', ['dataname' => 'user'])
-            ], 201);
+        if(!$user->save()){
+            return $this->response->errorInternalError(trans('errors.data_save', ['dataname' => 'user']));
         }
+
+        return $this->response->setStatusCode(201)->withArray([
+            'status' => 'success',
+            'message' => trans('success.data_updated', ['dataname' => 'user'])
+        ]);
     }
 
     /**
@@ -151,17 +159,14 @@ class UsersController extends Controller
         /** @var Users $user */
         $user = Users::find($id);
         if(empty($user) || count($user) === 0){
-            return response()->json([
-                'status' => 'error',
-                'message' => trans('errors.data_not_found', ['dataname' => 'user'])
-            ], 404);
+            return $this->response->errorNotFound(trans('errors.data_not_found', ['dataname' => 'user']));
         }
 
         if($user->delete()){
-            return response()->json([
+            return $this->response->setStatusCode(200)->withArray([
                 'status' => 'success',
                 'message' => trans('success.data_deleted', ['dataname' => 'user'])
-            ], 200);
+            ]);
         }
     }
 }
