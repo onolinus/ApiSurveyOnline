@@ -11,21 +11,9 @@ use EllipseSynergie\ApiResponse\Contracts\Response;
 use App\Transformer\UserTransformer;
 
 
-class UsersController extends Controller
+class UsersController extends BaseController
 {
-    CONST PER_PAGE = 10;
-
     private $validator;
-
-    /**
-     * @var Response
-     */
-    private $response;
-
-    public function __construct(Response $response)
-    {
-        $this->response = $response;
-    }
 
     private function runValidation($request, $rules){
         $this->validator = Validator::make($request->all(), $rules);
@@ -35,24 +23,6 @@ class UsersController extends Controller
 
         return true;
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
-        $rows = Users::paginate(self::PER_PAGE);
-        if(empty($rows) || count($rows) === 0){
-            return response()->json([
-                'status' => 'error',
-                'message' => trans('errors.data_empty', ['dataname' => 'user'])
-            ], 400);
-        }
-        return $this->response->withPaginator($rows, new UserTransformer);
-    }
-
 
     /**
      * Store a newly created resource in storage.
@@ -66,7 +36,7 @@ class UsersController extends Controller
             'type' => 'required|in:admin,correspondent,validator',
             'email' => 'required|max:50|email|unique:users,email',
             'password' => 'required|min:5',
-            'registration_token' => 'required|size:32|exists:registrasi_tokens,token,user_id,0'
+            'registration_token' => 'required|size:6|exists:registrasi_tokens,token,user_id,0'
         ])){
             return $this->response->errorInternalError($this->validator->errors()->all());
         }
@@ -93,22 +63,6 @@ class UsersController extends Controller
             'status' => 'success',
             'message' => trans('success.data_saved', ['dataname' => 'user'])
         ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $user = Users::find($id);
-        if(empty($user) || count($user) === 0){
-            return $this->response->errorNotFound(trans('errors.data_not_found', ['dataname' => 'user']));
-        }
-
-        return $this->response->withItem($user, new UserTransformer);
     }
 
     /**
@@ -168,5 +122,23 @@ class UsersController extends Controller
                 'message' => trans('success.data_deleted', ['dataname' => 'user'])
             ]);
         }
+    }
+
+    protected function getModelName()
+    {
+        return 'Users';
+    }
+
+    protected function getModelLabel()
+    {
+        return 'user';
+    }
+
+    /**
+     * @return \League\Fractal\TransformerAbstract
+     */
+    protected function getTransformer()
+    {
+        return new UserTransformer();
     }
 }

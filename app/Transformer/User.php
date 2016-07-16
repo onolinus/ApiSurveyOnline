@@ -13,8 +13,8 @@ class UserTransformer extends Fractal\TransformerAbstract
             'type' => $user->type,
             'email' => $user->email,
             'timestamp' => [
-                'created' => $user->created_at->toDateTimeString(),
-                'updated' => $user->updated_at->toDateTimeString()
+                'created' => $user->created_at, //$user->created_at->toDateTimeString()
+                'updated' => $user->updated_at, //$user->updated_at->toDateTimeString()
             ]
         ];
     }
