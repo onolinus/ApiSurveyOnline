@@ -23,4 +23,8 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
     Route::resource('socioeconomics', 'SocioEconomicsController', ['only' => [
         'show', 'index'
     ]]);
+
+    Route::resource('registrasitoken', 'RegistrasiTokenController', ['only' => [
+        'show', 'index'
+    ]]);
 });
