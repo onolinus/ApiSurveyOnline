@@ -34,7 +34,7 @@ class RegistrasiTokensSeeder extends Seeder
 
 
 	private function generateToken($token_name){
-		return strtoupper(md5(sprintf('%s:%s:%s', self::TOKEN_PREFIX, self::TOKEN_SALT, $token_name)));
+		return substr(strtoupper(md5(sprintf('%s:%s:%s', self::TOKEN_PREFIX, self::TOKEN_SALT, $token_name))),0, 6);
 	}
 }
 
