@@ -27,4 +27,8 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
     Route::resource('registrasitoken', 'RegistrasiTokenController', ['only' => [
         'show', 'index'
     ]]);
+
+    Route::resource('questions', 'QuestionsController', ['only' => [
+        'show', 'index'
+    ]]);
 });
