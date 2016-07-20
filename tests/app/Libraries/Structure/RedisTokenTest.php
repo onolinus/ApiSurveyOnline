@@ -3,7 +3,7 @@
 namespace tests\app\Libraries\Structure;
 
 use app\Libraries\Structure\RedisToken;
-use App\AuthToken;
+
 
 class RedisTokenTest extends \PHPUnit_Framework_TestCase{
 
@@ -28,16 +28,30 @@ class RedisTokenTest extends \PHPUnit_Framework_TestCase{
         }
     }
 
+    public function test_construct_where_param_data_access_token_is_not_provided(){
+        try{
+            new RedisToken([
+                'user_id' => 1,
+                'user_type' => 'admin',
+                'token_type' => RedisToken::TOKEN_TYPE,
+                'created_at' => date('Y-m-d H:i:s'),
+            ]);
+        }catch(\Exception $e){
+            $this->assertEquals('Access token parameter required', $e->getMessage());
+        }
+    }
+
     public function test_construct_where_param_data_is_not_complete(){
         try{
-            new RedisToken(['user_id' => 1]);
+            new RedisToken(['access_token' => 'xxx']);
         }catch(\Exception $e){
-            $this->assertEquals('Parameter data must be contain index : "user_type"', $e->getMessage());
+            $this->assertEquals('Parameter data must be contain index : "user_id"', $e->getMessage());
         }
     }
 
     public function test_construct_where_param_data_is_complete(){
         $data = [
+            'access_token' => 'xxx',
             'user_id' => 1,
             'user_type' => 'admin',
             'token_type' => RedisToken::TOKEN_TYPE,
@@ -45,6 +59,7 @@ class RedisTokenTest extends \PHPUnit_Framework_TestCase{
         ];
 
         $RedisToken = new RedisToken([
+            'access_token' => $data['access_token'],
             'user_id' => $data['user_id'],
             'user_type' => $data['user_type'],
             'token_type' => $data['token_type'],
@@ -52,7 +67,12 @@ class RedisTokenTest extends \PHPUnit_Framework_TestCase{
         ]);
 
         // get all attributes
-        $this->assertEquals($data, $RedisToken->getAttribute());
+        $this->assertEquals([
+            'user_id' => $data['user_id'],
+            'user_type' => $data['user_type'],
+            'token_type' => $data['token_type'],
+            'created_at' => $data['created_at'],
+        ], $RedisToken->getAttribute());
 
 
         // get single attribute
@@ -67,6 +87,7 @@ class RedisTokenTest extends \PHPUnit_Framework_TestCase{
 
     public function test_setAttribute_where_param_name_is_not_valid(){
         $data = [
+            'access_token' => 'xxx',
             'user_id' => 1,
             'user_type' => 'admin',
             'token_type' => RedisToken::TOKEN_TYPE,
@@ -74,6 +95,7 @@ class RedisTokenTest extends \PHPUnit_Framework_TestCase{
         ];
 
         $RedisToken = new RedisToken([
+            'access_token' => $data['access_token'],
             'user_id' => $data['user_id'],
             'user_type' => $data['user_type'],
             'token_type' => $data['token_type'],
