@@ -15,6 +15,7 @@ class SessionTokenTest extends \PHPUnit_Framework_TestCase{
 
     public function test_construct_where_param_data_is_complete(){
         $data = [
+            'access_token' => 'xxx',
             'user_id' => 1,
             'user_type' => 'admin',
             'token_type' => RedisToken::TOKEN_TYPE,
@@ -27,7 +28,7 @@ class SessionTokenTest extends \PHPUnit_Framework_TestCase{
         $SessionToken = new SessionToken($RedisTokenMock);
 
         // get single attribute
-        $this->assertEquals($data['user_id'], $SessionToken->getAttribute('user_id'));
+        $this->assertEquals($data['access_token'], $SessionToken->getAttribute('access_token'));
         $this->assertEquals($data['user_type'], $SessionToken->getAttribute('user_type'));
         $this->assertEquals($data['token_type'], $SessionToken->getAttribute('token_type'));
         $this->assertEquals(3590, $SessionToken->getAttribute('expires_in'));
