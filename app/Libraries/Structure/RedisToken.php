@@ -7,10 +7,6 @@ class RedisToken extends StructureAbstract
 
     private $access_token;
 
-    protected function getCurrentTimeStamp(){
-        return strtotime(date('Y-m-d H:i:s'));
-    }
-
     protected function initialize($data)
     {
         if(!is_array($data) || empty($data)){
@@ -32,6 +28,10 @@ class RedisToken extends StructureAbstract
         }
 
         return true;
+    }
+
+    public function getCurrentTimeStamp(){
+        return strtotime(date('Y-m-d H:i:s'));
     }
 
     public function getAccessToken(){
