@@ -4,7 +4,7 @@ namespace tests\app\Libraries\Questions;
 
 use app\Libraries\Questions\Question4;
 
-class Question4Test extends \TestCase{
+class Question4Test extends \PHPUnit_Framework_TestCase{
 
     public function test_isValidAnswer_return_true(){
         $belanja_pegawai = ['gaji_upah_honor_proyek' => 100];

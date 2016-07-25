@@ -4,7 +4,7 @@ namespace tests\app\Libraries\Questions;
 
 use app\Libraries\Questions\Question3;
 
-class Question3Test extends \TestCase{
+class Question3Test extends \PHPUnit_Framework_TestCase{
 
     public function test_isValidAnswer_return_true(){
         $dipa = ['dana_pemerintah' => 100, 'PNBP' => 100, 'PHLN' => 100];

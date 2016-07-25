@@ -4,7 +4,7 @@ namespace tests\app\Libraries\Questions;
 
 use app\Libraries\Questions\Question1;
 
-class Question1Test extends \TestCase{
+class Question1Test extends \PHPUnit_Framework_TestCase{
 
     public function setUp()
     {

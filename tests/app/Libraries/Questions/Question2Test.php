@@ -4,7 +4,7 @@ namespace tests\app\Libraries\Questions;
 
 use app\Libraries\Questions\Question2;
 
-class Question2Test extends \TestCase{
+class Question2Test extends \PHPUnit_Framework_TestCase{
 
     public function test_isValidAnswer_return_true(){
         $Question2 = new Question2(100);
