@@ -31,4 +31,6 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
     Route::resource('questions', 'QuestionsController', ['only' => [
         'show', 'index'
     ]]);
+
+    Route::post('/auth/token', ['as' => 'generatetoken', 'uses' => 'AuthController@store']);
 });

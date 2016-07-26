@@ -61,26 +61,52 @@ class AuthToken
         return $this->sessionToken;
     }
 
+    protected function setSessionToken(SessionToken $sessionToken){
+        $this->sessionToken = $sessionToken;
+        return $this;
+    }
+
     public function getRedisToken(){
         return $this->redisToken;
     }
 
+    protected function setRedisToken(RedisToken $redisToken){
+        $this->redisToken = $redisToken;
+        return $this;
+    }
+
+    public function getAccessToken(){
+        return $this->access_token;
+    }
+
+    protected function setAccessToken($access_token){
+        $this->access_token = $access_token;
+        return $this;
+    }
+
+    protected function setNewAccessToken($uniqId = null){
+        $this->access_token = sprintf('%s:%s', self::TOKEN_PREFIX, is_null($uniqId) ? $this->generateUniqId() : $uniqId);
+        return $this;
+    }
+
+
+    protected function isFoundInCache($access_token){
+        return Cache::get($access_token);
+    }
+
     protected function setSessionTokenByAccessToken($access_token){
-        if($data = Cache::get($access_token)){
+        if($data = $this->isFoundInCache($access_token)){
             $data['access_token'] = $access_token;
-            $this->redisToken =  new RedisToken($data);
-            $this->access_token = new SessionToken($this->redisToken);
+            $this->setRedisToken(new RedisToken($data))->setAccessToken($this->redisToken->getAccessToken())->setSessionToken(new SessionToken($this->redisToken));
+            return $this->sessionToken;
         }
+
+        return null;
     }
 
     protected function setSessionTokenByRedisToken(RedisToken $redisToken){
-        $this->redisToken = $redisToken;
-        $this->access_token = new SessionToken($this->redisToken);
-    }
-
-    protected function getAccessToken($uniqId = null){
-        $this->access_token = sprintf('%s:%s', self::TOKEN_PREFIX, is_null($uniqId) ? $this->generateUniqId() : $uniqId);
-        return $this->access_token;
+        $this->setRedisToken($redisToken)->setAccessToken($this->setAccessToken($this->redisToken->getAccessToken()))->setSessionToken(new SessionToken($this->redisToken));
+        return $this->sessionToken;
     }
 
     protected function generateUniqId(){
@@ -103,17 +129,15 @@ class AuthToken
     protected function generateNewSessionToken($user_id){
         $user = $this->isExistUser($user_id);
 
-        $this->redisToken = new RedisToken([
+        $this->setNewAccessToken()->setRedisToken(new RedisToken([
             'access_token' => $this->getAccessToken(),
             'user_id' => $user_id,
             'user_type' => $user->type,
             'token_type' => RedisToken::TOKEN_TYPE,
             'created_at' => $this->getCurrentDate()
-        ]);
+        ]))->setSessionToken(new SessionToken($this->redisToken));
 
-        Cache::put($this->redisToken->getAccessToken(), $this->redisToken->getAttribute(), self::CACHE_TIME);
-
-        $this->sessionToken = new SessionToken($this->redisToken);
+        Cache::put($this->getAccessToken(), $this->redisToken->getAttribute(), self::CACHE_TIME);
 
         return $this->sessionToken;
     }
