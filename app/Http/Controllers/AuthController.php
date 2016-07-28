@@ -48,4 +48,22 @@ class AuthController extends Controller
         ]);
 
     }
+
+    public function show(Request $request){
+        if(!$this->runValidation($request, [
+            'access_token' => 'required'
+        ])){
+            return $this->response->errorInternalError($this->validator->errors()->all());
+        }
+
+        $sessionToken = AuthToken::getFreshInstance($request->user_id)->getSessionToken();
+
+        return $this->response->setStatusCode(200)->withArray([
+            'access_token' => $sessionToken->getAttribute('access_token'),
+            'user_type' => $sessionToken->getAttribute('user_type'),
+            'token_type' => $sessionToken->getAttribute('token_type'),
+            'expires_in' => $sessionToken->getAttribute('expires_in'),
+        ]);
+
+    }
 }

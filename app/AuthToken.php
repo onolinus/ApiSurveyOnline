@@ -85,7 +85,8 @@ class AuthToken
     }
 
     protected function setNewAccessToken($uniqId = null){
-        $this->access_token = sprintf('%s:%s', self::TOKEN_PREFIX, is_null($uniqId) ? $this->generateUniqId() : $uniqId);
+        $uniqId = is_null($uniqId) ? $this->generateUniqId() : $uniqId;
+        $this->access_token = sprintf('%s%s', md5(sprintf('%s:%s', self::TOKEN_PREFIX, $uniqId)), $uniqId);
         return $this;
     }
 
