@@ -12,7 +12,13 @@ class CreateAnswers18Table extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('answers18', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('id_correspondent')->unsigned();
+            $table->text('comment');
+            $table->timestamps();
+            $table->index(['id_correspondent']);
+        });
     }
 
     /**

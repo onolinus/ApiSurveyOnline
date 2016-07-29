@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnswers8Table extends Migration
+class CreateAnswers16bTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,10 @@ class CreateAnswers8Table extends Migration
      */
     public function up()
     {
-        Schema::create('answers8', function (Blueprint $table) {
+        Schema::create('answers16b', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_correspondent')->unsigned();
-            $table->string('institusi', 250);
-            $table->double('jumlah_dana', 15, 8);
+            $table->integer('jumlah_patenluarnegeri')->unsigned();
             $table->timestamps();
             $table->index(['id_correspondent']);
         });
@@ -29,6 +28,6 @@ class CreateAnswers8Table extends Migration
      */
     public function down()
     {
-        Schema::drop('answers8');
+        Schema::drop('answers16b');
     }
 }

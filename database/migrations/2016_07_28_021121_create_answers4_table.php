@@ -12,7 +12,16 @@ class CreateAnswers4Table extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('answers4', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('id_correspondent')->unsigned();
+            $table->double('belanja_pegawai_upah', 15, 8);
+            $table->double('belanja_modal_properti', 15, 8);
+            $table->double('belanja_modal_mesin', 15, 8);
+            $table->double('belanja_operasional_maintenance', 15, 8);
+            $table->timestamps();
+            $table->index(['id_correspondent']);
+        });
     }
 
     /**

@@ -12,7 +12,19 @@ class CreateAnswers3Table extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('answers3', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('id_correspondent')->unsigned();
+            $table->double('dipa_danapemerintah', 15, 8);
+            $table->double('dipa_pnbp', 15, 8);
+            $table->double('dipa_phln', 15, 8);
+            $table->double('danaluar_swasta', 15, 8);
+            $table->double('danaluar_pemerintah', 15, 8);
+            $table->double('danaluar_nonprofit', 15, 8);
+            $table->double('danaluar_luarnegeri', 15, 8);
+            $table->timestamps();
+            $table->index(['id_correspondent']);
+        });
     }
 
     /**

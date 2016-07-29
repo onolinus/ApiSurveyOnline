@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnswers6Table extends Migration
+class CreateAnswers9cTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,17 @@ class CreateAnswers6Table extends Migration
      */
     public function up()
     {
-        Schema::create('answers6', function (Blueprint $table) {
+        Schema::create('answers9c', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_correspondent')->unsigned();
             $table->string('code', 5);
-            $table->integer('percentage')->unsigned();
+            $table->string('klasifikasi', 250);
+            $table->integer('s1_l')->unsigned();
+            $table->integer('s1_p')->unsigned();
+            $table->integer('s2_l')->unsigned();
+            $table->integer('s2_p')->unsigned();
+            $table->integer('s3_l')->unsigned();
+            $table->integer('s3_p')->unsigned();
             $table->timestamps();
             $table->index(['id_correspondent', 'code']);
         });
@@ -29,6 +35,6 @@ class CreateAnswers6Table extends Migration
      */
     public function down()
     {
-        Schema::drop('answers6');
+        Schema::drop('answers9c');
     }
 }

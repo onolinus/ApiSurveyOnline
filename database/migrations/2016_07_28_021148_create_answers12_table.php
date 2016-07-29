@@ -12,7 +12,15 @@ class CreateAnswers12Table extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('answers12', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('id_correspondent')->unsigned();
+            $table->string('nama_jurnal', 500);
+            $table->string('code', 5);
+            $table->integer('jumlah')->unsigned();
+            $table->timestamps();
+            $table->index(['id_correspondent', 'code']);
+        });
     }
 
     /**

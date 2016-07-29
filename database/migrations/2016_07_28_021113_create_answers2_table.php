@@ -12,7 +12,13 @@ class CreateAnswers2Table extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('answers2', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('id_correspondent')->unsigned();
+            $table->double('jumlah', 15, 8);
+            $table->timestamps();
+            $table->index(['id_correspondent']);
+        });
     }
 
     /**
