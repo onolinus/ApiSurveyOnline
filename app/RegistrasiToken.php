@@ -15,4 +15,6 @@ class RegistrasiToken extends Model
     protected $connection = 'mysql';
 
     public $incrementing = false;
+
+    public $timestamps = false;
 }

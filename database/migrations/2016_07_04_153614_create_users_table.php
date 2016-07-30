@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->enum('type', ['admin','correspondent','validator'])->default('correspondent');
+            $table->enum('type', ['admin','correspondent','validator', 'guest'])->default('correspondent');
             $table->string('email', 100)->unique();
             $table->string('password', 50);
             $table->timestamps();

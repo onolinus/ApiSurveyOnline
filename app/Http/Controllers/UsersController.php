@@ -9,7 +9,7 @@ use App\Users;
 use Illuminate\Support\Facades\Validator;
 use EllipseSynergie\ApiResponse\Contracts\Response;
 use App\Transformer\UserTransformer;
-
+use DB;
 
 class UsersController extends BaseController
 {
@@ -33,7 +33,7 @@ class UsersController extends BaseController
     public function store(Request $request)
     {
         if(!$this->runValidation($request, [
-            'type' => 'required|in:admin,correspondent,validator',
+            'type' => 'required|in:admin,correspondent,validator,guest',
             'email' => 'required|max:50|email|unique:users,email',
             'password' => 'required|min:5',
             'registration_token' => 'required|size:6|exists:registrasi_tokens,token,user_id,0'
@@ -41,23 +41,25 @@ class UsersController extends BaseController
             return $this->response->errorInternalError($this->validator->errors()->all());
         }
 
-        $user = new Users();
-        $user->type = $request->type;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->save();
+        DB::transaction(function () use ($request) {
+            $user = new Users();
+            $user->type = $request->type;
+            $user->email = $request->email;
+            $user->password = \PluginCommonSurvey\Helper\Hashed\hash_password($request->password, config('app.password_slug'));
+            $user->save();
 
-        if(!$user->save()){
-            return $this->response->errorInternalError(trans('errors.data_save', ['dataname' => 'user']));
-        }
+            if (!$user->save()) {
+                return $this->response->errorInternalError(trans('errors.data_save', ['dataname' => 'user']));
+            }
 
-        $registrasiToken = RegistrasiToken::find($request->registration_token);
-        $registrasiToken->user_id = 0;
-        $registrasiToken->save();
+            $registrasiToken = RegistrasiToken::find($request->registration_token);
+            $registrasiToken->user_id = $user->id;
+            $registrasiToken->save();
 
-        if(!$registrasiToken->save()){
-            return $this->response->errorInternalError(trans('errors.data_save', ['dataname' => 'registrasi token']));
-        }
+            if (!$registrasiToken->save()) {
+                return $this->response->errorInternalError(trans('errors.data_save', ['dataname' => 'registrasi token']));
+            }
+        });
 
         return $this->response->setStatusCode(201)->withArray([
             'status' => 'success',

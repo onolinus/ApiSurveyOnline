@@ -3,7 +3,7 @@ namespace app\Libraries\Structure;
 
 class RedisToken extends StructureAbstract
 {
-    protected $attributes = ['user_id', 'user_type', 'token_type', 'created_at'];
+    protected $attributes = ['refreshtoken', 'user_id', 'user_type', 'token_type', 'created_at'];
 
     private $access_token;
 
