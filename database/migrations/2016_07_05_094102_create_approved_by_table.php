@@ -19,6 +19,7 @@ class CreateApprovedByTable extends Migration
             $table->string('nip', 100)->unique();
             $table->string('role', 150);
             $table->string('puslit', 150);
+            $table->text('alamat');
             $table->string('lembaga', 150);
             $table->timestamps();
         });
