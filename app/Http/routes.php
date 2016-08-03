@@ -24,8 +24,7 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
 
     # Correspondent
     Route::group(['middleware' => ['\App\Http\Middleware\CorrespondentPrivilegeMiddleware']], function () {
-        Route::post('/correspondent/login', ['as' => 'correspondent-login', 'uses' => 'CorrespondentController@login']);
-        Route::post('/correspondent/resetpassword', ['as' => 'correspondent-resetpassword', 'uses' => 'CorrespondentController@resetpassword']);
+
     });
 
     Route::resource('researchfields', 'ResearchFieldsController', ['only' => [
@@ -44,4 +43,6 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         'store', 'update', 'show'
     ]]);
     Route::post('/auth/token/password', ['as' => 'auth.token.grantpassword', 'uses' => 'AuthController@grantpassword']);
+
+    Route::post('/reset/password', ['as' => 'resetpassword', 'uses' => 'ResetPasswordController@update']);
 });

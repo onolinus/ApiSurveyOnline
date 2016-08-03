@@ -13,4 +13,9 @@ class Users extends Model
     protected $dateFormat = 'Y-m-d H:i:s';
 
     protected $connection = 'mysql';
+
+    public function registrasitoken()
+    {
+        return $this->hasOne('App\RegistrasiToken', 'user_id', 'id');
+    }
 }
