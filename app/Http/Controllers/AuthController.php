@@ -40,7 +40,7 @@ class AuthController extends Controller
 
         $sessionToken = AuthToken::getFreshInstance($request->user_id)->getSessionToken();
 
-        return $this->response->setStatusCode(200)->withArray([
+        return $this->response->setStatusCode(201)->withArray([
             'access_token' => $sessionToken->getAttribute('access_token'),
             'refresh_token' => $sessionToken->getAttribute('refresh_token'),
             'user_type' => $sessionToken->getAttribute('user_type'),
@@ -50,16 +50,15 @@ class AuthController extends Controller
 
     }
 
-    public function show(Request $request){
-        if(!$this->runValidation($request, [
-            'access_token' => 'required'
-        ])){
-            return $this->response->errorInternalError($this->validator->errors()->all());
+    public function update($refresh_token){
+        /** @var SessionToken $sessionToken */
+        $sessionToken = AuthToken::getInstanceFromRefreshToken($refresh_token)->getSessionToken();
+
+        if(!$sessionToken){
+            return $this->response->errorInternalError(trans('refresh token is invalid'));
         }
 
-        $sessionToken = AuthToken::getFreshInstance($request->user_id)->getSessionToken();
-
-        return $this->response->setStatusCode(200)->withArray([
+        return $this->response->setStatusCode(201)->withArray([
             'access_token' => $sessionToken->getAttribute('access_token'),
             'refresh_token' => $sessionToken->getAttribute('refresh_token'),
             'user_type' => $sessionToken->getAttribute('user_type'),

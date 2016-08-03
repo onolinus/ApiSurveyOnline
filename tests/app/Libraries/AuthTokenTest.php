@@ -66,10 +66,10 @@ class AuthTokenTest extends \TestCase{
     }
 
     public function test_setSessionTokenByAccessToken_where_found_in_cache(){
-        $AuthTokenMock = Mockery::mock('\App\AuthToken[isAccessTokenFoundInCache]')->shouldAllowMockingProtectedMethods();
+        $AuthTokenMock = Mockery::mock('\App\AuthToken[isTokenFoundInCache]')->shouldAllowMockingProtectedMethods();
 
         $data = ['user_id' => 1, 'user_type' => 'admin', 'token_type' => 'bearer', 'created_at' => '2016-07-26 00:00:00', 'refresh_token' => 'yyyy'];
-        $AuthTokenMock->shouldReceive('isAccessTokenFoundInCache')->once()->andReturn($data);
+        $AuthTokenMock->shouldReceive('isTokenFoundInCache')->once()->andReturn($data);
 
         $AuthTokenMockReflection = new  \ReflectionClass($AuthTokenMock);
         $method_setSessionTokenByAccessToken = $AuthTokenMockReflection->getMethod('setSessionTokenByAccessToken');
@@ -90,9 +90,9 @@ class AuthTokenTest extends \TestCase{
     }
 
     public function test_setSessionTokenByAccessToken_where_not_found_in_cache_then_return_null(){
-        $AuthTokenMock = Mockery::mock('\App\AuthToken[isAccessTokenFoundInCache]')->shouldAllowMockingProtectedMethods();
+        $AuthTokenMock = Mockery::mock('\App\AuthToken[isTokenFoundInCache]')->shouldAllowMockingProtectedMethods();
 
-        $AuthTokenMock->shouldReceive('isAccessTokenFoundInCache')->once()->andReturn(false);
+        $AuthTokenMock->shouldReceive('isTokenFoundInCache')->once()->andReturn(false);
 
         $AuthTokenMockReflection = new  \ReflectionClass($AuthTokenMock);
         $method_setSessionTokenByAccessToken = $AuthTokenMockReflection->getMethod('setSessionTokenByAccessToken');
