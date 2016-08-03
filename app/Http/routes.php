@@ -43,4 +43,5 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
     Route::resource('/auth/token', 'AuthController', ['only' => [
         'store', 'update', 'show'
     ]]);
+    Route::post('/auth/token/password', ['as' => 'auth.token.grantpassword', 'uses' => 'AuthController@grantpassword']);
 });
