@@ -15,9 +15,8 @@ class CreateAnswers15aTable extends Migration
         Schema::create('answers15a', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_correspondent')->unsigned();
-            $table->string('nama_barang', 250);
-            $table->boolean('terkomersialisasi');
-            $table->integer('tahun')->unsigned();
+            $table->string('nama_jasa', 250);
+            $table->string('pengguna_jasa', 250);
             $table->timestamps();
             $table->index(['id_correspondent']);
         });
