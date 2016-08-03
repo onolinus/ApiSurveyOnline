@@ -2,7 +2,9 @@
 
 namespace App;
 
-use app\Libraries\Structure\RedisToken;
+use app\Libraries\Structure\RedisAccessToken;
+use app\Libraries\Structure\RedisRefreshToken;
+use app\Libraries\Structure\RedisUserToken;
 use app\Libraries\Structure\SessionToken;
 use Illuminate\Support\Facades\Cache;
 use App\Users;
@@ -11,19 +13,34 @@ class AuthToken
 {
     CONST TOKEN_PREFIX = 'token';
 
-    CONST CACHE_TIME = 60; // in minutes
+    CONST ACCESS_TOKEN_CACHE_TIME = 60; // in minutes
 
-    private $access_token;
+    CONST REFRESH_TOKEN_CACHE_TIME = 300; // in minutes
 
-    /**
-     * @var RedisToken
-     */
-    private $redisToken;
+    CONST USER_TOKEN_CACHE_TIME = 60; // in minutes
+
+    private $access_token, $refresh_token, $user_token;
 
     /**
      * @var SessionToken
      */
     private $sessionToken;
+
+    /**
+     * @var RedisAccessToken
+     */
+    private $redisAccessToken;
+
+    /**
+     * @var RedisUserToken
+     */
+    private $redisUserToken;
+
+    /**
+     * @var RedisRefreshToken
+     */
+    private $redisRefreshToken;
+
 
     /**
      * @var self
@@ -39,15 +56,6 @@ class AuthToken
         return self::$instance;
     }
 
-    public static function getInstanceFromRedisToken(RedisToken $redisToken){
-        if(is_null(self::$instance)){
-            self::$instance = new self;
-            self::$instance->setSessionTokenByRedisToken($redisToken);
-        }
-
-        return self::$instance;
-    }
-
     public static function getInstanceFromAccessToken($access_token){
         if(is_null(self::$instance)){
             self::$instance = new self;
@@ -57,21 +65,84 @@ class AuthToken
         return self::$instance;
     }
 
-    public function getSessionToken(){
-        return $this->sessionToken;
-    }
 
+    /**
+     * @param SessionToken $sessionToken
+     * @return $this
+     */
     protected function setSessionToken(SessionToken $sessionToken){
         $this->sessionToken = $sessionToken;
         return $this;
     }
 
-    public function getRedisToken(){
-        return $this->redisToken;
+    /**
+     * @return SessionToken
+     */
+    public function getSessionToken(){
+        return $this->sessionToken;
     }
 
-    protected function setRedisToken(RedisToken $redisToken){
-        $this->redisToken = $redisToken;
+    /**
+     * @param RedisAccessToken $redisAccessToken
+     * @return $this
+     */
+    protected function setRedisAccessToken(RedisAccessToken $redisAccessToken){
+        $this->redisAccessToken = $redisAccessToken;
+        return $this;
+    }
+
+    /**
+     * @return RedisAccessToken
+     */
+    public function getRedisAccessToken(){
+        return $this->redisAccessToken;
+    }
+
+    /**
+     * @param RedisUserToken $userToken
+     * @return $this
+     */
+    protected function setRedisUserToken(RedisUserToken $userToken){
+        $this->redisUserToken = $userToken;
+        return $this;
+    }
+
+    /**
+     * @return RedisUserToken
+     */
+    public function getRedisUserToken(){
+        return $this->redisUserToken;
+    }
+
+    /**
+     * @param RedisRefreshToken $userToken
+     * @return $this
+     */
+    protected function setRedisRefreshToken(RedisRefreshToken $userToken){
+        $this->redisRefreshToken = $userToken;
+        return $this;
+    }
+
+    /**
+     * @return RedisRefreshToken
+     */
+    public function getRedisRefreshToken(){
+        return $this->redisRefreshToken;
+    }
+
+    /**
+     * ACCESS TOKEN
+     * @param $access_token
+     * @return $this
+     */
+    protected function setAccessToken($access_token){
+        $this->access_token = $access_token;
+        return $this;
+    }
+
+    protected function setNewAccessToken(){
+        $uniqId = $this->generateUniqId();
+        $this->access_token = sprintf('%s%s', md5(sprintf('accesstoken:%s:%s', self::TOKEN_PREFIX, $uniqId)), $uniqId);
         return $this;
     }
 
@@ -79,35 +150,42 @@ class AuthToken
         return $this->access_token;
     }
 
-    protected function setAccessToken($access_token){
-        $this->access_token = $access_token;
+    /**
+     * USER TOKEN
+     * @param $user_id
+     * @return $this
+     */
+    protected function setUserToken($user_id){
+        $this->user_token = sprintf('user:accesstoken:reference:%d', $user_id);
         return $this;
     }
 
-    protected function setNewAccessToken($uniqId = null){
-        $uniqId = is_null($uniqId) ? $this->generateUniqId() : $uniqId;
-        $this->access_token = sprintf('%s%s', md5(sprintf('%s:%s', self::TOKEN_PREFIX, $uniqId)), $uniqId);
+    public function getUserToken(){
+        return $this->user_token;
+    }
+
+    /**
+     * REFRESH TOKEN
+     * @param $refresh_token
+     * @return $this
+     */
+    protected function setRefreshToken($refresh_token){
+        $this->refresh_token = $refresh_token;
         return $this;
     }
 
+    protected function setNewRefreshToken(){
+        $uniqId = $this->generateUniqId();
+        $this->refresh_token = sprintf('%s%s', md5(sprintf('refreshtoken:%s:%s', self::TOKEN_PREFIX, $uniqId)), $uniqId);
+        return $this;
+    }
 
-    protected function isFoundInCache($access_token){
+    public function getRefreshToken(){
+        return $this->refresh_token;
+    }
+
+    protected function isAccessTokenFoundInCache($access_token){
         return Cache::get($access_token);
-    }
-
-    protected function setSessionTokenByAccessToken($access_token){
-        if($data = $this->isFoundInCache($access_token)){
-            $data['access_token'] = $access_token;
-            $this->setRedisToken(new RedisToken($data))->setAccessToken($this->redisToken->getAccessToken())->setSessionToken(new SessionToken($this->redisToken));
-            return $this->sessionToken;
-        }
-
-        return null;
-    }
-
-    protected function setSessionTokenByRedisToken(RedisToken $redisToken){
-        $this->setRedisToken($redisToken)->setAccessToken($this->setAccessToken($this->redisToken->getAccessToken()))->setSessionToken(new SessionToken($this->redisToken));
-        return $this->sessionToken;
     }
 
     protected function generateUniqId(){
@@ -118,7 +196,7 @@ class AuthToken
         return date('Y-m-d H:i:s');
     }
 
-    protected function isExistUser($user_id){
+    protected function isExistUserInDB($user_id){
         $user = Users::find($user_id);
         if(!$user){
             throw new \Exception(sprintf("User Id %d is not exist in database", $user_id));
@@ -127,18 +205,55 @@ class AuthToken
         return $user;
     }
 
+    protected function isExistUserInRedisUserToken($user_id){
+        $this->setUserToken($user_id);
+        if($data = Cache::get($this->getUserToken())){
+            return $sessionToken = $this->setSessionTokenByAccessToken($data['access_token']);
+        }
+
+        return null;
+    }
+
+    protected function setSessionTokenByAccessToken($access_token){
+        if($data = $this->isAccessTokenFoundInCache($access_token)){
+            $data['access_token'] = $access_token;
+            $this->setAccessToken($access_token)
+                ->setRedisAccessToken(new RedisAccessToken($data))
+                ->setSessionToken(new SessionToken($this->redisAccessToken));
+            return $this->sessionToken;
+        }
+
+        return null;
+    }
+
     protected function generateNewSessionToken($user_id){
-        $user = $this->isExistUser($user_id);
+        // 1. check in cache by user_id
+        if($sessionToken = $this->isExistUserInRedisUserToken($user_id)){
+            return $sessionToken;
+        }
 
-        $this->setNewAccessToken()->setRedisToken(new RedisToken([
-            'access_token' => $this->getAccessToken(),
-            'user_id' => $user_id,
-            'user_type' => $user->type,
-            'token_type' => RedisToken::TOKEN_TYPE,
-            'created_at' => $this->getCurrentDate()
-        ]))->setSessionToken(new SessionToken($this->redisToken));
+        // 2. check in database
+        $user = $this->isExistUserInDB($user_id);
 
-        Cache::put($this->getAccessToken(), $this->redisToken->getAttribute(), self::CACHE_TIME);
+        // 3. generate new token
+        $this->setNewAccessToken()
+            ->setUserToken($user_id)
+            ->setNewRefreshToken()
+            ->setRedisAccessToken(new RedisAccessToken([
+                'access_token' => $this->getAccessToken(),
+                'refresh_token' => $this->getRefreshToken(),
+                'user_id' => $user_id,
+                'user_type' => $user->type,
+                'token_type' => RedisAccessToken::TOKEN_TYPE,
+                'created_at' => $this->getCurrentDate(),
+            ]))
+            ->setRedisUserToken(new RedisUserToken($this->getRedisAccessToken()))
+            ->setRedisRefreshToken(new RedisRefreshToken($this->getRedisAccessToken()))
+            ->setSessionToken(new SessionToken($this->getRedisAccessToken()));
+
+        Cache::put($this->getUserToken(), $this->redisUserToken->getAttribute(), self::USER_TOKEN_CACHE_TIME);
+        Cache::put($this->getAccessToken(), $this->redisAccessToken->getAttribute(), self::ACCESS_TOKEN_CACHE_TIME);
+        Cache::put($this->getRefreshToken(), $this->redisRefreshToken->getAttribute(), self::REFRESH_TOKEN_CACHE_TIME);
 
         return $this->sessionToken;
     }

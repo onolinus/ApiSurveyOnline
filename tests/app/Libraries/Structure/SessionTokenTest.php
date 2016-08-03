@@ -2,7 +2,7 @@
 
 namespace tests\app\Libraries\Structure;
 
-use app\Libraries\Structure\RedisToken;
+use app\Libraries\Structure\RedisAccessToken;
 use app\Libraries\Structure\SessionToken;
 use Mockery;
 
@@ -16,16 +16,17 @@ class SessionTokenTest extends \PHPUnit_Framework_TestCase{
     public function test_construct_where_param_data_is_complete(){
         $data = [
             'access_token' => 'xxx',
+            'refresh_token' => 'yyyy',
             'user_id' => 1,
             'user_type' => 'admin',
-            'token_type' => RedisToken::TOKEN_TYPE,
+            'token_type' => RedisAccessToken::TOKEN_TYPE,
             'created_at' => '2017-07-18 00:00:00',
         ];
 
-        $RedisTokenMock = Mockery::mock('\app\Libraries\Structure\RedisToken[getCurrentTimeStamp]', [$data])->shouldAllowMockingProtectedMethods();
-        $RedisTokenMock->shouldReceive('getCurrentTimeStamp')->times(2)->andReturn(strtotime('2017-07-18 00:00:10'));
+        $RedisAccessTokenMock = Mockery::mock('\app\Libraries\Structure\RedisAccessToken[getCurrentTimeStamp]', [$data])->shouldAllowMockingProtectedMethods();
+        $RedisAccessTokenMock->shouldReceive('getCurrentTimeStamp')->times(2)->andReturn(strtotime('2017-07-18 00:00:10'));
 
-        $SessionToken = new SessionToken($RedisTokenMock);
+        $SessionToken = new SessionToken($RedisAccessTokenMock);
 
         // get single attribute
         $this->assertEquals($data['access_token'], $SessionToken->getAttribute('access_token'));

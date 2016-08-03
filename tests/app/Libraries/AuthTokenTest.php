@@ -3,7 +3,7 @@
 namespace tests\app\Libraries;
 
 use App\AuthToken;
-use app\Libraries\Structure\RedisToken;
+use app\Libraries\Structure\RedisAccessToken;
 use app\Libraries\Structure\SessionToken;
 use App\Users;
 use Mockery;
@@ -16,18 +16,19 @@ class AuthTokenTest extends \TestCase{
 
     public function test_generateNewSessionToken_where_method_isExistUser_return_new_user_object(){
         $CacheMock = Mockery::mock('alias:\Illuminate\Support\Facades\Cache');
-        $CacheMock->shouldReceive('put')->once()->andReturn('x');
+        $CacheMock->shouldReceive('put')->times(3)->andReturn('x');
 
-        $AuthTokenMock = Mockery::mock('\App\AuthToken[isExistUser,setNewAccessToken,getAccessToken]')->shouldAllowMockingProtectedMethods();
+        $AuthTokenMock = Mockery::mock('\App\AuthToken[isExistUserInDB,setNewAccessToken,getAccessToken,isExistUserInRedisUserToken]')->shouldAllowMockingProtectedMethods();
 
         $user = new Users();
         $user->id = 5;
         $user->type = 'admin';
         $user->email = '12345@gmail.com';
         $user->password = 'xxx';
-        $AuthTokenMock->shouldReceive('isExistUser')->once()->andReturn($user);
+        $AuthTokenMock->shouldReceive('isExistUserInDB')->once()->andReturn($user);
         $AuthTokenMock->shouldReceive('setNewAccessToken')->once()->andReturn($AuthTokenMock);
         $AuthTokenMock->shouldReceive('getAccessToken')->times(3)->andReturn('xxx');
+        $AuthTokenMock->shouldReceive('isExistUserInRedisUserToken')->times(1)->andReturn(null);
 
         $AuthTokenMockReflection = new  \ReflectionClass($AuthTokenMock);
         $method_generateNewSessionToken = $AuthTokenMockReflection->getMethod('generateNewSessionToken');
@@ -48,9 +49,10 @@ class AuthTokenTest extends \TestCase{
     }
 
     public function test_generateNewSessionToken_where_method_isExistUser_return_false(){
-        $AuthTokenMock = Mockery::mock('\App\AuthToken[isExistUser]')->shouldAllowMockingProtectedMethods();
+        $AuthTokenMock = Mockery::mock('\App\AuthToken[isExistUserInDB,isExistUserInRedisUserToken]')->shouldAllowMockingProtectedMethods();
         $msg = 'exception happened here, user not exist';
-        $AuthTokenMock->shouldReceive('isExistUser')->once()->andThrow(new \Exception($msg));
+        $AuthTokenMock->shouldReceive('isExistUserInDB')->once()->andThrow(new \Exception($msg));
+        $AuthTokenMock->shouldReceive('isExistUserInRedisUserToken')->once()->andReturnNull();
 
         $AuthTokenMockReflection = new  \ReflectionClass($AuthTokenMock);
         $method = $AuthTokenMockReflection->getMethod('generateNewSessionToken');
@@ -64,10 +66,10 @@ class AuthTokenTest extends \TestCase{
     }
 
     public function test_setSessionTokenByAccessToken_where_found_in_cache(){
-        $AuthTokenMock = Mockery::mock('\App\AuthToken[isFoundInCache]')->shouldAllowMockingProtectedMethods();
+        $AuthTokenMock = Mockery::mock('\App\AuthToken[isAccessTokenFoundInCache]')->shouldAllowMockingProtectedMethods();
 
-        $data = ['user_id' => 1, 'user_type' => 'admin', 'token_type' => 'bearer', 'created_at' => '2016-07-26 00:00:00'];
-        $AuthTokenMock->shouldReceive('isFoundInCache')->once()->andReturn($data);
+        $data = ['user_id' => 1, 'user_type' => 'admin', 'token_type' => 'bearer', 'created_at' => '2016-07-26 00:00:00', 'refresh_token' => 'yyyy'];
+        $AuthTokenMock->shouldReceive('isAccessTokenFoundInCache')->once()->andReturn($data);
 
         $AuthTokenMockReflection = new  \ReflectionClass($AuthTokenMock);
         $method_setSessionTokenByAccessToken = $AuthTokenMockReflection->getMethod('setSessionTokenByAccessToken');
@@ -88,9 +90,9 @@ class AuthTokenTest extends \TestCase{
     }
 
     public function test_setSessionTokenByAccessToken_where_not_found_in_cache_then_return_null(){
-        $AuthTokenMock = Mockery::mock('\App\AuthToken[isFoundInCache]')->shouldAllowMockingProtectedMethods();
+        $AuthTokenMock = Mockery::mock('\App\AuthToken[isAccessTokenFoundInCache]')->shouldAllowMockingProtectedMethods();
 
-        $AuthTokenMock->shouldReceive('isFoundInCache')->once()->andReturn(false);
+        $AuthTokenMock->shouldReceive('isAccessTokenFoundInCache')->once()->andReturn(false);
 
         $AuthTokenMockReflection = new  \ReflectionClass($AuthTokenMock);
         $method_setSessionTokenByAccessToken = $AuthTokenMockReflection->getMethod('setSessionTokenByAccessToken');
@@ -98,7 +100,7 @@ class AuthTokenTest extends \TestCase{
         $method_setSessionTokenByAccessToken->invoke($AuthTokenMock, 'xxx');
 
         $this->assertNull($AuthTokenMock->getSessionToken());
-        $this->assertNull($AuthTokenMock->getRedisToken());
+        $this->assertNull($AuthTokenMock->getRedisAccessToken());
 
         $method_getAccessToken = $AuthTokenMockReflection->getMethod('getAccessToken');
         $method_getAccessToken->setAccessible(true);

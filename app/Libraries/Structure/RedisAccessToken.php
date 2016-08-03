@@ -1,9 +1,9 @@
 <?php
 namespace app\Libraries\Structure;
 
-class RedisToken extends StructureAbstract
+class RedisAccessToken extends StructureAbstract
 {
-    protected $attributes = ['refreshtoken', 'user_id', 'user_type', 'token_type', 'created_at'];
+    protected $attributes = ['user_id', 'user_type', 'token_type', 'refresh_token', 'created_at'];
 
     private $access_token;
 
@@ -36,5 +36,9 @@ class RedisToken extends StructureAbstract
 
     public function getAccessToken(){
         return $this->access_token;
+    }
+
+    public function getRefreshToken(){
+        return $this->getAttribute('refresh_token');
     }
 }

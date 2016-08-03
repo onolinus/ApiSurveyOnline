@@ -5,23 +5,23 @@ use App\AuthToken;
 
 class SessionToken extends StructureAbstract
 {
-    protected $attributes = ['access_token', 'user_type', 'token_type', 'expires_in'];
+    protected $attributes = ['access_token', 'refresh_token', 'user_type', 'token_type', 'expires_in'];
 
     /**
-     * @var RedisToken
+     * @var RedisAccessToken
      */
-    private $redisToken;
+    private $redisAccessToken;
 
-    public function __construct(RedisToken $redisToken)
+    public function __construct(RedisAccessToken $redisAccessToken)
     {
-        $this->redisToken = $redisToken;
-        $data = $this->redisToken->getAttribute();
+        $this->redisAccessToken = $redisAccessToken;
+        $data = $this->redisAccessToken->getAttribute();
 
         $this->generateSessionToken($data);
     }
 
     private function getExpiresIn(){
-        $expiredin = strtotime($this->redisToken->getAttribute('created_at')) - $this->redisToken->getCurrentTimeStamp() + (AuthToken::CACHE_TIME * 60);
+        $expiredin = strtotime($this->redisAccessToken->getAttribute('created_at')) - $this->redisAccessToken->getCurrentTimeStamp() + (AuthToken::ACCESS_TOKEN_CACHE_TIME * 60);
         return $expiredin > 0 ? $expiredin : 0;
     }
 
@@ -30,7 +30,8 @@ class SessionToken extends StructureAbstract
     }
 
     public function generateSessionToken($data){
-        $this->setAttribute('access_token', $this->redisToken->getAccessToken());
+        $this->setAttribute('access_token', $this->redisAccessToken->getAccessToken());
+        $this->setAttribute('refresh_token', $this->redisAccessToken->getRefreshToken());
         $this->setAttribute('user_type', $data['user_type']);
         $this->setAttribute('token_type', $data['token_type']);
         $this->set_expires_in();

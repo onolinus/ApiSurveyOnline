@@ -42,6 +42,7 @@ class AuthController extends Controller
 
         return $this->response->setStatusCode(200)->withArray([
             'access_token' => $sessionToken->getAttribute('access_token'),
+            'refresh_token' => $sessionToken->getAttribute('refresh_token'),
             'user_type' => $sessionToken->getAttribute('user_type'),
             'token_type' => $sessionToken->getAttribute('token_type'),
             'expires_in' => $sessionToken->getAttribute('expires_in'),
@@ -60,6 +61,7 @@ class AuthController extends Controller
 
         return $this->response->setStatusCode(200)->withArray([
             'access_token' => $sessionToken->getAttribute('access_token'),
+            'refresh_token' => $sessionToken->getAttribute('refresh_token'),
             'user_type' => $sessionToken->getAttribute('user_type'),
             'token_type' => $sessionToken->getAttribute('token_type'),
             'expires_in' => $sessionToken->getAttribute('expires_in'),
