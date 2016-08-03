@@ -9,6 +9,8 @@ use App\AuthToken;
 use EllipseSynergie\ApiResponse\Contracts\Response;
 use Illuminate\Support\Facades\Validator;
 use App\Transformer\TokenTransformer;
+use PluginCommonSurvey\Libraries\ApiClient;
+use PluginCommonSurvey\Libraries\Codes;
 
 class AuthController extends Controller
 {
@@ -33,12 +35,29 @@ class AuthController extends Controller
 
     public function store(Request $request){
         if(!$this->runValidation($request, [
-            'user_id' => 'required|integer|exists:users,id'
+            'user_id' => 'required|integer|exists:users,id',
+            'client_id' => 'required',
+            'secret_code' => 'required',
         ])){
-            return $this->response->errorInternalError($this->validator->errors()->all());
+            return $this->response->errorWrongArgs($this->validator->errors()->all());
         }
 
-        $sessionToken = AuthToken::getFreshInstance($request->user_id)->getSessionToken();
+        if($request->client_id != ApiClient::CLIENT_ID || $request->secret_code != ApiClient::SECRET_CODE){
+            return $this->response->errorWrongArgs([
+                'status' => 'error',
+                'message' => trans('invalid api client or secret code value'),
+                'code' => Codes::INVALID_PARAMETER,
+                'code_msg' => Codes::getInstance()->getCode(Codes::INVALID_PARAMETER)
+            ]);
+        }
+
+
+        try {
+            /** @var SessionToken $sessionToken */
+            $sessionToken = AuthToken::getFreshInstance($request->user_id)->getSessionToken();
+        }catch(\Exception $e){
+            return $this->response->errorInternalError($e->getMessage());
+        }
 
         return $this->response->setStatusCode(201)->withArray([
             'access_token' => $sessionToken->getAttribute('access_token'),
@@ -51,8 +70,12 @@ class AuthController extends Controller
     }
 
     public function update($refresh_token){
-        /** @var SessionToken $sessionToken */
-        $sessionToken = AuthToken::getInstanceFromRefreshToken($refresh_token)->getSessionToken();
+        try{
+            /** @var SessionToken $sessionToken */
+            $sessionToken = AuthToken::getInstanceFromRefreshToken($refresh_token)->getSessionToken();
+        }catch(\Exception $e){
+            return $this->response->errorInternalError($e->getMessage());
+        }
 
         if(!$sessionToken){
             return $this->response->errorInternalError(trans('refresh token is invalid'));
