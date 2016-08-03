@@ -45,4 +45,6 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
     Route::post('/auth/token/password', ['as' => 'auth.token.grantpassword', 'uses' => 'AuthController@grantpassword']);
 
     Route::post('/reset/password', ['as' => 'resetpassword', 'uses' => 'ResetPasswordController@update']);
+
+    Route::post('/user/register', ['as' => 'register', 'uses' => 'RegisterController@store']);
 });
