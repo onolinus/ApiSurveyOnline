@@ -65,6 +65,15 @@ class AuthToken
         return self::$instance;
     }
 
+    public static function getInstanceFromAccessToken($access_token){
+        if(is_null(self::$instance)){
+            self::$instance = new self;
+            self::$instance->setSessionTokenByAccessToken($access_token);
+        }
+
+        return self::$instance;
+    }
+
 
     /**
      * @param SessionToken $sessionToken
@@ -251,7 +260,10 @@ class AuthToken
         // 2. check in database
         $user = $this->isExistUserInDB($user_id);
 
-        // 3. generate new token
+        // 3. set new token
+        $this->setNewAccessToken()->setNewRefreshToken()->setUserToken($user_id);
+
+        // 4. generate new access token
         $this->initialize(new RedisAccessToken([
             'access_token' => $this->getAccessToken(),
             'refresh_token' => $this->getRefreshToken(),

@@ -37,6 +37,21 @@ class SessionToken extends StructureAbstract
         $this->set_expires_in();
     }
 
+    public function getAccessToken(){
+        return $this->getAttribute('access_token');
+    }
+
+    public function getRefreshToken(){
+        return $this->getAttribute('refresh_token');
+    }
+
+    public function getUserType(){
+        return $this->getAttribute('user_type');
+    }
+
+    public function getTokenType(){
+        return $this->getAttribute('token_type');
+    }
 
     public function getAttribute($attribute_name = null){
         if(is_null($attribute_name)){

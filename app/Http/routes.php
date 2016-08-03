@@ -12,9 +12,11 @@
 */
 
 Route::group(['middleware' => ['apisurveylitbang']], function () {
-    Route::resource('user', 'UsersController', ['only' => [
-        'store', 'destroy', 'update', 'show', 'index'
-    ]]);
+    Route::group(['middleware' => ['\App\Http\Middleware\AdminPrivilegeMiddleware']], function () {
+        Route::resource('user', 'UsersController', ['only' => [
+            'store', 'destroy', 'update', 'show', 'index'
+        ]]);
+    });
 
     Route::resource('researchfields', 'ResearchFieldsController', ['only' => [
         'show', 'index'
