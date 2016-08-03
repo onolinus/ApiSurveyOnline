@@ -16,6 +16,16 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::resource('user', 'UsersController', ['only' => [
             'store', 'destroy', 'update', 'show', 'index'
         ]]);
+
+        Route::resource('registrasitoken', 'RegistrasiTokenController', ['only' => [
+            'show', 'index'
+        ]]);
+    });
+
+    # Correspondent
+    Route::group(['middleware' => ['\App\Http\Middleware\CorrespondentPrivilegeMiddleware']], function () {
+        Route::post('/correspondent/login', ['as' => 'correspondent-login', 'uses' => 'CorrespondentController@login']);
+        Route::post('/correspondent/resetpassword', ['as' => 'correspondent-resetpassword', 'uses' => 'CorrespondentController@resetpassword']);
     });
 
     Route::resource('researchfields', 'ResearchFieldsController', ['only' => [
@@ -23,10 +33,6 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
     ]]);
 
     Route::resource('socioeconomics', 'SocioEconomicsController', ['only' => [
-        'show', 'index'
-    ]]);
-
-    Route::resource('registrasitoken', 'RegistrasiTokenController', ['only' => [
         'show', 'index'
     ]]);
 
