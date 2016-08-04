@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
-use App\UsersTrait;
+use App\TraitUsers;
+use App\TraitValidate;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Users;
@@ -13,7 +14,9 @@ use PluginCommonSurvey\Libraries\Codes;
 
 class UsersController extends BaseController
 {
-    use UsersTrait;
+    use TraitValidate;
+
+    use TraitUsers;
 
     private function getRulesStoreValidation(Request $request){
         $rules = [

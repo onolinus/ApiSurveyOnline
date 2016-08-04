@@ -2,25 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\AuthTrait;
+use App\TraitAuth;
 use app\Libraries\Structure\SessionToken;
-use App\UsersTrait;
+use App\TraitUsers;
+use App\TraitValidate;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\AuthToken;
 use EllipseSynergie\ApiResponse\Contracts\Response;
-use Illuminate\Support\Facades\Validator;
-use App\Transformer\TokenTransformer;
-use PluginCommonSurvey\Libraries\ApiClient;
-use PluginCommonSurvey\Libraries\Codes;
 use App\Users as UsersModel;
 
 class AuthController extends Controller
 {
+    use TraitValidate;
 
-    use UsersTrait;
+    use TraitUsers;
 
-    use AuthTrait;
+    use TraitAuth;
 
     /**
      * @var Response

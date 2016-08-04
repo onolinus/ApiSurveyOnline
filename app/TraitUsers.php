@@ -6,23 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PluginCommonSurvey\Libraries\Codes;
 
-trait UsersTrait
+trait TraitUsers
 {
-
-    /**
-     * @var Validator
-     */
-    private $validator;
-
-    private function runValidation($request, $rules){
-        $this->validator = Validator::make($request->all(), $rules);
-        if($this->validator->fails()){
-            return false;
-        }
-
-        return true;
-    }
-
     private function updateFlagRegistrasiToken(Request $request, $user_id){
         if($request->type === 'correspondent') {
             $registrasiToken = RegistrasiToken::find($request->registration_token);

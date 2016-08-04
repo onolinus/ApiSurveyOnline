@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use PluginCommonSurvey\Libraries\ApiClient;
 use PluginCommonSurvey\Libraries\Codes;
 
-trait AuthTrait
+trait TraitAuth
 {
     private function checkApiClientAndSecretCode(Request $request){
         return $request->client_id != ApiClient::CLIENT_ID || $request->secret_code != ApiClient::SECRET_CODE ? false : true;

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\AuthToken;
-use App\AuthTrait;
+use App\TraitAuth;
 use app\Libraries\Structure\SessionToken;
 use App\RegistrasiToken as RegistrasiTokenModel;
+use App\TraitValidate;
 use App\Users as UsersModel;
-use App\UsersTrait;
+use App\TraitUsers;
 use Illuminate\Http\Request;
 use EllipseSynergie\ApiResponse\Contracts\Response;
 use App\Http\Requests;
@@ -16,9 +17,11 @@ use PluginCommonSurvey\Libraries\Codes;
 
 class UserController extends Controller
 {
-    use UsersTrait;
+    use TraitValidate;
 
-    use AuthTrait;
+    use TraitUsers;
+
+    use TraitAuth;
 
     /**
      * @var Response
