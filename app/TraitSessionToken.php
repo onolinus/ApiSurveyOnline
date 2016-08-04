@@ -11,6 +11,9 @@ trait TraitSessionToken
 
     private $redisData;
 
+    /**
+     * This must be protected cause called from parent override TraitFractalResponse `initialize`
+     */
     protected function initialize()
     {
         $this->setAuthTokenInstance();
