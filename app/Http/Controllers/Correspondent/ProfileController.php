@@ -25,12 +25,12 @@ class ProfileController extends Controller
     private function getRules(){
         return [
             'correspondent.name' => 'required|max:150',
-            'correspondent.nip' => 'required|max:100',
+            'correspondent.nip' => 'required|max:100|unique:correspondents,nip',
             'correspondent.role' => 'required|max:150',
             'correspondent.telephone_number' => 'required|max:20',
             'correspondent.handhone_number' => 'required|max:20',
             'approved_by.name' => 'required|max:150',
-            'approved_by.nip' => 'required|max:100',
+            'approved_by.nip' => 'required|max:100|unique:approved_by,nip',
             'approved_by.role' => 'required|max:150',
             'approved_by.puslit' => 'required|max:150',
             'approved_by.alamat' => 'required|min:10',
