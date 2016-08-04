@@ -8,7 +8,10 @@ use App\Http\Requests;
 
 class QuestionsController extends BaseController
 {
-    //
+    protected function initialize(){
+        return null;
+    }
+
     protected function getModelName()
     {
         return 'Questions';

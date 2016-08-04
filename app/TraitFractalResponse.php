@@ -16,8 +16,4 @@ trait TraitFractalResponse
         $this->response = $response;
         $this->initialize();
     }
-
-    protected function initialize(){
-        // TODO : this method overrided in TraitSessionToken
-    }
 }

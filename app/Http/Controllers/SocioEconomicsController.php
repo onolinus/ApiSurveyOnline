@@ -8,6 +8,10 @@ use App\Http\Requests;
 
 class SocioEconomicsController extends BaseController
 {
+    protected function initialize(){
+        return null;
+    }
+
     protected function getModelName()
     {
         return 'SocioEconomics';
