@@ -1,8 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
+use App\TraitSessionToken;
 use App\TraitUsers;
 use App\TraitValidate;
 use Illuminate\Http\Request;
@@ -14,6 +14,8 @@ use PluginCommonSurvey\Libraries\Codes;
 
 class UsersController extends BaseController
 {
+    use TraitSessionToken;
+
     use TraitValidate;
 
     use TraitUsers;

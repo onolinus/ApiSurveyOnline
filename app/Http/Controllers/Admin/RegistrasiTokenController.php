@@ -1,8 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
+use App\TraitSessionToken;
 use App\Transformer\RegistrasiToken;
 use Illuminate\Http\Request;
 
@@ -10,7 +10,8 @@ use App\Http\Requests;
 
 class RegistrasiTokenController extends BaseController
 {
-    //
+    use TraitSessionToken;
+
     protected function getModelName()
     {
         return 'RegistrasiToken';

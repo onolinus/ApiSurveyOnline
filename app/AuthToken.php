@@ -47,6 +47,14 @@ class AuthToken
      */
     private static $instance;
 
+    public static function getInstance(){
+        if(is_null(self::$instance)){
+            throw new \Exception(trans('there is no instance created'));
+        }
+
+        return self::$instance;
+    }
+
     public static function getFreshInstance($user_id){
         if(is_null(self::$instance)){
             self::$instance = new self;

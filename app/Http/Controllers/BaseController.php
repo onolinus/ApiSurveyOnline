@@ -2,22 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\TraitFractalResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use EllipseSynergie\ApiResponse\Contracts\Response;
 
 
 abstract class BaseController extends Controller
 {
-    /**
-     * @var Response
-     */
-    protected $response;
-
-    public function __construct(Response $response)
-    {
-        $this->response = $response;
-    }
+    use TraitFractalResponse;
 
     protected function getPerPage(){
         return 10;

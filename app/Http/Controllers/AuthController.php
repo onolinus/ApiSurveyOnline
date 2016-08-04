@@ -97,6 +97,6 @@ class AuthController extends Controller
             return $this->response->errorInternalError($e->getMessage());
         }
 
-        $this->getSuccessStoreResponse($sessionToken);
+        return $this->getSuccessStoreResponse($sessionToken);
     }
 }

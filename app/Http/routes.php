@@ -25,7 +25,9 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
 
     # Correspondent
     Route::group(['middleware' => ['\App\Http\Middleware\CorrespondentPrivilegeMiddleware']], function () {
-
+        Route::resource('correspondent/profile', 'Correspondent\ProfileController', ['only' => [
+            'store', 'update', 'show'
+        ]]);
     });
 
     # Public

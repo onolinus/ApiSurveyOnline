@@ -2,27 +2,16 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
+use App\TraitPrivilegeMiddleware;
 
-class CorrespondentPrivilegeMiddleware extends PrivilegeMiddleware
+class CorrespondentPrivilegeMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next)
-    {
-        if(!$this->checkIsInvalidToken($request, $next)){
-            return $this->responseInvalidToken();
-        }
 
-        if($this->sessionToken->getAttribute('user_type') !== 'correspondent'){
-            return $this->responseUnathorizedAccess();
-        }
+    use TraitPrivilegeMiddleware;
 
-        return $next($request);
+    CONST USER_TYPE_ALLOWED = 'correspondent';
+
+    private function checkAccessByUserType(){
+        return $this->sessionToken->getAttribute('user_type') === self::USER_TYPE_ALLOWED;
     }
 }

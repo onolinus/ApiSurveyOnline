@@ -2,29 +2,16 @@
 
 namespace App\Http\Middleware;
 
-use App\AuthToken;
-use app\Libraries\Structure\SessionToken;
-use Closure;
+use App\TraitPrivilegeMiddleware;
 
-class AdminPrivilegeMiddleware extends PrivilegeMiddleware
+class AdminPrivilegeMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next)
-    {
-        if(!$this->checkIsInvalidToken($request, $next)){
-            return $this->responseInvalidToken();
-        }
 
-        if($this->sessionToken->getAttribute('user_type') !== 'admin'){
-            return $this->responseUnathorizedAccess();
-        }
+    use TraitPrivilegeMiddleware;
 
-        return $next($request);
+    CONST USER_TYPE_ALLOWED = 'admin';
+
+    private function checkAccessByUserType(){
+        return $this->sessionToken->getAttribute('user_type') === self::USER_TYPE_ALLOWED;
     }
 }
