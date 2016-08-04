@@ -17,4 +17,9 @@ class ApprovedBy extends Model
     public $incrementing = false;
 
     protected $fillable = ['correspondent_id_approved'];
+
+    public function Correspondents()
+    {
+        return $this->belongsTo('App\Correspondents', 'correspondent_id_approved', 'user_id');
+    }
 }

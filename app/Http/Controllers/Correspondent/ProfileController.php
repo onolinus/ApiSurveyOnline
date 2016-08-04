@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\TraitFractalResponse;
 use App\TraitSessionToken;
 use App\TraitValidate;
+use App\Transformer\CorrespondentTransformer;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
@@ -56,26 +57,6 @@ class ProfileController extends Controller
         return $rules;
     }
 
-    public function store(Request $request)
-    {
-        $this->setCorrespondent();
-        $this->setApprovedBy();
-
-        if(!$this->runValidation($request, $this->getRules())){
-            return $this->response->errorInternalError($this->validator->errors()->all());
-        }
-
-        DB::transaction(function () use ($request) {
-            $this->createNewCorrespondent($request);
-            $this->createNewApprovedBy($request);
-        });
-
-        return $this->response->setStatusCode(201)->withArray([
-            'code' => Codes::SUCCESS,
-            'message' => trans('profile successfully updated')
-        ]);
-    }
-
     private function setCorrespondent(){
         $this->correspondent = CorrespondentsModel::firstOrNew(['user_id' => $this->getSessionUserID()]);
     }
@@ -103,5 +84,30 @@ class ProfileController extends Controller
         $this->approved_by->alamat = $request->input('approved_by.alamat');
         $this->approved_by->lembaga = $request->input('approved_by.lembaga');
         $this->approved_by->save();
+    }
+
+    public function store(Request $request)
+    {
+        $this->setCorrespondent();
+        $this->setApprovedBy();
+
+        if(!$this->runValidation($request, $this->getRules())){
+            return $this->response->errorInternalError($this->validator->errors()->all());
+        }
+
+        DB::transaction(function () use ($request) {
+            $this->createNewCorrespondent($request);
+            $this->createNewApprovedBy($request);
+        });
+
+        return $this->response->setStatusCode(201)->withArray([
+            'code' => Codes::SUCCESS,
+            'message' => trans('profile successfully updated')
+        ]);
+    }
+
+    public function index(Request $request){
+        $row = $this->correspondent = CorrespondentsModel::find($this->getSessionUserID());
+        return $this->response->withItem($row, new CorrespondentTransformer());
     }
 }

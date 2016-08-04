@@ -18,4 +18,9 @@ class Users extends Model
     {
         return $this->hasOne('App\RegistrasiToken', 'user_id', 'id');
     }
+
+    public function correspondents()
+    {
+        return $this->hasOne('App\Correspondents', 'user_id', 'id');
+    }
 }

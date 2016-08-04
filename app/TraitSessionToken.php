@@ -16,8 +16,10 @@ trait TraitSessionToken
      */
     protected function initialize()
     {
-        $this->setAuthTokenInstance();
-        $this->setRedisData();
+        if(!\App::runningInConsole()) {
+            $this->setAuthTokenInstance();
+            $this->setRedisData();
+        }
     }
 
     private function setAuthTokenInstance(){
