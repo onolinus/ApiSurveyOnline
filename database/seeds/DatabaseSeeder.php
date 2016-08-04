@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(QuestionsSeeder::class);
         $this->call(RegistrasiTokensSeeder::class);
         $this->call(UsersSeeder::class);
-
+        $this->call(LembagaSeeder::class);
     }
 }
