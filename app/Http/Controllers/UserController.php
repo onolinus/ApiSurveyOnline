@@ -12,8 +12,9 @@ use Illuminate\Http\Request;
 use EllipseSynergie\ApiResponse\Contracts\Response;
 use App\Http\Requests;
 use DB;
+use PluginCommonSurvey\Libraries\Codes;
 
-class RegisterController extends Controller
+class UserController extends Controller
 {
     use UsersTrait;
 
@@ -103,5 +104,32 @@ class RegisterController extends Controller
 
         // generate token after register
         return $this->generateTokenAfterRegister($request);
+    }
+
+    public function update(Request $request){
+        if(!$this->runValidation($request, [
+            'email' => 'required|max:50|email|exists:users,email',
+            'registrasi_tokens' => 'required|size:6|exists:registrasi_tokens,token,user_id,!0',
+            'newpassword' => 'required|min:5',
+            'confirm_newpassword' => 'required|min:5|same:newpassword',
+        ])){
+            return $this->response->errorInternalError($this->validator->errors()->all());
+        }
+
+        $user = UsersModel::where('email', $request->email)->first();
+
+        if($user->registrasitoken->token != $request->registrasi_tokens){
+            return $this->response->errorWrongArgs(trans('This token does not belong to you'));
+        }
+
+        $user->password = \PluginCommonSurvey\Helper\Hashed\hash_password($request->newpassword);
+        if (!$user->save()) {
+            return $this->response->errorInternalError(trans('errors.data_save', ['dataname' => 'user']));
+        }
+
+        return $this->response->setStatusCode(200)->withArray([
+            'code' => Codes::SUCCESS,
+            'message' => trans('your password successfully updated')
+        ]);
     }
 }

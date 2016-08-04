@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PluginCommonSurvey\Libraries\Codes;
 
 trait UsersTrait
 {
@@ -42,7 +43,7 @@ trait UsersTrait
 
     private function returnStoreSuccessResponse(){
         return $this->response->setStatusCode(201)->withArray([
-            'status' => 'success',
+            'code' => Codes::SUCCESS,
             'message' => trans('success.data_saved', ['dataname' => 'user'])
         ]);
     }

@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\BaseController;
 use App\UsersTrait;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Users;
 use App\Transformer\UserTransformer;
 use DB;
+use PluginCommonSurvey\Libraries\Codes;
 
 class UsersController extends BaseController
 {
@@ -77,7 +79,7 @@ class UsersController extends BaseController
         $user->save();
 
         return $this->response->setStatusCode(201)->withArray([
-            'status' => 'success',
+            'code' => Codes::SUCCESS,
             'message' => trans('success.data_updated', ['dataname' => 'user'])
         ]);
     }
@@ -98,7 +100,7 @@ class UsersController extends BaseController
 
         $user->delete();
         return $this->response->setStatusCode(200)->withArray([
-            'status' => 'success',
+            'code' => Codes::SUCCESS,
             'message' => trans('success.data_deleted', ['dataname' => 'user'])
         ]);
     }

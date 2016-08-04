@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Users;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-
+use PluginCommonSurvey\Libraries\Codes;
 
 
 class AnswersController extends Controller
@@ -36,7 +36,7 @@ class AnswersController extends Controller
         $user = Users::where('id', $id)->get();
         if(empty($user) || count($user) === 0){
             return response()->json([
-                'status' => 'error',
+                'code' => Codes::DATA_NOT_FOUND,
                 'message' => trans('errors.data_not_found', ['dataname' => 'user'])
             ], 400);
         }

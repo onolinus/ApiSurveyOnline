@@ -12,12 +12,13 @@
 */
 
 Route::group(['middleware' => ['apisurveylitbang']], function () {
+    # Admin
     Route::group(['middleware' => ['\App\Http\Middleware\AdminPrivilegeMiddleware']], function () {
-        Route::resource('user', 'UsersController', ['only' => [
+        Route::resource('user', 'Admin\UsersController', ['only' => [
             'store', 'destroy', 'update', 'show', 'index'
         ]]);
 
-        Route::resource('registrasitoken', 'RegistrasiTokenController', ['only' => [
+        Route::resource('registrasitoken', 'Admin\RegistrasiTokenController', ['only' => [
             'show', 'index'
         ]]);
     });
@@ -26,6 +27,10 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
     Route::group(['middleware' => ['\App\Http\Middleware\CorrespondentPrivilegeMiddleware']], function () {
 
     });
+
+    # Public
+    Route::post('/user/register', ['as' => 'register', 'uses' => 'UserController@store']);
+    Route::post('/user/resetpassword', ['as' => 'resetpassword', 'uses' => 'UserController@update']);
 
     Route::resource('researchfields', 'ResearchFieldsController', ['only' => [
         'show', 'index'
@@ -43,8 +48,4 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         'store', 'update', 'show'
     ]]);
     Route::post('/auth/token/password', ['as' => 'auth.token.grantpassword', 'uses' => 'AuthController@grantpassword']);
-
-    Route::post('/reset/password', ['as' => 'resetpassword', 'uses' => 'ResetPasswordController@update']);
-
-    Route::post('/user/register', ['as' => 'register', 'uses' => 'RegisterController@store']);
 });
