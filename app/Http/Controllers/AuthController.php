@@ -53,10 +53,16 @@ class AuthController extends Controller
         return $this->getSuccessStoreResponse($sessionToken);
     }
 
-    public function update($refresh_token){
+    public function refresh(Request $request){
+        if(!$this->runValidation($request, [
+            'refresh_token' => 'required',
+        ])){
+            return $this->response->errorWrongArgs($this->validator->errors()->all());
+        }
+
         try{
             /** @var SessionToken $sessionToken */
-            $sessionToken = AuthToken::getInstanceFromRefreshToken($refresh_token)->getSessionToken();
+            $sessionToken = AuthToken::getInstanceFromRefreshToken($request->refresh_token)->getSessionToken();
         }catch(\Exception $e){
             return $this->response->errorInternalError($e->getMessage());
         }
