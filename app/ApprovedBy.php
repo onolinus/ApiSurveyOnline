@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ApprovedBy extends Model
 {
-    protected $table = 'correspondents';
+    protected $table = 'approved_by';
 
     protected $primaryKey = 'id';
 

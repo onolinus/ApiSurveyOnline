@@ -58,7 +58,7 @@ class ProfileController extends Controller
     private function createNewCorrespondent(Request $request){
         $correspondent = new CorrespondentsModel();
         $correspondent->user_id = $this->getSessionUserID();
-        $correspondent->name = $request->input('correspondent.type');
+        $correspondent->name = $request->input('correspondent.name');
         $correspondent->nip = $request->input('correspondent.nip');
         $correspondent->role = $request->input('correspondent.role');
         $correspondent->telephone_number = $request->input('correspondent.telephone_number');
@@ -71,7 +71,7 @@ class ProfileController extends Controller
     private function createNewApprovedBy(Request $request){
         $approved_by = new ApprovedByModel();
         $approved_by->correspondent_id_approved = $this->getSessionUserID();
-        $approved_by->name = $request->input('approved_by.type');
+        $approved_by->name = $request->input('approved_by.name');
         $approved_by->nip = $request->input('approved_by.nip');
         $approved_by->role = $request->input('approved_by.role');
         $approved_by->puslit = $request->input('approved_by.puslit');
