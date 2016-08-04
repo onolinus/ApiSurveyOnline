@@ -13,4 +13,6 @@ class Correspondents extends Model
     protected $dateFormat = 'Y-m-d H:i:s';
 
     protected $connection = 'mysql';
+
+    protected $fillable = ['user_id'];
 }

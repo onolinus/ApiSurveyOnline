@@ -13,8 +13,7 @@ class CreateApprovedByTable extends Migration
     public function up()
     {
         Schema::create('approved_by', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('correspondent_id_approved')->unsigned()->unique();
+            $table->integer('correspondent_id_approved')->unsigned()->primary('correspondent_id_approved');
             $table->string('name', 150);
             $table->string('nip', 100)->unique();
             $table->string('role', 150);

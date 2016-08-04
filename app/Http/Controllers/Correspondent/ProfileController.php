@@ -4,13 +4,11 @@ namespace App\Http\Controllers\Correspondent;
 use App\ApprovedBy as ApprovedByModel;
 use App\Correspondents as CorrespondentsModel;
 use App\Http\Controllers\Controller;
-use app\Libraries\Structure\SessionToken;
 use App\TraitFractalResponse;
 use App\TraitSessionToken;
 use App\TraitValidate;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use EllipseSynergie\ApiResponse\Contracts\Response;
 use DB;
 use PluginCommonSurvey\Libraries\Codes;
 
@@ -22,31 +20,54 @@ class ProfileController extends Controller
 
     use TraitValidate;
 
+    /**
+     * @var CorrespondentsModel
+     */
+    private $correspondent;
+
+    /**
+     * @var ApprovedByModel
+     */
+    private $approved_by;
+
     private function getRules(){
-        return [
+        $rules =  [
             'correspondent.name' => 'required|max:150',
-            'correspondent.nip' => 'required|max:100|unique:correspondents,nip',
+            'correspondent.nip' => 'required|max:100',
             'correspondent.role' => 'required|max:150',
             'correspondent.telephone_number' => 'required|max:20',
             'correspondent.handhone_number' => 'required|max:20',
             'approved_by.name' => 'required|max:150',
-            'approved_by.nip' => 'required|max:100|unique:approved_by,nip',
+            'approved_by.nip' => 'required|max:100',
             'approved_by.role' => 'required|max:150',
             'approved_by.puslit' => 'required|max:150',
             'approved_by.alamat' => 'required|min:10',
             'approved_by.lembaga' => 'required|max:150',
         ];
+
+        if($this->correspondent->nip === null){
+            $rules['correspondent.nip'] .= '|unique:correspondents,nip';
+        }
+
+        if($this->approved_by->nip === null){
+            $rules['approved_by.nip'] .= '|unique:approved_by,nip';
+        }
+
+        return $rules;
     }
 
     public function store(Request $request)
     {
+        $this->setCorrespondent();
+        $this->setApprovedBy();
+
         if(!$this->runValidation($request, $this->getRules())){
             return $this->response->errorInternalError($this->validator->errors()->all());
         }
 
         DB::transaction(function () use ($request) {
-            $correspondent = $this->createNewCorrespondent($request);
-            $approved_by = $this->createNewApprovedBy($request);
+            $this->createNewCorrespondent($request);
+            $this->createNewApprovedBy($request);
         });
 
         return $this->response->setStatusCode(201)->withArray([
@@ -55,30 +76,32 @@ class ProfileController extends Controller
         ]);
     }
 
-    private function createNewCorrespondent(Request $request){
-        $correspondent = new CorrespondentsModel();
-        $correspondent->user_id = $this->getSessionUserID();
-        $correspondent->name = $request->input('correspondent.name');
-        $correspondent->nip = $request->input('correspondent.nip');
-        $correspondent->role = $request->input('correspondent.role');
-        $correspondent->telephone_number = $request->input('correspondent.telephone_number');
-        $correspondent->handhone_number = $request->input('correspondent.handhone_number');
-        $correspondent->save();
+    private function setCorrespondent(){
+        $this->correspondent = CorrespondentsModel::firstOrNew(['user_id' => $this->getSessionUserID()]);
+    }
 
-        return $correspondent;
+    private function setApprovedBy(){
+        $this->approved_by = ApprovedByModel::firstOrNew(['correspondent_id_approved' => $this->getSessionUserID()]);
+    }
+
+    private function createNewCorrespondent(Request $request){
+        $this->correspondent->user_id = $this->getSessionUserID();
+        $this->correspondent->name = $request->input('correspondent.name');
+        $this->correspondent->nip = $request->input('correspondent.nip');
+        $this->correspondent->role = $request->input('correspondent.role');
+        $this->correspondent->telephone_number = $request->input('correspondent.telephone_number');
+        $this->correspondent->handhone_number = $request->input('correspondent.handhone_number');
+        $this->correspondent->save();
     }
 
     private function createNewApprovedBy(Request $request){
-        $approved_by = new ApprovedByModel();
-        $approved_by->correspondent_id_approved = $this->getSessionUserID();
-        $approved_by->name = $request->input('approved_by.name');
-        $approved_by->nip = $request->input('approved_by.nip');
-        $approved_by->role = $request->input('approved_by.role');
-        $approved_by->puslit = $request->input('approved_by.puslit');
-        $approved_by->alamat = $request->input('approved_by.alamat');
-        $approved_by->lembaga = $request->input('approved_by.lembaga');
-        $approved_by->save();
-
-        return $approved_by;
+        $this->approved_by->correspondent_id_approved = $this->getSessionUserID();
+        $this->approved_by->name = $request->input('approved_by.name');
+        $this->approved_by->nip = $request->input('approved_by.nip');
+        $this->approved_by->role = $request->input('approved_by.role');
+        $this->approved_by->puslit = $request->input('approved_by.puslit');
+        $this->approved_by->alamat = $request->input('approved_by.alamat');
+        $this->approved_by->lembaga = $request->input('approved_by.lembaga');
+        $this->approved_by->save();
     }
 }
