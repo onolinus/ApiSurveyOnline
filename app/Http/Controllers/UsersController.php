@@ -45,7 +45,7 @@ class UsersController extends BaseController
             $this->updateFlagRegistrasiToken($request, $user->id);
         });
 
-        return $this->returnStoreSuccessResponce();
+        return $this->returnStoreSuccessResponse();
     }
 
     /**

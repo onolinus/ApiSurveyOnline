@@ -40,7 +40,7 @@ trait UsersTrait
         return $user;
     }
 
-    private function returnStoreSuccessResponce(){
+    private function returnStoreSuccessResponse(){
         return $this->response->setStatusCode(201)->withArray([
             'status' => 'success',
             'message' => trans('success.data_saved', ['dataname' => 'user'])

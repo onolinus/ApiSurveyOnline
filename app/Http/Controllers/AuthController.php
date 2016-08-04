@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\AuthTrait;
 use app\Libraries\Structure\SessionToken;
+use App\UsersTrait;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\AuthToken;
@@ -15,6 +17,11 @@ use App\Users as UsersModel;
 
 class AuthController extends Controller
 {
+
+    use UsersTrait;
+
+    use AuthTrait;
+
     /**
      * @var Response
      */
@@ -23,23 +30,6 @@ class AuthController extends Controller
     public function __construct(Response $response)
     {
         $this->response = $response;
-    }
-
-    private function runValidation($request, $rules){
-        $this->validator = Validator::make($request->all(), $rules);
-        if($this->validator->fails()){
-            return false;
-        }
-
-        return true;
-    }
-
-    private function checkApiClientAndSecretCode(Request $request){
-        return $request->client_id != ApiClient::CLIENT_ID || $request->secret_code != ApiClient::SECRET_CODE ? false : true;
-    }
-
-    private function getInvalidApiClientAndSecretCodeResponce(){
-        return $this->response->errorWrongArgs(trans('invalid api client or secret code value'));
     }
 
     public function store(Request $request){
@@ -52,7 +42,7 @@ class AuthController extends Controller
         }
 
         if(!$this->checkApiClientAndSecretCode($request)){
-            return $this->getInvalidApiClientAndSecretCodeResponce();
+            return $this->getInvalidApiClientAndSecretCodeResponse();
         }
 
         try {
@@ -62,14 +52,7 @@ class AuthController extends Controller
             return $this->response->errorInternalError($e->getMessage());
         }
 
-        return $this->response->setStatusCode(201)->withArray([
-            'access_token' => $sessionToken->getAttribute('access_token'),
-            'refresh_token' => $sessionToken->getAttribute('refresh_token'),
-            'user_type' => $sessionToken->getAttribute('user_type'),
-            'token_type' => $sessionToken->getAttribute('token_type'),
-            'expires_in' => $sessionToken->getAttribute('expires_in'),
-        ]);
-
+        return $this->getSuccessStoreResponse($sessionToken);
     }
 
     public function update($refresh_token){
@@ -84,14 +67,7 @@ class AuthController extends Controller
             return $this->response->errorInternalError(trans('refresh token is invalid'));
         }
 
-        return $this->response->setStatusCode(201)->withArray([
-            'access_token' => $sessionToken->getAttribute('access_token'),
-            'refresh_token' => $sessionToken->getAttribute('refresh_token'),
-            'user_type' => $sessionToken->getAttribute('user_type'),
-            'token_type' => $sessionToken->getAttribute('token_type'),
-            'expires_in' => $sessionToken->getAttribute('expires_in'),
-        ]);
-
+        return $this->getSuccessStoreResponse($sessionToken);
     }
 
     public function grantpassword(Request $request){
@@ -105,7 +81,7 @@ class AuthController extends Controller
         }
 
         if(!$this->checkApiClientAndSecretCode($request)){
-            return $this->getInvalidApiClientAndSecretCodeResponce();
+            return $this->getInvalidApiClientAndSecretCodeResponse();
         }
 
         $user = UsersModel::where('email', $request->email)
@@ -123,13 +99,6 @@ class AuthController extends Controller
             return $this->response->errorInternalError($e->getMessage());
         }
 
-        return $this->response->setStatusCode(200)->withArray([
-            'status' => 'success',
-            'access_token' => $sessionToken->getAttribute('access_token'),
-            'refresh_token' => $sessionToken->getAttribute('refresh_token'),
-            'user_type' => $sessionToken->getAttribute('user_type'),
-            'token_type' => $sessionToken->getAttribute('token_type'),
-            'expires_in' => $sessionToken->getAttribute('expires_in'),
-        ]);
+        $this->getSuccessStoreResponse($sessionToken);
     }
 }
