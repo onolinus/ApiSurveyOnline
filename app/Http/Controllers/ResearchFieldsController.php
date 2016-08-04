@@ -7,10 +7,6 @@ use App\Transformer\ResearchFieldsTransformer;
 
 class ResearchFieldsController extends BaseController
 {
-    protected function initialize(){
-        return null;
-    }
-
     protected function getModelName()
     {
         return 'ResearchFields';

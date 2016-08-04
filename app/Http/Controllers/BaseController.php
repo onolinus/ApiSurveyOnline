@@ -11,6 +11,10 @@ abstract class BaseController extends Controller
 {
     use TraitFractalResponse;
 
+    protected function initialize(){
+        return null;
+    }
+
     protected function getPerPage(){
         return 10;
     }
