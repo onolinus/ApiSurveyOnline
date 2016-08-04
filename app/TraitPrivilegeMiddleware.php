@@ -14,7 +14,7 @@ trait TraitPrivilegeMiddleware
      */
     private $sessionToken;
 
-    private function checkIsInvalidToken(\Illuminate\Http\Request $request, Closure $next){
+    private function checkIsValidToken(\Illuminate\Http\Request $request, Closure $next){
         /** @var SessionToken $sessionToken */
         $this->sessionToken = AuthToken::getInstanceFromAccessToken($request->bearerToken())->getSessionToken();
         return $this->sessionToken ? true : false;
@@ -42,7 +42,7 @@ trait TraitPrivilegeMiddleware
     public function handle($request, Closure $next)
     {
         // Invalid Token
-        if(!$this->checkIsInvalidToken($request, $next)){
+        if(!$this->checkIsValidToken($request, $next)){
             return $this->responseInvalidToken();
         }
 
