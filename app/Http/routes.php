@@ -46,6 +46,10 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         'show', 'index'
     ]]);
 
+    Route::resource('lembaga', 'LembagaController', ['only' => [
+        'show', 'index'
+    ]]);
+
     Route::resource('/auth/token', 'AuthController', ['only' => [
         'store', 'show'
     ]]);

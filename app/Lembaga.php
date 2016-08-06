@@ -8,7 +8,7 @@ class Lembaga extends Model
 {
     protected $table = 'lembaga';
 
-    protected $primaryKey = 'name';
+    protected $primaryKey = 'id';
 
     protected $dateFormat = 'Y-m-d H:i:s';
 
