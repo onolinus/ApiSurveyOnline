@@ -112,7 +112,7 @@ class UserController extends Controller
     public function update(Request $request){
         if(!$this->runValidation($request, [
             'email' => 'required|max:50|email|exists:users,email',
-            'registrasi_tokens' => 'required|size:6|exists:registrasi_tokens,token,user_id,!0',
+            'registration_token' => 'required|size:6|exists:registrasi_tokens,token,user_id,!0',
             'newpassword' => 'required|min:5',
             'confirm_newpassword' => 'required|min:5|same:newpassword',
         ])){
