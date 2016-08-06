@@ -121,7 +121,7 @@ class UserController extends Controller
 
         $user = UsersModel::where('email', $request->email)->first();
 
-        if($user->registrasitoken->token != $request->registrasi_tokens){
+        if($user->registrasitoken->token != $request->registration_token){
             return $this->response->errorWrongArgs(trans('This token does not belong to you'));
         }
 
