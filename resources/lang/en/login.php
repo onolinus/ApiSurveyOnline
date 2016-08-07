@@ -13,6 +13,5 @@ return [
     |
     */
 
-    'failed' => 'Kriteria ini tidak cocok dengan catatan kami.',
-    'throttle' => 'Terlalu banyak usaha login. Silahkan coba lagi :seconds detik.',
+    'failed' => 'Please check your username or password',
 ];

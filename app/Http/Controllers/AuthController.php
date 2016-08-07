@@ -93,7 +93,7 @@ class AuthController extends Controller
             ->first();
 
         if(empty($user) || count($user) === 0){
-            return $this->response->errorNotFound(trans('Please check your username or password'));
+            return $this->response->errorNotFound(trans('login.failed'));
         }
 
         try {
