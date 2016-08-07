@@ -27,7 +27,6 @@ class CorrespondentTransformer extends Fractal\TransformerAbstract
                     'type' => $user->ApprovedBy->lembaga->type,
                 ],
                 'puslit' => $user->ApprovedBy->puslit,
-                'puslit' => $user->ApprovedBy->puslit,
                 'alamat' => $user->ApprovedBy->alamat,
                 'timestamp' => [
                     'created' => $user->ApprovedBy->created_at,
