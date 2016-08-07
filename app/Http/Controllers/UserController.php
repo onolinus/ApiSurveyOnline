@@ -93,7 +93,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         if(!$this->runValidation($request, $this->getRulesStoreValidation($request))){
-            return $this->response->errorInternalError($this->validator->errors()->all());
+            return $this->response->errorWrongArgs($this->validator->errors()->all());
         }
 
         DB::transaction(function () use ($request) {
