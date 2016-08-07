@@ -17,7 +17,7 @@ class CorrespondentTransformer extends Fractal\TransformerAbstract
             'nip' => $user->nip,
             'role' => $user->role,
             'telephone_number' => $user->telephone_number,
-            'handphone_number' => $user->handhone_number,
+            'handphone_number' => $user->handphone_number,
             'approved_by' => [
                 'name' => $user->ApprovedBy->name,
                 'nip' => $user->ApprovedBy->nip,

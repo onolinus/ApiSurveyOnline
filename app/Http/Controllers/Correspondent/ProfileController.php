@@ -37,7 +37,7 @@ class ProfileController extends Controller
             'correspondent.nip' => 'required|max:100',
             'correspondent.role' => 'required|max:150',
             'correspondent.telephone_number' => 'required|max:20',
-            'correspondent.handhone_number' => 'required|max:20',
+            'correspondent.handphone_number' => 'required|max:20',
             'approved_by.name' => 'required|max:150',
             'approved_by.nip' => 'required|max:100',
             'approved_by.role' => 'required|max:150',
@@ -71,7 +71,7 @@ class ProfileController extends Controller
         $this->correspondent->nip = $request->input('correspondent.nip');
         $this->correspondent->role = $request->input('correspondent.role');
         $this->correspondent->telephone_number = $request->input('correspondent.telephone_number');
-        $this->correspondent->handhone_number = $request->input('correspondent.handhone_number');
+        $this->correspondent->handphone_number = $request->input('correspondent.handphone_number');
         $this->correspondent->save();
     }
 
