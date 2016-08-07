@@ -19,8 +19,9 @@ class CreateApprovedByTable extends Migration
             $table->string('role', 150);
             $table->string('puslit', 150);
             $table->text('alamat');
-            $table->string('lembaga', 150);
+            $table->integer('id_lembaga')->unsigned();
             $table->timestamps();
+            $table->index(['id_lembaga']);
         });
     }
 

@@ -22,4 +22,9 @@ class ApprovedBy extends Model
     {
         return $this->belongsTo('App\Correspondents', 'correspondent_id_approved', 'user_id');
     }
+
+    public function Lembaga()
+    {
+        return $this->belongsTo('App\Lembaga', 'id_lembaga', 'id');
+    }
 }

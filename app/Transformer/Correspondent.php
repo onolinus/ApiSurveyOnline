@@ -22,7 +22,10 @@ class CorrespondentTransformer extends Fractal\TransformerAbstract
                 'name' => $user->ApprovedBy->name,
                 'nip' => $user->ApprovedBy->nip,
                 'role' => $user->ApprovedBy->role,
-                'lembaga' => $user->ApprovedBy->lembaga,
+                'lembaga' => [
+                    'name' => $user->ApprovedBy->lembaga->name,
+                    'type' => $user->ApprovedBy->lembaga->type,
+                ],
                 'puslit' => $user->ApprovedBy->puslit,
                 'puslit' => $user->ApprovedBy->puslit,
                 'alamat' => $user->ApprovedBy->alamat,

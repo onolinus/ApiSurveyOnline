@@ -43,7 +43,7 @@ class ProfileController extends Controller
             'approved_by.role' => 'required|max:150',
             'approved_by.puslit' => 'required|max:150',
             'approved_by.alamat' => 'required|min:10',
-            'approved_by.lembaga' => 'required|max:150',
+            'approved_by.id_lembaga' => 'required|max:150',
         ];
 
         if($this->correspondent->nip === null){
@@ -82,7 +82,7 @@ class ProfileController extends Controller
         $this->approved_by->role = $request->input('approved_by.role');
         $this->approved_by->puslit = $request->input('approved_by.puslit');
         $this->approved_by->alamat = $request->input('approved_by.alamat');
-        $this->approved_by->lembaga = $request->input('approved_by.lembaga');
+        $this->approved_by->id_lembaga = $request->input('approved_by.id_lembaga');
         $this->approved_by->save();
     }
 
