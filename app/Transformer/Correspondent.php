@@ -6,14 +6,18 @@ use League\Fractal;
 
 class CorrespondentTransformer extends Fractal\TransformerAbstract
 {
-    public function transform(ModelCorrespondents $user)
+    public function transform(ModelCorrespondents $user = null)
     {
+        if($user === null){
+            return [];
+        }
+
         return [
             'name' => $user->name,
             'nip' => $user->nip,
             'role' => $user->role,
             'telephone_number' => $user->telephone_number,
-            'handhone_number' => $user->handhone_number,
+            'handphone_number' => $user->handhone_number,
             'approved_by' => [
                 'name' => $user->ApprovedBy->name,
                 'nip' => $user->ApprovedBy->nip,
