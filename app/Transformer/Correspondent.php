@@ -23,6 +23,7 @@ class CorrespondentTransformer extends Fractal\TransformerAbstract
                 'nip' => $user->ApprovedBy->nip,
                 'role' => $user->ApprovedBy->role,
                 'lembaga' => [
+                    'id' => $user->ApprovedBy->lembaga->id,
                     'name' => $user->ApprovedBy->lembaga->name,
                     'type' => $user->ApprovedBy->lembaga->type,
                 ],
