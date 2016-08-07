@@ -18,7 +18,7 @@ class CreateCorrespondentsTable extends Migration
             $table->string('nip', 100)->unique();
             $table->string('role', 150);
             $table->string('telephone_number', 20);
-            $table->string('handhone_number', 20);
+            $table->string('handphone_number', 20);
             $table->timestamps();
             $table->primary('user_id');
         });
