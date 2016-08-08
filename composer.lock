@@ -227,12 +227,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/harryosmar/plugin-survey-common.git",
-                "reference": "d25170aa780c28c7a185e0fc79b3ccf37587aa62"
+                "reference": "bfdf328bf41cfcbca6d3127d73f4b261dc74bdce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harryosmar/plugin-survey-common/zipball/d25170aa780c28c7a185e0fc79b3ccf37587aa62",
-                "reference": "d25170aa780c28c7a185e0fc79b3ccf37587aa62",
+                "url": "https://api.github.com/repos/harryosmar/plugin-survey-common/zipball/bfdf328bf41cfcbca6d3127d73f4b261dc74bdce",
+                "reference": "bfdf328bf41cfcbca6d3127d73f4b261dc74bdce",
                 "shasum": ""
             },
             "require": {
