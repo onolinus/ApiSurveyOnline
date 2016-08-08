@@ -12,7 +12,7 @@ class SocioEconomicsTransformer extends Fractal\TransformerAbstract
             'code' => $socioeconomics->code,
             'division' => [
                 'name' => $socioeconomics->division,
-                'number' => $socioeconomics->number,
+                'number' => $socioeconomics->division_number,
             ],
             'category' => $socioeconomics->category,
             'group' => $socioeconomics->group,
