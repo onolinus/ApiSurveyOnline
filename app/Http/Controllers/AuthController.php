@@ -108,7 +108,7 @@ class AuthController extends Controller
 
     public function grantpasswordhashed(Request $request){
         if(!$this->runValidation($request, [
-            'email' => 'required|max:50|email|exists:users,email',
+            'user_id' => 'required|integer|exists:users,id',
             'hashed_password' => 'required',
             'client_id' => 'required',
             'secret_code' => 'required'
@@ -120,7 +120,7 @@ class AuthController extends Controller
             return $this->getInvalidApiClientAndSecretCodeResponse();
         }
 
-        $user = UsersModel::where('email', $request->email)->first();
+        $user = UsersModel::find($request->user_id);
 
         if($user->password != $request->hashed_password){
             return $this->response->errorWrongArgs(trans('invalid password'));
