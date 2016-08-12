@@ -32,6 +32,9 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::resource('correspondent/draft', 'Correspondent\SurveyController', ['only' => [
             'store', 'index'
         ]]);
+
+        Route::get('correspondent/draft/data', ['as' => 'respondent.draft.data', 'uses' => 'Correspondent\SurveyController@draftdata']);
+        Route::get('correspondent/draft/status', ['as' => 'respondent.draft.status', 'uses' => 'Correspondent\SurveyController@draftstatus']);
     });
 
     # Public
