@@ -28,6 +28,10 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::resource('correspondent/profile', 'Correspondent\ProfileController', ['only' => [
             'store', 'index'
         ]]);
+
+        Route::resource('correspondent/draft', 'Correspondent\SurveyController', ['only' => [
+            'store', 'index'
+        ]]);
     });
 
     # Public
