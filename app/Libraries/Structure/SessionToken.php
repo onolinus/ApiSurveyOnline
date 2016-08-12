@@ -5,7 +5,7 @@ use App\AuthToken;
 
 class SessionToken extends StructureAbstract
 {
-    protected $attributes = ['access_token', 'refresh_token', 'user_type', 'token_type', 'expires_in'];
+    protected $attributes = ['access_token', 'refresh_token', 'user_type', 'user_id', 'hashed_password', 'token_type', 'expires_in'];
 
     /**
      * @var RedisAccessToken
@@ -32,7 +32,9 @@ class SessionToken extends StructureAbstract
     public function generateSessionToken($data){
         $this->setAttribute('access_token', $this->redisAccessToken->getAccessToken());
         $this->setAttribute('refresh_token', $this->redisAccessToken->getRefreshToken());
+        $this->setAttribute('user_id', $data['user_id']);
         $this->setAttribute('user_type', $data['user_type']);
+        $this->setAttribute('hashed_password', $data['hashed_password']);
         $this->setAttribute('token_type', $data['token_type']);
         $this->set_expires_in();
     }

@@ -98,7 +98,7 @@ class AuthController extends Controller
 
         try {
             /** @var SessionToken $sessionToken */
-            $sessionToken = AuthToken::getFreshInstance($user->id)->getSessionToken();
+            $sessionToken = AuthToken::getFreshInstance($user->id, \PluginCommonSurvey\Helper\Hashed\hash_password($request->password))->getSessionToken();
         }catch(\Exception $e){
             return $this->response->errorInternalError($e->getMessage());
         }
