@@ -60,7 +60,7 @@ class SurveyController  extends Controller
 
         return $this->response->setStatusCode(201)->withArray([
             'code' => Codes::SUCCESS,
-            'message' => trans('survey successfully saved as draft')
+            'message' => trans('survey.successsavetodraft')
         ]);
     }
 
