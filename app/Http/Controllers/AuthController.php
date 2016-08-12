@@ -105,4 +105,38 @@ class AuthController extends Controller
 
         return $this->getSuccessStoreResponse($sessionToken);
     }
+
+    public function grantpasswordhashed(Request $request){
+        if(!$this->runValidation($request, [
+            'email' => 'required|max:50|email|exists:users,email',
+            'hashed_password' => 'required',
+            'client_id' => 'required',
+            'secret_code' => 'required'
+        ])){
+            return $this->response->errorInternalError($this->validator->errors()->all());
+        }
+
+        if(!$this->checkApiClientAndSecretCode($request)){
+            return $this->getInvalidApiClientAndSecretCodeResponse();
+        }
+
+        $user = UsersModel::where('email', $request->email)->first();
+
+        if($user->password != $request->hashed_password){
+            return $this->response->errorWrongArgs(trans('invalid password'));
+        }
+
+        if(empty($user) || count($user) === 0){
+            return $this->response->errorNotFound(trans('login.failed'));
+        }
+
+        try {
+            /** @var SessionToken $sessionToken */
+            $sessionToken = AuthToken::getFreshInstance($user->id, $request->hashed_password)->getSessionToken();
+        }catch(\Exception $e){
+            return $this->response->errorInternalError($e->getMessage());
+        }
+
+        return $this->getSuccessStoreResponse($sessionToken);
+    }
 }
