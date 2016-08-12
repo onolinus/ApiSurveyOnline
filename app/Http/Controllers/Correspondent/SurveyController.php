@@ -16,22 +16,36 @@ class SurveyController  extends Controller
 
     use TraitSessionToken;
 
-    CONST CACHE_DRAFT_PREFIX = 'draft:user';
+    CONST CACHE_DRAFT_DATA_PREFIX = 'draft:data:user';
+    CONST CACHE_DRAFT_STATUS_PREFIX = 'draft:status:user';
 
 
-    private function getCacheKey(){
-        return SurveyCacheKey::getInstance()->generateCacheKey(sprintf('%s:%d', self::CACHE_DRAFT_PREFIX, $this->getSessionUserID()), false);
+    private function getDataCacheKey(){
+        return SurveyCacheKey::getInstance()->generateCacheKey(sprintf('%s:%d', self::CACHE_DRAFT_DATA_PREFIX, $this->getSessionUserID()), false);
     }
 
-    private function saveDraftToCache($data){
-        Cache::forever($this->getCacheKey(), $data);
+    private function getStatusCacheKey(){
+        return SurveyCacheKey::getInstance()->generateCacheKey(sprintf('%s:%d', self::CACHE_DRAFT_STATUS_PREFIX, $this->getSessionUserID()), false);
+    }
+
+    private function saveDraftToCache($data, $status){
+        Cache::forever($this->getDataCacheKey(), $data);
+        Cache::forever($this->getStatusCacheKey(), $status);
 
         return $this;
     }
 
-    private function getDraftFromCache(){
-        if($data = Cache::get($this->getCacheKey())){
+    private function getDataDraftFromCache(){
+        if($data = Cache::get($this->getDataCacheKey())){
             return $data;
+        }
+
+        return [];
+    }
+
+    private function getStatusDraftFromCache(){
+        if($status = Cache::get($this->getStatusCacheKey())){
+            return $status;
         }
 
         return [];
@@ -39,9 +53,10 @@ class SurveyController  extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->data;
+        $status = $request->questions_status;
 
-        $this->saveDraftToCache($data);
+        $this->saveDraftToCache($data, $status);
 
         return $this->response->setStatusCode(201)->withArray([
             'code' => Codes::SUCCESS,
@@ -50,6 +65,10 @@ class SurveyController  extends Controller
     }
 
     public function index(){
-        return $this->response->withArray($this->getDraftFromCache());
+        return $this->response->withArray([
+                'data' => $this->getDataDraftFromCache(),
+                'status' => $this->getStatusDraftFromCache(),
+            ]
+        );
     }
 }
