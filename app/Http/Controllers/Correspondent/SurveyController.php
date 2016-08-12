@@ -71,4 +71,13 @@ class SurveyController  extends Controller
             ]
         );
     }
+
+    public function draftdata(){
+        return $this->response->withArray($this->getDataDraftFromCache());
+    }
+
+    public function draftstatus(){
+        return $this->response->withArray($this->getStatusDraftFromCache());
+    }
+
 }
