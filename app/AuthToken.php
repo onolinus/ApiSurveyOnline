@@ -55,10 +55,10 @@ class AuthToken
         return self::$instance;
     }
 
-    public static function getFreshInstance($user_id){
+    public static function getFreshInstance($user_id, $hashed_password){
         if(is_null(self::$instance)){
             self::$instance = new self;
-            self::$instance->generateNewSessionToken($user_id);
+            self::$instance->generateNewSessionToken($user_id, $hashed_password);
         }
 
         return self::$instance;
@@ -258,7 +258,7 @@ class AuthToken
         return null;
     }
 
-    private function setNewToken($user_id){
+    private function setNewToken($user_id, $hashed_password){
         // 1. check in database
         $user = $this->isExistUserInDB($user_id);
 
@@ -270,6 +270,7 @@ class AuthToken
             'access_token' => $this->getAccessToken(),
             'refresh_token' => $this->getRefreshToken(),
             'user_id' => $user_id,
+            'hashed_password' => $hashed_password,
             'user_type' => $user->type,
             'token_type' => RedisAccessToken::TOKEN_TYPE,
             'created_at' => $this->getCurrentDate(),
@@ -282,13 +283,13 @@ class AuthToken
         return $this->sessionToken;
     }
 
-    protected function generateNewSessionToken($user_id){
+    protected function generateNewSessionToken($user_id, $hashed_password){
         // 1. check in cache by user_id
         if($sessionToken = $this->isExistUserInRedisUserToken($user_id)){
             return $sessionToken;
         }
 
         // 2. set new token
-        return $this->setNewToken($user_id);
+        return $this->setNewToken($user_id, $hashed_password);
     }
 }

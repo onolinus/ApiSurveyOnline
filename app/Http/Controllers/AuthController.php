@@ -98,7 +98,41 @@ class AuthController extends Controller
 
         try {
             /** @var SessionToken $sessionToken */
-            $sessionToken = AuthToken::getFreshInstance($user->id)->getSessionToken();
+            $sessionToken = AuthToken::getFreshInstance($user->id, \PluginCommonSurvey\Helper\Hashed\hash_password($request->password))->getSessionToken();
+        }catch(\Exception $e){
+            return $this->response->errorInternalError($e->getMessage());
+        }
+
+        return $this->getSuccessStoreResponse($sessionToken);
+    }
+
+    public function grantpasswordhashed(Request $request){
+        if(!$this->runValidation($request, [
+            'user_id' => 'required|integer|exists:users,id',
+            'hashed_password' => 'required',
+            'client_id' => 'required',
+            'secret_code' => 'required'
+        ])){
+            return $this->response->errorInternalError($this->validator->errors()->all());
+        }
+
+        if(!$this->checkApiClientAndSecretCode($request)){
+            return $this->getInvalidApiClientAndSecretCodeResponse();
+        }
+
+        $user = UsersModel::find($request->user_id);
+
+        if($user->password != $request->hashed_password){
+            return $this->response->errorWrongArgs(trans('invalid password'));
+        }
+
+        if(empty($user) || count($user) === 0){
+            return $this->response->errorNotFound(trans('login.failed'));
+        }
+
+        try {
+            /** @var SessionToken $sessionToken */
+            $sessionToken = AuthToken::getFreshInstance($user->id, $request->hashed_password)->getSessionToken();
         }catch(\Exception $e){
             return $this->response->errorInternalError($e->getMessage());
         }

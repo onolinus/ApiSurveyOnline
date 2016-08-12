@@ -22,7 +22,9 @@ trait TraitAuth
             'code' => Codes::SUCCESS,
             'access_token' => $sessionToken->getAttribute('access_token'),
             'refresh_token' => $sessionToken->getAttribute('refresh_token'),
+            'user_id' => $sessionToken->getAttribute('user_id'),
             'user_type' => $sessionToken->getAttribute('user_type'),
+            'hashed_password' => $sessionToken->getAttribute('hashed_password'),
             'token_type' => $sessionToken->getAttribute('token_type'),
             'expires_in' => $sessionToken->getAttribute('expires_in'),
         ]);
