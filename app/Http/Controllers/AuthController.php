@@ -30,6 +30,7 @@ class AuthController extends Controller
         $this->response = $response;
     }
 
+    // TODO this has been deprecated
     public function store(Request $request){
         if(!$this->runValidation($request, [
             'user_id' => 'required|integer|exists:users,id',
