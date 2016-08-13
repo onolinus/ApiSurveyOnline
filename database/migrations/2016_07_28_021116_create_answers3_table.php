@@ -17,13 +17,20 @@ class CreateAnswers3Table extends Migration
             $table->integer('id_answer')->unsigned();
             $table->enum('status', ['pengisian', 'diterima', 'ditolak'])->default('pengisian');
             $table->text('status_comment');
+
             $table->double('dipa_danapemerintah', 15, 8);
-            $table->double('dipa_pnbp', 15, 8);
+
+            $table->double('dipa_pnbp_perusahaanswasta', 15, 8);
+            $table->double('dipa_pnbp_instansipemerintah', 15, 8);
+            $table->double('dipa_pnbp_swastanonprofit', 15, 8);
+            $table->double('dipa_pnbp_luarnegeri', 15, 8);
+
             $table->double('dipa_phln', 15, 8);
-            $table->double('danaluar_swasta', 15, 8);
-            $table->double('danaluar_pemerintah', 15, 8);
-            $table->double('danaluar_nonprofit', 15, 8);
-            $table->double('danaluar_luarnegeri', 15, 8);
+
+            $table->double('nondipa_insentif_ristekdikti', 15, 8);
+            $table->double('nondipa_insentif_dalamnegeri', 15, 8);
+            $table->double('nondipa_insentif_researchgrant', 15, 8);
+
             $table->timestamps();
             $table->index(['id_answer']);
         });
