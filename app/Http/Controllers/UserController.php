@@ -81,7 +81,7 @@ class UserController extends Controller
 
         try {
             /** @var SessionToken $sessionToken */
-            $sessionToken = AuthToken::getFreshInstance($this->user->id)->getSessionToken();
+            $sessionToken = AuthToken::getFreshInstance($this->user->id, $this->user->password)->getSessionToken();
         }catch(\Exception $e){
             return $this->response->errorInternalError($e->getMessage());
         }

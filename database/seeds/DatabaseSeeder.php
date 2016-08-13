@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RegistrasiTokensSeeder::class);
         $this->call(UsersSeeder::class);
         $this->call(LembagaSeeder::class);
+        $this->call(KlasifikasiBidangIlmuSeeder::class);
     }
 }

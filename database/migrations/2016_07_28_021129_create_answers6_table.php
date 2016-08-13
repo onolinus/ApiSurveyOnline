@@ -14,11 +14,13 @@ class CreateAnswers6Table extends Migration
     {
         Schema::create('answers6', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_correspondent')->unsigned();
+            $table->integer('id_answer')->unsigned();
+            $table->enum('status', ['pengisian', 'diterima', 'ditolak'])->default('pengisian');
+            $table->text('status_comment');
             $table->string('code', 5);
             $table->integer('percentage')->unsigned();
             $table->timestamps();
-            $table->index(['id_correspondent', 'code']);
+            $table->index(['id_answer', 'code']);
         });
     }
 

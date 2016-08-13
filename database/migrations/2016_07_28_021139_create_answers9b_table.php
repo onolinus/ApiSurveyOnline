@@ -14,7 +14,9 @@ class CreateAnswers9bTable extends Migration
     {
         Schema::create('answers9b', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_correspondent')->unsigned();
+            $table->integer('id_answer')->unsigned();
+            $table->enum('status', ['pengisian', 'diterima', 'ditolak'])->default('pengisian');
+            $table->text('status_comment');
 
             $table->integer('peneliti_fungsional_peneliti_s1_l')->unsigned();
             $table->integer('peneliti_fungsional_peneliti_s1_p')->unsigned();
@@ -67,7 +69,7 @@ class CreateAnswers9bTable extends Migration
             $table->integer('staffpendukung_belowd3_fte')->unsigned();
 
             $table->timestamps();
-            $table->index(['id_correspondent']);
+            $table->index(['id_answer']);
         });
     }
 
