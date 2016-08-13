@@ -14,11 +14,13 @@ class CreateAnswers14Table extends Migration
     {
         Schema::create('answers14', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_correspondent')->unsigned();
+            $table->integer('id_answer')->unsigned();
+            $table->enum('status', ['pengisian', 'diterima', 'ditolak'])->default('pengisian');
+            $table->text('status_comment');
             $table->string('nama_penerima_award', 250);
             $table->string('institusi_pemberi_award', 250);
             $table->timestamps();
-            $table->index(['id_correspondent']);
+            $table->index(['id_answer']);
         });
     }
 

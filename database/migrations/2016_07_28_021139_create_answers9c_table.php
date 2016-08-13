@@ -14,7 +14,9 @@ class CreateAnswers9cTable extends Migration
     {
         Schema::create('answers9c', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_correspondent')->unsigned();
+            $table->integer('id_answer')->unsigned();
+            $table->enum('status', ['pengisian', 'diterima', 'ditolak'])->default('pengisian');
+            $table->text('status_comment');
             $table->string('code', 5);
             $table->string('klasifikasi', 250);
             $table->integer('s1_l')->unsigned();
@@ -24,7 +26,7 @@ class CreateAnswers9cTable extends Migration
             $table->integer('s3_l')->unsigned();
             $table->integer('s3_p')->unsigned();
             $table->timestamps();
-            $table->index(['id_correspondent', 'code']);
+            $table->index(['id_answer', 'code']);
         });
     }
 
