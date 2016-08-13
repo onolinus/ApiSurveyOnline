@@ -227,7 +227,7 @@ class KlasifikasiBidangIlmuSeeder extends Seeder
                 'bidang_ilmu' => 'Chemistry',
                 'kelompok' => 'Macromolecular chemistry',
             ],
-
+            [
                 'code' => '2305',
                 'bidang_ilmu' => 'Chemistry',
                 'kelompok' => 'Nuclear chemistry',
@@ -507,7 +507,7 @@ class KlasifikasiBidangIlmuSeeder extends Seeder
                 'bidang_ilmu' => 'Medical Sciences',
                 'kelompok' => 'Pharmacodynamics',
             ], 
-
+            [
                 'code' => '3209',
                 'bidang_ilmu' => 'Medical Sciences',
                 'kelompok' => 'Pharmacology',
@@ -532,7 +532,7 @@ class KlasifikasiBidangIlmuSeeder extends Seeder
                 'bidang_ilmu' => 'Medical Sciences',
                 'kelompok' => 'Surgery',
             ], 
-
+            [
                 'code' => '3214',
                 'bidang_ilmu' => 'Medical Sciences',
                 'kelompok' => 'Toxicology',
@@ -1236,8 +1236,7 @@ class KlasifikasiBidangIlmuSeeder extends Seeder
                 'code' => '7299',
                 'bidang_ilmu' => 'Philosophy',
                 'kelompok' => 'Other philosophical specialities',
-            ], 
-           
+            ],
         ]);
     }
 }
