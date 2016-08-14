@@ -14,4 +14,5 @@ return [
     */
 
     'successsavetodraft' => 'Survey successfully saved as draft',
+    'successsavesurvey' => 'Survey successfully saved',
 ];
