@@ -15,7 +15,7 @@ class CreateAnswers15bTable extends Migration
         Schema::create('answers15b', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_answer')->unsigned();
-            $table->enum('status', ['pengisian', 'diterima', 'ditolak'])->default('pengisian');
+            $table->enum('status', ['terkirim', 'diterima', 'ditolak'])->default('terkirim');
             $table->text('status_comment');
             $table->string('nama_jasa', 250);
             $table->string('pengguna_jasa', 250);

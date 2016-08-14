@@ -15,7 +15,7 @@ class CreateAnswersTable extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_correspondent')->unsigned();
-            $table->enum('status', ['pengisian','prosesvalidasi', 'diterima', 'ditolak'])->default('pengisian');
+            $table->enum('status', ['terkirim','prosesvalidasi', 'diterima', 'ditolak'])->default('terkirim');
             $table->timestamps();
             $table->index(['id_correspondent']);
         });

@@ -15,7 +15,7 @@ class CreateAnswers9bTable extends Migration
         Schema::create('answers9b', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_answer')->unsigned();
-            $table->enum('status', ['pengisian', 'diterima', 'ditolak'])->default('pengisian');
+            $table->enum('status', ['terkirim', 'diterima', 'ditolak'])->default('terkirim');
             $table->text('status_comment');
 
             $table->integer('peneliti_fungsional_peneliti_s1_l')->unsigned();
