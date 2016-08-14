@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cache;
 use PluginCommonSurvey\Libraries\Codes;
 use PluginCommonSurvey\Libraries\SurveyCacheKey;
 
-class SurveyController  extends Controller
+class SurveyDraftController  extends Controller
 {
     use TraitFractalResponse;
 
