@@ -2,8 +2,21 @@
 
 namespace app\Libraries;
 
+use App\Answers18;
+use App\TraitSessionToken;
 use Illuminate\Http\Request;
 use app\Libraries\Questions\InterfaceQuestion;
+use App\Answers10;
+use App\Answers11;
+use App\Answers12;
+use App\Answers13;
+use App\Answers14;
+use App\Answers15a;
+use App\Answers15b;
+use App\Answers16a;
+use App\Answers16b;
+use App\Answers17;
+use App\Answers9c;
 use App\Answers;
 use App\Answers1;
 use App\Answers2;
@@ -29,6 +42,8 @@ class Survey{
      * @var \Illuminate\Validation\Validator
      */
     protected $validator;
+
+    use TraitSessionToken;
 
     public function __construct()
     {
@@ -114,8 +129,10 @@ class Survey{
             $this->createNewAnswers12($answers, $request);
             $this->createNewAnswers13($answers, $request);
             $this->createNewAnswers14($answers, $request);
-            $this->createNewAnswers15($answers, $request);
-            $this->createNewAnswers16($answers, $request);
+            $this->createNewAnswers15a($answers, $request);
+            $this->createNewAnswers15b($answers, $request);
+            $this->createNewAnswers16a($answers, $request);
+            $this->createNewAnswers16b($answers, $request);
             $this->createNewAnswers17($answers, $request);
             $this->createNewAnswers18($answers, $request);
         });
@@ -204,16 +221,19 @@ class Survey{
     }
 
     private function createNewAnswers8(Answers $answers, Request $request){
-        $deletedRows = Answers8::where('id_answer', $answers->id_answer)->delete();
+        if($request->input('data.question8_switch') === 'on') {
 
-        $codes = $request->input('data.answer8_code');
-        $percentages = $request->input('data.answer8_percentage');
+            $deletedRows = Answers8::where('id_answer', $answers->id_answer)->delete();
 
-        foreach($codes as $row_index => $code){
-            $answers8 = new Answers8;
-            $answers8->code = $code;
-            $answers8->percentage = $percentages[$row_index];
-            $answers8->save();
+            $arr_institusi = $request->input('data.answer8_institusi');
+            $arr_jumlah_dana = $request->input('data.answer8_jumlah_dana');
+
+            foreach ($arr_institusi as $row_index => $institusi) {
+                $answers8 = new Answers8;
+                $answers8->institusi = $arr_institusi[$row_index];
+                $answers8->jumlah_dana = $this->getValueFromNominalFormat($arr_jumlah_dana[$row_index]);
+                $answers8->save();
+            }
         }
     }
 
@@ -306,6 +326,213 @@ class Survey{
         $answers9b->staffpendukung_belowd3_fte_p = $request->input('data.answer9b_total_staffpendukung_belowd3_fte_p');
 
         $answers9b->save();
+    }
+
+    private function createNewAnswers9c(Answers $answers, Request $request){
+        $deletedRows = Answers9c::where('id_answer', $answers->id_answer)->delete();
+
+        $arr_s1_l = $request->input('data.answer9c_s1_l');
+        $arr_s1_p = $request->input('data.answer9c_s1_p');
+        $arr_s2_l = $request->input('data.answer9c_s2_l');
+        $arr_s2_p = $request->input('data.answer9c_s2_p');
+        $arr_s3_l = $request->input('data.answer9c_s3_l');
+        $arr_s3_p = $request->input('data.answer9c_s3_p');
+
+
+        foreach($arr_s1_l as $row_index => $s1_l){
+            $answers9c = new Answers9c;
+            $answers9c->s1_l = $arr_s1_l[$row_index];
+            $answers9c->s1_p = $arr_s1_p[$row_index];
+            $answers9c->s2_l = $arr_s2_l[$row_index];
+            $answers9c->s2_p = $arr_s2_p[$row_index];
+            $answers9c->s3_l = $arr_s3_l[$row_index];
+            $answers9c->s3_p = $arr_s3_p[$row_index];
+            $answers9c->save();
+        }
+    }
+
+    private function createNewAnswers10(Answers $answers, Request $request){
+        if($request->input('data.question10_switch') === 'on') {
+            $answers10 = Answers10::firstOrNew(['id_answer' => $answers->id_answer]);
+            $answers10->jumlah_peneliti_pemerintah = $request->input('data.answer10_jumlah_peneliti_pemerintah');
+            $answers10->jumlah_peneliti_perguruantinggi = $request->input('data.answer10_jumlah_peneliti_perguruantinggi');
+            $answers10->jumlah_peneliti_industri = $request->input('data.answer10_jumlah_peneliti_industri');
+            $answers10->jumlah_peneliti_lembagaswadaya = $request->input('data.answer10_jumlah_peneliti_lembagaswadaya ');
+            $answers10->jumlah_peneliti_asing = $request->input('data.answer10_jumlah_peneliti_asing ');
+            $answers10->save();
+        }
+    }
+
+    private function createNewAnswers11(Answers $answers, Request $request){
+        if($request->input('data.question11_switch') === 'on') {
+            $deletedRows = Answers11::where('id_answer', $answers->id_answer)->delete();
+
+            $arr_code = $request->input('data.answer11_code');
+            $arr_nama_jurnal = $request->input('data.answer11_nama_jurnal');
+            $arr_jumlah = $request->input('data.answer11_jumlah');
+
+
+            foreach ($arr_code as $row_index => $code) {
+                $answers11 = new Answers11;
+                $answers11->nama_jurnal = $arr_nama_jurnal[$row_index];
+                $answers11->code = $arr_code[$row_index];
+                $answers11->jumlah = $arr_jumlah[$row_index];
+                $answers11->save();
+            }
+        }
+    }
+
+    private function createNewAnswers12(Answers $answers, Request $request){
+        if($request->input('data.question12_switch') === 'on') {
+            $deletedRows = Answers12::where('id_answer', $answers->id_answer)->delete();
+
+            $arr_code = $request->input('data.answer12_code');
+            $arr_nama_jurnal = $request->input('data.answer12_nama_jurnal');
+            $arr_jumlah = $request->input('data.answer12_jumlah');
+
+
+            foreach ($arr_code as $row_index => $code) {
+                $answers12 = new Answers12;
+                $answers12->nama_jurnal = $arr_nama_jurnal[$row_index];
+                $answers12->code = $arr_code[$row_index];
+                $answers12->jumlah = $arr_jumlah[$row_index];
+                $answers12->save();
+            }
+        }
+    }
+
+    private function createNewAnswers13(Answers $answers, Request $request){
+        if($request->input('data.question13_switch') === 'on') {
+            $deletedRows = Answers13::where('id_answer', $answers->id_answer)->delete();
+
+            $arr_nama_peneliti = $request->input('data.answer13_nama_peneliti');
+            $arr_nama_seminar = $request->input('data.answer13_nama_seminar');
+            $arr_negara_penyelenggara_seminar = $request->input('data.answer13_negara_penyelenggara_seminar');
+
+
+            foreach ($arr_nama_peneliti as $row_index => $code) {
+                $answers13 = new Answers13;
+                $answers13->nama_peneliti = $arr_nama_peneliti[$row_index];
+                $answers13->nama_seminar = $arr_nama_seminar[$row_index];
+                $answers13->negara_penyelenggara_seminar = $arr_negara_penyelenggara_seminar[$row_index];
+                $answers13->save();
+            }
+        }
+    }
+
+    private function createNewAnswers14(Answers $answers, Request $request){
+        if($request->input('data.question14_switch') === 'on') {
+            $deletedRows = Answers14::where('id_answer', $answers->id_answer)->delete();
+
+            $arr_nama_penerima_award = $request->input('data.answer14_nama_penerima_award');
+            $arr_nama_award = $request->input('data.answer14_nama_award');
+            $arr_institusi_pemberi_award = $request->input('data.answer14_institusi_pemberi_award');
+
+
+            foreach ($arr_nama_penerima_award as $row_index => $code) {
+                $answers14 = new Answers14;
+                $answers14->nama_penerima_award = $arr_nama_penerima_award[$row_index];
+                $answers14->nama_award = $arr_nama_award[$row_index];
+                $answers14->institusi_pemberi_award = $arr_institusi_pemberi_award[$row_index];
+                $answers14->save();
+            }
+        }
+    }
+
+    private function createNewAnswers15a(Answers $answers, Request $request){
+        if($request->input('data.question15_switch') === 'on') {
+            $deletedRows = Answers15a::where('id_answer', $answers->id_answer)->delete();
+
+            $arr_nama_barang = $request->input('data.answer15a_nama_barang');
+            $arr_terkomersialisasi = $request->input('data.answer15a_terkomersialisasi');
+            $arr_tahun = $request->input('data.answer15a_tahun');
+
+
+            foreach ($arr_nama_barang as $row_index => $code) {
+                $answers15a = new Answers15a;
+                $answers15a->nama_barang = $arr_nama_barang[$row_index];
+                $answers15a->terkomersialisasi = $arr_terkomersialisasi[$row_index];
+                $answers15a->tahun = $arr_tahun[$row_index];
+                $answers15a->save();
+            }
+        }
+    }
+
+    private function createNewAnswers15b(Answers $answers, Request $request){
+        if($request->input('data.question15_switch') === 'on') {
+            $deletedRows = Answers15b::where('id_answer', $answers->id_answer)->delete();
+
+            $arr_nama_jasa = $request->input('data.answer15b_nama_jasa');
+            $arr_pengguna_jasa = $request->input('data.answer15b_pengguna_jasa');
+            $arr_tahun = $request->input('data.answer15b_tahun');
+
+
+            foreach ($arr_nama_jasa as $row_index => $code) {
+                $answers15b = new Answers15b;
+                $answers15b->nama_jasa = $arr_nama_jasa[$row_index];
+                $answers15b->pengguna_jasa = $arr_pengguna_jasa[$row_index];
+                $answers15b->tahun = $arr_tahun[$row_index];
+                $answers15b->save();
+            }
+        }
+    }
+
+    private function createNewAnswers16a(Answers $answers, Request $request){
+        if($request->input('data.question16_switch') === 'on') {
+            $deletedRows = Answers16a::where('id_answer', $answers->id_answer)->delete();
+
+            $arr_usulan_paten = $request->input('data.answer16a_usulan_paten');
+            $arr_usulan_patensederhana = $request->input('data.answer16a_usulan_patensederhana');
+            $arr_disetujui_paten = $request->input('data.answer16a_disetujui_paten');
+            $arr_disetujui_patensederhana = $request->input('data.answer16a_disetujui_patensederhana');
+            $arr_terkomersialisasi_paten = $request->input('data.answer16a_terkomersialisasi_paten');
+            $arr_terkomersialisasi_patensederhana = $request->input('data.answer16a_terkomersialisasi_patensederhana');
+
+
+            foreach ($arr_usulan_paten as $row_index => $code) {
+                $answers16a = new Answers16a;
+                $answers16a->usulan_paten = $arr_usulan_paten[$row_index];
+                $answers16a->usulan_patensederhana = $arr_usulan_patensederhana[$row_index];
+                $answers16a->disetujui_paten = $arr_disetujui_paten[$row_index];
+                $answers16a->disetujui_patensederhana = $arr_disetujui_patensederhana[$row_index];
+                $answers16a->terkomersialisasi_paten = $arr_terkomersialisasi_paten[$row_index];
+                $answers16a->terkomersialisasi_patensederhana = $arr_terkomersialisasi_patensederhana[$row_index];
+                $answers16a->save();
+            }
+        }
+    }
+
+    private function createNewAnswers16b(Answers $answers, Request $request){
+        if($request->input('data.question16_switch') === 'on') {
+            $answers16b = Answers16b::firstOrNew(['id_answer' => $answers->id_answer]);
+            $answers16b->jumlah_patenluarnegeri = $request->input('data.answer16b_jumlah_patenluarnegeri');
+            $answers16b->save();
+        }
+    }
+
+    private function createNewAnswers17(Answers $answers, Request $request){
+        if($request->input('data.question17_switch') === 'on') {
+            $deletedRows = Answers17::where('id_answer', $answers->id_answer)->delete();
+
+            $arr_lisensi = $request->input('data.answer17_lisensi');
+            $arr_tahun = $request->input('data.answer17_tahun');
+            $arr_nilai = $this->getValueFromNominalFormat($request->input('data.answer17_nilai'));
+
+
+            foreach ($arr_lisensi as $row_index => $code) {
+                $answers17 = new Answers17;
+                $answers17->lisensi = $arr_lisensi[$row_index];
+                $answers17->tahun = $arr_tahun[$row_index];
+                $answers17->nilai = $arr_nilai[$row_index];
+                $answers17->save();
+            }
+        }
+    }
+
+    private function createNewAnswers18(Answers $answers, Request $request){
+        $answers18 =  Answers18::firstOrNew(['id_answer' => $answers->id_answer]);
+        $answers18->comment = $request->input('data.answer18_comment');
+        $answers18->save();
     }
 
     public function setQuestion(InterfaceQuestion $question){

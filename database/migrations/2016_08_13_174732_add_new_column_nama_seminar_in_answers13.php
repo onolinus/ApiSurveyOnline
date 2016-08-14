@@ -13,7 +13,7 @@ class AddNewColumnNamaSeminarInAnswers13 extends Migration
     public function up()
     {
         Schema::table('answers13', function ($table) {
-            $table->string('negara_seminar', 250)->after('nama_peneliti');
+            $table->string('nama_seminar', 250)->after('nama_peneliti');
         });
     }
 
