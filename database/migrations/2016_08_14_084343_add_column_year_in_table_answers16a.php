@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddNewColumnNamaSeminarInAnswers13 extends Migration
+class AddColumnYearInTableAnswers16a extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class AddNewColumnNamaSeminarInAnswers13 extends Migration
      */
     public function up()
     {
-        Schema::table('answers13', function ($table) {
-            $table->string('nama_seminar', 250)->after('nama_peneliti');
+        Schema::table('answers16a', function ($table) {
+            $table->integer('tahun')->unsigned()->after('id_answer');
         });
     }
 

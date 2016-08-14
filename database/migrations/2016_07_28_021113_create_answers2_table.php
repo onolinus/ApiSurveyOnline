@@ -17,7 +17,7 @@ class CreateAnswers2Table extends Migration
             $table->integer('id_answer')->unsigned();
             $table->enum('status', ['pengisian', 'diterima', 'ditolak'])->default('pengisian');
             $table->text('status_comment');
-            $table->double('jumlah', 15, 8);
+            $table->double('jumlah', 15, 2);
             $table->timestamps();
             $table->index(['id_answer']);
         });

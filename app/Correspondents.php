@@ -21,6 +21,11 @@ class Correspondents extends Model
         return $this->belongsTo('App\Users', 'user_id', 'id');
     }
 
+    public function Answers()
+    {
+        return $this->hasOne('App\Answers', 'id_correspondent', 'user_id');
+    }
+
     public function approvedBy()
     {
         return $this->hasOne('App\ApprovedBy', 'correspondent_id_approved', 'user_id');

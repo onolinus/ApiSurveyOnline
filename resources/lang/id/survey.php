@@ -14,4 +14,5 @@ return [
     */
 
     'successsavetodraft' => 'Hasil survei Anda berhasil disimpan sebagai draft',
+    'successsavesurvey' => 'Hasil survei Anda berhasil disimpan',
 ];

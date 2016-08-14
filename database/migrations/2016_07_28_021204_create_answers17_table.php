@@ -19,7 +19,7 @@ class CreateAnswers17Table extends Migration
             $table->text('status_comment');
             $table->string('lisensi', 250);
             $table->integer('tahun')->unsigned();
-            $table->double('nilai', 15, 8);
+            $table->double('nilai', 15, 2);
             $table->timestamps();
             $table->index(['id_answer']);
         });

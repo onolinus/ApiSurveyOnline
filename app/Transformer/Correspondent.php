@@ -31,12 +31,16 @@ class CorrespondentTransformer extends Fractal\TransformerAbstract
                 'alamat' => $user->ApprovedBy->alamat,
                 'timestamp' => [
                     'created' => $user->ApprovedBy->created_at,
+                    'created_string' => $user->ApprovedBy->created_at->toDayDateTimeString(),
                     'updated' => $user->ApprovedBy->updated_at,
+                    'updated_string' => $user->ApprovedBy->updated_at->toDayDateTimeString(),
                 ]
             ],
             'timestamp' => [
-                'created' => $user->created_at, //$user->created_at->toDateTimeString()
-                'updated' => $user->updated_at, //$user->updated_at->toDateTimeString()
+                'created' => $user->created_at,
+                'created_string' => $user->created_at->toDayDateTimeString(),
+                'updated' => $user->updated_at,
+                'updated_string' => $user->updated_at->toDayDateTimeString(),
             ]
         ];
     }
