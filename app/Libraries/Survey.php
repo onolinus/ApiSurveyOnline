@@ -249,10 +249,9 @@ class Survey{
     }
 
     private function createNewAnswers8(Answers $answers, Request $request){
+        Answers8::where('id_answer', $answers->id)->delete();
+
         if($request->input('data.question8_switch') === 'on') {
-
-            $deletedRows = Answers8::where('id_answer', $answers->id)->delete();
-
             $arr_institusi = $request->input('data.answer8_institusi');
             $arr_jumlah_dana = $request->input('data.answer8_jumlah_dana');
 
@@ -404,14 +403,17 @@ class Survey{
             $answers10->save();
 
             return $answers10;
+        }else{
+            Answers10::where('id_answer', $answers->id)->delete();
         }
 
         return null;
     }
 
     private function createNewAnswers11(Answers $answers, Request $request){
+        Answers11::where('id_answer', $answers->id)->delete();
+
         if($request->input('data.question11_switch') === 'on') {
-            $deletedRows = Answers11::where('id_answer', $answers->id)->delete();
 
             $arr_code = $request->input('data.answer11_code');
             $arr_nama_jurnal = $request->input('data.answer11_nama_jurnal');
@@ -437,8 +439,9 @@ class Survey{
     }
 
     private function createNewAnswers12(Answers $answers, Request $request){
+        Answers12::where('id_answer', $answers->id)->delete();
+
         if($request->input('data.question12_switch') === 'on') {
-            $deletedRows = Answers12::where('id_answer', $answers->id)->delete();
 
             $arr_code = $request->input('data.answer12_code');
             $arr_nama_jurnal = $request->input('data.answer12_nama_jurnal');
@@ -463,8 +466,9 @@ class Survey{
     }
 
     private function createNewAnswers13(Answers $answers, Request $request){
+        Answers13::where('id_answer', $answers->id)->delete();
+
         if($request->input('data.question13_switch') === 'on') {
-            $deletedRows = Answers13::where('id_answer', $answers->id)->delete();
 
             $arr_nama_peneliti = $request->input('data.answer13_nama_peneliti');
             $arr_nama_seminar = $request->input('data.answer13_nama_seminar');
@@ -489,8 +493,9 @@ class Survey{
     }
 
     private function createNewAnswers14(Answers $answers, Request $request){
+        Answers14::where('id_answer', $answers->id)->delete();
+
         if($request->input('data.question14_switch') === 'on') {
-            $deletedRows = Answers14::where('id_answer', $answers->id)->delete();
 
             $arr_nama_penerima_award = $request->input('data.answer14_nama_penerima_award');
             $arr_nama_award = $request->input('data.answer14_nama_award');
@@ -515,9 +520,9 @@ class Survey{
     }
 
     private function createNewAnswers15a(Answers $answers, Request $request){
-        if($request->input('data.question15_switch') === 'on') {
-            $deletedRows = Answers15a::where('id_answer', $answers->id)->delete();
+        Answers15a::where('id_answer', $answers->id)->delete();
 
+        if($request->input('data.question15_switch') === 'on') {
             $arr_nama_barang = $request->input('data.answer15a_nama_barang');
             $arr_terkomersialisasi = $request->input('data.answer15a_terkomersialisasi');
             $arr_tahun = $request->input('data.answer15a_tahun');
@@ -541,9 +546,8 @@ class Survey{
     }
 
     private function createNewAnswers15b(Answers $answers, Request $request){
+        Answers15b::where('id_answer', $answers->id)->delete();
         if($request->input('data.question15_switch') === 'on') {
-            $deletedRows = Answers15b::where('id_answer', $answers->id)->delete();
-
             $arr_nama_jasa = $request->input('data.answer15b_nama_jasa');
             $arr_pengguna_jasa = $request->input('data.answer15b_pengguna_jasa');
             $arr_tahun = $request->input('data.answer15b_tahun');
@@ -567,9 +571,9 @@ class Survey{
     }
 
     private function createNewAnswers16a(Answers $answers, Request $request){
-        if($request->input('data.question16_switch') === 'on') {
-            $deletedRows = Answers16a::where('id_answer', $answers->id)->delete();
+        Answers16a::where('id_answer', $answers->id)->delete();
 
+        if($request->input('data.question16_switch') === 'on') {
             $arr_tahun = $request->input('data.answer16a_tahun');
             $arr_usulan_paten = $request->input('data.answer16a_usulan_paten');
             $arr_usulan_patensederhana = $request->input('data.answer16a_usulan_patensederhana');
@@ -607,15 +611,17 @@ class Survey{
             $answers16b->save();
 
             return $answers16b;
+        }else{
+            Answers16b::where('id_answer', $answers->id)->delete();
         }
 
         return null;
     }
 
     private function createNewAnswers17(Answers $answers, Request $request){
-        if($request->input('data.question17_switch') === 'on') {
-            $deletedRows = Answers17::where('id_answer', $answers->id)->delete();
+        Answers17::where('id_answer', $answers->id)->delete();
 
+        if($request->input('data.question17_switch') === 'on') {
             $arr_lisensi = $request->input('data.answer17_lisensi');
             $arr_tahun = $request->input('data.answer17_tahun');
             $arr_nilai = $request->input('data.answer17_nilai');

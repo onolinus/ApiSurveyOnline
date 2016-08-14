@@ -18,7 +18,7 @@ class CreateAnswers8Table extends Migration
             $table->enum('status', ['pengisian', 'diterima', 'ditolak'])->default('pengisian');
             $table->text('status_comment');
             $table->string('institusi', 250);
-            $table->double('jumlah_dana', 15, 8);
+            $table->double('jumlah_dana', 15, 2);
             $table->timestamps();
             $table->index(['id_answer']);
         });

@@ -17,7 +17,7 @@ class CreateAnswers1Table extends Migration
             $table->integer('id_answer')->unsigned();
             $table->enum('status', ['pengisian', 'diterima', 'ditolak'])->default('pengisian');
             $table->text('status_comment');
-            $table->double('total', 15, 8);
+            $table->double('total', 15, 2);
             $table->integer('percentage')->unsigned();
             $table->timestamps();
             $table->index(['id_answer']);
