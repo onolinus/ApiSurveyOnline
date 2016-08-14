@@ -15,7 +15,7 @@ class CreateAnswers16bTable extends Migration
         Schema::create('answers16b', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_answer')->unsigned();
-            $table->enum('status', ['pengisian', 'diterima', 'ditolak'])->default('pengisian');
+            $table->enum('status', ['terkirim', 'diterima', 'ditolak'])->default('terkirim');
             $table->text('status_comment');
             $table->integer('jumlah_patenluarnegeri')->unsigned();
             $table->timestamps();

@@ -15,7 +15,7 @@ class CreateAnswers10Table extends Migration
         Schema::create('answers10', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_answer')->unsigned();
-            $table->enum('status', ['pengisian', 'diterima', 'ditolak'])->default('pengisian');
+            $table->enum('status', ['terkirim', 'diterima', 'ditolak'])->default('terkirim');
             $table->text('status_comment');
             $table->integer('jumlah_peneliti_pemerintah')->unsigned();
             $table->integer('jumlah_peneliti_perguruantinggi')->unsigned();

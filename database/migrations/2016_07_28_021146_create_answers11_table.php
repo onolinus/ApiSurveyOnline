@@ -15,7 +15,7 @@ class CreateAnswers11Table extends Migration
         Schema::create('answers11', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_answer')->unsigned();
-            $table->enum('status', ['pengisian', 'diterima', 'ditolak'])->default('pengisian');
+            $table->enum('status', ['terkirim', 'diterima', 'ditolak'])->default('terkirim');
             $table->text('status_comment');
             $table->string('nama_jurnal', 500);
             $table->string('code', 5);

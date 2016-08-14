@@ -15,7 +15,7 @@ class CreateAnswers4Table extends Migration
         Schema::create('answers4', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_answer')->unsigned();
-            $table->enum('status', ['pengisian', 'diterima', 'ditolak'])->default('pengisian');
+            $table->enum('status', ['terkirim', 'diterima', 'ditolak'])->default('terkirim');
             $table->text('status_comment');
             $table->double('belanja_pegawai_upah', 15, 2);
             $table->double('belanja_modal_properti', 15, 2);

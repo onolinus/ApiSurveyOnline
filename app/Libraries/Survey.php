@@ -148,7 +148,7 @@ class Survey{
 
     private function createNewAnswers(Request $request){
         $answers =  Answers::firstOrNew(['id_correspondent' => $this->sessionTokenAccessor->getSessionUserID()]);
-        $answers->status = 'pengisian';
+        $answers->status = 'terkirim';
         $answers->save();
 
         return $answers;

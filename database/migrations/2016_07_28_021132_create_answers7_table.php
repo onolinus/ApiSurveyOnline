@@ -15,7 +15,7 @@ class CreateAnswers7Table extends Migration
         Schema::create('answers7', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_answer')->unsigned();
-            $table->enum('status', ['pengisian', 'diterima', 'ditolak'])->default('pengisian');
+            $table->enum('status', ['terkirim', 'diterima', 'ditolak'])->default('terkirim');
             $table->text('status_comment');
             $table->double('penelitian_dasar', 15, 2);
             $table->double('penelitian_terapan', 15, 2);
