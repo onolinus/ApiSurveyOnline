@@ -14,6 +14,8 @@ class Answers extends Model
 
     protected $connection = 'mysql';
 
+    protected $fillable = ['id_correspondent'];
+
     public function Correspondents()
     {
         return $this->belongsTo('App\Correspondents', 'id_correspondent', 'user_id');
@@ -59,9 +61,19 @@ class Answers extends Model
         return $this->hasMany('App\Answers8', 'id_answer', 'id');
     }
 
-    public function Answers9()
+    public function Answers9a()
     {
-        return $this->hasMany('App\Answers9', 'id_answer', 'id');
+        return $this->hasMany('App\Answers9a', 'id_answer', 'id');
+    }
+
+    public function Answers9b()
+    {
+        return $this->hasMany('App\Answers9b', 'id_answer', 'id');
+    }
+
+    public function Answers9c()
+    {
+        return $this->hasMany('App\Answers9c', 'id_answer', 'id');
     }
 
     public function Answers10()
@@ -94,9 +106,14 @@ class Answers extends Model
         return $this->hasMany('App\Answers15', 'id_answer', 'id');
     }
 
-    public function Answers16()
+    public function Answers16a()
     {
-        return $this->hasMany('App\Answers16', 'id_answer', 'id');
+        return $this->hasMany('App\Answers16a', 'id_answer', 'id');
+    }
+
+    public function Answers16b()
+    {
+        return $this->hasMany('App\Answers16b', 'id_answer', 'id');
     }
 
     public function Answers17()

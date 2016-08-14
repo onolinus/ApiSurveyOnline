@@ -14,6 +14,8 @@ class Answers9a extends Model
 
     protected $connection = 'mysql';
 
+    protected $fillable = ['id_answer'];
+
     public function Answers()
     {
         return $this->belongsTo('App\Answers', 'id_answer', 'id');
