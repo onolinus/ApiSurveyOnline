@@ -21,6 +21,10 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::resource('registrasitoken', 'Admin\RegistrasiTokenController', ['only' => [
             'show', 'index'
         ]]);
+
+        Route::resource('admin/correspondent', 'Admin\CorrespondentController', ['only' => [
+            'show', 'index'
+        ]]);
     });
 
     # Correspondent
