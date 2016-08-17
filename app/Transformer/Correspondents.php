@@ -17,6 +17,7 @@ class CorrespondentsTransformer extends Fractal\TransformerAbstract
         $includes = explode(',', $request->include);
 
         return [
+            'user_id' => $correspondent->user_id,
             'name' => $correspondent->name,
             'nip' => $correspondent->nip,
             'role' => $correspondent->role,
