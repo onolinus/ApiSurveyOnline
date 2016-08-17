@@ -25,6 +25,10 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::resource('admin/correspondent', 'Admin\CorrespondentController', ['only' => [
             'show', 'index'
         ]]);
+
+        Route::resource('admin/approvedby', 'Admin\ApprovedByController', ['only' => [
+            'show', 'index'
+        ]]);
     });
 
     # Correspondent
