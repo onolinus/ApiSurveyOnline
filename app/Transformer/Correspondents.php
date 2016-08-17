@@ -30,6 +30,9 @@ class CorrespondentsTransformer extends Fractal\TransformerAbstract
                 'updated' => $correspondent->updated_at,
                 'updated_string' => $correspondent->updated_at->toDayDateTimeString(),
             ],
+            'links' => [
+                'self' => route('admin.correspondent.show', [$correspondent->user_id])
+            ],
             'relationships' => [
                 'user' => [
                     'links' => [
