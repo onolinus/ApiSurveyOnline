@@ -74,7 +74,7 @@ abstract class BaseController extends Controller
     {
         $row = call_user_func_array('\\App\\' . $this->getModelName() . '::find', [$id]);
         if(empty($row) || count($row) === 0){
-            return $this->response->errorNotFound(trans('errors.data_not_found', ['dataname' => $this->getModelName()]));
+            return $this->response->errorNotFound(trans('errors.data_not_found', ['dataname' => $this->getModelLabel()]));
         }
 
         return $this->response->withItem($row, $this->getTransformer());
