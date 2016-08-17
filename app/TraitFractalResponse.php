@@ -7,7 +7,7 @@ use EllipseSynergie\ApiResponse\Contracts\Response;
 trait TraitFractalResponse
 {
     /**
-     * @var Response
+     * @var \EllipseSynergie\ApiResponse\Laravel
      */
     protected $response;
 

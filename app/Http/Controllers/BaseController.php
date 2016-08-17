@@ -32,12 +32,16 @@ abstract class BaseController extends Controller
      */
     abstract protected function getTransformer();
 
+    protected function getListTransformer(){
+        return $this->getTransformer();
+    }
+
     protected function paging(){
         $rows = call_user_func_array('\\App\\' . $this->getModelName() . '::paginate', [$this->getPerPage()]);
         if(empty($rows) || count($rows) === 0){
             return $this->response->errorNotFound(trans('errors.data_empty', ['dataname' => $this->getModelLabel()]));
         }
-        return $this->response->withPaginator($rows, $this->getTransformer());
+        return $this->response->withPaginator($rows, $this->getListTransformer());
     }
 
     /**
@@ -55,7 +59,7 @@ abstract class BaseController extends Controller
         if(empty($rows) || count($rows) === 0){
             return $this->response->errorNotFound(trans('errors.data_empty', ['dataname' => $this->getModelLabel()]));
         }
-        return $this->response->withCollection($rows, $this->getTransformer(), null, null, [
+        return $this->response->withCollection($rows, $this->getListTransformer(), null, null, [
             'total' => count($rows)
         ]);
     }
