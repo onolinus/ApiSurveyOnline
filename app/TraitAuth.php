@@ -14,11 +14,15 @@ trait TraitAuth
     }
 
     private function getInvalidApiClientAndSecretCodeResponse(){
-        return $this->response->errorWrongArgs(trans('invalid api client or secret code value'));
+        /** @var \EllipseSynergie\ApiResponse\Contracts\Response $response*/
+        $response = $this->response;
+        return $response->errorWrongArgs([trans('invalid api client or secret code value')]);
     }
 
     private function getSuccessStoreResponse(SessionToken $sessionToken){
-        return $this->response->setStatusCode(201)->withArray([
+        /** @var \EllipseSynergie\ApiResponse\Contracts\Response $response*/
+        $response = $this->response;
+        return $response->setStatusCode(201)->withArray([
             'code' => Codes::SUCCESS,
             'access_token' => $sessionToken->getAttribute('access_token'),
             'refresh_token' => $sessionToken->getAttribute('refresh_token'),

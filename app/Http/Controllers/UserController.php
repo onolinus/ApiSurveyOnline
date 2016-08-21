@@ -122,12 +122,12 @@ class UserController extends Controller
         $user = UsersModel::where('email', $request->email)->first();
 
         if($user->registrasitoken->token != $request->registration_token){
-            return $this->response->errorWrongArgs(trans('This token does not belong to you'));
+            return $this->response->errorWrongArgs([trans('This token does not belong to you')]);
         }
 
         $user->password = \PluginCommonSurvey\Helper\Hashed\hash_password($request->newpassword);
         if (!$user->save()) {
-            return $this->response->errorInternalError(trans('errors.data_save', ['dataname' => 'user']));
+            return $this->response->errorInternalError([trans('errors.data_save', ['dataname' => 'user'])]);
         }
 
         return $this->response->setStatusCode(200)->withArray([

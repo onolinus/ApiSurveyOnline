@@ -58,7 +58,7 @@ class AuthController extends Controller
         if(!$this->runValidation($request, [
             'refresh_token' => 'required',
         ])){
-            return $this->response->errorWrongArgs($this->validator->errors()->all());
+            return $this->response->errorWrongArgs([$this->validator->errors()->all()]);
         }
 
         try{
@@ -69,7 +69,7 @@ class AuthController extends Controller
         }
 
         if(!$sessionToken){
-            return $this->response->errorInternalError(trans('refresh token is invalid'));
+            return $this->response->errorInternalError([trans('refresh token is invalid')]);
         }
 
         return $this->getSuccessStoreResponse($sessionToken);
@@ -94,7 +94,7 @@ class AuthController extends Controller
             ->first();
 
         if(empty($user) || count($user) === 0){
-            return $this->response->errorNotFound(trans('login.failed'));
+            return $this->response->errorNotFound([trans('login.failed')]);
         }
 
         try {
@@ -124,11 +124,11 @@ class AuthController extends Controller
         $user = UsersModel::find($request->user_id);
 
         if($user->password != $request->hashed_password){
-            return $this->response->errorWrongArgs(trans('invalid password'));
+            return $this->response->errorWrongArgs([trans('invalid password')]);
         }
 
         if(empty($user) || count($user) === 0){
-            return $this->response->errorNotFound(trans('login.failed'));
+            return $this->response->errorNotFound([trans('login.failed')]);
         }
 
         try {
