@@ -40,7 +40,7 @@ abstract class BaseController extends Controller
     protected function paging(){
         $models = call_user_func_array('\\App\\' . $this->getModelName() . '::paginate', [$this->getPerPage()]);
         if(empty($models) || count($models) === 0){
-            return $this->response->errorNotFound(trans('errors.data_empty', ['dataname' => $this->getModelLabel()]));
+            return $this->response->errorNotFound([trans('errors.data_empty', ['dataname' => $this->getModelLabel()])]);
         }
         return $this->response->withPaginator($models, $this->getListTransformer());
     }
@@ -49,7 +49,7 @@ abstract class BaseController extends Controller
         $models = call_user_func_array('\\App\\' . $this->getModelName() . '::ofType', [$request->filter])->paginate($this->getPerPage());
 
         if(empty($models) || count($models) === 0){
-            return $this->response->errorNotFound(trans('errors.data_empty', ['dataname' => $this->getModelLabel()]));
+            return $this->response->errorNotFound([trans('errors.data_empty', ['dataname' => $this->getModelLabel()])]);
         }
 
         return $this->response->withPaginator($models, $this->getListTransformer());
@@ -72,7 +72,7 @@ abstract class BaseController extends Controller
 
         $models = call_user_func('\\App\\' . $this->getModelName() . '::all');
         if(empty($models) || count($models) === 0){
-            return $this->response->errorNotFound(trans('errors.data_empty', ['dataname' => $this->getModelLabel()]));
+            return $this->response->errorNotFound([trans('errors.data_empty', ['dataname' => $this->getModelLabel()])]);
         }
         return $this->response->withCollection($models, $this->getListTransformer(), null, null, [
             'total' => count($models)
@@ -89,7 +89,7 @@ abstract class BaseController extends Controller
     {
         $models = call_user_func_array('\\App\\' . $this->getModelName() . '::find', [$id]);
         if(empty($models) || count($models) === 0){
-            return $this->response->errorNotFound(trans('errors.data_not_found', ['dataname' => $this->getModelLabel()]));
+            return $this->response->errorNotFound([trans('errors.data_not_found', ['dataname' => $this->getModelLabel()])]);
         }
 
         return $this->response->withItem($models, $this->getTransformer());
