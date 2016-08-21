@@ -23,4 +23,9 @@ class Users extends Model
     {
         return $this->hasOne('App\Correspondents', 'user_id', 'id');
     }
+
+    public function scopeOfType($query, $type)
+    {
+        return $query->where('type', $type);
+    }
 }
