@@ -81,6 +81,7 @@ class UsersController extends BaseController
         $user->type = $request->type ? $request->type : $user->type;
         $user->email = $request->email ? $request->email : $user->email;
         $user->password = $request->password ? $request->password : $user->password;
+        $user->password = \PluginCommonSurvey\Helper\Hashed\hash_password($user->password);
         $user->save();
 
         return $this->response->setStatusCode(201)->withArray([
