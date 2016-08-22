@@ -104,7 +104,15 @@ class UsersController extends BaseController
             return $this->response->errorNotFound(trans('errors.data_not_found', ['dataname' => 'user']));
         }
 
-        $user->delete();
+        $registrasiToken = $user->registrasitoken;
+
+        DB::transaction(function () use ($user, $registrasiToken) {
+            $registrasiToken->user_id = 0;
+            $registrasiToken->save();
+
+            $user->delete();
+        });
+
         return $this->response->setStatusCode(200)->withArray([
             'code' => Codes::SUCCESS,
             'message' => trans('success.data_deleted', ['dataname' => 'user'])
