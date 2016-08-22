@@ -370,6 +370,7 @@ class Survey{
     private function createNewAnswers9c(Answers $answers, Request $request){
         $deletedRows = Answers9c::where('id_answer', $answers->id)->delete();
 
+        $arr_klasifikasi = $request->input('data.answer9c_klasifikasi');
         $arr_s1_l = $request->input('data.answer9c_s1_l');
         $arr_s1_p = $request->input('data.answer9c_s1_p');
         $arr_s2_l = $request->input('data.answer9c_s2_l');
@@ -378,8 +379,9 @@ class Survey{
         $arr_s3_p = $request->input('data.answer9c_s3_p');
 
 
-        foreach($arr_s1_l as $row_index => $s1_l){
+        foreach($arr_klasifikasi as $row_index => $code){
             $answers9c = new Answers9c;
+            $answers9c->code = $arr_klasifikasi[$row_index];
             $answers9c->s1_l = $arr_s1_l[$row_index];
             $answers9c->s1_p = $arr_s1_p[$row_index];
             $answers9c->s2_l = $arr_s2_l[$row_index];
