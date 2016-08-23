@@ -48,7 +48,7 @@ class SurveyDb{
         $this->getAnswers7($answers, $data);
         $this->getAnswers8($answers, $data);
         $this->getAnswers9a($answers, $data);
-//        $this->getAnswers9b($answers, $data);
+        $this->getAnswers9b($answers, $data);
 //        $this->getAnswers9c($answers, $data);
 //        $this->getAnswers10($answers, $data);
 //        $this->getAnswers11($answers, $data);
@@ -170,5 +170,71 @@ class SurveyDb{
         $answers9a = $answers->Answers9a;
 
         $data['answer9a_total_pegawai'] = $answers9a->total_pegawai;
+    }
+
+    private function getAnswers9b(Answers $answers, &$data){
+        /** @var Answers9b $answers9b */
+        $answers9b = $answers->Answers9b;
+
+        $data['answer9b_total_peneliti_fungsional_s3_l'] = $answers9b->peneliti_fungsional_peneliti_s3_l;
+        $data['answer9b_total_peneliti_fungsional_s3_p'] = $answers9b->peneliti_fungsional_peneliti_s3_p;
+        $data['answer9b_total_peneliti_fungsional_s3_fte_l'] = $answers9b->peneliti_fungsional_peneliti_s3_fte_l;
+        $data['answer9b_total_peneliti_fungsional_s3_fte_p'] = $answers9b->peneliti_fungsional_peneliti_s3_fte_p;
+        $data['answer9b_total_peneliti_fungsional_s2_l'] = $answers9b->peneliti_fungsional_peneliti_s2_l;
+        $data['answer9b_total_peneliti_fungsional_s2_p'] = $answers9b->peneliti_fungsional_peneliti_s2_p;
+        $data['answer9b_total_peneliti_fungsional_s2_fte_l'] = $answers9b->peneliti_fungsional_peneliti_s2_fte_l;
+        $data['answer9b_total_peneliti_fungsional_s2_fte_p'] = $answers9b->peneliti_fungsional_peneliti_s2_fte_p;
+        $data['answer9b_total_peneliti_fungsional_s1_l'] = $answers9b->peneliti_fungsional_peneliti_s1_l;
+        $data['answer9b_total_peneliti_fungsional_s1_p'] = $answers9b->peneliti_fungsional_peneliti_s1_p;
+        $data['answer9b_total_peneliti_fungsional_s1_fte_l'] = $answers9b->peneliti_fungsional_peneliti_s1_fte_l;
+        $data['answer9b_total_peneliti_fungsional_s1_fte_p'] = $answers9b->peneliti_fungsional_peneliti_s1_fte_p;
+        $data['answer9b_total_nonpeneliti_fungsional_s3_l'] = $answers9b->peneliti_fungsional_nonpeneliti_s3_l;
+        $data['answer9b_total_nonpeneliti_fungsional_s3_p'] = $answers9b->peneliti_fungsional_nonpeneliti_s3_p;
+        $data['answer9b_total_nonpeneliti_fungsional_s3_fte_l'] = $answers9b->peneliti_fungsional_nonpeneliti_s3_fte_l;
+        $data['answer9b_total_nonpeneliti_fungsional_s3_fte_p'] = $answers9b->peneliti_fungsional_nonpeneliti_s3_fte_p;
+        $data['answer9b_total_nonpeneliti_fungsional_s2_l'] = $answers9b->peneliti_fungsional_nonpeneliti_s2_l;
+        $data['answer9b_total_nonpeneliti_fungsional_s2_p'] = $answers9b->peneliti_fungsional_nonpeneliti_s2_p;
+        $data['answer9b_total_nonpeneliti_fungsional_s2_fte_l'] = $answers9b->peneliti_fungsional_nonpeneliti_s2_fte_l;
+        $data['answer9b_total_nonpeneliti_fungsional_s2_fte_p'] = $answers9b->peneliti_fungsional_nonpeneliti_s2_fte_p;
+        $data['answer9b_total_nonpeneliti_fungsional_s1_l'] = $answers9b->peneliti_fungsional_nonpeneliti_s1_l;
+        $data['answer9b_total_nonpeneliti_fungsional_s1_p'] = $answers9b->peneliti_fungsional_nonpeneliti_s1_p;
+        $data['answer9b_total_nonpeneliti_fungsional_s1_fte_l'] = $answers9b->peneliti_fungsional_nonpeneliti_s1_fte_l;
+        $data['answer9b_total_nonpeneliti_fungsional_s1_fte_p'] = $answers9b->peneliti_fungsional_nonpeneliti_s1_fte_p;
+        $data['answer9b_total_peneliti_nonfungsional_s3_l'] = $answers9b->peneliti_nonfungsional_s3_l;
+        $data['answer9b_total_peneliti_nonfungsional_s3_p'] = $answers9b->peneliti_nonfungsional_s3_p;
+        $data['answer9b_total_peneliti_nonfungsional_s3_fte_l'] = $answers9b->peneliti_nonfungsional_s3_fte_l;
+        $data['answer9b_total_peneliti_nonfungsional_s3_fte_p'] = $answers9b->peneliti_nonfungsional_s3_fte_p;
+        $data['answer9b_total_peneliti_nonfungsional_s2_l'] = $answers9b->peneliti_nonfungsional_s2_l;
+        $data['answer9b_total_peneliti_nonfungsional_s2_p'] = $answers9b->peneliti_nonfungsional_s2_p;
+        $data['answer9b_total_peneliti_nonfungsional_s2_fte_l'] = $answers9b->peneliti_nonfungsional_s2_fte_l;
+        $data['answer9b_total_peneliti_nonfungsional_s2_fte_p'] = $answers9b->peneliti_nonfungsional_s2_fte_p;
+        $data['answer9b_total_peneliti_nonfungsional_s1_l'] = $answers9b->peneliti_nonfungsional_s1_l;
+        $data['answer9b_total_peneliti_nonfungsional_s1_p'] = $answers9b->peneliti_nonfungsional_s1_p;
+        $data['answer9b_total_peneliti_nonfungsional_s1_fte_l'] = $answers9b->peneliti_nonfungsional_s1_fte_l;
+        $data['answer9b_total_peneliti_nonfungsional_s1_fte_p'] = $answers9b->peneliti_nonfungsional_s1_fte_p;
+        $data['answer9b_total_teknisi_s1_l'] = $answers9b->teknisi_s1_l;
+        $data['answer9b_total_teknisi_s1_p'] = $answers9b->teknisi_s1_p;
+        $data['answer9b_total_teknisi_s1_fte_l'] = $answers9b->teknisi_s1_fte_l;
+        $data['answer9b_total_teknisi_s1_fte_p'] = $answers9b->teknisi_s1_fte_p;
+        $data['answer9b_total_teknisi_d3_l'] = $answers9b->teknisi_d3_l;
+        $data['answer9b_total_teknisi_d3_p'] = $answers9b->teknisi_d3_p;
+        $data['answer9b_total_teknisi_d3_fte_l'] = $answers9b->teknisi_d3_fte_l;
+        $data['answer9b_total_teknisi_d3_fte_p'] = $answers9b->teknisi_d3_fte_p;
+        $data['answer9b_total_teknisi_belowd3_l'] = $answers9b->teknisi_belowd3_l;
+        $data['answer9b_total_teknisi_belowd3_p'] = $answers9b->teknisi_belowd3_p;
+        $data['answer9b_total_teknisi_belowd3_fte_l'] = $answers9b->teknisi_belowd3_fte_l;
+        $data['answer9b_total_teknisi_belowd3_fte_p'] = $answers9b->teknisi_belowd3_fte_p;
+        $data['answer9b_total_staffpendukung_s1_l'] = $answers9b->staffpendukung_s1_l;
+        $data['answer9b_total_staffpendukung_s1_p'] = $answers9b->staffpendukung_s1_p;
+        $data['answer9b_total_staffpendukung_s1_fte_l'] = $answers9b->staffpendukung_s1_fte_l;
+        $data['answer9b_total_staffpendukung_s1_fte_p'] = $answers9b->staffpendukung_s1_fte_p;
+        $data['answer9b_total_staffpendukung_d3_l'] = $answers9b->staffpendukung_d3_l;
+        $data['answer9b_total_staffpendukung_d3_p'] = $answers9b->staffpendukung_d3_p;
+        $data['answer9b_total_staffpendukung_d3_fte_l'] = $answers9b->staffpendukung_d3_fte_l;
+        $data['answer9b_total_staffpendukung_d3_fte_p'] = $answers9b->staffpendukung_d3_fte_p;
+        $data['answer9b_total_staffpendukung_belowd3_l'] = $answers9b->staffpendukung_belowd3_l;
+        $data['answer9b_total_staffpendukung_belowd3_p'] = $answers9b->staffpendukung_belowd3_p;
+        $data['answer9b_total_staffpendukung_belowd3_fte_l'] = $answers9b->staffpendukung_belowd3_fte_l;
+        $data['answer9b_total_staffpendukung_belowd3_fte_p'] = $answers9b->staffpendukung_belowd3_fte_p;
     }
 }
