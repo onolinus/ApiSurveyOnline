@@ -51,13 +51,12 @@ class SurveyDb{
         $this->getAnswers9b($answers, $data);
         $this->getAnswers9c($answers, $data);
         $this->getAnswers10($answers, $data);
-//        $this->getAnswers11($answers, $data);
-//        $this->getAnswers12($answers, $data);
-//        $this->getAnswers13($answers, $data);
-//        $this->getAnswers14($answers, $data);
-//        $this->getAnswers15a($answers, $data);
-//        $this->getAnswers15b($answers, $data);
-//        $this->getAnswers16a($answers, $data);
+        $this->getAnswers11($answers, $data);
+        $this->getAnswers12($answers, $data);
+        $this->getAnswers13($answers, $data);
+        $this->getAnswers14($answers, $data);
+        $this->getAnswers15($answers, $data);
+        $this->getAnswers16($answers, $data);
 //        $this->getAnswers16b($answers, $data);
 //        $this->getAnswers17($answers, $data);
 //        $this->getAnswers18($answers, $data);
@@ -274,5 +273,167 @@ class SurveyDb{
         $data['answer10_jumlah_peneliti_industri'] = $answers10->jumlah_peneliti_industri;
         $data['answer10_jumlah_peneliti_lembagaswadaya'] = $answers10->jumlah_peneliti_lembagaswadaya;
         $data['answer10_jumlah_peneliti_asing'] = $answers10->jumlah_peneliti_asing;
+    }
+
+    private function getAnswers11(Answers $answers, &$data){
+        $list_answers11 = $answers->Answers11;
+
+        $is_empty = empty($list_answers11) || count($list_answers11) === 0 ? true : false;
+
+        $data['answer11_nama_jurnal'] = [];
+        $data['answer11_code'] = [];
+        $data['answer11_jumlah'] = [];
+
+        if($is_empty){
+            return $data;
+        }
+
+        $data['question11_switch'] = 'on';
+
+        /** @var Answers11 $answers11 */
+        foreach($list_answers11 as $index=>$answers11){
+            $data['answer11_nama_jurnal'][$index+1] = $answers11->nama_jurnal;
+            $data['answer11_code'][$index+1] = $answers11->code;
+            $data['answer11_jumlah'][$index+1] = $answers11->jumlah;
+        }
+    }
+
+    private function getAnswers12(Answers $answers, &$data){
+        $list_answers12 = $answers->Answers12;
+
+        $is_empty = empty($list_answers12) || count($list_answers12) === 0 ? true : false;
+
+        $data['answer12_nama_jurnal'] = [];
+        $data['answer12_code'] = [];
+        $data['answer12_jumlah'] = [];
+
+        if($is_empty){
+            return $data;
+        }
+
+        $data['question12_switch'] = 'on';
+
+        /** @var Answers12 $answers12 */
+        foreach($list_answers12 as $index=>$answers12){
+            $data['answer12_nama_jurnal'][$index+1] = $answers12->nama_jurnal;
+            $data['answer12_code'][$index+1] = $answers12->code;
+            $data['answer12_jumlah'][$index+1] = $answers12->jumlah;
+        }
+    }
+
+    private function getAnswers13(Answers $answers, &$data){
+        $list_answers13 = $answers->Answers13;
+
+        $is_empty = empty($list_answers13) || count($list_answers13) === 0 ? true : false;
+
+        $data['answer13_nama_peneliti'] = [];
+        $data['answer13_nama_seminar'] = [];
+        $data['answer13_negara_penyelenggara_seminar'] = [];
+
+        if($is_empty){
+            return $data;
+        }
+
+        $data['question13_switch'] = 'on';
+
+        /** @var Answers13 $answers13 */
+        foreach($list_answers13 as $index=>$answers13){
+            $data['answer13_nama_peneliti'][$index+1] = $answers13->nama_peneliti;
+            $data['answer13_nama_seminar'][$index+1] = $answers13->nama_seminar;
+            $data['answer13_negara_penyelenggara_seminar'][$index+1] = $answers13->negara_penyelenggara_seminar;
+        }
+    }
+
+    private function getAnswers14(Answers $answers, &$data){
+        $list_answers14 = $answers->Answers14;
+
+        $is_empty = empty($list_answers14) || count($list_answers14) === 0 ? true : false;
+
+        $data['answer14_nama_penerima_award'] = [];
+        $data['answer14_nama_award'] = [];
+        $data['answer14_institusi_pemberi_award'] = [];
+
+        if($is_empty){
+            return $data;
+        }
+
+        $data['question14_switch'] = 'on';
+
+        /** @var Answers14 $answers14 */
+        foreach($list_answers14 as $index=>$answers14){
+            $data['answer14_nama_penerima_award'][$index+1] = $answers14->nama_penerima_award;
+            $data['answer14_nama_award'][$index+1] = $answers14->nama_award;
+            $data['answer14_institusi_pemberi_award'][$index+1] = $answers14->institusi_pemberi_award;
+        }
+    }
+
+    private function getAnswers15(Answers $answers, &$data){
+        $list_answers15a = $answers->Answers15a;
+        $list_answers15b = $answers->Answers15b;
+
+        $is_empty = empty($list_answers15a) || count($list_answers15a) === 0 ? true : false;
+
+        $data['answer15a_nama_barang'] = [];
+        $data['answer15a_terkomersialisasi'] = [];
+        $data['answer15a_tahun'] = [];
+
+        $data['answer15b_nama_jasa'] = [];
+        $data['answer15b_pengguna_jasa'] = [];
+        $data['answer15b_tahun'] = [];
+
+        if($is_empty){
+            return $data;
+        }
+
+        $data['question15_switch'] = 'on';
+
+        /** @var Answers15a $answers15a */
+        foreach($list_answers15a as $index=>$answers15a){
+            $data['answer15a_nama_barang'][$index+1] = $answers15a->nama_barang;
+            $data['answer15a_terkomersialisasi'][$index+1] = $answers15a->terkomersialisasi;
+            $data['answer15a_tahun'][$index+1] = $answers15a->tahun;
+        }
+
+        /** @var Answers15b $answers15b */
+        foreach($list_answers15b as $index=>$answers15b){
+            $data['answer15b_nama_jasa'][$index+1] = $answers15b->nama_jasa;
+            $data['answer15b_pengguna_jasa'][$index+1] = $answers15b->pengguna_jasa;
+            $data['answer15b_tahun'][$index+1] = $answers15b->tahun;
+        }
+    }
+
+    private function getAnswers16(Answers $answers, &$data){
+        $list_answers16a = $answers->Answers16a;
+        $answers16b = $answers->Answers16b;
+
+        $is_empty = empty($list_answers16a) || count($list_answers16a) === 0 ? true : false;
+
+        $data['answer16a_tahun'] = [];
+        $data['answer16a_usulan_paten'] = [];
+        $data['answer16a_usulan_patensederhana'] = [];
+        $data['answer16a_disetujui_paten'] = [];
+        $data['answer16a_disetujui_patensederhana'] = [];
+        $data['answer16a_terkomersialisasi_paten'] = [];
+        $data['answer16a_terkomersialisasi_patensederhana'] = [];
+
+        if($is_empty){
+            return $data;
+        }
+
+        $data['question16_switch'] = 'on';
+
+        /** @var Answers16a $answers16a */
+        foreach($list_answers16a as $index=>$answers16a){
+            $data['answer16a_tahun'][$index+1] = $answers16a->tahun;
+            $data['answer16a_usulan_paten'][$index+1] = $answers16a->usulan_paten;
+            $data['answer16a_usulan_patensederhana'][$index+1] = $answers16a->usulan_patensederhana;
+            $data['answer16a_disetujui_paten'][$index+1] = $answers16a->disetujui_paten;
+            $data['answer16a_disetujui_patensederhana'][$index+1] = $answers16a->disetujui_patensederhana;
+            $data['answer16a_terkomersialisasi_paten'][$index+1] = $answers16a->terkomersialisasi_paten;
+            $data['answer16a_terkomersialisasi_patensederhana'][$index+1] = $answers16a->terkomersialisasi_patensederhana;
+        }
+
+        /** @var Answers16b $answers16b */
+        $data['answer16b_jumlah_patenluarnegeri'] = $answers16b->jumlah_patenluarnegeri;
     }
 }

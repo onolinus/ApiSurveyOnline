@@ -101,9 +101,14 @@ class Answers extends Model
         return $this->hasMany('App\Answers14', 'id_answer', 'id');
     }
 
-    public function Answers15()
+    public function Answers15a()
     {
-        return $this->hasMany('App\Answers15', 'id_answer', 'id');
+        return $this->hasMany('App\Answers15a', 'id_answer', 'id');
+    }
+
+    public function Answers15b()
+    {
+        return $this->hasMany('App\Answers15b', 'id_answer', 'id');
     }
 
     public function Answers16a()
