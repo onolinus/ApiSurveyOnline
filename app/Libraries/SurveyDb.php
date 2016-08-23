@@ -57,9 +57,8 @@ class SurveyDb{
         $this->getAnswers14($answers, $data);
         $this->getAnswers15($answers, $data);
         $this->getAnswers16($answers, $data);
-//        $this->getAnswers16b($answers, $data);
-//        $this->getAnswers17($answers, $data);
-//        $this->getAnswers18($answers, $data);
+        $this->getAnswers17($answers, $data);
+        $this->getAnswers18($answers, $data);
 
         return $data;
     }
@@ -435,5 +434,35 @@ class SurveyDb{
 
         /** @var Answers16b $answers16b */
         $data['answer16b_jumlah_patenluarnegeri'] = $answers16b->jumlah_patenluarnegeri;
+    }
+
+    private function getAnswers17(Answers $answers, &$data){
+        $list_answers17 = $answers->Answers17;
+
+        $is_empty = empty($list_answers17) || count($list_answers17) === 0 ? true : false;
+
+        $data['answer17_lisensi'] = [];
+        $data['answer17_tahun'] = [];
+        $data['answer17_nilai'] = [];
+
+        if($is_empty){
+            return $data;
+        }
+
+        $data['question17_switch'] = 'on';
+
+        /** @var Answers17 $answers17 */
+        foreach($list_answers17 as $index=>$answers17){
+            $data['answer17_lisensi'][$index+1] = $answers17->lisensi;
+            $data['answer17_tahun'][$index+1] = $answers17->tahun;
+            $data['answer17_nilai'][$index+1] = $this->number_format($answers17->nilai);
+        }
+    }
+
+    private function getAnswers18(Answers $answers, &$data){
+        /** @var Answers18 $answers18 */
+        $answers18 = $answers->Answers18;
+
+        $data['answer18_comment'] = $answers18->comment;
     }
 }
