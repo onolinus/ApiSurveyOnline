@@ -23,22 +23,22 @@ class Answers extends Model
 
     public function Answers1()
     {
-        return $this->hasMany('App\Answers1', 'id_answer', 'id');
+        return $this->hasOne('App\Answers1', 'id_answer', 'id');
     }
 
     public function Answers2()
     {
-        return $this->hasMany('App\Answers2', 'id_answer', 'id');
+        return $this->hasOne('App\Answers2', 'id_answer', 'id');
     }
 
     public function Answers3()
     {
-        return $this->hasMany('App\Answers3', 'id_answer', 'id');
+        return $this->hasOne('App\Answers3', 'id_answer', 'id');
     }
 
     public function Answers4()
     {
-        return $this->hasMany('App\Answers4', 'id_answer', 'id');
+        return $this->hasOne('App\Answers4', 'id_answer', 'id');
     }
 
     public function Answers5()
@@ -53,7 +53,7 @@ class Answers extends Model
 
     public function Answers7()
     {
-        return $this->hasMany('App\Answers7', 'id_answer', 'id');
+        return $this->hasOne('App\Answers7', 'id_answer', 'id');
     }
 
     public function Answers8()
@@ -63,12 +63,12 @@ class Answers extends Model
 
     public function Answers9a()
     {
-        return $this->hasMany('App\Answers9a', 'id_answer', 'id');
+        return $this->hasOne('App\Answers9a', 'id_answer', 'id');
     }
 
     public function Answers9b()
     {
-        return $this->hasMany('App\Answers9b', 'id_answer', 'id');
+        return $this->hasOne('App\Answers9b', 'id_answer', 'id');
     }
 
     public function Answers9c()
@@ -78,7 +78,7 @@ class Answers extends Model
 
     public function Answers10()
     {
-        return $this->hasMany('App\Answers10', 'id_answer', 'id');
+        return $this->hasOne('App\Answers10', 'id_answer', 'id');
     }
 
     public function Answers11()
@@ -113,7 +113,7 @@ class Answers extends Model
 
     public function Answers16b()
     {
-        return $this->hasMany('App\Answers16b', 'id_answer', 'id');
+        return $this->hasOne('App\Answers16b', 'id_answer', 'id');
     }
 
     public function Answers17()
@@ -123,7 +123,7 @@ class Answers extends Model
 
     public function Answers18()
     {
-        return $this->hasMany('App\Answers18', 'id_answer', 'id');
+        return $this->hasOne('App\Answers18', 'id_answer', 'id');
     }
 
 }
