@@ -123,7 +123,7 @@ class Survey{
         $this->getAnswers2($answers, $data);
         $this->getAnswers3($answers, $data);
         $this->getAnswers4($answers, $data);
-//        $this->getAnswers5($answers, $data);
+        $this->getAnswers5($answers, $data);
 //        $this->getAnswers6($answers, $data);
 //        $this->getAnswers7($answers, $data);
 //        $this->getAnswers8($answers, $data);
@@ -187,6 +187,19 @@ class Survey{
         $data['answer4_belanja_modal_properti'] = $this->number_format($answers4->belanja_modal_properti);
         $data['answer4_belanja_modal_mesin'] = $this->number_format($answers4->belanja_modal_mesin);
         $data['answer4_belanja_operasional_maintenance'] = $this->number_format($answers4->belanja_operasional_maintenance);
+    }
+
+    private function getAnswers5(Answers $answers, &$data){
+        $list_answers5 = $answers->Answers5;
+
+        $data['answer5_code'] = [];
+        $data['answer5_percentage'] = [];
+
+        /** @var Answers5 $answers5 */
+        foreach($list_answers5 as $index=>$answers5){
+            $data['answer5_code'][$index+1] = $answers5->code;
+            $data['answer5_percentage'][$index+1] = $answers5->percentage;
+        }
     }
 
 
