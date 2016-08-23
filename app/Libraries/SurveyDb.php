@@ -50,7 +50,7 @@ class SurveyDb{
         $this->getAnswers9a($answers, $data);
         $this->getAnswers9b($answers, $data);
         $this->getAnswers9c($answers, $data);
-//        $this->getAnswers10($answers, $data);
+        $this->getAnswers10($answers, $data);
 //        $this->getAnswers11($answers, $data);
 //        $this->getAnswers12($answers, $data);
 //        $this->getAnswers13($answers, $data);
@@ -259,5 +259,20 @@ class SurveyDb{
             $data['answer9c_s3_l'][$index+1] = $answers9c->s3_l;
             $data['answer9c_s3_p'][$index+1] = $answers9c->s3_p;
         }
+    }
+
+    private function getAnswers10(Answers $answers, &$data){
+        $answers10 = $answers->Answers10;
+
+        if($answers10 === null){
+            return false;
+        }
+
+        $data['question10_switch'] = 'on';
+        $data['answer10_jumlah_peneliti_pemerintah'] = $answers10->jumlah_peneliti_pemerintah;
+        $data['answer10_jumlah_peneliti_perguruantinggi'] = $answers10->jumlah_peneliti_perguruantinggi;
+        $data['answer10_jumlah_peneliti_industri'] = $answers10->jumlah_peneliti_industri;
+        $data['answer10_jumlah_peneliti_lembagaswadaya'] = $answers10->jumlah_peneliti_lembagaswadaya;
+        $data['answer10_jumlah_peneliti_asing'] = $answers10->jumlah_peneliti_asing;
     }
 }
