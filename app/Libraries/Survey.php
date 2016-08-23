@@ -3,6 +3,7 @@
 namespace app\Libraries;
 
 use App\Answers18;
+use App\Correspondents;
 use App\TraitSessionToken;
 use Illuminate\Http\Request;
 use app\Libraries\Questions\InterfaceQuestion;
@@ -109,6 +110,85 @@ class Survey{
     public function getRules(){
         return true;
     }
+
+
+    public function getListAnswers(){
+        /** @var Correspondents $correspondent */
+        $user_id = $this->sessionTokenAccessor->getSessionUserID();
+        $correspondent = Correspondents::find($user_id);
+        $answers = $correspondent->Answers;
+        $data = [];
+
+        $this->getAnswers1($answers, $data);
+        $this->getAnswers2($answers, $data);
+        $this->getAnswers3($answers, $data);
+        $this->getAnswers4($answers, $data);
+//        $this->getAnswers5($answers, $data);
+//        $this->getAnswers6($answers, $data);
+//        $this->getAnswers7($answers, $data);
+//        $this->getAnswers8($answers, $data);
+//        $this->getAnswers9a($answers, $data);
+//        $this->getAnswers9b($answers, $data);
+//        $this->getAnswers9c($answers, $data);
+//        $this->getAnswers10($answers, $data);
+//        $this->getAnswers11($answers, $data);
+//        $this->getAnswers12($answers, $data);
+//        $this->getAnswers13($answers, $data);
+//        $this->getAnswers14($answers, $data);
+//        $this->getAnswers15a($answers, $data);
+//        $this->getAnswers15b($answers, $data);
+//        $this->getAnswers16a($answers, $data);
+//        $this->getAnswers16b($answers, $data);
+//        $this->getAnswers17($answers, $data);
+//        $this->getAnswers18($answers, $data);
+
+        return $data;
+    }
+
+    private function number_format($number){
+        return number_format(floatval($number), 2, ',', '.');
+    }
+
+    private function getAnswers1(Answers $answers, &$data){
+        /** @var Answers1 $answers1 */
+        $answers1 = $answers->Answers1;
+
+        $data['answer1_total'] = $this->number_format($answers1->total);
+        $data['answer1_percentage'] = $this->number_format($answers1->percentage);
+    }
+
+    private function getAnswers2(Answers $answers, &$data){
+        /** @var Answers2 $answers2 */
+        $answers2 = $answers->Answers2;
+
+        $data['answer2_jumlah'] = $this->number_format($answers2->jumlah);
+    }
+
+    private function getAnswers3(Answers $answers, &$data){
+        /** @var Answers3 $answers3 */
+        $answers3 = $answers->Answers3;
+
+        $data['answer3_dipa_danapemerintah'] = $this->number_format($answers3->dipa_danapemerintah);
+        $data['answer3_dipa_pnbp_perusahaanswasta'] = $this->number_format($answers3->dipa_pnbp_perusahaanswasta);
+        $data['answer3_dipa_pnbp_instansipemerintah'] = $this->number_format($answers3->dipa_pnbp_instansipemerintah);
+        $data['answer3_dipa_pnbp_swastanonprofit'] = $this->number_format($answers3->dipa_pnbp_swastanonprofit);
+        $data['answer3_dipa_pnbp_luarnegeri'] = $this->number_format($answers3->dipa_pnbp_luarnegeri);
+        $data['answer3_dipa_phln'] = $this->number_format($answers3->dipa_phln);
+        $data['answer3_nondipa_insentif_ristekdikti'] = $this->number_format($answers3->nondipa_insentif_ristekdikti);
+        $data['answer3_nondipa_insentif_dalamnegeri'] = $this->number_format($answers3->nondipa_insentif_dalamnegeri);
+        $data['answer3_nondipa_insentif_researchgrant'] = $this->number_format($answers3->nondipa_insentif_researchgrant);
+    }
+
+    private function getAnswers4(Answers $answers, &$data){
+        /** @var Answers4 $answers4 */
+        $answers4 = $answers->Answers4;
+
+        $data['answer4_belanja_pegawai_upah'] = $this->number_format($answers4->belanja_pegawai_upah);
+        $data['answer4_belanja_modal_properti'] = $this->number_format($answers4->belanja_modal_properti);
+        $data['answer4_belanja_modal_mesin'] = $this->number_format($answers4->belanja_modal_mesin);
+        $data['answer4_belanja_operasional_maintenance'] = $this->number_format($answers4->belanja_operasional_maintenance);
+    }
+
 
     private function getValueFromNominalFormat($nominal){
         $nominal = preg_replace('/[\.]/', '', $nominal);
