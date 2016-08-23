@@ -49,7 +49,7 @@ class SurveyDb{
         $this->getAnswers8($answers, $data);
         $this->getAnswers9a($answers, $data);
         $this->getAnswers9b($answers, $data);
-//        $this->getAnswers9c($answers, $data);
+        $this->getAnswers9c($answers, $data);
 //        $this->getAnswers10($answers, $data);
 //        $this->getAnswers11($answers, $data);
 //        $this->getAnswers12($answers, $data);
@@ -236,5 +236,28 @@ class SurveyDb{
         $data['answer9b_total_staffpendukung_belowd3_p'] = $answers9b->staffpendukung_belowd3_p;
         $data['answer9b_total_staffpendukung_belowd3_fte_l'] = $answers9b->staffpendukung_belowd3_fte_l;
         $data['answer9b_total_staffpendukung_belowd3_fte_p'] = $answers9b->staffpendukung_belowd3_fte_p;
+    }
+
+    private function getAnswers9c(Answers $answers, &$data){
+        $list_answers9c = $answers->Answers9c;
+
+        $data['answer9c_klasifikasi'] = [];
+        $data['answer9c_s1_l'] = [];
+        $data['answer9c_s1_p'] = [];
+        $data['answer9c_s2_l'] = [];
+        $data['answer9c_s2_p'] = [];
+        $data['answer9c_s3_l'] = [];
+        $data['answer9c_s3_p'] = [];
+
+        /** @var Answers9c $answers9c */
+        foreach($list_answers9c as $index=>$answers9c){
+            $data['answer9c_klasifikasi'][$index+1] = $answers9c->code;
+            $data['answer9c_s1_l'][$index+1] = $answers9c->s1_l;
+            $data['answer9c_s1_p'][$index+1] = $answers9c->s1_p;
+            $data['answer9c_s2_l'][$index+1] = $answers9c->s2_l;
+            $data['answer9c_s2_p'][$index+1] = $answers9c->s2_p;
+            $data['answer9c_s3_l'][$index+1] = $answers9c->s3_l;
+            $data['answer9c_s3_p'][$index+1] = $answers9c->s3_p;
+        }
     }
 }
