@@ -33,6 +33,8 @@ use DB;
 
 class SurveyDb{
 
+
+
     public function getListAnswers($user_id){
         /** @var Correspondents $correspondent */
         $correspondent = Correspondents::find($user_id);

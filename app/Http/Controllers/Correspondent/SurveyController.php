@@ -70,10 +70,22 @@ class SurveyController  extends Controller
 //            ]
 //        );
 //    }
-//
-    public function surveydata(){
+
+    private function getDataSurveyFromCache(){
+        if($data = Cache::get($this->getDataCacheKey())){
+            return $data;
+        }
+
         $survey = new Survey();
-        return $this->response->withArray($survey->getListAnswers());
+        $data = $survey->getListAnswers();
+
+        Cache::forever($this->getDataCacheKey(), $data);
+
+        return $data;
+    }
+
+    public function surveydata(){
+        return $this->response->withArray($this->getDataSurveyFromCache());
     }
 //
 //    public function surveystatus(){
