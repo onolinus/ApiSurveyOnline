@@ -75,7 +75,7 @@ class UsersController extends BaseController
         /** @var Users $user */
         $user = Users::find($id);
         if(empty($user) || count($user) === 0){
-            return $this->response->errorNotFound(trans('errors.data_not_found', ['dataname' => 'user']));
+            return $this->response->errorNotFound([trans('errors.data_not_found', ['dataname' => 'user'])]);
         }
 
         $user->type = $request->type ? $request->type : $user->type;
@@ -86,7 +86,7 @@ class UsersController extends BaseController
 
         return $this->response->setStatusCode(201)->withArray([
             'code' => Codes::SUCCESS,
-            'message' => trans('success.data_updated', ['dataname' => 'user'])
+            'message' => [trans('success.data_updated', ['dataname' => 'user'])]
         ]);
     }
 
@@ -101,7 +101,7 @@ class UsersController extends BaseController
         /** @var Users $user */
         $user = Users::find($id);
         if(empty($user) || count($user) === 0){
-            return $this->response->errorNotFound(trans('errors.data_not_found', ['dataname' => 'user']));
+            return $this->response->errorNotFound([trans('errors.data_not_found', ['dataname' => 'user'])]);
         }
 
         $registrasiToken = $user->registrasitoken;
@@ -115,7 +115,7 @@ class UsersController extends BaseController
 
         return $this->response->setStatusCode(200)->withArray([
             'code' => Codes::SUCCESS,
-            'message' => trans('success.data_deleted', ['dataname' => 'user'])
+            'message' => [trans('success.data_deleted', ['dataname' => 'user'])]
         ]);
     }
 

@@ -3,6 +3,7 @@
 namespace app\Libraries;
 
 use App\Answers18;
+use App\Correspondents;
 use App\TraitSessionToken;
 use Illuminate\Http\Request;
 use app\Libraries\Questions\InterfaceQuestion;
@@ -109,6 +110,13 @@ class Survey{
     public function getRules(){
         return true;
     }
+
+
+    public function getListAnswers(){
+        $SurveyDb = new SurveyDb();
+        return $SurveyDb->getListAnswers($this->sessionTokenAccessor->getSessionUserID());
+    }
+
 
     private function getValueFromNominalFormat($nominal){
         $nominal = preg_replace('/[\.]/', '', $nominal);

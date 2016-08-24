@@ -29,7 +29,7 @@ trait TraitUsers
     private function returnStoreSuccessResponse(){
         return $this->response->setStatusCode(201)->withArray([
             'code' => Codes::SUCCESS,
-            'message' => trans('success.data_saved', ['dataname' => 'user'])
+            'message' => [trans('success.data_saved', ['dataname' => 'user'])]
         ]);
     }
 }

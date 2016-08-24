@@ -29,7 +29,11 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::resource('admin/approvedby', 'Admin\ApprovedByController', ['only' => [
             'show', 'index'
         ]]);
+
+
+        Route::get('/stats/lembaga/countuser', ['as' => 'lembaga.countuser', 'uses' => 'LembagaController@getUserCount']);
     });
+
 
     # Correspondent
     Route::group(['middleware' => ['\App\Http\Middleware\CorrespondentPrivilegeMiddleware']], function () {
@@ -82,8 +86,6 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
     Route::post('/auth/token/password', ['as' => 'auth.token.grantpassword', 'uses' => 'AuthController@grantpassword']);
     Route::post('/auth/token/passwordhashed', ['as' => 'auth.token.grantpasswordhashed', 'uses' => 'AuthController@grantpasswordhashed']);
     Route::put('/auth/token/refresh', ['as' => 'auth.token.refresh', 'uses' => 'AuthController@refresh']);
-
-    Route::get('/stats/lembaga/countuser', ['as' => 'lembaga.countuser', 'uses' => 'LembagaController@getUserCount']);
 
 
     Route::get('/', function(){
