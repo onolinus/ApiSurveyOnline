@@ -83,6 +83,9 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
     Route::post('/auth/token/passwordhashed', ['as' => 'auth.token.grantpasswordhashed', 'uses' => 'AuthController@grantpasswordhashed']);
     Route::put('/auth/token/refresh', ['as' => 'auth.token.refresh', 'uses' => 'AuthController@refresh']);
 
+    Route::get('/stats/lembaga/countuser', ['as' => 'lembaga.countuser', 'uses' => 'LembagaController@getUserCount']);
+
+
     Route::get('/', function(){
         return [
             'error' => [
