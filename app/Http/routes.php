@@ -30,8 +30,9 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
             'show', 'index'
         ]]);
 
+        Route::get('admin/survey/{userId}', ['as' => 'survey.data', 'uses' => 'Correspondent\SurveyController@surveyDetail']);
 
-        Route::get('/stats/lembaga/countuser', ['as' => 'lembaga.countuser', 'uses' => 'LembagaController@getUserCount']);
+        Route::get('stats/lembaga/countuser', ['as' => 'lembaga.countuser', 'uses' => 'LembagaController@getUserCount']);
     });
 
 

@@ -87,6 +87,12 @@ class SurveyController  extends Controller
     public function surveydata(){
         return $this->response->withArray($this->getDataSurveyFromCache());
     }
+
+    public function surveyDetail($userId){
+        $survey = new Survey();
+
+        return $this->response->withArray($survey->getListAnswersById($userId));
+    }
 //
 //    public function surveystatus(){
 //        return $this->response->withArray($this->getStatusDraftFromCache());

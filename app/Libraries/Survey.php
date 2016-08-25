@@ -117,6 +117,10 @@ class Survey{
         return $SurveyDb->getListAnswers($this->sessionTokenAccessor->getSessionUserID());
     }
 
+    public function getListAnswersById($userId){
+        $SurveyDb = new SurveyDb();
+        return $SurveyDb->getListAnswers($userId);
+    }
 
     private function getValueFromNominalFormat($nominal){
         $nominal = preg_replace('/[\.]/', '', $nominal);
