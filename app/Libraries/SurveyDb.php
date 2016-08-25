@@ -74,7 +74,7 @@ class SurveyDb{
         $answers1 = $answers->Answers1;
 
         $data['answer1_total'] = $this->number_format($answers1->total);
-        $data['answer1_percentage'] = $this->number_format($answers1->percentage);
+        $data['answer1_percentage'] = $answers1->percentage;
     }
 
     private function getAnswers2(Answers $answers, &$data){
