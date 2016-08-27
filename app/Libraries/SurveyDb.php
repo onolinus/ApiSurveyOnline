@@ -38,29 +38,32 @@ class SurveyDb{
     public function getListAnswers($user_id){
         /** @var Correspondents $correspondent */
         $correspondent = Correspondents::find($user_id);
-        $answers = $correspondent->Answers;
+
+        $answers = @$correspondent->Answers;
         $data = [];
 
-        $this->getAnswers1($answers, $data);
-        $this->getAnswers2($answers, $data);
-        $this->getAnswers3($answers, $data);
-        $this->getAnswers4($answers, $data);
-        $this->getAnswers5($answers, $data);
-        $this->getAnswers6($answers, $data);
-        $this->getAnswers7($answers, $data);
-        $this->getAnswers8($answers, $data);
-        $this->getAnswers9a($answers, $data);
-        $this->getAnswers9b($answers, $data);
-        $this->getAnswers9c($answers, $data);
-        $this->getAnswers10($answers, $data);
-        $this->getAnswers11($answers, $data);
-        $this->getAnswers12($answers, $data);
-        $this->getAnswers13($answers, $data);
-        $this->getAnswers14($answers, $data);
-        $this->getAnswers15($answers, $data);
-        $this->getAnswers16($answers, $data);
-        $this->getAnswers17($answers, $data);
-        $this->getAnswers18($answers, $data);
+        if ($answers) {
+            $this->getAnswers1($answers, $data);
+            $this->getAnswers2($answers, $data);
+            $this->getAnswers3($answers, $data);
+            $this->getAnswers4($answers, $data);
+            $this->getAnswers5($answers, $data);
+            $this->getAnswers6($answers, $data);
+            $this->getAnswers7($answers, $data);
+            $this->getAnswers8($answers, $data);
+            $this->getAnswers9a($answers, $data);
+            $this->getAnswers9b($answers, $data);
+            $this->getAnswers9c($answers, $data);
+            $this->getAnswers10($answers, $data);
+            $this->getAnswers11($answers, $data);
+            $this->getAnswers12($answers, $data);
+            $this->getAnswers13($answers, $data);
+            $this->getAnswers14($answers, $data);
+            $this->getAnswers15($answers, $data);
+            $this->getAnswers16($answers, $data);
+            $this->getAnswers17($answers, $data);
+            $this->getAnswers18($answers, $data);
+        }
 
         return $data;
     }
