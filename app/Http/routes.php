@@ -30,13 +30,20 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
             'show', 'index'
         ]]);
 
-        Route::get('admin/survey/{userId}', ['as' => 'survey.data', 'uses' => 'Correspondent\SurveyController@surveyDetail']);
+//        Route::get('admin/survey/{userId}', ['as' => 'survey.data', 'uses' => 'Correspondent\SurveyController@surveyDetail']);
 
         Route::get('stats/lembaga/countuser', ['as' => 'lembaga.countuser', 'uses' => 'LembagaController@getUserCount']);
     });
 
+    #Validator
+    Route::group(['middleware' => ['\App\Http\Middleware\ValidatorPrivilegeMiddleware']], function () {
+        Route::resource('validator/survey', 'Validator\SurveyController', ['only' => [
+            'show', 'index'
+        ]]);
+    });
 
-    # Correspondent
+
+    # Correspondent Frontend
     Route::group(['middleware' => ['\App\Http\Middleware\CorrespondentPrivilegeMiddleware']], function () {
         Route::resource('correspondent/profile', 'Correspondent\ProfileController', ['only' => [
             'store', 'index'

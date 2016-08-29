@@ -112,15 +112,15 @@ class Survey{
     }
 
 
-    public function getListAnswers(){
+    public function getListAnswers($userId = null){
         $SurveyDb = new SurveyDb();
-        return $SurveyDb->getListAnswers($this->sessionTokenAccessor->getSessionUserID());
+        return $SurveyDb->getListAnswers($userId === null ? $this->sessionTokenAccessor->getSessionUserID() : $userId);
     }
 
-    public function getListAnswersById($userId){
-        $SurveyDb = new SurveyDb();
-        return $SurveyDb->getListAnswers($userId);
-    }
+//    public function getListAnswersById($userId){
+//        $SurveyDb = new SurveyDb();
+//        return $SurveyDb->getListAnswers($userId);
+//    }
 
     private function getValueFromNominalFormat($nominal){
         $nominal = preg_replace('/[\.]/', '', $nominal);
