@@ -15,7 +15,12 @@ class SurveyController extends Controller
 
     public function show($id){
         $survey = new Survey();
+        $data = $survey->getListAnswers($id);
 
-        return $this->response->withArray($survey->getListAnswers($id));
+        if(is_null($data)){
+            return $this->response->errorNotFound([trans('errors.data_not_found', ['dataname' => 'user'])]);
+        }
+
+        return $this->response->withArray($data);
     }
 }

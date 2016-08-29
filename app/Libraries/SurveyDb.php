@@ -39,6 +39,10 @@ class SurveyDb{
         /** @var Correspondents $correspondent */
         $correspondent = Correspondents::find($user_id);
 
+        if($correspondent === null){
+            return null;
+        }
+
         $answers = @$correspondent->Answers;
         $data = [];
 
