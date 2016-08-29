@@ -2,45 +2,53 @@
 namespace App\Transformer;
 
 use App\Correspondents as ModelCorrespondents;
+use App\Users as ModelUsers;
 use League\Fractal;
 
 class CorrespondentTransformer extends Fractal\TransformerAbstract
 {
-    public function transform(ModelCorrespondents $user = null)
+    public function transform(ModelUsers $user = null)
     {
         if($user === null){
             return [];
         }
 
+        if($user->correspondents === null){
+            return [];
+        }
+
+        $correspondents = $user->correspondents;
+
         return [
-            'name' => $user->name,
-            'nip' => $user->nip,
-            'role' => $user->role,
-            'telephone_number' => $user->telephone_number,
-            'handphone_number' => $user->handphone_number,
+            'email' => $user->email,
+            'name' => $correspondents->name,
+            'nip' => $correspondents->nip,
+            'role' => $correspondents->role,
+            'telephone_number' => $correspondents->telephone_number,
+            'handphone_number' => $correspondents->handphone_number,
             'approved_by' => [
-                'name' => $user->ApprovedBy->name,
-                'nip' => $user->ApprovedBy->nip,
-                'role' => $user->ApprovedBy->role,
+                'name' => $correspondents->ApprovedBy->name,
+                'nip' => $correspondents->ApprovedBy->nip,
+                'role' => $correspondents->ApprovedBy->role,
                 'lembaga' => [
-                    'id' => $user->ApprovedBy->lembaga->id,
-                    'name' => $user->ApprovedBy->lembaga->name,
-                    'type' => $user->ApprovedBy->lembaga->type,
+                    'id' => $correspondents->ApprovedBy->lembaga->id,
+                    'name' => $correspondents->ApprovedBy->lembaga->name,
+                    'type' => $correspondents->ApprovedBy->lembaga->type,
                 ],
-                'puslit' => $user->ApprovedBy->puslit,
-                'alamat' => $user->ApprovedBy->alamat,
+                'puslit' => $correspondents->ApprovedBy->puslit,
+                'alamat' => $correspondents->ApprovedBy->alamat,
                 'timestamp' => [
-                    'created' => $user->ApprovedBy->created_at,
-                    'created_string' => $user->ApprovedBy->created_at->toDayDateTimeString(),
-                    'updated' => $user->ApprovedBy->updated_at,
-                    'updated_string' => $user->ApprovedBy->updated_at->toDayDateTimeString(),
+                    'created' => $correspondents->ApprovedBy->created_at,
+                    'created_string' => $correspondents->ApprovedBy->created_at->toDayDateTimeString(),
+                    'updated' => $correspondents->ApprovedBy->updated_at,
+                    'updated_string' => $correspondents->ApprovedBy->updated_at->toDayDateTimeString(),
                 ]
             ],
             'timestamp' => [
-                'created' => $user->created_at,
-                'created_string' => $user->created_at->toDayDateTimeString(),
-                'updated' => $user->updated_at,
-                'updated_string' => $user->updated_at->toDayDateTimeString(),
+                'created' => $correspondents->created_at,
+                'created_string' => $correspondents->created_at->toDayDateTimeString(),
+                'updated' => $correspondents->updated_at,
+                'updated_string' => $correspondents->updated_at->toDayDateTimeString(),
             ]
         ];
     }

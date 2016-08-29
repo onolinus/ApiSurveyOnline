@@ -3,11 +3,13 @@ namespace App\Http\Controllers\Correspondent;
 
 use App\ApprovedBy as ApprovedByModel;
 use App\Correspondents as CorrespondentsModel;
+use App\Users as UsersModel;
 use App\Http\Controllers\Controller;
 use App\TraitFractalResponse;
 use App\TraitSessionToken;
 use App\TraitValidate;
 use App\Transformer\CorrespondentTransformer;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
@@ -107,7 +109,8 @@ class ProfileController extends Controller
     }
 
     public function index(Request $request){
-        $row = $this->correspondent = CorrespondentsModel::find($this->getSessionUserID());
-        return $this->response->withItem($row, new CorrespondentTransformer());
+//        $row = $this->correspondent = CorrespondentsModel::find($this->getSessionUserID());
+        $this->correspondent = UsersModel::find($this->getSessionUserID());
+        return $this->response->withItem($this->correspondent, new CorrespondentTransformer());
     }
 }
