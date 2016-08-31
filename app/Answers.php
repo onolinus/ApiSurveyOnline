@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answers extends Model
 {
+    CONST STATUS_ANSWERS_SENT = 'terkirim';
+    CONST STATUS_ANSWERS_VALIDATION_PROGRESS = 'prosesvalidasi';
+
     protected $table = 'answers';
 
     protected $primaryKey = 'id';
@@ -131,4 +134,18 @@ class Answers extends Model
         return $this->hasOne('App\Answers18', 'id_answer', 'id');
     }
 
+    public function scopeProsesValidasi($query, $validator_id)
+    {
+        return $query->where('status', self::STATUS_ANSWERS_VALIDATION_PROGRESS)->where('validator_id', $validator_id);
+    }
+
+    public function scopeAvailable($query)
+    {
+        $collection = $query->where('status', self::STATUS_ANSWERS_SENT)->where('validator_id', null);
+//        if(!empty($exclude_ids)){
+//            $collection->whereNotIn('id', $exclude_ids);
+//        }
+
+        return $collection;
+    }
 }
