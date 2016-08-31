@@ -14,6 +14,16 @@ class SessionTokenAccessor{
      */
     private $authToken;
 
+    /**
+     * @var SessionToken $sessionToken
+     */
+    private $sessionToken;
+
+    /**
+     * @var RedisAccessToken $redisAccessToken
+     */
+    private $redisAccessToken;
+
     private $redisData;
 
     public static function getInstance(){
@@ -27,13 +37,14 @@ class SessionTokenAccessor{
     public function __construct(AuthToken $authToken = null)
     {
         $this->authToken = is_null($authToken) ? AuthToken::getInstance() : $authToken;
-        $redisAccessToken =  $this->authToken->getRedisAccessToken();
-        $this->redisData = $redisAccessToken->getAttribute();
+        $this->redisAccessToken =  $this->authToken->getRedisAccessToken();
+        $this->sessionToken = $this->authToken->getSessionToken();
+
+        $this->setRedisData();
     }
 
     public function setRedisData(){
-        $redisAccessToken =  $this->authToken->getRedisAccessToken();
-        $this->redisData = $redisAccessToken->getAttribute();
+        $this->redisData = $this->redisAccessToken->getAttribute();
     }
 
     public function getRedisData(){
@@ -41,10 +52,10 @@ class SessionTokenAccessor{
     }
 
     public function getSessionUserID(){
-        return $this->redisData['user_id'];
+        return $this->sessionToken->getUserId();
     }
 
     public function getSessionUserType(){
-        return $this->redisData['user_type'];
+        return $this->sessionToken->getUserType();
     }
 }

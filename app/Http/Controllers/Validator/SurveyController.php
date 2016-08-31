@@ -13,6 +13,11 @@ class SurveyController extends Controller
 
     use TraitCacheSurveyData;
 
+
+    public function index(){
+
+    }
+
     public function show($id){
         $survey = new Survey();
         $data = $survey->getListAnswers($id);

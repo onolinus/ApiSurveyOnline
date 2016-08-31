@@ -39,6 +39,10 @@ class SessionToken extends StructureAbstract
         $this->set_expires_in();
     }
 
+    public function getUserId(){
+        return $this->getAttribute('user_id');
+    }
+
     public function getAccessToken(){
         return $this->getAttribute('access_token');
     }
