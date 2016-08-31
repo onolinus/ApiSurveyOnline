@@ -2,22 +2,30 @@
 namespace App\Transformer;
 
 use App\Correspondents as ModelCorrespondents;
+use App\Users as ModelUsers;
 use League\Fractal;
 use Illuminate\Http\Request;
 
 class CorrespondentsTransformer extends Fractal\TransformerAbstract
 {
-    public function transform(ModelCorrespondents $correspondent = null)
+    public function transform(ModelUsers $user = null)
     {
-        if($correspondent === null){
+        if($user === null){
             return [];
         }
+
+        if($user->correspondents === null){
+            return [];
+        }
+
+        $correspondent = $user->correspondents;
 
         $request = Request::capture();
         $includes = explode(',', $request->include);
 
         return [
             'user_id' => $correspondent->user_id,
+            'email' => $user->email,
             'name' => $correspondent->name,
             'nip' => $correspondent->nip,
             'role' => $correspondent->role,
