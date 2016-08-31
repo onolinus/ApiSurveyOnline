@@ -106,12 +106,17 @@ class UsersController extends BaseController
 
         $registrasiToken = $user->registrasitoken;
 
-        DB::transaction(function () use ($user, $registrasiToken) {
-            $registrasiToken->user_id = 0;
-            $registrasiToken->save();
-
+        if($registrasiToken === null){
             $user->delete();
-        });
+        }else{
+            DB::transaction(function () use ($user, $registrasiToken) {
+                $registrasiToken->user_id = 0;
+                $registrasiToken->save();
+
+                $user->delete();
+            });
+        }
+
 
         return $this->response->setStatusCode(200)->withArray([
             'code' => Codes::SUCCESS,
