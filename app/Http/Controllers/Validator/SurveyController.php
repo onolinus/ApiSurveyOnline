@@ -8,6 +8,7 @@ use App\TraitCacheSurveyData;
 use App\TraitFractalResponse;
 use App\Http\Requests;
 use App\Transformer\Answers as AnswersTransformer;
+use Illuminate\Http\Request;
 
 class SurveyController extends Controller
 {
@@ -16,10 +17,10 @@ class SurveyController extends Controller
     use TraitCacheSurveyData;
 
 
-    public function index(){
+    public function index(Request $request){
         $surveyTrafficBalancer = new SurveyTrafficBalancer();
-        $answers = $surveyTrafficBalancer->getValidatorAnswers();
-        return $this->response->withCollection($answers, new AnswersTransformer());
+        $answers = $surveyTrafficBalancer->getValidatorAnswers($request->filter);
+        return $this->response->withPaginator($answers, new AnswersTransformer());
     }
 
     public function random(){

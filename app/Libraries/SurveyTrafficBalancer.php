@@ -10,6 +10,8 @@ class SurveyTrafficBalancer{
 
     CONST USER_TYPE = 'validator';
 
+    CONST PER_PAGE = 10;
+
     /**
      * @var SessionTokenAccessor
      */
@@ -24,8 +26,8 @@ class SurveyTrafficBalancer{
         $this->validator_id = $this->sessionTokenAccessor->getSessionUserID();
     }
 
-    public function getValidatorAnswers(){
-        return AnswersModel::Validator($this->validator_id)->get();
+    public function getValidatorAnswers($filter = null){
+        return AnswersModel::Validator($this->validator_id, $filter)->paginate(self::PER_PAGE);
     }
 
     public function getAnswerTobeValidated(){
