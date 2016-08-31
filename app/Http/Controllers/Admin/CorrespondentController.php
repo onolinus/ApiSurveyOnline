@@ -11,7 +11,7 @@ class CorrespondentController extends BaseController
 {
     protected function getModelName()
     {
-        return 'Correspondents';
+        return 'Users';
     }
 
     protected function getModelLabel()

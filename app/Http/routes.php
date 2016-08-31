@@ -15,18 +15,10 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
     # Admin
     Route::group(['middleware' => ['\App\Http\Middleware\AdminPrivilegeMiddleware']], function () {
         Route::resource('user', 'Admin\UsersController', ['only' => [
-            'store', 'destroy', 'update', 'show', 'index'
+            'store', 'destroy', 'update'
         ]]);
 
         Route::resource('registrasitoken', 'Admin\RegistrasiTokenController', ['only' => [
-            'show', 'index'
-        ]]);
-
-        Route::resource('admin/correspondent', 'Admin\CorrespondentController', ['only' => [
-            'show', 'index'
-        ]]);
-
-        Route::resource('admin/approvedby', 'Admin\ApprovedByController', ['only' => [
             'show', 'index'
         ]]);
 
@@ -38,6 +30,21 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
     #Validator
     Route::group(['middleware' => ['\App\Http\Middleware\ValidatorPrivilegeMiddleware']], function () {
         Route::resource('validator/survey', 'Validator\SurveyController', ['only' => [
+            'show', 'index'
+        ]]);
+    });
+
+    #Admin & Validator & Guest
+    Route::group(['middleware' => ['\App\Http\Middleware\DashboardUserGroupPrivilegeMiddleware']], function () {
+        Route::resource('user', 'Admin\UsersController', ['only' => [
+            'show', 'index'
+        ]]);
+
+        Route::resource('admin/correspondent', 'Admin\CorrespondentController', ['only' => [
+            'show', 'index'
+        ]]);
+
+        Route::resource('admin/approvedby', 'Admin\ApprovedByController', ['only' => [
             'show', 'index'
         ]]);
     });
