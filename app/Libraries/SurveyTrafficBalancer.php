@@ -24,12 +24,21 @@ class SurveyTrafficBalancer{
         $this->validator_id = $this->sessionTokenAccessor->getSessionUserID();
     }
 
+    public function getValidatorAnswers(){
+        return AnswersModel::Validator($this->validator_id)->get();
+    }
+
     public function getAnswerTobeValidated(){
         if($answer = AnswersModel::ProsesValidasi($this->validator_id)->first()){
             return $answer;
         }
 
         $answers = AnswersModel::Available()->get();
+
+        if(count($answers) === 0){
+            return null;
+        }
+
         $rand = rand(0, count($answers) -1);
         /** @var AnswersModel $answer */
         $answer = $answers[$rand];

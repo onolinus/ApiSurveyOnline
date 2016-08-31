@@ -8,6 +8,8 @@ class Answers extends Model
 {
     CONST STATUS_ANSWERS_SENT = 'terkirim';
     CONST STATUS_ANSWERS_VALIDATION_PROGRESS = 'prosesvalidasi';
+    CONST STATUS_ANSWERS_VALIDATION_APPROVED = 'diterima';
+    CONST STATUS_ANSWERS_VALIDATION_REJECTED = 'ditolak';
 
     protected $table = 'answers';
 
@@ -141,11 +143,11 @@ class Answers extends Model
 
     public function scopeAvailable($query)
     {
-        $collection = $query->where('status', self::STATUS_ANSWERS_SENT)->where('validator_id', null);
-//        if(!empty($exclude_ids)){
-//            $collection->whereNotIn('id', $exclude_ids);
-//        }
+        return $query->where('status', self::STATUS_ANSWERS_VALIDATION_REJECTED)->where('validator_id', null);
+    }
 
-        return $collection;
+    public function scopeValidator($query, $validator_id)
+    {
+        return $query->where('validator_id', $validator_id);
     }
 }

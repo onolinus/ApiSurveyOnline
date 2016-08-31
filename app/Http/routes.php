@@ -29,6 +29,8 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
 
     #Validator
     Route::group(['middleware' => ['\App\Http\Middleware\ValidatorPrivilegeMiddleware']], function () {
+        Route::get('validator/survey/random', ['as' => 'validator.survey.random', 'uses' => 'Validator\SurveyController@random']);
+
         Route::resource('validator/survey', 'Validator\SurveyController', ['only' => [
             'show', 'index'
         ]]);

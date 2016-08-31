@@ -18,7 +18,18 @@ class SurveyController extends Controller
 
     public function index(){
         $surveyTrafficBalancer = new SurveyTrafficBalancer();
+        $answers = $surveyTrafficBalancer->getValidatorAnswers();
+        return $this->response->withCollection($answers, new AnswersTransformer());
+    }
+
+    public function random(){
+        $surveyTrafficBalancer = new SurveyTrafficBalancer();
         $answer = $surveyTrafficBalancer->getAnswerTobeValidated();
+
+        if($answer === null){
+            return $this->response->errorNotFound([trans('validator.nodatatobevalidated')]);
+        }
+
         return $this->response->withItem($answer, new AnswersTransformer());
     }
 
