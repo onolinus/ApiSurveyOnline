@@ -33,6 +33,8 @@ class SurveyController  extends Controller
     {
         $this->saveToDatabase($request);
 
+        $this->removeDataSurveyFromCache();
+
         return $this->response->setStatusCode(201)->withArray([
             'code' => Codes::SUCCESS,
             'message' => trans('survey.successsavesurvey')

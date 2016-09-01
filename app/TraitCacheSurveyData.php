@@ -34,4 +34,8 @@ trait TraitCacheSurveyData
         return $data;
     }
 
+    private function removeDataSurveyFromCache(){
+        return Cache::pull($this->getDataCacheKey());
+    }
+
 }
