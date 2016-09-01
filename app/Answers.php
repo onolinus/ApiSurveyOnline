@@ -143,13 +143,18 @@ class Answers extends Model
 
     public function scopeAvailable($query)
     {
-        return $query->where('status', self::STATUS_ANSWERS_VALIDATION_REJECTED)->where('validator_id', null);
+        return $query->where('status', self::STATUS_ANSWERS_SENT)->where('validator_id', null);
     }
 
     public function scopeValidator($query, $validator_id, $status = null)
     {
         $collection =  $query->where('validator_id', $validator_id);
-        if(!is_null($status) && in_array($status, [self::STATUS_ANSWERS_SENT, self::STATUS_ANSWERS_VALIDATION_PROGRESS, self::STATUS_ANSWERS_VALIDATION_APPROVED, self::STATUS_ANSWERS_VALIDATION_REJECTED])){
+        if(!is_null($status) && in_array($status, [
+                self::STATUS_ANSWERS_SENT,
+                self::STATUS_ANSWERS_VALIDATION_PROGRESS,
+                self::STATUS_ANSWERS_VALIDATION_APPROVED,
+                self::STATUS_ANSWERS_VALIDATION_REJECTED
+            ])){
             $collection->where('status', $status);
         }
 
