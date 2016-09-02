@@ -91,8 +91,8 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'status' => $answers1->status,
             'comment' => $answers1->status_comment,
             'data' => [
-                'total' => $answers1->total,
-                'percentage' => $answers1->percentage,
+                'total' => doubleval($answers1->total),
+                'percentage' => intval($answers1->percentage),
             ]
         ];
 
@@ -104,7 +104,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'status' => $answers2->status,
             'comment' => $answers2->status_comment,
             'data' => [
-                'jumlah' => $answers2->jumlah,
+                'jumlah' => doubleval($answers2->jumlah),
             ],
         ];
 
@@ -116,7 +116,16 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'status' => $answers3->status,
             'comment' => $answers3->status_comment,
             'data' => [
-
+                'dipa_danapemerintah' => doubleval($answers3->dipa_danapemerintah),
+                'dipa_pnbp_perusahaanswasta' => doubleval($answers3->dipa_pnbp_perusahaanswasta),
+                'dipa_pnbp_perusahaanswasta' => doubleval($answers3->dipa_pnbp_perusahaanswasta),
+                'dipa_pnbp_instansipemerintah' => doubleval($answers3->dipa_pnbp_instansipemerintah),
+                'dipa_pnbp_swastanonprofit' => doubleval($answers3->dipa_pnbp_swastanonprofit),
+                'dipa_pnbp_luarnegeri' => doubleval($answers3->dipa_pnbp_luarnegeri),
+                'dipa_phln' => doubleval($answers3->dipa_phln),
+                'nondipa_insentif_ristekdikti' => doubleval($answers3->nondipa_insentif_ristekdikti),
+                'nondipa_insentif_dalamnegeri' => doubleval($answers3->nondipa_insentif_dalamnegeri),
+                'nondipa_insentif_researchgrant' => doubleval($answers3->nondipa_insentif_researchgrant),
             ],
         ];
 
@@ -128,7 +137,10 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'status' => $answers4->status,
             'comment' => $answers4->status_comment,
             'data' => [
-
+                'belanja_pegawai_upah' => doubleval($answers4->belanja_pegawai_upah),
+                'belanja_modal_properti' => doubleval($answers4->belanja_modal_properti),
+                'belanja_modal_mesin' => doubleval($answers4->belanja_modal_mesin),
+                'belanja_operasional_maintenance' => doubleval($answers4->belanja_operasional_maintenance),
             ],
         ];
 
@@ -164,7 +176,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'status' => $answers7->status,
             'comment' => $answers7->status_comment,
             'data' => [
-
+                'penelitian_dasar' => doubleval($answers7->penelitian_dasar),
+                'penelitian_terapan' => doubleval($answers7->penelitian_terapan),
+                'pengembangan_eksperimental' => doubleval($answers7->pengembangan_eksperimental),
             ],
         ];
 
@@ -188,7 +202,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'status' => $answers9a->status,
             'comment' => $answers9a->status_comment,
             'data' => [
-
+                'total_pegawai' => intval($answers9a->total_pegawai),
             ],
         ];
 
@@ -200,7 +214,66 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'status' => $answers9b->status,
             'comment' => $answers9b->status_comment,
             'data' => [
-
+                'peneliti_fungsional_peneliti_s1_l' => intval($answers9b->peneliti_fungsional_peneliti_s1_l),
+                'peneliti_fungsional_peneliti_s1_p' => intval($answers9b->peneliti_fungsional_peneliti_s1_p),
+                'peneliti_fungsional_peneliti_s1_fte_l' => doubleval($answers9b->peneliti_fungsional_peneliti_s1_fte_l),
+                'peneliti_fungsional_peneliti_s1_fte_p' => doubleval($answers9b->peneliti_fungsional_peneliti_s1_fte_p),
+                'peneliti_fungsional_peneliti_s2_l' => intval($answers9b->peneliti_fungsional_peneliti_s2_l),
+                'peneliti_fungsional_peneliti_s2_p' => intval($answers9b->peneliti_fungsional_peneliti_s2_p),
+                'peneliti_fungsional_peneliti_s2_fte_l' => doubleval($answers9b->peneliti_fungsional_peneliti_s2_fte_l),
+                'peneliti_fungsional_peneliti_s2_fte_p' => doubleval($answers9b->peneliti_fungsional_peneliti_s2_fte_p),
+                'peneliti_fungsional_peneliti_s3_l' => intval($answers9b->peneliti_fungsional_peneliti_s3_l),
+                'peneliti_fungsional_peneliti_s3_p' => intval($answers9b->peneliti_fungsional_peneliti_s3_p),
+                'peneliti_fungsional_peneliti_s3_fte_l' => doubleval($answers9b->peneliti_fungsional_peneliti_s3_fte_l),
+                'peneliti_fungsional_peneliti_s3_fte_p' => doubleval($answers9b->peneliti_fungsional_peneliti_s3_fte_p),
+                'peneliti_fungsional_nonpeneliti_s1_l' => intval($answers9b->peneliti_fungsional_nonpeneliti_s1_l),
+                'peneliti_fungsional_nonpeneliti_s1_p' => intval($answers9b->peneliti_fungsional_nonpeneliti_s1_p),
+                'peneliti_fungsional_nonpeneliti_s1_fte_l' => doubleval($answers9b->peneliti_fungsional_nonpeneliti_s1_fte_l),
+                'peneliti_fungsional_nonpeneliti_s1_fte_p' => doubleval($answers9b->peneliti_fungsional_nonpeneliti_s1_fte_p),
+                'peneliti_fungsional_nonpeneliti_s2_l' => intval($answers9b->peneliti_fungsional_nonpeneliti_s2_l),
+                'peneliti_fungsional_nonpeneliti_s2_p' => intval($answers9b->peneliti_fungsional_nonpeneliti_s2_p),
+                'peneliti_fungsional_nonpeneliti_s2_fte_l' => doubleval($answers9b->peneliti_fungsional_nonpeneliti_s2_fte_l),
+                'peneliti_fungsional_nonpeneliti_s2_fte_p' => doubleval($answers9b->peneliti_fungsional_nonpeneliti_s2_fte_p),
+                'peneliti_fungsional_nonpeneliti_s3_l' => intval($answers9b->peneliti_fungsional_nonpeneliti_s3_l),
+                'peneliti_fungsional_nonpeneliti_s3_p' => intval($answers9b->peneliti_fungsional_nonpeneliti_s3_p),
+                'peneliti_fungsional_nonpeneliti_s3_fte_l' => doubleval($answers9b->peneliti_fungsional_nonpeneliti_s3_fte_l),
+                'peneliti_fungsional_nonpeneliti_s3_fte_p' => doubleval($answers9b->peneliti_fungsional_nonpeneliti_s3_fte_p),
+                'peneliti_nonfungsional_s1_l' => intval($answers9b->peneliti_nonfungsional_s1_l),
+                'peneliti_nonfungsional_s1_p' => intval($answers9b->peneliti_nonfungsional_s1_p),
+                'peneliti_nonfungsional_s1_fte_l' => doubleval($answers9b->peneliti_nonfungsional_s1_fte_l),
+                'peneliti_nonfungsional_s1_fte_p' => doubleval($answers9b->peneliti_nonfungsional_s1_fte_p),
+                'peneliti_nonfungsional_s2_l' => intval($answers9b->peneliti_nonfungsional_s2_l),
+                'peneliti_nonfungsional_s2_p' => intval($answers9b->peneliti_nonfungsional_s2_p),
+                'peneliti_nonfungsional_s2_fte_l' => doubleval($answers9b->peneliti_nonfungsional_s2_fte_l),
+                'peneliti_nonfungsional_s2_fte_p' => doubleval($answers9b->peneliti_nonfungsional_s2_fte_p),
+                'peneliti_nonfungsional_s3_l' => intval($answers9b->peneliti_nonfungsional_s3_l),
+                'peneliti_nonfungsional_s3_p' => intval($answers9b->peneliti_nonfungsional_s3_p),
+                'peneliti_nonfungsional_s3_fte_l' => doubleval($answers9b->peneliti_nonfungsional_s3_fte_l),
+                'peneliti_nonfungsional_s3_fte_p' => doubleval($answers9b->peneliti_nonfungsional_s3_fte_p),
+                'teknisi_s1_l' => intval($answers9b->teknisi_s1_l),
+                'teknisi_s1_p' => intval($answers9b->teknisi_s1_p),
+                'teknisi_s1_fte_l' => doubleval($answers9b->teknisi_s1_fte_l),
+                'teknisi_s1_fte_p' => doubleval($answers9b->teknisi_s1_fte_p),
+                'teknisi_d3_l' => intval($answers9b->teknisi_d3_l),
+                'teknisi_d3_p' => intval($answers9b->teknisi_d3_p),
+                'teknisi_d3_fte_l' => doubleval($answers9b->teknisi_d3_fte_l),
+                'teknisi_d3_fte_p' => doubleval($answers9b->teknisi_d3_fte_p),
+                'teknisi_belowd3_l' => intval($answers9b->teknisi_belowd3_l),
+                'teknisi_belowd3_p' => intval($answers9b->teknisi_belowd3_p),
+                'teknisi_belowd3_fte_l' => doubleval($answers9b->teknisi_belowd3_fte_l),
+                'teknisi_belowd3_fte_p' => doubleval($answers9b->teknisi_belowd3_fte_p),
+                'staffpendukung_s1_l' => intval($answers9b->staffpendukung_s1_l),
+                'staffpendukung_s1_p' => intval($answers9b->staffpendukung_s1_p),
+                'staffpendukung_s1_fte_l' => doubleval($answers9b->staffpendukung_s1_fte_l),
+                'staffpendukung_s1_fte_p' => doubleval($answers9b->staffpendukung_s1_fte_p),
+                'staffpendukung_d3_l' => intval($answers9b->staffpendukung_d3_l),
+                'staffpendukung_d3_p' => intval($answers9b->staffpendukung_d3_p),
+                'staffpendukung_d3_fte_l' => doubleval($answers9b->staffpendukung_d3_fte_l),
+                'staffpendukung_d3_fte_p' => doubleval($answers9b->staffpendukung_d3_fte_p),
+                'staffpendukung_belowd3_l' => intval($answers9b->staffpendukung_belowd3_l),
+                'staffpendukung_belowd3_p' => intval($answers9b->staffpendukung_belowd3_p),
+                'staffpendukung_belowd3_fte_l' => doubleval($answers9b->staffpendukung_belowd3_fte_l),
+                'staffpendukung_belowd3_fte_p' => doubleval($answers9b->staffpendukung_belowd3_fte_p),
             ],
         ];
 
@@ -224,7 +297,11 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'status' => $answers10->status,
             'comment' => $answers10->status_comment,
             'data' => [
-
+                'jumlah_peneliti_pemerintah' => intval($answers10->jumlah_peneliti_pemerintah),
+                'jumlah_peneliti_perguruantinggi' => intval($answers10->jumlah_peneliti_perguruantinggi),
+                'jumlah_peneliti_industri' => intval($answers10->jumlah_peneliti_industri),
+                'jumlah_peneliti_lembagaswadaya' => intval($answers10->jumlah_peneliti_lembagaswadaya),
+                'jumlah_peneliti_asing' => intval($answers10->jumlah_peneliti_asing),
             ],
         ];
 
@@ -320,7 +397,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'status' => $answers16b->status,
             'comment' => $answers16b->status_comment,
             'data' => [
-
+                'jumlah_patenluarnegeri' => intval($answers16b->jumlah_patenluarnegeri),
             ],
         ];
 
@@ -344,7 +421,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'status' => $answers18->status,
             'comment' => $answers18->status_comment,
             'data' => [
-
+                'comment' => $answers18->comment,
             ],
         ];
 
