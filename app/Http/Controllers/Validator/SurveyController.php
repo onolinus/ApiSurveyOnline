@@ -1,12 +1,13 @@
 <?php
 namespace App\Http\Controllers\Validator;
 
+use App\Correspondents as CorrespondentsModel;
 use App\Http\Controllers\Controller;
-use app\Libraries\Survey;
 use app\Libraries\SurveyTrafficBalancer;
 use App\TraitCacheSurveyData;
 use App\TraitFractalResponse;
 use App\Http\Requests;
+use App\Transformer\AnswerDetail as AnswerDetailTransformer;
 use App\Transformer\Answers as AnswersTransformer;
 use Illuminate\Http\Request;
 
@@ -35,13 +36,19 @@ class SurveyController extends Controller
     }
 
     public function show($id){
-        $survey = new Survey();
-        $data = $survey->getListAnswers($id);
+        /** @var Correspondents $correspondent */
+        $correspondent = CorrespondentsModel::find($id);
 
-        if(is_null($data)){
-            return $this->response->errorNotFound([trans('errors.data_not_found', ['dataname' => 'user'])]);
+        if($correspondent === null){
+            $this->response->errorNotFound([trans('validator.correspondentdatanotcompleted')]);
         }
 
-        return $this->response->withArray($data);
+        $answers = $correspondent->Answers;
+
+        if($answers === null){
+            $this->response->errorNotFound([trans('validator.nousersurveydata')]);
+        }
+
+        return $this->response->withItem($answers, new AnswerDetailTransformer());
     }
 }

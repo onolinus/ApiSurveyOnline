@@ -14,4 +14,6 @@ return [
     */
 
     'nodatatobevalidated' => 'Tidak ada lagi data yang bisa divalidasi.',
+    'correspondentdatanotcompleted' => 'Profil responden belum lengkap.',
+    'nousersurveydata' => 'Responden belum memiliki data survey',
 ];
