@@ -37,6 +37,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'correspondent' => [
                 'id' => $answers->id_correspondent,
             ],
+            'detail' => $this->getDetail($answers),
             'timestamp' => [
                 'created' => $answers->created_at,
                 'created_string' => $answers->created_at->toDayDateTimeString(),
@@ -46,7 +47,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'links' => [
                 'self' => route('validator.survey.show', [$answers->id_correspondent])
             ],
-            'detail' => $this->getDetail($answers),
             'relationships' => [
                 'correspondent' => [
                     'links' => [
@@ -93,13 +93,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'data' => [
                 'total' => $answers1->total,
                 'percentage' => $answers1->percentage,
-            ],
-            'timestamp' => [
-                'created' => $answers1->created_at,
-                'created_string' => $answers1->created_at->toDayDateTimeString(),
-                'updated' => $answers1->updated_at,
-                'updated_string' => $answers1->updated_at->toDayDateTimeString(),
-            ],
+            ]
         ];
 
         return $this;
@@ -111,12 +105,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'comment' => $answers2->status_comment,
             'data' => [
                 'jumlah' => $answers2->jumlah,
-            ],
-            'timestamp' => [
-                'created' => $answers2->created_at,
-                'created_string' => $answers2->created_at->toDayDateTimeString(),
-                'updated' => $answers2->updated_at,
-                'updated_string' => $answers2->updated_at->toDayDateTimeString(),
             ],
         ];
 
@@ -130,12 +118,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'data' => [
 
             ],
-            'timestamp' => [
-                'created' => $answers3->created_at,
-                'created_string' => $answers3->created_at->toDayDateTimeString(),
-                'updated' => $answers3->updated_at,
-                'updated_string' => $answers3->updated_at->toDayDateTimeString(),
-            ],
         ];
 
         return $this;
@@ -147,12 +129,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'comment' => $answers4->status_comment,
             'data' => [
 
-            ],
-            'timestamp' => [
-                'created' => $answers4->created_at,
-                'created_string' => $answers4->created_at->toDayDateTimeString(),
-                'updated' => $answers4->updated_at,
-                'updated_string' => $answers4->updated_at->toDayDateTimeString(),
             ],
         ];
 
@@ -166,12 +142,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
 //            'data' => [
 //
 //            ],
-//            'timestamp' => [
-//                'created' => $answers5->created_at,
-//                'created_string' => $answers5->created_at->toDayDateTimeString(),
-//                'updated' => $answers5->updated_at,
-//                'updated_string' => $answers5->updated_at->toDayDateTimeString(),
-//            ],
 //        ];
 
         return $this;
@@ -183,12 +153,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
 //            'comment' => $answers6->status_comment,
 //            'data' => [
 //
-//            ],
-//            'timestamp' => [
-//                'created' => $answers6->created_at,
-//                'created_string' => $answers6->created_at->toDayDateTimeString(),
-//                'updated' => $answers6->updated_at,
-//                'updated_string' => $answers6->updated_at->toDayDateTimeString(),
 //            ],
 //        ];
 
@@ -202,12 +166,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'data' => [
 
             ],
-            'timestamp' => [
-                'created' => $answers7->created_at,
-                'created_string' => $answers7->created_at->toDayDateTimeString(),
-                'updated' => $answers7->updated_at,
-                'updated_string' => $answers7->updated_at->toDayDateTimeString(),
-            ],
         ];
 
         return $this;
@@ -219,12 +177,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
 //            'comment' => $answers8->status_comment,
 //            'data' => [
 //
-//            ],
-//            'timestamp' => [
-//                'created' => $answers8->created_at,
-//                'created_string' => $answers8->created_at->toDayDateTimeString(),
-//                'updated' => $answers8->updated_at,
-//                'updated_string' => $answers8->updated_at->toDayDateTimeString(),
 //            ],
 //        ];
 
@@ -238,12 +190,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'data' => [
 
             ],
-            'timestamp' => [
-                'created' => $answers9a->created_at,
-                'created_string' => $answers9a->created_at->toDayDateTimeString(),
-                'updated' => $answers9a->updated_at,
-                'updated_string' => $answers9a->updated_at->toDayDateTimeString(),
-            ],
         ];
 
         return $this;
@@ -255,12 +201,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'comment' => $answers9b->status_comment,
             'data' => [
 
-            ],
-            'timestamp' => [
-                'created' => $answers9b->created_at,
-                'created_string' => $answers9b->created_at->toDayDateTimeString(),
-                'updated' => $answers9b->updated_at,
-                'updated_string' => $answers9b->updated_at->toDayDateTimeString(),
             ],
         ];
 
@@ -274,12 +214,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
 //            'data' => [
 //
 //            ],
-//            'timestamp' => [
-//                'created' => $answers9c->created_at,
-//                'created_string' => $answers9c->created_at->toDayDateTimeString(),
-//                'updated' => $answers9c->updated_at,
-//                'updated_string' => $answers9c->updated_at->toDayDateTimeString(),
-//            ],
 //        ];
 
         return $this;
@@ -291,12 +225,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'comment' => $answers10->status_comment,
             'data' => [
 
-            ],
-            'timestamp' => [
-                'created' => $answers10->created_at,
-                'created_string' => $answers10->created_at->toDayDateTimeString(),
-                'updated' => $answers10->updated_at,
-                'updated_string' => $answers10->updated_at->toDayDateTimeString(),
             ],
         ];
 
@@ -310,12 +238,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
 //            'data' => [
 //
 //            ],
-//            'timestamp' => [
-//                'created' => $answers11->created_at,
-//                'created_string' => $answers11->created_at->toDayDateTimeString(),
-//                'updated' => $answers11->updated_at,
-//                'updated_string' => $answers11->updated_at->toDayDateTimeString(),
-//            ],
 //        ];
 
         return $this;
@@ -327,12 +249,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
 //            'comment' => $answers12->status_comment,
 //            'data' => [
 //
-//            ],
-//            'timestamp' => [
-//                'created' => $answers12->created_at,
-//                'created_string' => $answers12->created_at->toDayDateTimeString(),
-//                'updated' => $answers12->updated_at,
-//                'updated_string' => $answers12->updated_at->toDayDateTimeString(),
 //            ],
 //        ];
 
@@ -346,12 +262,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
 //            'data' => [
 //
 //            ],
-//            'timestamp' => [
-//                'created' => $answers13->created_at,
-//                'created_string' => $answers13->created_at->toDayDateTimeString(),
-//                'updated' => $answers13->updated_at,
-//                'updated_string' => $answers13->updated_at->toDayDateTimeString(),
-//            ],
 //        ];
 
         return $this;
@@ -363,12 +273,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
 //            'comment' => $answers14->status_comment,
 //            'data' => [
 //
-//            ],
-//            'timestamp' => [
-//                'created' => $answers14->created_at,
-//                'created_string' => $answers14->created_at->toDayDateTimeString(),
-//                'updated' => $answers14->updated_at,
-//                'updated_string' => $answers14->updated_at->toDayDateTimeString(),
 //            ],
 //        ];
 
@@ -382,12 +286,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
 //            'data' => [
 //
 //            ],
-//            'timestamp' => [
-//                'created' => $answers15a->created_at,
-//                'created_string' => $answers15a->created_at->toDayDateTimeString(),
-//                'updated' => $answers15a->updated_at,
-//                'updated_string' => $answers15a->updated_at->toDayDateTimeString(),
-//            ],
 //        ];
 
         return $this;
@@ -399,12 +297,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
 //            'comment' => $answers15b->status_comment,
 //            'data' => [
 //
-//            ],
-//            'timestamp' => [
-//                'created' => $answers15b->created_at,
-//                'created_string' => $answers15b->created_at->toDayDateTimeString(),
-//                'updated' => $answers15b->updated_at,
-//                'updated_string' => $answers15b->updated_at->toDayDateTimeString(),
 //            ],
 //        ];
 
@@ -418,12 +310,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
 //            'data' => [
 //
 //            ],
-//            'timestamp' => [
-//                'created' => $answers16a->created_at,
-//                'created_string' => $answers16a->created_at->toDayDateTimeString(),
-//                'updated' => $answers16a->updated_at,
-//                'updated_string' => $answers16a->updated_at->toDayDateTimeString(),
-//            ],
 //        ];
 
         return $this;
@@ -435,12 +321,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'comment' => $answers16b->status_comment,
             'data' => [
 
-            ],
-            'timestamp' => [
-                'created' => $answers16b->created_at,
-                'created_string' => $answers16b->created_at->toDayDateTimeString(),
-                'updated' => $answers16b->updated_at,
-                'updated_string' => $answers16b->updated_at->toDayDateTimeString(),
             ],
         ];
 
@@ -454,12 +334,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
 //            'data' => [
 //
 //            ],
-//            'timestamp' => [
-//                'created' => $answers17->created_at,
-//                'created_string' => $answers17->created_at->toDayDateTimeString(),
-//                'updated' => $answers17->updated_at,
-//                'updated_string' => $answers17->updated_at->toDayDateTimeString(),
-//            ],
 //        ];
 
         return $this;
@@ -471,12 +345,6 @@ class AnswerDetail extends Fractal\TransformerAbstract
             'comment' => $answers18->status_comment,
             'data' => [
 
-            ],
-            'timestamp' => [
-                'created' => $answers18->created_at,
-                'created_string' => $answers18->created_at->toDayDateTimeString(),
-                'updated' => $answers18->updated_at,
-                'updated_string' => $answers18->updated_at->toDayDateTimeString(),
             ],
         ];
 
