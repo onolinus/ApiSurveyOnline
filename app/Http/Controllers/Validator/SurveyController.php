@@ -46,7 +46,7 @@ class SurveyController extends Controller
         $answers = $correspondent->Answers;
 
         if($answers === null){
-            $this->response->errorNotFound([trans('validator.nousersurveydata')]);
+            return $this->response->errorNotFound([trans('validator.nousersurveydata')]);
         }
 
         return $this->response->withItem($answers, new AnswerDetailTransformer());
