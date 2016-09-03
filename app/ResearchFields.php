@@ -17,4 +17,19 @@ class ResearchFields extends Model
     protected $fillable = ['code', 'subject', 'area', 'sub_area'];
 
     public $incrementing = false;
+
+    public function Answers5()
+    {
+        return $this->hasMany('App\Answers5', 'code', 'code');
+    }
+
+    public function Answers11()
+    {
+        return $this->hasMany('App\Answers11', 'code', 'code');
+    }
+
+    public function Answers12()
+    {
+        return $this->hasMany('App\Answers12', 'code', 'code');
+    }
 }

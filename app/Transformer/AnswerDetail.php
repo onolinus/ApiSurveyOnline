@@ -67,20 +67,50 @@ class AnswerDetail extends Fractal\TransformerAbstract
         $this->setAnswer5($detail, $answers->Answers5);
         $this->setAnswer6($detail, $answers->Answers6);
         $this->setAnswer7($detail, $answers->Answers7);
-        $this->setAnswer8($detail, $answers->Answers8);
+
+        if(!is_null($answers->Answers8)) {
+            $this->setAnswer8($detail, $answers->Answers8);
+        }
+
+
         $this->setAnswer9a($detail, $answers->Answers9a);
         $this->setAnswer9b($detail, $answers->Answers9b);
         $this->setAnswer9c($detail, $answers->Answers9c);
-        $this->setAnswer10($detail, $answers->Answers10);
-        $this->setAnswer11($detail, $answers->Answers11);
-        $this->setAnswer12($detail, $answers->Answers12);
-        $this->setAnswer13($detail, $answers->Answers13);
-        $this->setAnswer14($detail, $answers->Answers14);
-        $this->setAnswer15a($detail, $answers->Answers15a);
-        $this->setAnswer15b($detail, $answers->Answers15b);
-        $this->setAnswer16a($detail, $answers->Answers16a);
-        $this->setAnswer16b($detail, $answers->Answers16b);
-        $this->setAnswer17($detail, $answers->Answers17);
+
+        if(!is_null($answers->Answers10)) {
+            $this->setAnswer10($detail, $answers->Answers10);
+        }
+
+        if(!is_null($answers->Answers11)) {
+            $this->setAnswer11($detail, $answers->Answers11);
+        }
+
+        if(!is_null($answers->Answers12)) {
+            $this->setAnswer12($detail, $answers->Answers12);
+        }
+
+        if(!is_null($answers->Answers13)) {
+            $this->setAnswer13($detail, $answers->Answers13);
+        }
+
+        if(!is_null($answers->Answers14)) {
+            $this->setAnswer14($detail, $answers->Answers14);
+        }
+
+        if(!is_null($answers->Answers15a)) {
+            $this->setAnswer15a($detail, $answers->Answers15a);
+            $this->setAnswer15b($detail, $answers->Answers15b);
+        }
+
+        if(!is_null($answers->Answers16a)) {
+            $this->setAnswer16a($detail, $answers->Answers16a);
+            $this->setAnswer16b($detail, $answers->Answers16b);
+        }
+
+        if(!is_null($answers->Answers17)) {
+            $this->setAnswer17($detail, $answers->Answers17);
+        }
+
         $this->setAnswer18($detail, $answers->Answers18);
 
         return $detail;
@@ -147,26 +177,44 @@ class AnswerDetail extends Fractal\TransformerAbstract
         return $this;
     }
 
-    private function setAnswer5(&$detail, Collection $answers5){
-//        $detail['answer5'] = [
-//            'status' => $answers5->status,
-//            'comment' => $answers5->status_comment,
-//            'data' => [
-//
-//            ],
-//        ];
+    private function setAnswer5(&$detail, Collection $list_answers5){
+        /** @var ModelAnswers5 $answers5 */
+        foreach($list_answers5 as $index=>$answers5){
+            if($index === 0){
+                $detail['answer5']['status'] = $answers5->status;
+                $detail['answer5']['comment'] = $answers5->status_comment;
+            }
+
+            $detail['answer5']['data'][] = [
+                'id' => $answers5->id,
+                'code' => $answers5->code,
+                'percentage' => doubleval($answers5->percentage),
+                'links' => [
+                    'researchfields' => route("researchfields.show", $answers5->code)
+                ]
+            ];
+        }
 
         return $this;
     }
 
-    private function setAnswer6(&$detail, Collection $answers6){
-//        $detail['answer6'] = [
-//            'status' => $answers6->status,
-//            'comment' => $answers6->status_comment,
-//            'data' => [
-//
-//            ],
-//        ];
+    private function setAnswer6(&$detail, Collection $list_answers6){
+        /** @var ModelAnswers6 $answers6 */
+        foreach($list_answers6 as $index=>$answers6){
+            if($index === 0){
+                $detail['answer6']['status'] = $answers6->status;
+                $detail['answer6']['comment'] = $answers6->status_comment;
+            }
+
+            $detail['answer6']['data'][] = [
+                'id' => $answers6->id,
+                'code' => $answers6->code,
+                'percentage' => doubleval($answers6->percentage),
+                'links' => [
+                    'socioeconomics' => route("socioeconomics.show", $answers6->code)
+                ]
+            ];
+        }
 
         return $this;
     }
@@ -185,14 +233,20 @@ class AnswerDetail extends Fractal\TransformerAbstract
         return $this;
     }
 
-    private function setAnswer8(&$detail, Collection $answers8){
-//        $detail['answer8'] = [
-//            'status' => $answers8->status,
-//            'comment' => $answers8->status_comment,
-//            'data' => [
-//
-//            ],
-//        ];
+    private function setAnswer8(&$detail, Collection $list_answers8){
+        /** @var ModelAnswers8 $answers8 */
+        foreach($list_answers8 as $index=>$answers8){
+            if($index === 0){
+                $detail['answer8']['status'] = $answers8->status;
+                $detail['answer8']['comment'] = $answers8->status_comment;
+            }
+
+            $detail['answer8']['data'][] = [
+                'id' => $answers8->id,
+                'institusi' => $answers8->institusi,
+                'jumlah_dana' => doubleval($answers8->jumlah_dana)
+            ];
+        }
 
         return $this;
     }
@@ -280,19 +334,34 @@ class AnswerDetail extends Fractal\TransformerAbstract
         return $this;
     }
 
-    private function setAnswer9c(&$detail, Collection $answers9c){
-//        $detail['answer9c'] = [
-//            'status' => $answers9c->status,
-//            'comment' => $answers9c->status_comment,
-//            'data' => [
-//
-//            ],
-//        ];
+    private function setAnswer9c(&$detail, Collection $list_answers9c){
+        /** @var ModelAnswers9c $answers9c */
+        foreach($list_answers9c as $index=>$answers9c){
+            if($index === 0){
+                $detail['answer9c']['status'] = $answers9c->status;
+                $detail['answer9c']['comment'] = $answers9c->status_comment;
+            }
+
+            $detail['answer9c']['data'][] = [
+                'id' => $answers9c->id,
+                's1_l' => intval($answers9c->s1_l),
+                's1_p' => intval($answers9c->s1_p),
+                's2_l' => intval($answers9c->s2_l),
+                's2_p' => intval($answers9c->s2_p),
+                's3_l' => intval($answers9c->s3_l),
+                's3_p' => intval($answers9c->s3_p),
+                'code' => $answers9c->code,
+                'links' => [
+                    'bidangilmu' => route("bidangilmu.show", $answers9c->code)
+                ]
+            ];
+        }
 
         return $this;
     }
 
     private function setAnswer10(&$detail, ModelAnswers10 $answers10){
+        /** @var ModelAnswers10 $answers10 */
         $detail['answer10'] = [
             'status' => $answers10->status,
             'comment' => $answers10->status_comment,
@@ -308,86 +377,145 @@ class AnswerDetail extends Fractal\TransformerAbstract
         return $this;
     }
 
-    private function setAnswer11(&$detail, Collection $answers11){
-//        $detail['answer11'] = [
-//            'status' => $answers11->status,
-//            'comment' => $answers11->status_comment,
-//            'data' => [
-//
-//            ],
-//        ];
+    private function setAnswer11(&$detail, Collection $list_answers11){
+        /** @var ModelAnswers11 $answers11 */
+        foreach($list_answers11 as $index=>$answers11){
+            if($index === 0){
+                $detail['answer11']['status'] = $answers11->status;
+                $detail['answer11']['comment'] = $answers11->status_comment;
+            }
+
+            $detail['answer11']['data'][] = [
+                'id' => $answers11->id,
+                'code' => $answers11->code,
+                'nama_jurnal' => $answers11->nama_jurnal,
+                'jumlah' => $answers11->jumlah,
+                'links' => [
+                    'researchfields' => route("researchfields.show", $answers11->code)
+                ]
+            ];
+        }
 
         return $this;
     }
 
-    private function setAnswer12(&$detail, Collection $answers12){
-//        $detail['answer12'] = [
-//            'status' => $answers12->status,
-//            'comment' => $answers12->status_comment,
-//            'data' => [
-//
-//            ],
-//        ];
+    private function setAnswer12(&$detail, Collection $list_answers12){
+        /** @var ModelAnswers12 $answers12 */
+        foreach($list_answers12 as $index=>$answers12){
+            if($index === 0){
+                $detail['answer12']['status'] = $answers12->status;
+                $detail['answer12']['comment'] = $answers12->status_comment;
+            }
+
+            $detail['answer12']['data'][] = [
+                'id' => $answers12->id,
+                'code' => $answers12->code,
+                'nama_jurnal' => $answers12->nama_jurnal,
+                'jumlah' => $answers12->jumlah,
+                'links' => [
+                    'researchfields' => route("researchfields.show", $answers12->code)
+                ]
+            ];
+        }
 
         return $this;
     }
 
-    private function setAnswer13(&$detail, Collection $answers13){
-//        $detail['answer13'] = [
-//            'status' => $answers13->status,
-//            'comment' => $answers13->status_comment,
-//            'data' => [
-//
-//            ],
-//        ];
+    private function setAnswer13(&$detail, Collection $list_answers13){
+        /** @var ModelAnswers13 $answers13 */
+        foreach($list_answers13 as $index=>$answers13){
+            if($index === 0){
+                $detail['answer13']['status'] = $answers13->status;
+                $detail['answer13']['comment'] = $answers13->status_comment;
+            }
+
+            $detail['answer13']['data'][] = [
+                'id' => $answers13->id,
+                'nama_peneliti' => $answers13->nama_peneliti,
+                'nama_seminar' => $answers13->nama_seminar,
+                'negara_penyelenggara_seminar' => $answers13->negara_penyelenggara_seminar,
+            ];
+        }
 
         return $this;
     }
 
-    private function setAnswer14(&$detail, Collection $answers14){
-//        $detail['answer14'] = [
-//            'status' => $answers14->status,
-//            'comment' => $answers14->status_comment,
-//            'data' => [
-//
-//            ],
-//        ];
+    private function setAnswer14(&$detail, Collection $list_answers14){
+        /** @var ModelAnswers14 $answers14 */
+        foreach($list_answers14 as $index=>$answers14){
+            if($index === 0){
+                $detail['answer14']['status'] = $answers14->status;
+                $detail['answer14']['comment'] = $answers14->status_comment;
+            }
+
+            $detail['answer14']['data'][] = [
+                'id' => $answers14->id,
+                'nama_penerima_award' => $answers14->nama_penerima_award,
+                'nama_award' => $answers14->nama_award,
+                'institusi_pemberi_award' => $answers14->institusi_pemberi_award,
+            ];
+        }
 
         return $this;
     }
 
-    private function setAnswer15a(&$detail, Collection $answers15a){
-//        $detail['answer15a'] = [
-//            'status' => $answers15a->status,
-//            'comment' => $answers15a->status_comment,
-//            'data' => [
-//
-//            ],
-//        ];
+    private function setAnswer15a(&$detail, Collection $list_answers15a){
+        /** @var ModelAnswers15a $answers15a */
+        foreach($list_answers15a as $index=>$answers15a){
+            if($index === 0){
+                $detail['answer15a']['status'] = $answers15a->status;
+                $detail['answer15a']['comment'] = $answers15a->status_comment;
+            }
+
+            $detail['answer15a']['data'][] = [
+                'id' => $answers15a->id,
+                'nama_barang' => $answers15a->nama_barang,
+                'terkomersialisasi' => intval($answers15a->terkomersialisasi),
+                'tahun' => intval($answers15a->tahun),
+            ];
+        }
 
         return $this;
     }
 
-    private function setAnswer15b(&$detail, Collection $answers15b){
-//        $detail['answer15b'] = [
-//            'status' => $answers15b->status,
-//            'comment' => $answers15b->status_comment,
-//            'data' => [
-//
-//            ],
-//        ];
+    private function setAnswer15b(&$detail, Collection $list_answers15b){
+        /** @var ModelAnswers15b $answers15b */
+        foreach($list_answers15b as $index=>$answers15b){
+            if($index === 0){
+                $detail['answer15b']['status'] = $answers15b->status;
+                $detail['answer15b']['comment'] = $answers15b->status_comment;
+            }
+
+            $detail['answer15b']['data'][] = [
+                'id' => $answers15b->id,
+                'nama_jasa' => $answers15b->nama_jasa,
+                'pengguna_jasa' => $answers15b->pengguna_jasa,
+                'tahun' => intval($answers15b->tahun),
+            ];
+        }
 
         return $this;
     }
 
-    private function setAnswer16a(&$detail, Collection $answers16a){
-//        $detail['answer16a'] = [
-//            'status' => $answers16a->status,
-//            'comment' => $answers16a->status_comment,
-//            'data' => [
-//
-//            ],
-//        ];
+    private function setAnswer16a(&$detail, Collection $list_answers16a){
+        /** @var ModelAnswers16a $answers16a */
+        foreach($list_answers16a as $index=>$answers16a){
+            if($index === 0){
+                $detail['answer16a']['status'] = $answers16a->status;
+                $detail['answer16a']['comment'] = $answers16a->status_comment;
+            }
+
+            $detail['answer16a']['data'][] = [
+                'id' => $answers16a->id,
+                'usulan_paten' => intval($answers16a->usulan_paten),
+                'usulan_patensederhana' => intval($answers16a->usulan_patensederhana),
+                'usulan_patensederhana' => intval($answers16a->usulan_patensederhana),
+                'disetujui_paten' => intval($answers16a->disetujui_paten),
+                'disetujui_patensederhana' => intval($answers16a->disetujui_patensederhana),
+                'terkomersialisasi_paten' => intval($answers16a->terkomersialisasi_paten),
+                'terkomersialisasi_patensederhana' => intval($answers16a->terkomersialisasi_patensederhana),
+            ];
+        }
 
         return $this;
     }
@@ -404,14 +532,21 @@ class AnswerDetail extends Fractal\TransformerAbstract
         return $this;
     }
 
-    private function setAnswer17(&$detail, Collection $answers17){
-//        $detail['answer17'] = [
-//            'status' => $answers17->status,
-//            'comment' => $answers17->status_comment,
-//            'data' => [
-//
-//            ],
-//        ];
+    private function setAnswer17(&$detail, Collection $list_answers17){
+        /** @var ModelAnswers17 $answers17 */
+        foreach($list_answers17 as $index=>$answers17){
+            if($index === 0){
+                $detail['answer17']['status'] = $answers17->status;
+                $detail['answer17']['comment'] = $answers17->status_comment;
+            }
+
+            $detail['answer17']['data'][] = [
+                'id' => $answers17->id,
+                'lisensi' => intval($answers17->lisensi),
+                'tahun' => intval($answers17->tahun),
+                'nilai' => doubleval($answers17->nilai),
+            ];
+        }
 
         return $this;
     }

@@ -21,4 +21,9 @@ class Answers12 extends Model
         return $this->belongsTo('App\Answers', 'id_answer', 'id');
     }
 
+    public function ResearchFields()
+    {
+        return $this->belongsTo('App\ResearchFields', 'code', 'code');
+    }
+
 }
