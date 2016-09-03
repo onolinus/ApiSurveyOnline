@@ -73,8 +73,9 @@ trait TraitCacheSurveyData
         return $response;
     }
 
-    private function removeDataSurveyFromCache(){
-        return Cache::pull($this->getDataCacheKey());
+    private function removeDataSurveyFromCache($user_id = null){
+        return Cache::pull($this->getDataCacheKey($user_id));
+        return Cache::pull($this->getValidatorDataCacheKey($user_id));
     }
 
 }
