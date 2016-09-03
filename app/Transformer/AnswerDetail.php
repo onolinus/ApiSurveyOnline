@@ -99,11 +99,17 @@ class AnswerDetail extends Fractal\TransformerAbstract
 
         if(!is_null($answers->Answers15a)) {
             $this->setAnswer15a($detail, $answers->Answers15a);
+        }
+
+        if(!is_null($answers->Answers15b)) {
             $this->setAnswer15b($detail, $answers->Answers15b);
         }
 
         if(!is_null($answers->Answers16a)) {
             $this->setAnswer16a($detail, $answers->Answers16a);
+        }
+
+        if(!is_null($answers->Answers16b)) {
             $this->setAnswer16b($detail, $answers->Answers16b);
         }
 
