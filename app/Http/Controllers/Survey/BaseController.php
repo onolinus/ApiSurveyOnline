@@ -8,6 +8,7 @@ use App\TraitFractalResponse;
 use App\Http\Requests;
 use App\Answers as ModelAnswers;
 use Illuminate\Routing\Controller;
+use League\Fractal\TransformerAbstract;
 
 abstract class BaseController extends Controller
 {
@@ -15,23 +16,25 @@ abstract class BaseController extends Controller
 
     use TraitCacheSurveyData;
 
-
     public function show($id_answer){
-        $answersNumberModel = call_user_func_array('\\App\\' . $this->getModelName() . '::answerId', [$id_answer])->first();
+        /** @var ModelAnswers $answersModel */
+        $answers = ModelAnswers::find($id_answer);
+
+        if($answers === null){
+            return $this->response->errorNotFound([trans('validator.notfoundanswersdata', ['answersnumber' => 1])]);
+        }
+
+        $answersNumberModel = $answers->{$this->getModelName()};
 
         if($answersNumberModel === null){
             return $this->response->errorNotFound([trans('validator.notfoundanswersdata', ['answersnumber' => 1])]);
         }
 
-        /** @var ModelAnswers $answers */
-        $answers = $answersNumberModel->Answers;
-        $session_user_id = $this->getSessionUserID();
-
-        if(intval($answers->validator_id) !== $session_user_id && $this->getSessionUserType() !== AdminPrivilegeMiddleware::USER_TYPE_ALLOWED){
+        if(intval($answers->validator_id) !== $this->getSessionUserID() && $this->getSessionUserType() !== AdminPrivilegeMiddleware::USER_TYPE_ALLOWED){
             return $this->response->errorForbidden([trans('validator.forbiddenaccesstoanswersnumber')]);
         }
 
-        return $answersNumberModel;
+        return $this->response->withItem($answersNumberModel, $this->getTransformers());
     }
 
 
@@ -40,4 +43,9 @@ abstract class BaseController extends Controller
     }
 
     abstract protected function getModelName();
+
+    /**
+     * @return TransformerAbstract
+     */
+    abstract protected function getTransformers();
 }
