@@ -132,7 +132,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
                 'percentage' => intval($answers1->percentage),
             ],
             'links' => [
-                'self' => route("survey.{id}.answers1.show", $answers1->id_answer)
+                'self' => route("survey.{id}.answers1.show", $answers1->id_answer),
+                'approve' => route("survey.{id}.answers1.approve", $answers1->id_answer),
+                'reject' => route("survey.{id}.answers1.reject", $answers1->id_answer),
             ]
         ];
 
@@ -148,7 +150,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
                 'jumlah' => doubleval($answers2->jumlah),
             ],
             'links' => [
-                'self' => route("survey.{id}.answers2.show", $answers2->id_answer)
+                'self' => route("survey.{id}.answers2.show", $answers2->id_answer),
+                'approve' => route("survey.{id}.answers2.approve", $answers2->id_answer),
+                'reject' => route("survey.{id}.answers2.reject", $answers2->id_answer),
             ]
         ];
 
@@ -173,7 +177,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
                 'nondipa_insentif_researchgrant' => doubleval($answers3->nondipa_insentif_researchgrant),
             ],
             'links' => [
-                'self' => route("survey.{id}.answers3.show", $answers3->id_answer)
+                'self' => route("survey.{id}.answers3.show", $answers3->id_answer),
+                'approve' => route("survey.{id}.answers3.approve", $answers3->id_answer),
+                'reject' => route("survey.{id}.answers3.reject", $answers3->id_answer),
             ]
         ];
 
@@ -192,7 +198,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
                 'belanja_operasional_maintenance' => doubleval($answers4->belanja_operasional_maintenance),
             ],
             'links' => [
-                'self' => route("survey.{id}.answers4.show", $answers4->id_answer)
+                'self' => route("survey.{id}.answers4.show", $answers4->id_answer),
+                'approve' => route("survey.{id}.answers4.approve", $answers4->id_answer),
+                'reject' => route("survey.{id}.answers4.reject", $answers4->id_answer),
             ]
         ];
 
@@ -219,7 +227,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
         }
 
         $detail['answer5']['links'] = [
-            'self' => route("survey.{id}.answers5.show", $answers5->id_answer)
+            'self' => route("survey.{id}.answers5.show", $answers5->id_answer),
+            'approve' => route("survey.{id}.answers5.approve", $answers5->id_answer),
+            'reject' => route("survey.{id}.answers5.reject", $answers5->id_answer),
         ];
 
         return $this;
@@ -245,7 +255,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
         }
 
         $detail['answer6']['links'] = [
-            'self' => route("survey.{id}.answers6.show", $answers6->id_answer)
+            'self' => route("survey.{id}.answers6.show", $answers6->id_answer),
+            'approve' => route("survey.{id}.answers6.approve", $answers6->id_answer),
+                'reject' => route("survey.{id}.answers6.reject", $answers6->id_answer),
         ];
 
         return $this;
@@ -262,7 +274,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
                 'pengembangan_eksperimental' => doubleval($answers7->pengembangan_eksperimental),
             ],
             'links' => [
-                'self' => route("survey.{id}.answers7.show", $answers7->id_answer)
+                'self' => route("survey.{id}.answers7.show", $answers7->id_answer),
+                'approve' => route("survey.{id}.answers7.approve", $answers7->id_answer),
+                'reject' => route("survey.{id}.answers7.reject", $answers7->id_answer),
             ]
         ];
 
@@ -286,7 +300,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
         }
 
         $detail['answer8']['links'] = [
-            'self' => route("survey.{id}.answers8.show", $answers8->id_answer)
+            'self' => route("survey.{id}.answers8.show", $answers8->id_answer),
+            'approve' => route("survey.{id}.answers8.approve", $answers8->id_answer),
+                'reject' => route("survey.{id}.answers8.reject", $answers8->id_answer),
         ];
 
         return $this;
@@ -301,7 +317,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
                 'total_pegawai' => intval($answers9a->total_pegawai),
             ],
             'links' => [
-                'self' => route("survey.{id}.answers9a.show", $answers9a->id_answer)
+                'self' => route("survey.{id}.answers9a.show", $answers9a->id_answer),
+                'approve' => route("survey.{id}.answers9a.approve", $answers9a->id_answer),
+                'reject' => route("survey.{id}.answers9a.reject", $answers9a->id_answer),
             ]
         ];
 
@@ -376,7 +394,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
                 'staffpendukung_belowd3_fte_p' => doubleval($answers9b->staffpendukung_belowd3_fte_p),
             ],
             'links' => [
-                'self' => route("survey.{id}.answers9b.show", $answers9b->id_answer)
+                'self' => route("survey.{id}.answers9b.show", $answers9b->id_answer),
+                'approve' => route("survey.{id}.answers9b.approve", $answers9b->id_answer),
+                'reject' => route("survey.{id}.answers9b.reject", $answers9b->id_answer),
             ]
         ];
 
@@ -408,7 +428,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
         }
 
         $detail['answer9c']['links'] = [
-            'self' => route("survey.{id}.answers9c.show", $answers9c->id_answer)
+            'self' => route("survey.{id}.answers9c.show", $answers9c->id_answer),
+            'approve' => route("survey.{id}.answers9c.approve", $answers9c->id_answer),
+                'reject' => route("survey.{id}.answers9c.reject", $answers9c->id_answer),
         ];
 
         return $this;
@@ -428,7 +450,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
                 'jumlah_peneliti_asing' => intval($answers10->jumlah_peneliti_asing),
             ],
             'links' => [
-                'self' => route("survey.{id}.answers10.show", $answers10->id_answer)
+                'self' => route("survey.{id}.answers10.show", $answers10->id_answer),
+                'approve' => route("survey.{id}.answers10.approve", $answers10->id_answer),
+                'reject' => route("survey.{id}.answers10.reject", $answers10->id_answer),
             ]
         ];
 
@@ -456,7 +480,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
         }
 
         $detail['answer11']['links'] = [
-            'self' => route("survey.{id}.answers11.show", $answers11->id_answer)
+            'self' => route("survey.{id}.answers11.show", $answers11->id_answer),
+            'approve' => route("survey.{id}.answers11.approve", $answers11->id_answer),
+                'reject' => route("survey.{id}.answers11.reject", $answers11->id_answer),
         ];
 
         return $this;
@@ -483,7 +509,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
         }
 
         $detail['answer12']['links'] = [
-            'self' => route("survey.{id}.answers12.show", $answers12->id_answer)
+            'self' => route("survey.{id}.answers12.show", $answers12->id_answer),
+            'approve' => route("survey.{id}.answers12.approve", $answers12->id_answer),
+                'reject' => route("survey.{id}.answers12.reject", $answers12->id_answer),
         ];
 
         return $this;
@@ -507,7 +535,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
         }
 
         $detail['answer13']['links'] = [
-            'self' => route("survey.{id}.answers13.show", $answers13->id_answer)
+            'self' => route("survey.{id}.answers13.show", $answers13->id_answer),
+            'approve' => route("survey.{id}.answers13.approve", $answers13->id_answer),
+                'reject' => route("survey.{id}.answers13.reject", $answers13->id_answer),
         ];
 
         return $this;
@@ -531,7 +561,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
         }
 
         $detail['answer14']['links'] = [
-            'self' => route("survey.{id}.answers14.show", $answers14->id_answer)
+            'self' => route("survey.{id}.answers14.show", $answers14->id_answer),
+            'approve' => route("survey.{id}.answers14.approve", $answers14->id_answer),
+                'reject' => route("survey.{id}.answers14.reject", $answers14->id_answer),
         ];
 
         return $this;
@@ -555,7 +587,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
         }
 
         $detail['answer15a']['links'] = [
-            'self' => route("survey.{id}.answers15a.show", $answers15a->id_answer)
+            'self' => route("survey.{id}.answers15a.show", $answers15a->id_answer),
+            'approve' => route("survey.{id}.answers15a.approve", $answers15a->id_answer),
+                'reject' => route("survey.{id}.answers15a.reject", $answers15a->id_answer),
         ];
 
         return $this;
@@ -579,7 +613,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
         }
 
         $detail['answer15b']['links'] = [
-            'self' => route("survey.{id}.answers15b.show", $answers15b->id_answer)
+            'self' => route("survey.{id}.answers15b.show", $answers15b->id_answer),
+            'approve' => route("survey.{id}.answers15b.approve", $answers15b->id_answer),
+                'reject' => route("survey.{id}.answers15b.reject", $answers15b->id_answer),
         ];
 
         return $this;
@@ -607,7 +643,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
         }
 
         $detail['answer16a']['links'] = [
-            'self' => route("survey.{id}.answers16a.show", $answers16a->id_answer)
+            'self' => route("survey.{id}.answers16a.show", $answers16a->id_answer),
+            'approve' => route("survey.{id}.answers16a.approve", $answers16a->id_answer),
+                'reject' => route("survey.{id}.answers16a.reject", $answers16a->id_answer),
         ];
 
         return $this;
@@ -624,7 +662,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
         ];
 
         $detail['answer16b']['links'] = [
-            'self' => route("survey.{id}.answers16b.show", $answers16b->id_answer)
+            'self' => route("survey.{id}.answers16b.show", $answers16b->id_answer),
+            'approve' => route("survey.{id}.answers16b.approve", $answers16b->id_answer),
+                'reject' => route("survey.{id}.answers16b.reject", $answers16b->id_answer),
         ];
 
         return $this;
@@ -648,7 +688,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
         }
 
         $detail['answer17']['links'] = [
-            'self' => route("survey.{id}.answers17.show", $answers17->id_answer)
+            'self' => route("survey.{id}.answers17.show", $answers17->id_answer),
+            'approve' => route("survey.{id}.answers17.approve", $answers17->id_answer),
+                'reject' => route("survey.{id}.answers17.reject", $answers17->id_answer),
         ];
 
         return $this;
@@ -663,7 +705,9 @@ class AnswerDetail extends Fractal\TransformerAbstract
                 'comment' => $answers18->comment,
             ],
             'links' => [
-                'self' => route("survey.{id}.answers18.show", $answers18->id_answer)
+                'self' => route("survey.{id}.answers18.show", $answers18->id_answer),
+                'approve' => route("survey.{id}.answers18.approve", $answers18->id_answer),
+                'reject' => route("survey.{id}.answers18.reject", $answers18->id_answer),
             ]
         ];
 
