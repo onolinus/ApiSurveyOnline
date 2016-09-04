@@ -124,6 +124,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
 
     private function setAnswer1(&$detail, ModelAnswers1 $answers1){
         $detail['answer1'] = [
+            'id' => $answers1->id,
             'status' => $answers1->status,
             'comment' => $answers1->status_comment,
             'data' => [
@@ -140,6 +141,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
 
     private function setAnswer2(&$detail, ModelAnswers2 $answers2){
         $detail['answer2'] = [
+            'id' => $answers2->id,
             'status' => $answers2->status,
             'comment' => $answers2->status_comment,
             'data' => [
@@ -155,6 +157,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
 
     private function setAnswer3(&$detail, ModelAnswers3 $answers3){
         $detail['answer3'] = [
+            'id' => $answers3->id,
             'status' => $answers3->status,
             'comment' => $answers3->status_comment,
             'data' => [
@@ -179,6 +182,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
 
     private function setAnswer4(&$detail, ModelAnswers4 $answers4){
         $detail['answer4'] = [
+            'id' => $answers4->id,
             'status' => $answers4->status,
             'comment' => $answers4->status_comment,
             'data' => [
@@ -247,6 +251,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
 
     private function setAnswer7(&$detail, ModelAnswers7 $answers7){
         $detail['answer7'] = [
+            'id' => $answers7->id,
             'status' => $answers7->status,
             'comment' => $answers7->status_comment,
             'data' => [
@@ -286,6 +291,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
 
     private function setAnswer9a(&$detail, ModelAnswers9a $answers9a){
         $detail['answer9a'] = [
+            'id' => $answers9a->id,
             'status' => $answers9a->status,
             'comment' => $answers9a->status_comment,
             'data' => [
@@ -301,6 +307,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
 
     private function setAnswer9b(&$detail, ModelAnswers9b $answers9b){
         $detail['answer9b'] = [
+            'id' => $answers9b->id,
             'status' => $answers9b->status,
             'comment' => $answers9b->status_comment,
             'data' => [
@@ -406,6 +413,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
     private function setAnswer10(&$detail, ModelAnswers10 $answers10){
         /** @var ModelAnswers10 $answers10 */
         $detail['answer10'] = [
+            'id' => $answers10->id,
             'status' => $answers10->status,
             'comment' => $answers10->status_comment,
             'data' => [
@@ -596,6 +604,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
 
     private function setAnswer16b(&$detail, ModelAnswers16b $answers16b){
         $detail['answer16b'] = [
+            'id' => $answers16b->id,
             'status' => $answers16b->status,
             'comment' => $answers16b->status_comment,
             'data' => [
@@ -635,6 +644,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
 
     private function setAnswer18(&$detail, ModelAnswers18 $answers18){
         $detail['answer18'] = [
+            'id' => $answers18->id,
             'status' => $answers18->status,
             'comment' => $answers18->status_comment,
             'data' => [
