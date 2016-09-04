@@ -10,6 +10,7 @@ use App\TraitFractalResponse;
 use App\Http\Requests;
 use App\Answers as ModelAnswers;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use League\Fractal\TransformerAbstract;
 use PluginCommonSurvey\Libraries\Codes;
@@ -103,6 +104,28 @@ abstract class BaseController extends Controller
         return $this->response->setStatusCode(201)->withArray([
             'code' => Codes::SUCCESS,
             'message' => trans('validator.successrejectsurvey')
+        ]);
+
+    }
+
+    public function comment(Request $request, $id_answer){
+        if($this->preCheckAnswers($id_answer) === false){
+            return $this->error_message;
+        }
+
+        if($this->answersNumberModel instanceof Collection){
+            foreach($this->answersNumberModel as $answersNumber){
+                $answersNumber->status_comment = $request->comment;
+                $answersNumber->save();
+            }
+        }else{
+            $this->answersNumberModel->status_comment = $request->comment;
+            $this->answersNumberModel->save();
+        }
+
+        return $this->response->setStatusCode(201)->withArray([
+            'code' => Codes::SUCCESS,
+            'message' => trans('validator.successcommentsurvey')
         ]);
 
     }
