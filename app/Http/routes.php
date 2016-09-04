@@ -37,9 +37,7 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
     Route::group(['prefix' => 'correspondent/{id}', 'middleware' => ['\App\Http\Middleware\ValidatorPrivilegeMiddleware']], function () {
         Route::get('survey/detail', ['as' => 'user.{id}.survey.show', 'uses' => 'Validator\SurveyController@show']);
     });
-
-    # Survey Answers group : Admin & Validator
-    Route::group(['prefix' => 'survey/{id}', 'middleware' => ['\App\Http\Middleware\AnswersPrivilegeMiddleware']], function () {
+    Route::group(['prefix' => 'survey/{id}', 'middleware' => ['\App\Http\Middleware\ValidatorPrivilegeMiddleware']], function () {
         Route::get('answers1', ['as' => 'survey.{id}.answers1.show', 'uses' => 'Survey\Answers1Controller@show']);
         Route::put('answers1/approve', ['as' => 'survey.{id}.answers1.approve', 'uses' => 'Survey\Answers1Controller@approve']);
         Route::put('answers1/reject', ['as' => 'survey.{id}.answers1.reject', 'uses' => 'Survey\Answers1Controller@reject']);
@@ -128,6 +126,8 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::put('answers18/approve', ['as' => 'survey.{id}.answers18.approve', 'uses' => 'Survey\Answers18Controller@approve']);
         Route::put('answers18/reject', ['as' => 'survey.{id}.answers18.reject', 'uses' => 'Survey\Answers18Controller@reject']);
     });
+
+    # Survey Answers group : Admin & Validator
 
     #Admin & Validator & Guest
     Route::group(['middleware' => ['\App\Http\Middleware\DashboardUserGroupPrivilegeMiddleware']], function () {
