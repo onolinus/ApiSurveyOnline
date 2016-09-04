@@ -32,10 +32,10 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
     #Validator
     Route::group(['middleware' => ['\App\Http\Middleware\ValidatorPrivilegeMiddleware']], function () {
         Route::get('validator/survey/random', ['as' => 'validator.survey.random', 'uses' => 'Validator\SurveyController@random']);
-
-        Route::resource('validator/survey', 'Validator\SurveyController', ['only' => [
-            'show', 'index'
-        ]]);
+        Route::get('validator/survey', ['as' => 'validator.survey.index', 'uses' => 'Validator\SurveyController@index']);
+    });
+    Route::group(['prefix' => 'correspondent/{id}', 'middleware' => ['\App\Http\Middleware\ValidatorPrivilegeMiddleware']], function () {
+        Route::get('survey/detail', ['as' => 'user.{id}.survey.show', 'uses' => 'Validator\SurveyController@show']);
     });
 
     # Survey Answers group : Admin & Validator
