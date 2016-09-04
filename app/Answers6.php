@@ -2,23 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Answers6 extends Model
+class Answers6 extends AnswersNumber
 {
     protected $table = 'answers6';
-
-    protected $primaryKey = 'id';
-
-    protected $dateFormat = 'Y-m-d H:i:s';
-
-    protected $connection = 'mysql';
-
-    protected $fillable = ['id_answer'];
-
-    public function Answers()
-    {
-        return $this->belongsTo('App\Answers', 'id_answer', 'id');
-    }
-
 }
