@@ -26,8 +26,8 @@ abstract class BaseController extends Controller
 
         $answersNumberModel = $answers->{$this->getModelName()};
 
-        if($answersNumberModel === null){
-            return $this->response->errorNotFound([trans('validator.notfoundanswersdata', ['answersnumber' => 1])]);
+        if($answersNumberModel === null || count($answersNumberModel) === 0){
+            return $this->response->errorNotFound([trans('validator.notfoundanswersdata', ['answersnumber' => $this->getModelName()])]);
         }
 
         if(intval($answers->validator_id) !== $this->getSessionUserID() && $this->getSessionUserType() !== AdminPrivilegeMiddleware::USER_TYPE_ALLOWED){
