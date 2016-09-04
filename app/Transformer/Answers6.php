@@ -19,7 +19,7 @@ class Answers6 extends Fractal\TransformerAbstract
                 $data['comment'] = $answers6->status_comment;
             }
 
-            $data['content'][] = [
+            $data['data'][] = [
                 'id' => $answers6->id,
                 'code' => $answers6->code,
                 'percentage' => doubleval($answers6->percentage),

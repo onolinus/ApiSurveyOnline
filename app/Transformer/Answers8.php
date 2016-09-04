@@ -19,7 +19,7 @@ class Answers8 extends Fractal\TransformerAbstract
                 $data['comment'] = $answers8->status_comment;
             }
 
-            $data['content'][] = [
+            $data['data'][] = [
                 'id' => $answers8->id,
                 'institusi' => $answers8->institusi,
                 'jumlah_dana' => doubleval($answers8->jumlah_dana)

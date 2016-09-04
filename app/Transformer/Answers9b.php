@@ -12,7 +12,7 @@ class Answers9b extends Fractal\TransformerAbstract
         return [
             'status' => $answers9b->status,
             'comment' => $answers9b->status_comment,
-            'content' => [
+            'data' => [
                 'peneliti_fungsional_peneliti_s1_l' => intval($answers9b->peneliti_fungsional_peneliti_s1_l),
                 'peneliti_fungsional_peneliti_s1_p' => intval($answers9b->peneliti_fungsional_peneliti_s1_p),
                 'peneliti_fungsional_peneliti_s1_fte_l' => doubleval($answers9b->peneliti_fungsional_peneliti_s1_fte_l),

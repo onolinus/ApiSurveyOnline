@@ -11,7 +11,7 @@ class Answers10 extends Fractal\TransformerAbstract
         return [
             'status' => $answers10->status,
             'comment' => $answers10->status_comment,
-            'content' => [
+            'data' => [
                 'jumlah_peneliti_pemerintah' => intval($answers10->jumlah_peneliti_pemerintah),
                 'jumlah_peneliti_perguruantinggi' => intval($answers10->jumlah_peneliti_perguruantinggi),
                 'jumlah_peneliti_industri' => intval($answers10->jumlah_peneliti_industri),

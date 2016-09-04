@@ -18,7 +18,7 @@ class Answers13 extends Fractal\TransformerAbstract
                 $data['comment'] = $answers13->status_comment;
             }
 
-            $data['content'][] = [
+            $data['data'][] = [
                 'id' => $answers13->id,
                 'nama_peneliti' => $answers13->nama_peneliti,
                 'nama_seminar' => $answers13->nama_seminar,

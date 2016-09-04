@@ -18,7 +18,7 @@ class Answers9c extends Fractal\TransformerAbstract
                 $data['comment'] = $answers9c->status_comment;
             }
 
-            $data['content'][] = [
+            $data['data'][] = [
                 'id' => $answers9c->id,
                 's1_l' => intval($answers9c->s1_l),
                 's1_p' => intval($answers9c->s1_p),

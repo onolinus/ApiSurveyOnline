@@ -12,7 +12,7 @@ class Answers9a extends Fractal\TransformerAbstract
         return [
             'status' => $answers9a->status,
             'comment' => $answers9a->status_comment,
-            'content' => [
+            'data' => [
                 'total_pegawai' => intval($answers9a->total_pegawai),
             ],
         ];

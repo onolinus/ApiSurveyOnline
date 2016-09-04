@@ -12,7 +12,7 @@ class Answers1 extends Fractal\TransformerAbstract
         return  [
             'status' => $answers1->status,
             'comment' => $answers1->status_comment,
-            'content' => [
+            'data' => [
                 'total' => doubleval($answers1->total),
                 'percentage' => intval($answers1->percentage),
             ]

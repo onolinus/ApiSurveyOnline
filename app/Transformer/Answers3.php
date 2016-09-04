@@ -12,7 +12,7 @@ class Answers3 extends Fractal\TransformerAbstract
         return [
             'status' => $answers3->status,
             'comment' => $answers3->status_comment,
-            'content' => [
+            'data' => [
                 'dipa_danapemerintah' => doubleval($answers3->dipa_danapemerintah),
                 'dipa_pnbp_perusahaanswasta' => doubleval($answers3->dipa_pnbp_perusahaanswasta),
                 'dipa_pnbp_perusahaanswasta' => doubleval($answers3->dipa_pnbp_perusahaanswasta),

@@ -12,7 +12,7 @@ class Answers4 extends Fractal\TransformerAbstract
         return [
             'status' => $answers4->status,
             'comment' => $answers4->status_comment,
-            'content' => [
+            'data' => [
                 'belanja_pegawai_upah' => doubleval($answers4->belanja_pegawai_upah),
                 'belanja_modal_properti' => doubleval($answers4->belanja_modal_properti),
                 'belanja_modal_mesin' => doubleval($answers4->belanja_modal_mesin),

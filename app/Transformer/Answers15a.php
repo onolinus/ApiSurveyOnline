@@ -18,7 +18,7 @@ class Answers15a extends Fractal\TransformerAbstract
                 $data['comment'] = $answers15a->status_comment;
             }
 
-            $data['content'][] = [
+            $data['data'][] = [
                 'id' => $answers15a->id,
                 'nama_barang' => $answers15a->nama_barang,
                 'terkomersialisasi' => intval($answers15a->terkomersialisasi),
