@@ -18,4 +18,6 @@ return [
     'nousersurveydata' => 'User did not have survey data.',
     'notfoundanswersdata' => 'Answers :answersnumber data not found.',
     'forbiddenaccesstoanswersnumber' => 'You are forbiddent to access this answers data.',
+    'successapprovesurvey' => 'Survey successfully approved.',
+    'successrejectsurvey' => 'Survey successfully rejected.',
 ];

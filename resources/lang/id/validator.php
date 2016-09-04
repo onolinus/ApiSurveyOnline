@@ -18,4 +18,6 @@ return [
     'nousersurveydata' => 'Responden belum memiliki data survey',
     'notfoundanswersdata' => 'Jawaban survei :answersnumber tidak ditemukan.',
     'forbiddenaccesstoanswersnumber' => 'Anda tidak diizinkan mengakses data jawaban survey ini.',
+    'successapprovesurvey' => 'Survei berhasil disetujui.',
+    'successrejectsurvey' => 'Survei berhasil ditolak.',
 ];
