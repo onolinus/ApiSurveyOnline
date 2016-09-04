@@ -203,6 +203,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
         /** @var ModelAnswers5 $answers5 */
         foreach($list_answers5 as $index=>$answers5){
             if($index === 0){
+                $detail['answer5']['id'] = $answers5->id;
                 $detail['answer5']['status'] = $answers5->status;
                 $detail['answer5']['comment'] = $answers5->status_comment;
             }
@@ -228,6 +229,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
         /** @var ModelAnswers6 $answers6 */
         foreach($list_answers6 as $index=>$answers6){
             if($index === 0){
+                $detail['answer6']['id'] = $answers6->id;
                 $detail['answer6']['status'] = $answers6->status;
                 $detail['answer6']['comment'] = $answers6->status_comment;
             }
@@ -271,6 +273,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
         /** @var ModelAnswers8 $answers8 */
         foreach($list_answers8 as $index=>$answers8){
             if($index === 0){
+                $detail['answer8']['id'] = $answers8->id;
                 $detail['answer8']['status'] = $answers8->status;
                 $detail['answer8']['comment'] = $answers8->status_comment;
             }
@@ -384,6 +387,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
         /** @var ModelAnswers9c $answers9c */
         foreach($list_answers9c as $index=>$answers9c){
             if($index === 0){
+                $detail['answer9c']['id'] = $answers9c->id;
                 $detail['answer9c']['status'] = $answers9c->status;
                 $detail['answer9c']['comment'] = $answers9c->status_comment;
             }
@@ -435,6 +439,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
         /** @var ModelAnswers11 $answers11 */
         foreach($list_answers11 as $index=>$answers11){
             if($index === 0){
+                $detail['answer11']['id'] = $answers11->id;
                 $detail['answer11']['status'] = $answers11->status;
                 $detail['answer11']['comment'] = $answers11->status_comment;
             }
@@ -461,6 +466,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
         /** @var ModelAnswers12 $answers12 */
         foreach($list_answers12 as $index=>$answers12){
             if($index === 0){
+                $detail['answer12']['id'] = $answers12->id;
                 $detail['answer12']['status'] = $answers12->status;
                 $detail['answer12']['comment'] = $answers12->status_comment;
             }
@@ -487,6 +493,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
         /** @var ModelAnswers13 $answers13 */
         foreach($list_answers13 as $index=>$answers13){
             if($index === 0){
+                $detail['answer13']['id'] = $answers13->id;
                 $detail['answer13']['status'] = $answers13->status;
                 $detail['answer13']['comment'] = $answers13->status_comment;
             }
@@ -510,6 +517,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
         /** @var ModelAnswers14 $answers14 */
         foreach($list_answers14 as $index=>$answers14){
             if($index === 0){
+                $detail['answer14']['id'] = $answers14->id;
                 $detail['answer14']['status'] = $answers14->status;
                 $detail['answer14']['comment'] = $answers14->status_comment;
             }
@@ -533,6 +541,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
         /** @var ModelAnswers15a $answers15a */
         foreach($list_answers15a as $index=>$answers15a){
             if($index === 0){
+                $detail['answer15a']['id'] = $answers15a->id;
                 $detail['answer15a']['status'] = $answers15a->status;
                 $detail['answer15a']['comment'] = $answers15a->status_comment;
             }
@@ -556,6 +565,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
         /** @var ModelAnswers15b $answers15b */
         foreach($list_answers15b as $index=>$answers15b){
             if($index === 0){
+                $detail['answer15b']['id'] = $answers15b->id;
                 $detail['answer15b']['status'] = $answers15b->status;
                 $detail['answer15b']['comment'] = $answers15b->status_comment;
             }
@@ -579,6 +589,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
         /** @var ModelAnswers16a $answers16a */
         foreach($list_answers16a as $index=>$answers16a){
             if($index === 0){
+                $detail['answer16a']['id'] = $answers16a->id;
                 $detail['answer16a']['status'] = $answers16a->status;
                 $detail['answer16a']['comment'] = $answers16a->status_comment;
             }
@@ -623,6 +634,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
         /** @var ModelAnswers17 $answers17 */
         foreach($list_answers17 as $index=>$answers17){
             if($index === 0){
+                $detail['answer17']['id'] = $answers17->id;
                 $detail['answer17']['status'] = $answers17->status;
                 $detail['answer17']['comment'] = $answers17->status_comment;
             }
