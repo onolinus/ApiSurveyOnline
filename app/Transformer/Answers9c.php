@@ -14,6 +14,7 @@ class Answers9c extends Fractal\TransformerAbstract
         /** @var ModelAnswers9c $answers9c */
         foreach($list_answers9c as $index=>$answers9c){
             if($index === 0){
+                $data['id'] = $answers9c->id;
                 $data['status'] = $answers9c->status;
                 $data['comment'] = $answers9c->status_comment;
             }

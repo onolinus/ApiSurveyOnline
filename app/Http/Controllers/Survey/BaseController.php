@@ -42,6 +42,10 @@ abstract class BaseController extends Controller
 
     }
 
+    public function approve(){
+
+    }
+
     abstract protected function getModelName();
 
     /**

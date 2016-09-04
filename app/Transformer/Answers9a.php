@@ -10,6 +10,7 @@ class Answers9a extends Fractal\TransformerAbstract
     public function transform(ModelAnswers9a $answers9a)
     {
         return [
+            'id' => $answers9a->id,
             'status' => $answers9a->status,
             'comment' => $answers9a->status_comment,
             'data' => [
