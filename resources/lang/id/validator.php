@@ -20,4 +20,5 @@ return [
     'forbiddenaccesstoanswersnumber' => 'Anda tidak diizinkan mengakses data jawaban survey ini.',
     'successapprovesurvey' => 'Survei berhasil disetujui.',
     'successrejectsurvey' => 'Survei berhasil ditolak.',
+    'successcommentsurvey' => 'komentar survei berhasil disimpan.',
 ];

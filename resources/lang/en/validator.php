@@ -20,4 +20,5 @@ return [
     'forbiddenaccesstoanswersnumber' => 'You are forbiddent to access this answers data.',
     'successapprovesurvey' => 'Survey successfully approved.',
     'successrejectsurvey' => 'Survey successfully rejected.',
+    'successcommentsurvey' => 'Survey comment successfully posted.',
 ];
