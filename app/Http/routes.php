@@ -149,7 +149,13 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::put('answers18/comment', ['as' => 'survey.{id}.answers18.comment', 'uses' => 'Survey\Answers18Controller@comment']);
     });
 
+
     # Survey Answers group : Admin & Validator
+    Route::group(['prefix' => 'survey/{id}', 'middleware' => ['\App\Http\Middleware\AnswersPrivilegeMiddleware']], function () {
+        Route::put('approve', ['as' => 'survey.{id}.approve', 'uses' => 'Survey\AnswersController@approve']);
+        Route::put('reject', ['as' => 'survey.{id}.reject', 'uses' => 'Survey\AnswersController@reject']);
+    });
+
 
     #Admin & Validator & Guest
     Route::group(['middleware' => ['\App\Http\Middleware\DashboardUserGroupPrivilegeMiddleware']], function () {

@@ -17,6 +17,7 @@ return [
     'correspondentdatanotcompleted' => 'Profil responden belum lengkap.',
     'nousersurveydata' => 'Responden belum memiliki data survey',
     'notfoundanswersdata' => 'Jawaban survei :answersnumber tidak ditemukan.',
+    'notfoundanswers' => 'Jawaban survei tidak ditemukan.',
     'forbiddenaccesstoanswersnumber' => 'Anda tidak diizinkan mengakses data jawaban survey ini.',
     'successapprovesurvey' => 'Survei berhasil disetujui.',
     'successrejectsurvey' => 'Survei berhasil ditolak.',
