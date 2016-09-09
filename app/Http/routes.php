@@ -173,6 +173,10 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
             'index'
         ]]);
 
+        Route::resource('stats/total/summary', 'Guest\Report\TotalSummaryController', ['only' => [
+            'index'
+        ]]);
+
         Route::get('stats/lembaga/countuser', ['as' => 'lembaga.countuser', 'uses' => 'LembagaController@getUserCount']);
     });
 

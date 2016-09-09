@@ -18,7 +18,6 @@ class SentAnswersController extends Controller
             ->groupBy('approved_by.id_lembaga')
             ->get();
 
-        return $response->withArray(['data' => $result]
-        );
+        return $response->withArray(['data' => $result]);
     }
 }
