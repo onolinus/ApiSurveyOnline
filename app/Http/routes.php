@@ -25,8 +25,6 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::resource('admin/survey', 'Admin\SurveyController', ['only' => [
             'show', 'index'
         ]]);
-
-        Route::get('stats/lembaga/countuser', ['as' => 'lembaga.countuser', 'uses' => 'LembagaController@getUserCount']);
     });
 
     #Validator
@@ -170,6 +168,12 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::resource('admin/approvedby', 'Admin\ApprovedByController', ['only' => [
             'show', 'index'
         ]]);
+
+        Route::resource('stats/answers/sent', 'Guest\Report\SentAnswersController', ['only' => [
+            'index'
+        ]]);
+
+        Route::get('stats/lembaga/countuser', ['as' => 'lembaga.countuser', 'uses' => 'LembagaController@getUserCount']);
     });
 
 
@@ -193,6 +197,7 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::get('correspondent/survey/data', ['as' => 'respondent.survey.data', 'uses' => 'Correspondent\SurveyController@surveydata']);
         Route::get('correspondent/survey/status', ['as' => 'respondent.survey.status', 'uses' => 'Correspondent\SurveyController@surveystatus']);
     });
+
 
     # Public
     Route::post('/user/register', ['as' => 'register', 'uses' => 'UserController@store']);
