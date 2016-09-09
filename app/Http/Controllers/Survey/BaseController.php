@@ -79,6 +79,7 @@ abstract class BaseController extends Controller
             $this->answersNumberModel->status = Answers::STATUS_ANSWERS_VALIDATION_APPROVED;
             $this->answersNumberModel->save();
         }
+        $this->removeDataSurveyFromCache($this->answers->id_correspondent);
 
         return $this->response->setStatusCode(201)->withArray([
             'code' => Codes::SUCCESS,
@@ -100,6 +101,7 @@ abstract class BaseController extends Controller
             $this->answersNumberModel->status = Answers::STATUS_ANSWERS_VALIDATION_REJECTED;
             $this->answersNumberModel->save();
         }
+        $this->removeDataSurveyFromCache($this->answers->id_correspondent);
 
         return $this->response->setStatusCode(201)->withArray([
             'code' => Codes::SUCCESS,
@@ -122,6 +124,7 @@ abstract class BaseController extends Controller
             $this->answersNumberModel->status_comment = $request->comment;
             $this->answersNumberModel->save();
         }
+        $this->removeDataSurveyFromCache($this->answers->id_correspondent);
 
         return $this->response->setStatusCode(201)->withArray([
             'code' => Codes::SUCCESS,

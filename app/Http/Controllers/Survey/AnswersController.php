@@ -3,15 +3,15 @@ namespace App\Http\Controllers\Survey;
 
 use App\Answers;
 use App\Http\Controllers\Controller;
+use App\TraitCacheSurveyData;
 use App\TraitFractalResponse;
-use App\TraitSessionToken;
 use PluginCommonSurvey\Libraries\Codes;
 
 class AnswersController extends Controller
 {
     use TraitFractalResponse;
 
-    use TraitSessionToken;
+    use TraitCacheSurveyData;
 
     /**
      * @var Answers
@@ -19,10 +19,6 @@ class AnswersController extends Controller
     private $answers;
 
     private $error_message;
-
-    private function checkPrivilege(Answers $answers){
-        return $answers->validator_id !== $this->getSessionUserID() && $this->getSessionUserType() !== 'admin' ? false : true;
-    }
 
     private function preCheckAnswers($id_answer){
         /** @var Answers $answersModel */
@@ -48,6 +44,7 @@ class AnswersController extends Controller
 
         $this->answers->status = Answers::STATUS_ANSWERS_VALIDATION_APPROVED;
         $this->answers->save();
+        $this->removeDataSurveyFromCache($this->answers->id_correspondent);
 
         return $this->response->setStatusCode(201)->withArray([
             'code' => Codes::SUCCESS,
@@ -62,6 +59,7 @@ class AnswersController extends Controller
 
         $this->answers->status = Answers::STATUS_ANSWERS_VALIDATION_REJECTED;
         $this->answers->save();
+        $this->removeDataSurveyFromCache($this->answers->id_correspondent);
 
         return $this->response->setStatusCode(201)->withArray([
             'code' => Codes::SUCCESS,
