@@ -208,6 +208,10 @@ class AnswerDetail extends Fractal\TransformerAbstract
     }
 
     private function setAnswer5(&$detail, Collection $list_answers5){
+        if(count($list_answers5) === 0){
+            return $this;
+        }
+
         /** @var ModelAnswers5 $answers5 */
         foreach($list_answers5 as $index=>$answers5){
             if($index === 0){
@@ -236,6 +240,10 @@ class AnswerDetail extends Fractal\TransformerAbstract
     }
 
     private function setAnswer6(&$detail, Collection $list_answers6){
+        if(count($list_answers6) === 0){
+            return $this;
+        }
+
         /** @var ModelAnswers6 $answers6 */
         foreach($list_answers6 as $index=>$answers6){
             if($index === 0){
@@ -284,6 +292,10 @@ class AnswerDetail extends Fractal\TransformerAbstract
     }
 
     private function setAnswer8(&$detail, Collection $list_answers8){
+        if(count($list_answers8) === 0){
+            return $this;
+        }
+
         /** @var ModelAnswers8 $answers8 */
         foreach($list_answers8 as $index=>$answers8){
             if($index === 0){
@@ -404,6 +416,10 @@ class AnswerDetail extends Fractal\TransformerAbstract
     }
 
     private function setAnswer9c(&$detail, Collection $list_answers9c){
+        if(count($list_answers9c) === 0){
+            return $this;
+        }
+
         /** @var ModelAnswers9c $answers9c */
         foreach($list_answers9c as $index=>$answers9c){
             if($index === 0){
@@ -460,6 +476,10 @@ class AnswerDetail extends Fractal\TransformerAbstract
     }
 
     private function setAnswer11(&$detail, Collection $list_answers11){
+        if(count($list_answers11) === 0){
+            return $this;
+        }
+
         /** @var ModelAnswers11 $answers11 */
         foreach($list_answers11 as $index=>$answers11){
             if($index === 0){
@@ -489,6 +509,10 @@ class AnswerDetail extends Fractal\TransformerAbstract
     }
 
     private function setAnswer12(&$detail, Collection $list_answers12){
+        if(count($list_answers12) === 0){
+            return $this;
+        }
+
         /** @var ModelAnswers12 $answers12 */
         foreach($list_answers12 as $index=>$answers12){
             if($index === 0){
@@ -518,6 +542,10 @@ class AnswerDetail extends Fractal\TransformerAbstract
     }
 
     private function setAnswer13(&$detail, Collection $list_answers13){
+        if(count($list_answers13) === 0){
+            return $this;
+        }
+
         /** @var ModelAnswers13 $answers13 */
         foreach($list_answers13 as $index=>$answers13){
             if($index === 0){
@@ -544,6 +572,10 @@ class AnswerDetail extends Fractal\TransformerAbstract
     }
 
     private function setAnswer14(&$detail, Collection $list_answers14){
+        if(count($list_answers14) === 0){
+            return $this;
+        }
+
         /** @var ModelAnswers14 $answers14 */
         foreach($list_answers14 as $index=>$answers14){
             if($index === 0){
@@ -570,6 +602,10 @@ class AnswerDetail extends Fractal\TransformerAbstract
     }
 
     private function setAnswer15a(&$detail, Collection $list_answers15a){
+        if(count($list_answers15a) === 0){
+            return $this;
+        }
+
         /** @var ModelAnswers15a $answers15a */
         foreach($list_answers15a as $index=>$answers15a){
             if($index === 0){
@@ -596,6 +632,10 @@ class AnswerDetail extends Fractal\TransformerAbstract
     }
 
     private function setAnswer15b(&$detail, Collection $list_answers15b){
+        if(count($list_answers15b) === 0){
+            return $this;
+        }
+
         /** @var ModelAnswers15b $answers15b */
         foreach($list_answers15b as $index=>$answers15b){
             if($index === 0){
@@ -622,6 +662,10 @@ class AnswerDetail extends Fractal\TransformerAbstract
     }
 
     private function setAnswer16a(&$detail, Collection $list_answers16a){
+        if(count($list_answers16a) === 0){
+            return $this;
+        }
+
         /** @var ModelAnswers16a $answers16a */
         foreach($list_answers16a as $index=>$answers16a){
             if($index === 0){
@@ -671,6 +715,10 @@ class AnswerDetail extends Fractal\TransformerAbstract
     }
 
     private function setAnswer17(&$detail, Collection $list_answers17){
+        if(count($list_answers17) === 0){
+            return $this;
+        }
+
         /** @var ModelAnswers17 $answers17 */
         foreach($list_answers17 as $index=>$answers17){
             if($index === 0){
