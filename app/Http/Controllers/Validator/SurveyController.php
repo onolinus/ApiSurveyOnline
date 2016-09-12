@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Validator;
 
 
+use App\Answers;
 use App\Http\Controllers\Controller;
 use app\Libraries\SurveyTrafficBalancer;
 use App\TraitCacheSurveyData;
@@ -15,6 +16,11 @@ class SurveyController extends Controller
     use TraitFractalResponse;
 
     use TraitCacheSurveyData;
+
+    /**
+     * @var Answers
+     */
+    private $answers;
 
 
     public function index(Request $request){
@@ -35,7 +41,10 @@ class SurveyController extends Controller
     }
 
     public function show($id){
-        $response = $this->getValidatorDataSurveyFromCache($id);
+        $this->answers = Answers::find($id);
+        $user_id = $this->answers->Correspondents->user_id;
+
+        $response = $this->getValidatorDataSurveyFromCache($user_id);
 
         if($response === null){
             return $this->response->errorNotFound([trans('validator.nousersurveydata')]);
