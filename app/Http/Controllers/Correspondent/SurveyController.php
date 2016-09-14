@@ -41,20 +41,20 @@ class SurveyController  extends Controller
         ]);
     }
 
-//    public function index(){
-//        return $this->response->withArray([
-//                'data' => $this->getDataDraftFromCache(),
-//                'status' => $this->getStatusDraftFromCache(),
-//            ]
-//        );
-//    }
+    public function index(){
+        return $this->response->withArray([
+                'data' => $this->getDataSurveyFromCache(),
+                'status' => $this->getStatusSurveyFromCache(),
+            ]
+        );
+    }
 
     public function surveydata(){
         return $this->response->withArray($this->getDataSurveyFromCache());
     }
 
-//    public function surveystatus(){
-//        return $this->response->withArray($this->getStatusDraftFromCache());
-//    }
+    public function surveystatus(){
+        return $this->response->withArray($this->getStatusSurveyFromCache());
+    }
 
 }

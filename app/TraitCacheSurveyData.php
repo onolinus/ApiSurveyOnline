@@ -36,7 +36,20 @@ trait TraitCacheSurveyData
         }
 
         $survey = new Survey();
-        $data = $survey->getListAnswers();
+        $data = $survey->getListAnswers($user_id);
+
+        Cache::forever($this->getDataCacheKey($user_id), $data);
+
+        return $data;
+    }
+
+    private function getStatusSurveyFromCache($user_id = null){
+        if($data = Cache::get($this->getStatusCacheKey($user_id))){
+            return $data;
+        }
+
+        $survey = new Survey();
+        $data = $survey->getListAnswersStatus($user_id);
 
         Cache::forever($this->getDataCacheKey($user_id), $data);
 
@@ -75,6 +88,7 @@ trait TraitCacheSurveyData
 
     private function removeDataSurveyFromCache($user_id = null){
         Cache::pull($this->getDataCacheKey($user_id));
+        Cache::pull($this->getStatusCacheKey($user_id));
         Cache::pull($this->getValidatorDataCacheKey($user_id));
     }
 
