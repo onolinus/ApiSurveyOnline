@@ -32,126 +32,126 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::get('validator/survey/random', ['as' => 'validator.survey.random', 'uses' => 'Validator\SurveyController@random']);
         Route::get('validator/survey', ['as' => 'validator.survey.index', 'uses' => 'Validator\SurveyController@index']);
     });
-    Route::group(['prefix' => 'correspondent/{id}', 'middleware' => ['\App\Http\Middleware\ValidatorPrivilegeMiddleware']], function () {
-        Route::get('survey/detail', ['as' => 'user.{id}.survey.show', 'uses' => 'Validator\SurveyController@show']);
+    Route::group(['prefix' => 'correspondent/{user_id}', 'middleware' => ['\App\Http\Middleware\ValidatorPrivilegeMiddleware']], function () {
+        Route::get('survey/detail', ['as' => 'user.{user_id}.survey.show', 'uses' => 'Validator\SurveyController@show']);
     });
-    Route::group(['prefix' => 'survey/{id}', 'middleware' => ['\App\Http\Middleware\ValidatorPrivilegeMiddleware']], function () {
-        Route::get('answers1', ['as' => 'survey.{id}.answers1.show', 'uses' => 'Survey\Answers1Controller@show']);
-        Route::put('answers1/approve', ['as' => 'survey.{id}.answers1.approve', 'uses' => 'Survey\Answers1Controller@approve']);
-        Route::put('answers1/reject', ['as' => 'survey.{id}.answers1.reject', 'uses' => 'Survey\Answers1Controller@reject']);
-        Route::put('answers1/comment', ['as' => 'survey.{id}.answers1.comment', 'uses' => 'Survey\Answers1Controller@comment']);
+    Route::group(['prefix' => 'survey/{id_answer}', 'middleware' => ['\App\Http\Middleware\ValidatorPrivilegeMiddleware']], function () {
+        Route::get('answers1', ['as' => 'survey.{id_answer}.answers1.show', 'uses' => 'Survey\Answers1Controller@show']);
+        Route::put('answers1/approve', ['as' => 'survey.{id_answer}.answers1.approve', 'uses' => 'Survey\Answers1Controller@approve']);
+        Route::put('answers1/reject', ['as' => 'survey.{id_answer}.answers1.reject', 'uses' => 'Survey\Answers1Controller@reject']);
+        Route::put('answers1/comment', ['as' => 'survey.{id_answer}.answers1.comment', 'uses' => 'Survey\Answers1Controller@comment']);
 
-        Route::get('answers2', ['as' => 'survey.{id}.answers2.show', 'uses' => 'Survey\Answers2Controller@show']);
-        Route::put('answers2/approve', ['as' => 'survey.{id}.answers2.approve', 'uses' => 'Survey\Answers2Controller@approve']);
-        Route::put('answers2/reject', ['as' => 'survey.{id}.answers2.reject', 'uses' => 'Survey\Answers2Controller@reject']);
-        Route::put('answers2/comment', ['as' => 'survey.{id}.answers2.comment', 'uses' => 'Survey\Answers2Controller@comment']);
+        Route::get('answers2', ['as' => 'survey.{id_answer}.answers2.show', 'uses' => 'Survey\Answers2Controller@show']);
+        Route::put('answers2/approve', ['as' => 'survey.{id_answer}.answers2.approve', 'uses' => 'Survey\Answers2Controller@approve']);
+        Route::put('answers2/reject', ['as' => 'survey.{id_answer}.answers2.reject', 'uses' => 'Survey\Answers2Controller@reject']);
+        Route::put('answers2/comment', ['as' => 'survey.{id_answer}.answers2.comment', 'uses' => 'Survey\Answers2Controller@comment']);
 
-        Route::get('answers3', ['as' => 'survey.{id}.answers3.show', 'uses' => 'Survey\Answers3Controller@show']);
-        Route::put('answers3/approve', ['as' => 'survey.{id}.answers3.approve', 'uses' => 'Survey\Answers3Controller@approve']);
-        Route::put('answers3/reject', ['as' => 'survey.{id}.answers3.reject', 'uses' => 'Survey\Answers3Controller@reject']);
-        Route::put('answers3/comment', ['as' => 'survey.{id}.answers3.comment', 'uses' => 'Survey\Answers3Controller@comment']);
+        Route::get('answers3', ['as' => 'survey.{id_answer}.answers3.show', 'uses' => 'Survey\Answers3Controller@show']);
+        Route::put('answers3/approve', ['as' => 'survey.{id_answer}.answers3.approve', 'uses' => 'Survey\Answers3Controller@approve']);
+        Route::put('answers3/reject', ['as' => 'survey.{id_answer}.answers3.reject', 'uses' => 'Survey\Answers3Controller@reject']);
+        Route::put('answers3/comment', ['as' => 'survey.{id_answer}.answers3.comment', 'uses' => 'Survey\Answers3Controller@comment']);
 
-        Route::get('answers4', ['as' => 'survey.{id}.answers4.show', 'uses' => 'Survey\Answers4Controller@show']);
-        Route::put('answers4/approve', ['as' => 'survey.{id}.answers4.approve', 'uses' => 'Survey\Answers4Controller@approve']);
-        Route::put('answers4/reject', ['as' => 'survey.{id}.answers4.reject', 'uses' => 'Survey\Answers4Controller@reject']);
-        Route::put('answers4/comment', ['as' => 'survey.{id}.answers4.comment', 'uses' => 'Survey\Answers4Controller@comment']);
+        Route::get('answers4', ['as' => 'survey.{id_answer}.answers4.show', 'uses' => 'Survey\Answers4Controller@show']);
+        Route::put('answers4/approve', ['as' => 'survey.{id_answer}.answers4.approve', 'uses' => 'Survey\Answers4Controller@approve']);
+        Route::put('answers4/reject', ['as' => 'survey.{id_answer}.answers4.reject', 'uses' => 'Survey\Answers4Controller@reject']);
+        Route::put('answers4/comment', ['as' => 'survey.{id_answer}.answers4.comment', 'uses' => 'Survey\Answers4Controller@comment']);
 
-        Route::get('answers5', ['as' => 'survey.{id}.answers5.show', 'uses' => 'Survey\Answers5Controller@show']);
-        Route::put('answers5/approve', ['as' => 'survey.{id}.answers5.approve', 'uses' => 'Survey\Answers5Controller@approve']);
-        Route::put('answers5/reject', ['as' => 'survey.{id}.answers5.reject', 'uses' => 'Survey\Answers5Controller@reject']);
-        Route::put('answers5/comment', ['as' => 'survey.{id}.answers5.comment', 'uses' => 'Survey\Answers5Controller@comment']);
+        Route::get('answers5', ['as' => 'survey.{id_answer}.answers5.show', 'uses' => 'Survey\Answers5Controller@show']);
+        Route::put('answers5/approve', ['as' => 'survey.{id_answer}.answers5.approve', 'uses' => 'Survey\Answers5Controller@approve']);
+        Route::put('answers5/reject', ['as' => 'survey.{id_answer}.answers5.reject', 'uses' => 'Survey\Answers5Controller@reject']);
+        Route::put('answers5/comment', ['as' => 'survey.{id_answer}.answers5.comment', 'uses' => 'Survey\Answers5Controller@comment']);
 
-        Route::get('answers6', ['as' => 'survey.{id}.answers6.show', 'uses' => 'Survey\Answers6Controller@show']);
-        Route::put('answers6/approve', ['as' => 'survey.{id}.answers6.approve', 'uses' => 'Survey\Answers6Controller@approve']);
-        Route::put('answers6/reject', ['as' => 'survey.{id}.answers6.reject', 'uses' => 'Survey\Answers6Controller@reject']);
-        Route::put('answers6/comment', ['as' => 'survey.{id}.answers6.comment', 'uses' => 'Survey\Answers6Controller@comment']);
+        Route::get('answers6', ['as' => 'survey.{id_answer}.answers6.show', 'uses' => 'Survey\Answers6Controller@show']);
+        Route::put('answers6/approve', ['as' => 'survey.{id_answer}.answers6.approve', 'uses' => 'Survey\Answers6Controller@approve']);
+        Route::put('answers6/reject', ['as' => 'survey.{id_answer}.answers6.reject', 'uses' => 'Survey\Answers6Controller@reject']);
+        Route::put('answers6/comment', ['as' => 'survey.{id_answer}.answers6.comment', 'uses' => 'Survey\Answers6Controller@comment']);
 
-        Route::get('answers7', ['as' => 'survey.{id}.answers7.show', 'uses' => 'Survey\Answers7Controller@show']);
-        Route::put('answers7/approve', ['as' => 'survey.{id}.answers7.approve', 'uses' => 'Survey\Answers7Controller@approve']);
-        Route::put('answers7/reject', ['as' => 'survey.{id}.answers7.reject', 'uses' => 'Survey\Answers7Controller@reject']);
-        Route::put('answers7/comment', ['as' => 'survey.{id}.answers7.comment', 'uses' => 'Survey\Answers7Controller@comment']);
+        Route::get('answers7', ['as' => 'survey.{id_answer}.answers7.show', 'uses' => 'Survey\Answers7Controller@show']);
+        Route::put('answers7/approve', ['as' => 'survey.{id_answer}.answers7.approve', 'uses' => 'Survey\Answers7Controller@approve']);
+        Route::put('answers7/reject', ['as' => 'survey.{id_answer}.answers7.reject', 'uses' => 'Survey\Answers7Controller@reject']);
+        Route::put('answers7/comment', ['as' => 'survey.{id_answer}.answers7.comment', 'uses' => 'Survey\Answers7Controller@comment']);
 
-        Route::get('answers8', ['as' => 'survey.{id}.answers8.show', 'uses' => 'Survey\Answers8Controller@show']);
-        Route::put('answers8/approve', ['as' => 'survey.{id}.answers8.approve', 'uses' => 'Survey\Answers8Controller@approve']);
-        Route::put('answers8/reject', ['as' => 'survey.{id}.answers8.reject', 'uses' => 'Survey\Answers8Controller@reject']);
-        Route::put('answers8/comment', ['as' => 'survey.{id}.answers8.comment', 'uses' => 'Survey\Answers8Controller@comment']);
+        Route::get('answers8', ['as' => 'survey.{id_answer}.answers8.show', 'uses' => 'Survey\Answers8Controller@show']);
+        Route::put('answers8/approve', ['as' => 'survey.{id_answer}.answers8.approve', 'uses' => 'Survey\Answers8Controller@approve']);
+        Route::put('answers8/reject', ['as' => 'survey.{id_answer}.answers8.reject', 'uses' => 'Survey\Answers8Controller@reject']);
+        Route::put('answers8/comment', ['as' => 'survey.{id_answer}.answers8.comment', 'uses' => 'Survey\Answers8Controller@comment']);
 
-        Route::get('answers9a', ['as' => 'survey.{id}.answers9a.show', 'uses' => 'Survey\Answers9aController@show']);
-        Route::put('answers9a/approve', ['as' => 'survey.{id}.answers9a.approve', 'uses' => 'Survey\Answers9aController@approve']);
-        Route::put('answers9a/reject', ['as' => 'survey.{id}.answers9a.reject', 'uses' => 'Survey\Answers9aController@reject']);
-        Route::put('answers9a/comment', ['as' => 'survey.{id}.answers9a.comment', 'uses' => 'Survey\Answers9aController@comment']);
+        Route::get('answers9a', ['as' => 'survey.{id_answer}.answers9a.show', 'uses' => 'Survey\Answers9aController@show']);
+        Route::put('answers9a/approve', ['as' => 'survey.{id_answer}.answers9a.approve', 'uses' => 'Survey\Answers9aController@approve']);
+        Route::put('answers9a/reject', ['as' => 'survey.{id_answer}.answers9a.reject', 'uses' => 'Survey\Answers9aController@reject']);
+        Route::put('answers9a/comment', ['as' => 'survey.{id_answer}.answers9a.comment', 'uses' => 'Survey\Answers9aController@comment']);
 
-        Route::get('answers9b', ['as' => 'survey.{id}.answers9b.show', 'uses' => 'Survey\Answers9bController@show']);
-        Route::put('answers9b/approve', ['as' => 'survey.{id}.answers9b.approve', 'uses' => 'Survey\Answers9bController@approve']);
-        Route::put('answers9b/reject', ['as' => 'survey.{id}.answers9b.reject', 'uses' => 'Survey\Answers9bController@reject']);
-        Route::put('answers9b/comment', ['as' => 'survey.{id}.answers9b.comment', 'uses' => 'Survey\Answers9bController@comment']);
+        Route::get('answers9b', ['as' => 'survey.{id_answer}.answers9b.show', 'uses' => 'Survey\Answers9bController@show']);
+        Route::put('answers9b/approve', ['as' => 'survey.{id_answer}.answers9b.approve', 'uses' => 'Survey\Answers9bController@approve']);
+        Route::put('answers9b/reject', ['as' => 'survey.{id_answer}.answers9b.reject', 'uses' => 'Survey\Answers9bController@reject']);
+        Route::put('answers9b/comment', ['as' => 'survey.{id_answer}.answers9b.comment', 'uses' => 'Survey\Answers9bController@comment']);
 
-        Route::get('answers9c', ['as' => 'survey.{id}.answers9c.show', 'uses' => 'Survey\Answers9cController@show']);
-        Route::put('answers9c/approve', ['as' => 'survey.{id}.answers9c.approve', 'uses' => 'Survey\Answers9cController@approve']);
-        Route::put('answers9c/reject', ['as' => 'survey.{id}.answers9c.reject', 'uses' => 'Survey\Answers9cController@reject']);
-        Route::put('answers9c/comment', ['as' => 'survey.{id}.answers9c.comment', 'uses' => 'Survey\Answers9cController@comment']);
+        Route::get('answers9c', ['as' => 'survey.{id_answer}.answers9c.show', 'uses' => 'Survey\Answers9cController@show']);
+        Route::put('answers9c/approve', ['as' => 'survey.{id_answer}.answers9c.approve', 'uses' => 'Survey\Answers9cController@approve']);
+        Route::put('answers9c/reject', ['as' => 'survey.{id_answer}.answers9c.reject', 'uses' => 'Survey\Answers9cController@reject']);
+        Route::put('answers9c/comment', ['as' => 'survey.{id_answer}.answers9c.comment', 'uses' => 'Survey\Answers9cController@comment']);
 
-        Route::get('answers10', ['as' => 'survey.{id}.answers10.show', 'uses' => 'Survey\Answers10Controller@show']);
-        Route::put('answers10/approve', ['as' => 'survey.{id}.answers10.approve', 'uses' => 'Survey\Answers10Controller@approve']);
-        Route::put('answers10/reject', ['as' => 'survey.{id}.answers10.reject', 'uses' => 'Survey\Answers10Controller@reject']);
-        Route::put('answers10/comment', ['as' => 'survey.{id}.answers10.comment', 'uses' => 'Survey\Answers10Controller@comment']);
+        Route::get('answers10', ['as' => 'survey.{id_answer}.answers10.show', 'uses' => 'Survey\Answers10Controller@show']);
+        Route::put('answers10/approve', ['as' => 'survey.{id_answer}.answers10.approve', 'uses' => 'Survey\Answers10Controller@approve']);
+        Route::put('answers10/reject', ['as' => 'survey.{id_answer}.answers10.reject', 'uses' => 'Survey\Answers10Controller@reject']);
+        Route::put('answers10/comment', ['as' => 'survey.{id_answer}.answers10.comment', 'uses' => 'Survey\Answers10Controller@comment']);
 
-        Route::get('answers11', ['as' => 'survey.{id}.answers11.show', 'uses' => 'Survey\Answers11Controller@show']);
-        Route::put('answers11/approve', ['as' => 'survey.{id}.answers11.approve', 'uses' => 'Survey\Answers11Controller@approve']);
-        Route::put('answers11/reject', ['as' => 'survey.{id}.answers11.reject', 'uses' => 'Survey\Answers11Controller@reject']);
-        Route::put('answers11/comment', ['as' => 'survey.{id}.answers11.comment', 'uses' => 'Survey\Answers11Controller@comment']);
+        Route::get('answers11', ['as' => 'survey.{id_answer}.answers11.show', 'uses' => 'Survey\Answers11Controller@show']);
+        Route::put('answers11/approve', ['as' => 'survey.{id_answer}.answers11.approve', 'uses' => 'Survey\Answers11Controller@approve']);
+        Route::put('answers11/reject', ['as' => 'survey.{id_answer}.answers11.reject', 'uses' => 'Survey\Answers11Controller@reject']);
+        Route::put('answers11/comment', ['as' => 'survey.{id_answer}.answers11.comment', 'uses' => 'Survey\Answers11Controller@comment']);
 
-        Route::get('answers12', ['as' => 'survey.{id}.answers12.show', 'uses' => 'Survey\Answers12Controller@show']);
-        Route::put('answers12/approve', ['as' => 'survey.{id}.answers12.approve', 'uses' => 'Survey\Answers12Controller@approve']);
-        Route::put('answers12/reject', ['as' => 'survey.{id}.answers12.reject', 'uses' => 'Survey\Answers12Controller@reject']);
-        Route::put('answers12/comment', ['as' => 'survey.{id}.answers12.comment', 'uses' => 'Survey\Answers12Controller@comment']);
+        Route::get('answers12', ['as' => 'survey.{id_answer}.answers12.show', 'uses' => 'Survey\Answers12Controller@show']);
+        Route::put('answers12/approve', ['as' => 'survey.{id_answer}.answers12.approve', 'uses' => 'Survey\Answers12Controller@approve']);
+        Route::put('answers12/reject', ['as' => 'survey.{id_answer}.answers12.reject', 'uses' => 'Survey\Answers12Controller@reject']);
+        Route::put('answers12/comment', ['as' => 'survey.{id_answer}.answers12.comment', 'uses' => 'Survey\Answers12Controller@comment']);
 
-        Route::get('answers13', ['as' => 'survey.{id}.answers13.show', 'uses' => 'Survey\Answers13Controller@show']);
-        Route::put('answers13/approve', ['as' => 'survey.{id}.answers13.approve', 'uses' => 'Survey\Answers13Controller@approve']);
-        Route::put('answers13/reject', ['as' => 'survey.{id}.answers13.reject', 'uses' => 'Survey\Answers13Controller@reject']);
-        Route::put('answers13/comment', ['as' => 'survey.{id}.answers13.comment', 'uses' => 'Survey\Answers13Controller@comment']);
+        Route::get('answers13', ['as' => 'survey.{id_answer}.answers13.show', 'uses' => 'Survey\Answers13Controller@show']);
+        Route::put('answers13/approve', ['as' => 'survey.{id_answer}.answers13.approve', 'uses' => 'Survey\Answers13Controller@approve']);
+        Route::put('answers13/reject', ['as' => 'survey.{id_answer}.answers13.reject', 'uses' => 'Survey\Answers13Controller@reject']);
+        Route::put('answers13/comment', ['as' => 'survey.{id_answer}.answers13.comment', 'uses' => 'Survey\Answers13Controller@comment']);
 
-        Route::get('answers14', ['as' => 'survey.{id}.answers14.show', 'uses' => 'Survey\Answers14Controller@show']);
-        Route::put('answers14/approve', ['as' => 'survey.{id}.answers14.approve', 'uses' => 'Survey\Answers14Controller@approve']);
-        Route::put('answers14/reject', ['as' => 'survey.{id}.answers14.reject', 'uses' => 'Survey\Answers14Controller@reject']);
-        Route::put('answers14/comment', ['as' => 'survey.{id}.answers14.comment', 'uses' => 'Survey\Answers14Controller@comment']);
+        Route::get('answers14', ['as' => 'survey.{id_answer}.answers14.show', 'uses' => 'Survey\Answers14Controller@show']);
+        Route::put('answers14/approve', ['as' => 'survey.{id_answer}.answers14.approve', 'uses' => 'Survey\Answers14Controller@approve']);
+        Route::put('answers14/reject', ['as' => 'survey.{id_answer}.answers14.reject', 'uses' => 'Survey\Answers14Controller@reject']);
+        Route::put('answers14/comment', ['as' => 'survey.{id_answer}.answers14.comment', 'uses' => 'Survey\Answers14Controller@comment']);
 
-        Route::get('answers15a', ['as' => 'survey.{id}.answers15a.show', 'uses' => 'Survey\Answers15aController@show']);
-        Route::put('answers15a/approve', ['as' => 'survey.{id}.answers15a.approve', 'uses' => 'Survey\Answers15aController@approve']);
-        Route::put('answers15a/reject', ['as' => 'survey.{id}.answers15a.reject', 'uses' => 'Survey\Answers15aController@reject']);
-        Route::put('answers15a/comment', ['as' => 'survey.{id}.answers15a.comment', 'uses' => 'Survey\Answers15aController@comment']);
+        Route::get('answers15a', ['as' => 'survey.{id_answer}.answers15a.show', 'uses' => 'Survey\Answers15aController@show']);
+        Route::put('answers15a/approve', ['as' => 'survey.{id_answer}.answers15a.approve', 'uses' => 'Survey\Answers15aController@approve']);
+        Route::put('answers15a/reject', ['as' => 'survey.{id_answer}.answers15a.reject', 'uses' => 'Survey\Answers15aController@reject']);
+        Route::put('answers15a/comment', ['as' => 'survey.{id_answer}.answers15a.comment', 'uses' => 'Survey\Answers15aController@comment']);
 
-        Route::get('answers15b', ['as' => 'survey.{id}.answers15b.show', 'uses' => 'Survey\Answers15bController@show']);
-        Route::put('answers15b/approve', ['as' => 'survey.{id}.answers15b.approve', 'uses' => 'Survey\Answers15bController@approve']);
-        Route::put('answers15b/reject', ['as' => 'survey.{id}.answers15b.reject', 'uses' => 'Survey\Answers15bController@reject']);
-        Route::put('answers15b/comment', ['as' => 'survey.{id}.answers15b.comment', 'uses' => 'Survey\Answers15bController@comment']);
+        Route::get('answers15b', ['as' => 'survey.{id_answer}.answers15b.show', 'uses' => 'Survey\Answers15bController@show']);
+        Route::put('answers15b/approve', ['as' => 'survey.{id_answer}.answers15b.approve', 'uses' => 'Survey\Answers15bController@approve']);
+        Route::put('answers15b/reject', ['as' => 'survey.{id_answer}.answers15b.reject', 'uses' => 'Survey\Answers15bController@reject']);
+        Route::put('answers15b/comment', ['as' => 'survey.{id_answer}.answers15b.comment', 'uses' => 'Survey\Answers15bController@comment']);
 
-        Route::get('answers16a', ['as' => 'survey.{id}.answers16a.show', 'uses' => 'Survey\Answers16aController@show']);
-        Route::put('answers16a/approve', ['as' => 'survey.{id}.answers16a.approve', 'uses' => 'Survey\Answers16aController@approve']);
-        Route::put('answers16a/reject', ['as' => 'survey.{id}.answers16a.reject', 'uses' => 'Survey\Answers16aController@reject']);
-        Route::put('answers16a/comment', ['as' => 'survey.{id}.answers16a.comment', 'uses' => 'Survey\Answers16aController@comment']);
+        Route::get('answers16a', ['as' => 'survey.{id_answer}.answers16a.show', 'uses' => 'Survey\Answers16aController@show']);
+        Route::put('answers16a/approve', ['as' => 'survey.{id_answer}.answers16a.approve', 'uses' => 'Survey\Answers16aController@approve']);
+        Route::put('answers16a/reject', ['as' => 'survey.{id_answer}.answers16a.reject', 'uses' => 'Survey\Answers16aController@reject']);
+        Route::put('answers16a/comment', ['as' => 'survey.{id_answer}.answers16a.comment', 'uses' => 'Survey\Answers16aController@comment']);
 
-        Route::get('answers16b', ['as' => 'survey.{id}.answers16b.show', 'uses' => 'Survey\Answers16bController@show']);
-        Route::put('answers16b/approve', ['as' => 'survey.{id}.answers16b.approve', 'uses' => 'Survey\Answers16bController@approve']);
-        Route::put('answers16b/reject', ['as' => 'survey.{id}.answers16b.reject', 'uses' => 'Survey\Answers16bController@reject']);
-        Route::put('answers16b/comment', ['as' => 'survey.{id}.answers16b.comment', 'uses' => 'Survey\Answers16bController@comment']);
+        Route::get('answers16b', ['as' => 'survey.{id_answer}.answers16b.show', 'uses' => 'Survey\Answers16bController@show']);
+        Route::put('answers16b/approve', ['as' => 'survey.{id_answer}.answers16b.approve', 'uses' => 'Survey\Answers16bController@approve']);
+        Route::put('answers16b/reject', ['as' => 'survey.{id_answer}.answers16b.reject', 'uses' => 'Survey\Answers16bController@reject']);
+        Route::put('answers16b/comment', ['as' => 'survey.{id_answer}.answers16b.comment', 'uses' => 'Survey\Answers16bController@comment']);
 
-        Route::get('answers17', ['as' => 'survey.{id}.answers17.show', 'uses' => 'Survey\Answers17Controller@show']);
-        Route::put('answers17/approve', ['as' => 'survey.{id}.answers17.approve', 'uses' => 'Survey\Answers17Controller@approve']);
-        Route::put('answers17/reject', ['as' => 'survey.{id}.answers17.reject', 'uses' => 'Survey\Answers17Controller@reject']);
-        Route::put('answers17/comment', ['as' => 'survey.{id}.answers17.comment', 'uses' => 'Survey\Answers17Controller@comment']);
+        Route::get('answers17', ['as' => 'survey.{id_answer}.answers17.show', 'uses' => 'Survey\Answers17Controller@show']);
+        Route::put('answers17/approve', ['as' => 'survey.{id_answer}.answers17.approve', 'uses' => 'Survey\Answers17Controller@approve']);
+        Route::put('answers17/reject', ['as' => 'survey.{id_answer}.answers17.reject', 'uses' => 'Survey\Answers17Controller@reject']);
+        Route::put('answers17/comment', ['as' => 'survey.{id_answer}.answers17.comment', 'uses' => 'Survey\Answers17Controller@comment']);
 
-        Route::get('answers18', ['as' => 'survey.{id}.answers18.show', 'uses' => 'Survey\Answers18Controller@show']);
-        Route::put('answers18/approve', ['as' => 'survey.{id}.answers18.approve', 'uses' => 'Survey\Answers18Controller@approve']);
-        Route::put('answers18/reject', ['as' => 'survey.{id}.answers18.reject', 'uses' => 'Survey\Answers18Controller@reject']);
-        Route::put('answers18/comment', ['as' => 'survey.{id}.answers18.comment', 'uses' => 'Survey\Answers18Controller@comment']);
+        Route::get('answers18', ['as' => 'survey.{id_answer}.answers18.show', 'uses' => 'Survey\Answers18Controller@show']);
+        Route::put('answers18/approve', ['as' => 'survey.{id_answer}.answers18.approve', 'uses' => 'Survey\Answers18Controller@approve']);
+        Route::put('answers18/reject', ['as' => 'survey.{id_answer}.answers18.reject', 'uses' => 'Survey\Answers18Controller@reject']);
+        Route::put('answers18/comment', ['as' => 'survey.{id_answer}.answers18.comment', 'uses' => 'Survey\Answers18Controller@comment']);
     });
 
 
     # Survey Answers group : Admin & Validator
-    Route::group(['prefix' => 'survey/{id}', 'middleware' => ['\App\Http\Middleware\AnswersPrivilegeMiddleware']], function () {
-        Route::put('approve', ['as' => 'survey.{id}.approve', 'uses' => 'Survey\AnswersController@approve']);
-        Route::put('reject', ['as' => 'survey.{id}.reject', 'uses' => 'Survey\AnswersController@reject']);
+    Route::group(['prefix' => 'survey/{id_answer}', 'middleware' => ['\App\Http\Middleware\AnswersPrivilegeMiddleware']], function () {
+        Route::put('approve', ['as' => 'survey.{id_answer}.approve', 'uses' => 'Survey\AnswersController@approve']);
+        Route::put('reject', ['as' => 'survey.{id_answer}.reject', 'uses' => 'Survey\AnswersController@reject']);
     });
 
 

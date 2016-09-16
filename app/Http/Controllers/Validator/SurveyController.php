@@ -40,9 +40,9 @@ class SurveyController extends Controller
         return $this->response->withItem($answer, new AnswersTransformer());
     }
 
-    public function show($id){
-        $this->answers = Answers::find($id);
-        $user_id = $this->answers->Correspondents->user_id;
+    public function show($user_id){
+//        $this->answers = Answers::find($id);
+//        $user_id = $this->answers->Correspondents->user_id;
 
         $response = $this->getValidatorDataSurveyFromCache($user_id);
 
