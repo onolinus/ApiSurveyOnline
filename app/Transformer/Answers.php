@@ -21,7 +21,7 @@ class Answers extends Fractal\TransformerAbstract
                 'updated_string' => $answers->updated_at->toDayDateTimeString(),
             ],
             'links' => [
-                'self' => route('user.{id}.survey.show', [$answers->id_correspondent])
+                'self' => route('user.{user_id}.survey.show', [$answers->id_correspondent])
             ],
             'relationships' => [
                 'correspondent' => [
