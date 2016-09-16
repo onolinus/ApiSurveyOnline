@@ -9,7 +9,7 @@ class Answers12Controller extends BaseController
 {
 
     protected function getModelName(){
-        return 'Answers11';
+        return 'Answers12';
     }
 
     /**
