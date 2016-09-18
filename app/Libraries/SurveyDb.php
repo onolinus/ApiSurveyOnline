@@ -303,25 +303,36 @@ class SurveyDb{
         }
 
         return [
-            '1' => $this->getAnswers1Status($this->answers),
-            '2' => $this->getAnswers2Status($this->answers),
-            '3' => $this->getAnswers3Status($this->answers),
-            '4' => $this->getAnswers4Status($this->answers),
-            '5' => $this->getAnswers5Status($this->answers),
-            '6' => $this->getAnswers6Status($this->answers),
-            '7' => $this->getAnswers7Status($this->answers),
-            '8' => $this->getAnswers8Status($this->answers),
-            '9' => $this->getAnswers9Status($this->answers),
-            '10' => $this->getAnswers10Status($this->answers),
-            '11' => $this->getAnswers11Status($this->answers),
-            '12' => $this->getAnswers12Status($this->answers),
-            '13' => $this->getAnswers13Status($this->answers),
-            '14' => $this->getAnswers14Status($this->answers),
-            '15' => $this->getAnswers15Status($this->answers),
-            '16' => $this->getAnswers16Status($this->answers),
-            '17' => $this->getAnswers17Status($this->answers),
-            '18' => $this->getAnswers18Status($this->answers),
+            'lock_status' => intval($this->getLockStatus($this->answers)),
+            'data' => [
+                '1' => $this->getAnswers1Status($this->answers),
+                '2' => $this->getAnswers2Status($this->answers),
+                '3' => $this->getAnswers3Status($this->answers),
+                '4' => $this->getAnswers4Status($this->answers),
+                '5' => $this->getAnswers5Status($this->answers),
+                '6' => $this->getAnswers6Status($this->answers),
+                '7' => $this->getAnswers7Status($this->answers),
+                '8' => $this->getAnswers8Status($this->answers),
+                '9' => $this->getAnswers9Status($this->answers),
+                '10' => $this->getAnswers10Status($this->answers),
+                '11' => $this->getAnswers11Status($this->answers),
+                '12' => $this->getAnswers12Status($this->answers),
+                '13' => $this->getAnswers13Status($this->answers),
+                '14' => $this->getAnswers14Status($this->answers),
+                '15' => $this->getAnswers15Status($this->answers),
+                '16' => $this->getAnswers16Status($this->answers),
+                '17' => $this->getAnswers17Status($this->answers),
+                '18' => $this->getAnswers18Status($this->answers),
+            ]
         ];
+    }
+
+    private function getLockStatus(Answers $answers){
+        if($answers->status === Answers::STATUS_ANSWERS_VALIDATION_REJECTED){
+            return true;
+        }
+
+        return false;
     }
 
     public function getListAnswers($user_id){
