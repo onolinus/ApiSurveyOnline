@@ -59,7 +59,7 @@ trait TraitCacheSurveyData
         }
 
         if($status = Cache::get($this->getDraftStatusCacheKey())){
-            return ['type' => 'survey', 'data' => $status];
+            return ['type' => 'draft', 'data' => $status];
         }
 
         return [];
