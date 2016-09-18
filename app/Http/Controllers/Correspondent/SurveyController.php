@@ -51,7 +51,7 @@ class SurveyController  extends Controller
 
     public function surveydata(){
 //        return $this->response->withArray($this->getDataSurveyFromCache());
-        return $this->response->withArray($this->getDataDraftFromCache());
+        return $this->response->withArray(array_merge($this->getDataDraftFromCache(), ['comment' => $this->getCommentSurveyFromCache()]));
     }
 
     public function surveystatus(){

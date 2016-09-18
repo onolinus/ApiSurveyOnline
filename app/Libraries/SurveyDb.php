@@ -67,10 +67,22 @@ class SurveyDb{
         return $this->getStatusValue($answers1->status);
     }
 
+    private function getAnswers1Comment(Answers $answers){
+        /** @var Answers1 $answers1 */
+        $answers1 = $answers->Answers1;
+        return $answers1->status_comment;
+    }
+
     private function getAnswers2Status(Answers $answers){
         /** @var Answers2 $answers2 */
         $answers2 = $answers->Answers2;
         return $this->getStatusValue($answers2->status);
+    }
+
+    private function getAnswers2Comment(Answers $answers){
+        /** @var Answers2 $answers2 */
+        $answers2 = $answers->Answers2;
+        return $answers2->status_comment;
     }
 
     private function getAnswers3Status(Answers $answers){
@@ -79,10 +91,22 @@ class SurveyDb{
         return $this->getStatusValue($answers3->status);
     }
 
+    private function getAnswers3Comment(Answers $answers){
+        /** @var Answers3 $answers3 */
+        $answers3 = $answers->Answers3;
+        return $answers3->status_comment;
+    }
+
     private function getAnswers4Status(Answers $answers){
         /** @var Answers4 $answers4 */
         $answers4 = $answers->Answers4;
         return $this->getStatusValue($answers4->status);
+    }
+
+    private function getAnswers4Comment(Answers $answers){
+        /** @var Answers4 $answers4 */
+        $answers4 = $answers->Answers4;
+        return $answers4->status_comment;
     }
 
     private function getAnswers5Status(Answers $answers){
@@ -92,31 +116,37 @@ class SurveyDb{
         $answers5_status = 1;
 
         /** @var Answers5 $answers5 */
-        foreach($list_answers5 as $answers5){
-            if($this->getStatusValue($answers5->status) === 0){
-                $answers5_status = 0;
-                break;
-            }
-        }
-
+        $answers5 = $list_answers5->first();
+        $answers5_status = $this->getStatusValue($answers5->status);
         return $answers5_status;
+    }
+
+    private function getAnswers5Comment(Answers $answers){
+        /** @var Collection $list_answers5 */
+        $list_answers5 = $answers->Answers5;
+
+        /** @var Answers5 $answers5 */
+        $answers5 = $list_answers5->first();
+        return $answers5->status_comment;
     }
 
     private function getAnswers6Status(Answers $answers){
         /** @var Collection $list_answers6 */
         $list_answers6 = $answers->Answers6;
 
-        $answers6_status = 1;
+        /** @var Answers6 $answers6 */
+        $answers6 = $list_answers6->first();
+        $answers6_status = $this->getStatusValue($answers6->status);
+        return $answers6_status;
+    }
+
+    private function getAnswers6Comment(Answers $answers){
+        /** @var Collection $list_answers6 */
+        $list_answers6 = $answers->Answers6;
 
         /** @var Answers6 $answers6 */
-        foreach($list_answers6 as $answers6){
-            if($this->getStatusValue($answers6->status) === 0){
-                $answers6_status = 0;
-                break;
-            }
-        }
-
-        return $answers6_status;
+        $answers6 = $list_answers6->first();
+        return $answers6->status_comment;
     }
 
     private function getAnswers7Status(Answers $answers){
@@ -125,21 +155,31 @@ class SurveyDb{
         return $this->getStatusValue($answers7->status);
     }
 
+    private function getAnswers7Comment(Answers $answers){
+        /** @var Answers7 $answers7 */
+        $answers7 = $answers->Answers7;
+        return $answers7->status_comment;
+    }
+
     private function getAnswers8Status(Answers $answers){
         /** @var Collection $list_answers8 */
         $list_answers8 = $answers->Answers8;
 
-        $answers8_status = 1;
-
         /** @var Answers8 $answers8 */
-        foreach($list_answers8 as $answers8){
-            if($this->getStatusValue($answers8->status) === 0){
-                $answers8_status = 0;
-                break;
-            }
-        }
+        $answers8 = $list_answers8->first();
+        $answers8_status = $this->getStatusValue($answers8->status);
 
         return $answers8_status;
+    }
+
+    private function getAnswers8Comment(Answers $answers){
+        /** @var Collection $list_answers8 */
+        $list_answers8 = $answers->Answers8;
+
+        /** @var Answers8 $answers8 */
+        $answers8 = $list_answers8->first();
+
+        return $answers8->status_comment;
     }
 
     private function getAnswers9Status(Answers $answers){
@@ -153,16 +193,35 @@ class SurveyDb{
 
         /** @var Collection $list_answers9c */
         $list_answers9c = $answers->Answers9c;
-        $answers9cStatus = 1;
         /** @var Answers9c $answers9c */
-        foreach($list_answers9c as $answers9c){
-            if($this->getStatusValue($answers9c->status) === 0){
-                $answers9cStatus = 0;
-                break;
-            }
-        }
+        $answers9c = $list_answers9c->first();
+        $answers9cStatus = $this->getStatusValue($answers9c->status);
 
         return $answers9aStatus === 1 && $answers9bStatus === 1 && $answers9cStatus === 1 ? 1 : 0;
+    }
+
+    private function getAnswers9aComment(Answers $answers){
+        /** @var Answers9a $answers9a */
+        $answers9a = $answers->Answers9a;
+        return  $answers9a->status_comment;
+    }
+
+    private function getAnswers9bComment(Answers $answers)
+    {
+        /** @var Answers9b $answers9b */
+        $answers9b = $answers->Answers9b;
+        return $answers9b->status_comment;
+    }
+
+    private function getAnswers9cComment(Answers $answers)
+    {
+        /** @var Collection $list_answers9c */
+        $list_answers9c = $answers->Answers9c;
+
+        /** @var Answers9c $answers9c */
+        $answers9c = $list_answers9c->first();
+
+        return $answers9c->status_comment;
     }
 
     private function getAnswers10Status(Answers $answers){
@@ -171,103 +230,128 @@ class SurveyDb{
         return $this->getStatusValue($answers10->status);
     }
 
+    private function getAnswers10Comment(Answers $answers){
+        /** @var Answers10 $answers10 */
+        $answers10 = $answers->Answers10;
+        return $answers10->status_comment;
+    }
+
     private function getAnswers11Status(Answers $answers){
         /** @var Collection $list_answers11 */
         $list_answers11 = $answers->Answers11;
-        $answers11Status = 1;
         /** @var Answers11 $answers11 */
-        foreach($list_answers11 as $answers11){
-            if($this->getStatusValue($answers11->status) === 0){
-                $answers11Status = 0;
-                break;
-            }
-        }
+        $answers11 = $list_answers11->first();
+        $answers11Status = $this->getStatusValue($answers11->status);
 
         return $answers11Status;
+    }
+
+    private function getAnswers11Comment(Answers $answers){
+        /** @var Collection $list_answers11 */
+        $list_answers11 = $answers->Answers11;
+        /** @var Answers11 $answers11 */
+        $answers11 = $list_answers11->first();
+
+        return $answers11->status_comment;
     }
 
     private function getAnswers12Status(Answers $answers){
         /** @var Collection $list_answers12 */
         $list_answers12 = $answers->Answers12;
-        $answers12Status = 1;
         /** @var Answers12 $answers12 */
-        foreach($list_answers12 as $answers12){
-            if($this->getStatusValue($answers12->status) === 0){
-                $answers12Status = 0;
-                break;
-            }
-        }
+        $answers12 = $list_answers12->first();
+        $answers12Status = $this->getStatusValue($answers12->status);
 
         return $answers12Status;
+    }
+
+    private function getAnswers12Comment(Answers $answers){
+        /** @var Collection $list_answers12 */
+        $list_answers12 = $answers->Answers12;
+        /** @var Answers12 $answers12 */
+        $answers12 = $list_answers12->first();
+
+        return $answers12->status_comment;
     }
 
     private function getAnswers13Status(Answers $answers){
         /** @var Collection $list_answers13 */
         $list_answers13 = $answers->Answers13;
-        $answers13Status = 1;
         /** @var Answers13 $answers13 */
-        foreach($list_answers13 as $answers13){
-            if($this->getStatusValue($answers13->status) === 0){
-                $answers13Status = 0;
-                break;
-            }
-        }
+        $answers13 = $list_answers13->first();
+        $answers13Status = $this->getStatusValue($answers13->status);
 
         return $answers13Status;
+    }
+
+    private function getAnswers13Comment(Answers $answers){
+        /** @var Collection $list_answers13 */
+        $list_answers13 = $answers->Answers13;
+        /** @var Answers13 $answers13 */
+        $answers13 = $list_answers13->first();
+
+        return $answers13->status_comment;
     }
 
     private function getAnswers14Status(Answers $answers){
         /** @var Collection $list_answers14 */
         $list_answers14 = $answers->Answers14;
-        $answers14Status = 1;
         /** @var Answers14 $answers14 */
-        foreach($list_answers14 as $answers14){
-            if($this->getStatusValue($answers14->status) === 0){
-                $answers14Status = 0;
-                break;
-            }
-        }
+        $answers14 = $list_answers14->first();
+        $answers14Status = $this->getStatusValue($answers14->status);
 
         return $answers14Status;
+    }
+
+    private function getAnswers14Comment(Answers $answers){
+        /** @var Collection $list_answers14 */
+        $list_answers14 = $answers->Answers14;
+        /** @var Answers14 $answers14 */
+        $answers14 = $list_answers14->first();
+
+        return $answers14->status_comment;
     }
 
     private function getAnswers15Status(Answers $answers){
         /** @var Collection $list_answers15a */
         $list_answers15a = $answers->Answers15a;
-        $answers15aStatus = 1;
         /** @var Answers15a $answers15a */
-        foreach($list_answers15a as $answers15a){
-            if($this->getStatusValue($answers15a->status) === 0){
-                $answers15aStatus = 0;
-                break;
-            }
-        }
+        $answers15a = $list_answers15a->first();
+        $answers15aStatus = $this->getStatusValue($answers15a->status);
 
         /** @var Collection $list_answers15b */
         $list_answers15b = $answers->Answers15b;
-        $answers15bStatus = 1;
         /** @var Answers15b $answers15b */
-        foreach($list_answers15b as $answers15b){
-            if($this->getStatusValue($answers15b->status) === 0){
-                $answers15bStatus = 0;
-                break;
-            }
-        }
+        $answers15b = $list_answers15b->first();
+        $answers15bStatus = $this->getStatusValue($answers15b->status);
 
         return $answers15aStatus === 1 && $answers15bStatus === 1 ? 1 : 0;
+    }
+
+    private function getAnswers15aComment(Answers $answers){
+        /** @var Collection $list_answers15a */
+        $list_answers15a = $answers->Answers15a;
+        /** @var Answers15a $answers15a */
+        $answers15a = $list_answers15a->first();
+        return $answers15a->status_comment;
+
+        return $answers15aStatus === 1 && $answers15bStatus === 1 ? 1 : 0;
+    }
+
+    private function getAnswers15bComment(Answers $answers){
+        /** @var Collection $list_answers15b */
+        $list_answers15b = $answers->Answers15b;
+        /** @var Answers15b $answers15b */
+        $answers15b = $list_answers15b->first();
+        return $answers15b->status_comment;
     }
 
     private function getAnswers16Status(Answers $answers){
         /** @var Collection $list_answers16a */
         $list_answers16a = $answers->Answers16a;
-        $answers16aStatus = 1;
         /** @var Answers16a $answers16a */
-        foreach($list_answers16a as $answers16a){
-            if($this->getStatusValue($answers16a->status) === 0){
-                $answers16aStatus = 0;
-                break;
-            }
-        }
+        $answers16a = $list_answers16a->first();
+        $answers16aStatus = $this->getStatusValue($answers16a->status);
 
         /** @var Answers16b $answers16b */
         $answers16b = $answers->Answers16b;
@@ -276,25 +360,49 @@ class SurveyDb{
         return $answers16aStatus === 1 && $answers16bStatus === 1 ? 1 : 0;
     }
 
+    private function getAnswers16aComment(Answers $answers){
+        /** @var Collection $list_answers16a */
+        $list_answers16a = $answers->Answers16a;
+        /** @var Answers16a $answers16a */
+        $answers16a = $list_answers16a->first();
+        return $answers16a->status_comment;
+    }
+
+    private function getAnswers16bComment(Answers $answers){
+        /** @var Answers16b $answers16b */
+        $answers16b = $answers->Answers16b;
+        return $answers16b->status_comment;
+    }
+
     private function getAnswers17Status(Answers $answers){
         /** @var Collection $list_answers17 */
         $list_answers17 = $answers->Answers17;
-        $answers17Status = 1;
         /** @var Answers17 $answers17 */
-        foreach($list_answers17 as $answers17){
-            if($this->getStatusValue($answers17->status) === 0){
-                $answers17Status = 0;
-                break;
-            }
-        }
+        $answers17 = $list_answers17->first();
+        $answers17Status = $this->getStatusValue($answers17->status);
 
         return $answers17Status;
+    }
+
+    private function getAnswers17Comment(Answers $answers){
+        /** @var Collection $list_answers17 */
+        $list_answers17 = $answers->Answers17;
+        /** @var Answers17 $answers17 */
+        $answers17 = $list_answers17->first();
+
+        return $answers17->status_comment;
     }
 
     private function getAnswers18Status(Answers $answers){
         /** @var Answers18 $answers18 */
         $answers18 = $answers->Answers18;
         return $this->getStatusValue($answers18->status);
+    }
+
+    private function getAnswers18Comment(Answers $answers){
+        /** @var Answers18 $answers18 */
+        $answers18 = $answers->Answers18;
+        return $answers18->status_comment;
     }
 
     public function getListAnswersStatus($user_id){
@@ -325,6 +433,37 @@ class SurveyDb{
                 '17' => $this->getAnswers17Status($this->answers),
                 '18' => $this->getAnswers18Status($this->answers),
             ]
+        ];
+    }
+
+    public function getListComment($user_id){
+        if($this->preCheck($user_id) === false){
+            return null;
+        }
+
+        return [
+            '1' => $this->getAnswers1Comment($this->answers),
+            '2' => $this->getAnswers2Comment($this->answers),
+            '3' => $this->getAnswers3Comment($this->answers),
+            '4' => $this->getAnswers4Comment($this->answers),
+            '5' => $this->getAnswers5Comment($this->answers),
+            '6' => $this->getAnswers6Comment($this->answers),
+            '7' => $this->getAnswers7Comment($this->answers),
+            '8' => $this->getAnswers8Comment($this->answers),
+            '9a' => $this->getAnswers9aComment($this->answers),
+            '9b' => $this->getAnswers9bComment($this->answers),
+            '9c' => $this->getAnswers9cComment($this->answers),
+            '10' => $this->getAnswers10Comment($this->answers),
+            '11' => $this->getAnswers11Comment($this->answers),
+            '12' => $this->getAnswers12Comment($this->answers),
+            '13' => $this->getAnswers13Comment($this->answers),
+            '14' => $this->getAnswers14Comment($this->answers),
+            '15' => $this->getAnswers15aComment($this->answers),
+            '15a' => $this->getAnswers15bComment($this->answers),
+            '16b' => $this->getAnswers16aComment($this->answers),
+            '16c' => $this->getAnswers16bComment($this->answers),
+            '17' => $this->getAnswers17Comment($this->answers),
+            '18' => $this->getAnswers18Comment($this->answers),
         ];
     }
 
