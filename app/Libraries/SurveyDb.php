@@ -304,6 +304,7 @@ class SurveyDb{
 
         return [
             'lock_status' => intval($this->getLockStatus($this->answers)),
+            'status' => $this->answers->status,
             'data' => [
                 '1' => $this->getAnswers1Status($this->answers),
                 '2' => $this->getAnswers2Status($this->answers),
