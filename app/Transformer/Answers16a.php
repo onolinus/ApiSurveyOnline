@@ -20,6 +20,7 @@ class Answers16a extends Fractal\TransformerAbstract
 
             $data['data'][] = [
                 'id' => $answers16a->id,
+                'tahun' => $answers16a->tahun,
                 'usulan_paten' => intval($answers16a->usulan_paten),
                 'usulan_patensederhana' => intval($answers16a->usulan_patensederhana),
                 'usulan_patensederhana' => intval($answers16a->usulan_patensederhana),
