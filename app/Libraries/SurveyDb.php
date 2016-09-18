@@ -5,6 +5,7 @@ namespace app\Libraries;
 use App\Answers18;
 use App\Correspondents;
 use App\TraitSessionToken;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use app\Libraries\Questions\InterfaceQuestion;
 use App\Answers10;
@@ -33,17 +34,313 @@ use DB;
 
 class SurveyDb{
 
+    /**
+     * @var Correspondents $correspondent
+     * @var Answers $answers
+     *
+     */
+    private $correspondent, $answers;
 
+    private function preCheck($user_id){
+        $this->correspondent = Correspondents::find($user_id);
 
-    public function getListAnswers($user_id){
-        /** @var Correspondents $correspondent */
-        $correspondent = Correspondents::find($user_id);
+        if($this->correspondent === null){
+            return false;
+        }
 
-        if($correspondent === null){
+        if($this->correspondent->Answers === null){
+            return false;
+        }
+
+        $this->answers = $this->correspondent->Answers;
+
+        return true;
+    }
+
+    private function getStatusValue($status){
+        return in_array($status, [Answers::STATUS_ANSWERS_SENT, Answers::STATUS_ANSWERS_VALIDATION_PROGRESS, Answers::STATUS_ANSWERS_VALIDATION_APPROVED]) ? 1 : 0;
+    }
+
+    private function getAnswers1Status(Answers $answers){
+        /** @var Answers1 $answers1 */
+        $answers1 = $answers->Answers1;
+        return $this->getStatusValue($answers1->status);
+    }
+
+    private function getAnswers2Status(Answers $answers){
+        /** @var Answers2 $answers2 */
+        $answers2 = $answers->Answers2;
+        return $this->getStatusValue($answers2->status);
+    }
+
+    private function getAnswers3Status(Answers $answers){
+        /** @var Answers3 $answers3 */
+        $answers3 = $answers->Answers3;
+        return $this->getStatusValue($answers3->status);
+    }
+
+    private function getAnswers4Status(Answers $answers){
+        /** @var Answers4 $answers4 */
+        $answers4 = $answers->Answers4;
+        return $this->getStatusValue($answers4->status);
+    }
+
+    private function getAnswers5Status(Answers $answers){
+        /** @var Collection $list_answers5 */
+        $list_answers5 = $answers->Answers5;
+
+        $answers5_status = 1;
+
+        /** @var Answers5 $answers5 */
+        foreach($list_answers5 as $answers5){
+            if($this->getStatusValue($answers5->status) === 0){
+                $answers5_status = 0;
+                break;
+            }
+        }
+
+        return $answers5_status;
+    }
+
+    private function getAnswers6Status(Answers $answers){
+        /** @var Collection $list_answers6 */
+        $list_answers6 = $answers->Answers6;
+
+        $answers6_status = 1;
+
+        /** @var Answers6 $answers6 */
+        foreach($list_answers6 as $answers6){
+            if($this->getStatusValue($answers6->status) === 0){
+                $answers6_status = 0;
+                break;
+            }
+        }
+
+        return $answers6_status;
+    }
+
+    private function getAnswers7Status(Answers $answers){
+        /** @var Answers7 $answers7 */
+        $answers7 = $answers->Answers7;
+        return $this->getStatusValue($answers7->status);
+    }
+
+    private function getAnswers8Status(Answers $answers){
+        /** @var Collection $list_answers8 */
+        $list_answers8 = $answers->Answers8;
+
+        $answers8_status = 1;
+
+        /** @var Answers8 $answers8 */
+        foreach($list_answers8 as $answers8){
+            if($this->getStatusValue($answers8->status) === 0){
+                $answers8_status = 0;
+                break;
+            }
+        }
+
+        return $answers8_status;
+    }
+
+    private function getAnswers9Status(Answers $answers){
+        /** @var Answers9a $answers9a */
+        $answers9a = $answers->Answers9a;
+        $answers9aStatus = $this->getStatusValue($answers9a->status);
+
+        /** @var Answers9b $answers9b */
+        $answers9b = $answers->Answers9b;
+        $answers9bStatus = $this->getStatusValue($answers9b->status);
+
+        /** @var Collection $list_answers9c */
+        $list_answers9c = $answers->Answers9c;
+        $answers9cStatus = 1;
+        /** @var Answers9c $answers9c */
+        foreach($list_answers9c as $answers9c){
+            if($this->getStatusValue($answers9c->status) === 0){
+                $answers9cStatus = 0;
+                break;
+            }
+        }
+
+        return $answers9aStatus === 1 && $answers9bStatus === 1 && $answers9cStatus === 1 ? 1 : 0;
+    }
+
+    private function getAnswers10Status(Answers $answers){
+        /** @var Answers10 $answers10 */
+        $answers10 = $answers->Answers10;
+        return $this->getStatusValue($answers10->status);
+    }
+
+    private function getAnswers11Status(Answers $answers){
+        /** @var Collection $list_answers11 */
+        $list_answers11 = $answers->Answers11;
+        $answers11Status = 1;
+        /** @var Answers11 $answers11 */
+        foreach($list_answers11 as $answers11){
+            if($this->getStatusValue($answers11->status) === 0){
+                $answers11Status = 0;
+                break;
+            }
+        }
+
+        return $answers11Status;
+    }
+
+    private function getAnswers12Status(Answers $answers){
+        /** @var Collection $list_answers12 */
+        $list_answers12 = $answers->Answers12;
+        $answers12Status = 1;
+        /** @var Answers12 $answers12 */
+        foreach($list_answers12 as $answers12){
+            if($this->getStatusValue($answers12->status) === 0){
+                $answers12Status = 0;
+                break;
+            }
+        }
+
+        return $answers12Status;
+    }
+
+    private function getAnswers13Status(Answers $answers){
+        /** @var Collection $list_answers13 */
+        $list_answers13 = $answers->Answers13;
+        $answers13Status = 1;
+        /** @var Answers13 $answers13 */
+        foreach($list_answers13 as $answers13){
+            if($this->getStatusValue($answers13->status) === 0){
+                $answers13Status = 0;
+                break;
+            }
+        }
+
+        return $answers13Status;
+    }
+
+    private function getAnswers14Status(Answers $answers){
+        /** @var Collection $list_answers14 */
+        $list_answers14 = $answers->Answers14;
+        $answers14Status = 1;
+        /** @var Answers14 $answers14 */
+        foreach($list_answers14 as $answers14){
+            if($this->getStatusValue($answers14->status) === 0){
+                $answers14Status = 0;
+                break;
+            }
+        }
+
+        return $answers14Status;
+    }
+
+    private function getAnswers15Status(Answers $answers){
+        /** @var Collection $list_answers15a */
+        $list_answers15a = $answers->Answers15a;
+        $answers15aStatus = 1;
+        /** @var Answers15a $answers15a */
+        foreach($list_answers15a as $answers15a){
+            if($this->getStatusValue($answers15a->status) === 0){
+                $answers15aStatus = 0;
+                break;
+            }
+        }
+
+        /** @var Collection $list_answers15b */
+        $list_answers15b = $answers->Answers15b;
+        $answers15bStatus = 1;
+        /** @var Answers15b $answers15b */
+        foreach($list_answers15b as $answers15b){
+            if($this->getStatusValue($answers15b->status) === 0){
+                $answers15bStatus = 0;
+                break;
+            }
+        }
+
+        return $answers15aStatus === 1 && $answers15bStatus === 1 ? 1 : 0;
+    }
+
+    private function getAnswers16Status(Answers $answers){
+        /** @var Collection $list_answers16a */
+        $list_answers16a = $answers->Answers16a;
+        $answers16aStatus = 1;
+        /** @var Answers16a $answers16a */
+        foreach($list_answers16a as $answers16a){
+            if($this->getStatusValue($answers16a->status) === 0){
+                $answers16aStatus = 0;
+                break;
+            }
+        }
+
+        /** @var Answers16b $answers16b */
+        $answers16b = $answers->Answers16b;
+        $answers16bStatus = $this->getStatusValue($answers16b->status);
+
+        return $answers16aStatus === 1 && $answers16bStatus === 1 ? 1 : 0;
+    }
+
+    private function getAnswers17Status(Answers $answers){
+        /** @var Collection $list_answers17 */
+        $list_answers17 = $answers->Answers17;
+        $answers17Status = 1;
+        /** @var Answers17 $answers17 */
+        foreach($list_answers17 as $answers17){
+            if($this->getStatusValue($answers17->status) === 0){
+                $answers17Status = 0;
+                break;
+            }
+        }
+
+        return $answers17Status;
+    }
+
+    private function getAnswers18Status(Answers $answers){
+        /** @var Answers18 $answers18 */
+        $answers18 = $answers->Answers18;
+        return $this->getStatusValue($answers18->status);
+    }
+
+    public function getListAnswersStatus($user_id){
+        if($this->preCheck($user_id) === false){
             return null;
         }
 
-        $answers = @$correspondent->Answers;
+        return [
+            'lock_status' => intval($this->getLockStatus($this->answers)),
+            'data' => [
+                '1' => $this->getAnswers1Status($this->answers),
+                '2' => $this->getAnswers2Status($this->answers),
+                '3' => $this->getAnswers3Status($this->answers),
+                '4' => $this->getAnswers4Status($this->answers),
+                '5' => $this->getAnswers5Status($this->answers),
+                '6' => $this->getAnswers6Status($this->answers),
+                '7' => $this->getAnswers7Status($this->answers),
+                '8' => $this->getAnswers8Status($this->answers),
+                '9' => $this->getAnswers9Status($this->answers),
+                '10' => $this->getAnswers10Status($this->answers),
+                '11' => $this->getAnswers11Status($this->answers),
+                '12' => $this->getAnswers12Status($this->answers),
+                '13' => $this->getAnswers13Status($this->answers),
+                '14' => $this->getAnswers14Status($this->answers),
+                '15' => $this->getAnswers15Status($this->answers),
+                '16' => $this->getAnswers16Status($this->answers),
+                '17' => $this->getAnswers17Status($this->answers),
+                '18' => $this->getAnswers18Status($this->answers),
+            ]
+        ];
+    }
+
+    private function getLockStatus(Answers $answers){
+        if($answers->status === Answers::STATUS_ANSWERS_VALIDATION_REJECTED){
+            return false;
+        }
+
+        return true;
+    }
+
+    public function getListAnswers($user_id){
+        if($this->preCheck($user_id) === false){
+            return null;
+        }
+
+        $answers = $this->answers;
         $data = [];
 
         if ($answers) {
