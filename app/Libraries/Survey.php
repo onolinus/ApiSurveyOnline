@@ -117,6 +117,11 @@ class Survey{
         return $SurveyDb->getListAnswers($userId === null ? $this->sessionTokenAccessor->getSessionUserID() : $userId);
     }
 
+    public function getListComment($userId = null){
+        $SurveyDb = new SurveyDb();
+        return $SurveyDb->getListComment($userId === null ? $this->sessionTokenAccessor->getSessionUserID() : $userId);
+    }
+
     public function getListAnswersStatus($userId = null){
         $SurveyDb = new SurveyDb();
         return $SurveyDb->getListAnswersStatus($userId === null ? $this->sessionTokenAccessor->getSessionUserID() : $userId);

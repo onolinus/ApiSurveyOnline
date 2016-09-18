@@ -15,6 +15,7 @@ trait TraitCacheSurveyData
     private $CACHE_DRAFT_STATUS_PREFIX = 'draft:status:user';
 
     private $CACHE_SURVEY_DATA_PREFIX = 'survey:data:user';
+    private $CACHE_SURVEY_COMMENT_PREFIX = 'survey:comment:user';
     private $CACHE_SURVEY_STATUS_PREFIX = 'survey:status:user';
 
     private $CACHE_VALIDATOR_SURVEY_DATA_PREFIX = 'survey:data:validator:user';
@@ -31,6 +32,10 @@ trait TraitCacheSurveyData
 
     private function getDataCacheKey($user_id = null){
         return SurveyCacheKey::getInstance()->generateCacheKey(sprintf('%s:%d', $this->CACHE_SURVEY_DATA_PREFIX, $user_id === null ? $this->getSessionUserID() : $user_id), false);
+    }
+
+    private function getCommentCacheKey($user_id = null){
+        return SurveyCacheKey::getInstance()->generateCacheKey(sprintf('%s:%d', $this->CACHE_SURVEY_COMMENT_PREFIX, $user_id === null ? $this->getSessionUserID() : $user_id), false);
     }
 
     private function getStatusCacheKey($user_id = null){
@@ -59,7 +64,13 @@ trait TraitCacheSurveyData
         }
 
         if($status = Cache::get($this->getDraftStatusCacheKey())){
-            return ['type' => 'survey', 'data' => $status];
+            return [
+                'type' => 'draft',
+                'data' => [
+                    'lock_status' => 0,
+                    'data' => $status
+                ]
+            ];
         }
 
         return [];
@@ -74,6 +85,21 @@ trait TraitCacheSurveyData
 
         $survey = new Survey();
         $data = $survey->getListAnswers($user_id);
+
+        Cache::forever($cacheKey, $data);
+
+        return $data;
+    }
+
+    private function getCommentSurveyFromCache($user_id = null){
+        $cacheKey = $this->getCommentCacheKey($user_id);
+
+        if($data = Cache::get($cacheKey)){
+            return $data;
+        }
+
+        $survey = new Survey();
+        $data = $survey->getListComment($user_id);
 
         Cache::forever($cacheKey, $data);
 
@@ -127,6 +153,7 @@ trait TraitCacheSurveyData
 
     private function removeDataSurveyFromCache($user_id = null){
         Cache::pull($this->getDataCacheKey($user_id));
+        Cache::pull($this->getCommentCacheKey($user_id));
         Cache::pull($this->getStatusCacheKey($user_id));
         Cache::pull($this->getValidatorDataCacheKey($user_id));
     }
