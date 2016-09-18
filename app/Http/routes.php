@@ -191,8 +191,8 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::resource('correspondent/draft', 'Correspondent\SurveyDraftController', ['only' => [
             'store', 'index'
         ]]);
-        Route::get('correspondent/draft/data', ['as' => 'respondent.draft.data', 'uses' => 'Correspondent\SurveyDraftController@draftdata']);
-        Route::get('correspondent/draft/status', ['as' => 'respondent.draft.status', 'uses' => 'Correspondent\SurveyDraftController@draftstatus']);
+//        Route::get('correspondent/draft/data', ['as' => 'respondent.draft.data', 'uses' => 'Correspondent\SurveyDraftController@draftdata']);
+//        Route::get('correspondent/draft/status', ['as' => 'respondent.draft.status', 'uses' => 'Correspondent\SurveyDraftController@draftstatus']);
 
         // Survey
         Route::resource('correspondent/survey', 'Correspondent\SurveyController', ['only' => [
