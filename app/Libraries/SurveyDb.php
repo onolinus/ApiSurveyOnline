@@ -329,10 +329,10 @@ class SurveyDb{
 
     private function getLockStatus(Answers $answers){
         if($answers->status === Answers::STATUS_ANSWERS_VALIDATION_REJECTED){
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     public function getListAnswers($user_id){
