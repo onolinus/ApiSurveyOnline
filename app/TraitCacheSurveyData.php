@@ -51,7 +51,7 @@ trait TraitCacheSurveyData
         $survey = new Survey();
         $data = $survey->getListAnswersStatus($user_id);
 
-        Cache::forever($this->getDataCacheKey($user_id), $data);
+        Cache::forever($this->getStatusCacheKey($user_id), $data);
 
         return $data;
     }
