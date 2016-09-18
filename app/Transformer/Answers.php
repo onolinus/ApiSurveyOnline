@@ -2,6 +2,8 @@
 namespace App\Transformer;
 
 use App\Answers as ModelAnswers;
+use App\ApprovedBy;
+use App\Correspondents;
 use Illuminate\Support\Facades\Request;
 use League\Fractal;
 
@@ -38,7 +40,7 @@ class Answers extends Fractal\TransformerAbstract
         $correspondent = $answers->Correspondents;
 
         if(in_array('correspondent', $includes) && $correspondent !== null){
-            return [
+            $result =  [
                 'user_id' => $correspondent->user_id,
                 'name' => $correspondent->name,
                 'nip' => $correspondent->nip,
@@ -50,8 +52,12 @@ class Answers extends Fractal\TransformerAbstract
                     'created_string' => $correspondent->created_at->toDayDateTimeString(),
                     'updated' => $correspondent->updated_at,
                     'updated_string' => $correspondent->updated_at->toDayDateTimeString(),
-                ],
+                ]
             ];
+
+            $this->getApprovedBy($includes, $correspondent->approvedBy, $result);
+
+            return $result;
         }
 
         return [
@@ -59,5 +65,29 @@ class Answers extends Fractal\TransformerAbstract
                 'related' => route('admin.correspondent.show', [$answers->id_correspondent])
             ]
         ];
+    }
+
+    private function getApprovedBy($includes, ApprovedBy $approvedBy, &$result)
+    {
+        if(in_array('approvedby', $includes) && $approvedBy !== null){
+            $result['approved_by'] = [
+                    'name' => $approvedBy->name,
+                    'nip' => $approvedBy->nip,
+                    'role' => $approvedBy->role,
+                    'lembaga' => [
+                        'id' => $approvedBy->lembaga->id,
+                        'name' => $approvedBy->lembaga->name,
+                        'type' => $approvedBy->lembaga->type,
+                    ],
+                    'puslit' => $approvedBy->puslit,
+                    'alamat' => $approvedBy->alamat,
+                    'timestamp' => [
+                        'created' => $approvedBy->created_at,
+                        'created_string' => $approvedBy->created_at->toDayDateTimeString(),
+                        'updated' => $approvedBy->updated_at,
+                        'updated_string' => $approvedBy->updated_at->toDayDateTimeString(),
+                    ]
+                ];
+        }
     }
 }
