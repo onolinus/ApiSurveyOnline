@@ -2,6 +2,9 @@
 namespace App\Transformer;
 
 use App\Correspondents as ModelCorrespondents;
+use App\Correspondents;
+use App\Http\Middleware\AdminPrivilegeMiddleware;
+use app\Libraries\SessionTokenAccessor;
 use App\Users as ModelUsers;
 use League\Fractal;
 use Illuminate\Http\Request;
@@ -23,7 +26,7 @@ class CorrespondentsTransformer extends Fractal\TransformerAbstract
         $request = Request::capture();
         $includes = explode(',', $request->include);
 
-        return [
+        $result = [
             'user_id' => $correspondent->user_id,
             'email' => $user->email,
             'name' => $correspondent->name,
@@ -54,6 +57,10 @@ class CorrespondentsTransformer extends Fractal\TransformerAbstract
                 ]
             ]
         ];
+
+        $this->getAnswersStatus($includes, $correspondent, $result);
+
+        return $result;
     }
 
 
@@ -80,5 +87,24 @@ class CorrespondentsTransformer extends Fractal\TransformerAbstract
         }
 
         return $correspondent->user_id;
+    }
+
+    private function getAnswersStatus($includes, Correspondents $correspondents, &$result)
+    {
+        if(in_array('surveystatus', $includes) && $correspondents !== null && SessionTokenAccessor::getInstance()->getSessionUserType() === AdminPrivilegeMiddleware::USER_TYPE_ALLOWED) {
+            /** @var Answers $answers */
+            $answers = $correspondents->Answers;
+            if(!is_null($answers)) {
+                $result ['survey'] = [
+                    'id' => $answers->id,
+                    'status' => $answers->status,
+                    'links' => [
+                        'detail' => route('admin.survey.show', [$answers->id]),
+                        'approve' => route('survey.{id_answer}.approve', [$answers->id]),
+                        'reject' => route('survey.{id_answer}.reject', [$answers->id])
+                    ]
+                ];
+            }
+        }
     }
 }
