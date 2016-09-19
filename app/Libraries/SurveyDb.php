@@ -117,7 +117,7 @@ class SurveyDb{
 
         /** @var Answers5 $answers5 */
         $answers5 = $list_answers5->first();
-        $answers5_status = $this->getStatusValue($answers5->status);
+        $answers5_status = $answers5 === null ? 1 : $this->getStatusValue($answers5->status);
         return $answers5_status;
     }
 
@@ -127,7 +127,7 @@ class SurveyDb{
 
         /** @var Answers5 $answers5 */
         $answers5 = $list_answers5->first();
-        return $answers5->status_comment;
+        return $answers5 === null ? '' : $answers5->status_comment;
     }
 
     private function getAnswers6Status(Answers $answers){
@@ -136,7 +136,7 @@ class SurveyDb{
 
         /** @var Answers6 $answers6 */
         $answers6 = $list_answers6->first();
-        $answers6_status = $this->getStatusValue($answers6->status);
+        $answers6_status = $answers6 === null ? 1 : $this->getStatusValue($answers6->status);
         return $answers6_status;
     }
 
@@ -146,7 +146,7 @@ class SurveyDb{
 
         /** @var Answers6 $answers6 */
         $answers6 = $list_answers6->first();
-        return $answers6->status_comment;
+        return $answers6 === null ? '' : $answers6->status_comment;
     }
 
     private function getAnswers7Status(Answers $answers){
@@ -167,7 +167,7 @@ class SurveyDb{
 
         /** @var Answers8 $answers8 */
         $answers8 = $list_answers8->first();
-        $answers8_status = $this->getStatusValue($answers8->status);
+        $answers8_status = $answers8 === null ? 1 : $this->getStatusValue($answers8->status);
 
         return $answers8_status;
     }
@@ -178,8 +178,7 @@ class SurveyDb{
 
         /** @var Answers8 $answers8 */
         $answers8 = $list_answers8->first();
-
-        return $answers8->status_comment;
+        return $answers8 === null ? '' : $answers8->status_comment;
     }
 
     private function getAnswers9Status(Answers $answers){
@@ -195,7 +194,7 @@ class SurveyDb{
         $list_answers9c = $answers->Answers9c;
         /** @var Answers9c $answers9c */
         $answers9c = $list_answers9c->first();
-        $answers9cStatus = $this->getStatusValue($answers9c->status);
+        $answers9cStatus = $answers9c === null ? 1 : $this->getStatusValue($answers9c->status);
 
         return $answers9aStatus === 1 && $answers9bStatus === 1 && $answers9cStatus === 1 ? 1 : 0;
     }
@@ -220,8 +219,7 @@ class SurveyDb{
 
         /** @var Answers9c $answers9c */
         $answers9c = $list_answers9c->first();
-
-        return $answers9c->status_comment;
+        return $answers9c === null ? '' : $answers9c->status_comment;
     }
 
     private function getAnswers10Status(Answers $answers){
@@ -241,7 +239,7 @@ class SurveyDb{
         $list_answers11 = $answers->Answers11;
         /** @var Answers11 $answers11 */
         $answers11 = $list_answers11->first();
-        $answers11Status = $this->getStatusValue($answers11->status);
+        $answers11Status = $answers11 === null ? 1 : $this->getStatusValue($answers11->status);
 
         return $answers11Status;
     }
@@ -252,7 +250,7 @@ class SurveyDb{
         /** @var Answers11 $answers11 */
         $answers11 = $list_answers11->first();
 
-        return $answers11->status_comment;
+        return $answers11 === null ? '' : $answers11->status_comment;
     }
 
     private function getAnswers12Status(Answers $answers){
@@ -260,7 +258,7 @@ class SurveyDb{
         $list_answers12 = $answers->Answers12;
         /** @var Answers12 $answers12 */
         $answers12 = $list_answers12->first();
-        $answers12Status = $this->getStatusValue($answers12->status);
+        $answers12Status = $answers12 === null ? 1 : $this->getStatusValue($answers12->status);
 
         return $answers12Status;
     }
@@ -271,7 +269,7 @@ class SurveyDb{
         /** @var Answers12 $answers12 */
         $answers12 = $list_answers12->first();
 
-        return $answers12->status_comment;
+        return $answers12 === null ? '' : $answers12->status_comment;
     }
 
     private function getAnswers13Status(Answers $answers){
@@ -279,7 +277,7 @@ class SurveyDb{
         $list_answers13 = $answers->Answers13;
         /** @var Answers13 $answers13 */
         $answers13 = $list_answers13->first();
-        $answers13Status = $this->getStatusValue($answers13->status);
+        $answers13Status = $answers13 === null ? 1 : $this->getStatusValue($answers13->status);
 
         return $answers13Status;
     }
@@ -289,8 +287,7 @@ class SurveyDb{
         $list_answers13 = $answers->Answers13;
         /** @var Answers13 $answers13 */
         $answers13 = $list_answers13->first();
-
-        return $answers13->status_comment;
+        return $answers13 === null ? '' : $answers13->status_comment;
     }
 
     private function getAnswers14Status(Answers $answers){
@@ -298,7 +295,7 @@ class SurveyDb{
         $list_answers14 = $answers->Answers14;
         /** @var Answers14 $answers14 */
         $answers14 = $list_answers14->first();
-        $answers14Status = $this->getStatusValue($answers14->status);
+        $answers14Status = $answers14 === null ? 1 : $this->getStatusValue($answers14->status);
 
         return $answers14Status;
     }
@@ -309,7 +306,7 @@ class SurveyDb{
         /** @var Answers14 $answers14 */
         $answers14 = $list_answers14->first();
 
-        return $answers14->status_comment;
+        return $answers14 === null ? '' : $answers14->status_comment;
     }
 
     private function getAnswers15Status(Answers $answers){
@@ -317,13 +314,13 @@ class SurveyDb{
         $list_answers15a = $answers->Answers15a;
         /** @var Answers15a $answers15a */
         $answers15a = $list_answers15a->first();
-        $answers15aStatus = $this->getStatusValue($answers15a->status);
+        $answers15aStatus = $answers15a === null ? 1 : $this->getStatusValue($answers15a->status);
 
         /** @var Collection $list_answers15b */
         $list_answers15b = $answers->Answers15b;
         /** @var Answers15b $answers15b */
         $answers15b = $list_answers15b->first();
-        $answers15bStatus = $this->getStatusValue($answers15b->status);
+        $answers15bStatus = $answers15b === null ? 1 : $this->getStatusValue($answers15b->status);
 
         return $answers15aStatus === 1 && $answers15bStatus === 1 ? 1 : 0;
     }
@@ -333,9 +330,7 @@ class SurveyDb{
         $list_answers15a = $answers->Answers15a;
         /** @var Answers15a $answers15a */
         $answers15a = $list_answers15a->first();
-        return $answers15a->status_comment;
-
-        return $answers15aStatus === 1 && $answers15bStatus === 1 ? 1 : 0;
+        return $answers15a === null ? '' : $answers15a->status_comment;
     }
 
     private function getAnswers15bComment(Answers $answers){
@@ -343,7 +338,7 @@ class SurveyDb{
         $list_answers15b = $answers->Answers15b;
         /** @var Answers15b $answers15b */
         $answers15b = $list_answers15b->first();
-        return $answers15b->status_comment;
+        return $answers15b === null ? '' : $answers15b->status_comment;
     }
 
     private function getAnswers16Status(Answers $answers){
@@ -351,11 +346,11 @@ class SurveyDb{
         $list_answers16a = $answers->Answers16a;
         /** @var Answers16a $answers16a */
         $answers16a = $list_answers16a->first();
-        $answers16aStatus = $this->getStatusValue($answers16a->status);
+        $answers16aStatus = $answers16a === null ? 1 : $this->getStatusValue($answers16a->status);
 
         /** @var Answers16b $answers16b */
         $answers16b = $answers->Answers16b;
-        $answers16bStatus = $this->getStatusValue($answers16b->status);
+        $answers16bStatus = $answers16b === null ? 1 : $this->getStatusValue($answers16b->status);
 
         return $answers16aStatus === 1 && $answers16bStatus === 1 ? 1 : 0;
     }
@@ -365,13 +360,13 @@ class SurveyDb{
         $list_answers16a = $answers->Answers16a;
         /** @var Answers16a $answers16a */
         $answers16a = $list_answers16a->first();
-        return $answers16a->status_comment;
+        return $answers16a === null ? '' : $answers16a->status_comment;
     }
 
     private function getAnswers16bComment(Answers $answers){
         /** @var Answers16b $answers16b */
         $answers16b = $answers->Answers16b;
-        return $answers16b->status_comment;
+        return $answers16b === null ? '' :  $answers16b->status_comment;
     }
 
     private function getAnswers17Status(Answers $answers){
@@ -379,7 +374,7 @@ class SurveyDb{
         $list_answers17 = $answers->Answers17;
         /** @var Answers17 $answers17 */
         $answers17 = $list_answers17->first();
-        $answers17Status = $this->getStatusValue($answers17->status);
+        $answers17Status = $answers17 === null ? 1 : $this->getStatusValue($answers17->status);
 
         return $answers17Status;
     }
@@ -390,7 +385,7 @@ class SurveyDb{
         /** @var Answers17 $answers17 */
         $answers17 = $list_answers17->first();
 
-        return $answers17->status_comment;
+        return $answers17 === null ? '' : $answers17->status_comment;
     }
 
     private function getAnswers18Status(Answers $answers){
