@@ -3,6 +3,8 @@ namespace App\Transformer;
 
 use App\Correspondents as ModelCorrespondents;
 use App\Correspondents;
+use App\Http\Middleware\AdminPrivilegeMiddleware;
+use app\Libraries\SessionTokenAccessor;
 use App\Users as ModelUsers;
 use League\Fractal;
 use Illuminate\Http\Request;
@@ -89,7 +91,7 @@ class CorrespondentsTransformer extends Fractal\TransformerAbstract
 
     private function getAnswersStatus($includes, Correspondents $correspondents, &$result)
     {
-        if(in_array('surveystatus', $includes) && $correspondents !== null) {
+        if(in_array('surveystatus', $includes) && $correspondents !== null && SessionTokenAccessor::getInstance()->getSessionUserType() === AdminPrivilegeMiddleware::USER_TYPE_ALLOWED) {
             /** @var Answers $answers */
             $answers = $correspondents->Answers;
             if(!is_null($answers)) {
