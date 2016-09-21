@@ -17,8 +17,21 @@ class CorrespondentsTransformer extends Fractal\TransformerAbstract
             return [];
         }
 
+        $result = [
+            'user_id' => $user->id,
+            'email' => $user->email,
+            'relationships' => [
+                'user' => [
+                    'links' => [
+                        'related' => route('user.show', [$user->id])
+                    ]
+                ]
+            ]
+        ];
+
+
         if($user->correspondents === null){
-            return [];
+            return $result;
         }
 
         $correspondent = $user->correspondents;
@@ -26,35 +39,24 @@ class CorrespondentsTransformer extends Fractal\TransformerAbstract
         $request = Request::capture();
         $includes = explode(',', $request->include);
 
-        $result = [
-            'user_id' => $correspondent->user_id,
-            'email' => $user->email,
-            'name' => $correspondent->name,
-            'nip' => $correspondent->nip,
-            'role' => $correspondent->role,
-            'telephone_number' => $correspondent->telephone_number,
-            'handphone_number' => $correspondent->handphone_number,
-            'approved_by' => $this->getApproved_by($includes, $correspondent),
-            'timestamp' => [
-                'created' => $correspondent->created_at,
-                'created_string' => $correspondent->created_at->toDayDateTimeString(),
-                'updated' => $correspondent->updated_at,
-                'updated_string' => $correspondent->updated_at->toDayDateTimeString(),
-            ],
+        $result['name'] = $correspondent->name;
+        $result['nip'] = $correspondent->nip;
+        $result['role'] = $correspondent->role;
+        $result['telephone_number'] = $correspondent->telephone_number;
+        $result['handphone_number'] = $correspondent->handphone_number;
+        $result['approved_by'] = $this->getApproved_by($includes, $correspondent);
+        $result['timestamp'] = [
+            'created' => $correspondent->created_at,
+            'created_string' => $correspondent->created_at->toDayDateTimeString(),
+            'updated' => $correspondent->updated_at,
+            'updated_string' => $correspondent->updated_at->toDayDateTimeString(),
+        ];
+        $result['links'] = [
+            'self' => route('admin.correspondent.show', [$correspondent->user_id])
+        ];
+        $result['relationships']['approved_by'] = [
             'links' => [
-                'self' => route('admin.correspondent.show', [$correspondent->user_id])
-            ],
-            'relationships' => [
-                'user' => [
-                    'links' => [
-                        'related' => route('user.show', [$correspondent->user_id])
-                    ]
-                ],
-                'approved_by' => [
-                    'links' => [
-                        'related' => route('admin.correspondent.show', [$correspondent->user_id])
-                    ]
-                ]
+                'related' => route('admin.correspondent.show', [$correspondent->user_id])
             ]
         ];
 
