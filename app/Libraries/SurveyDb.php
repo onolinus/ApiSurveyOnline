@@ -225,13 +225,13 @@ class SurveyDb{
     private function getAnswers10Status(Answers $answers){
         /** @var Answers10 $answers10 */
         $answers10 = $answers->Answers10;
-        return $this->getStatusValue($answers10->status);
+        return $answers10 === null ? 1 : $this->getStatusValue($answers10->status);
     }
 
     private function getAnswers10Comment(Answers $answers){
         /** @var Answers10 $answers10 */
         $answers10 = $answers->Answers10;
-        return $answers10->status_comment;
+        return $answers10 === null ? '' : $answers10->status_comment;
     }
 
     private function getAnswers11Status(Answers $answers){
