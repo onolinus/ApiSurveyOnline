@@ -56,7 +56,7 @@ class CorrespondentsTransformer extends Fractal\TransformerAbstract
         ];
         $result['relationships']['approved_by'] = [
             'links' => [
-                'related' => route('admin.correspondent.show', [$correspondent->user_id])
+                'related' => route('admin.approvedby.show', [$correspondent->user_id])
             ]
         ];
 
