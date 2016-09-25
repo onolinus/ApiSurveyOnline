@@ -13,6 +13,7 @@ class TotalBelanjaLembaga extends Fractal\TransformerAbstract
             'name' => $data->name,
             'type' => $data->type,
             'total' => doubleval($data->total),
+            'total_in_milyar' => doubleval($data->total) / 1000000000
         ];
     }
 }

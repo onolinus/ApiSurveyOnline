@@ -22,6 +22,8 @@ class TotalBelanjaLembagaController extends Controller
 
         $result = collect($result);
 
-        return $response->withCollection($result, new TotalBelanjaLembaga());
+        return $response->withCollection($result, new TotalBelanjaLembaga(), null, null, [
+            'title' => 'Total Belanja Litbang Sektor Pemerintah menurut Lembaga Pelaksana (Milyar)'
+        ]);
     }
 }
