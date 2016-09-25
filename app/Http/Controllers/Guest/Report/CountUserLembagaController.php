@@ -1,17 +1,15 @@
 <?php
 namespace App\Http\Controllers\Guest\Report;
 
-use App\Http\Controllers\Controller;
 use App\Http\Middleware\CorrespondentPrivilegeMiddleware;
 use App\Transformer\Report\CountUserLembaga;
-use EllipseSynergie\ApiResponse\Laravel\Response;
 use Illuminate\Support\Facades\DB;
 
-class CountUserLembagaController extends Controller
+class CountUserLembagaController extends ReportController
 {
-    public function index(Response $response)
+    protected function getFromDb()
     {
-        $result = $result = DB::table('lembaga')
+        return DB::table('lembaga')
             ->select('lembaga.*', DB::raw('COUNT(users.id) as count'))
             ->leftjoin('approved_by', 'approved_by.id_lembaga', '=', 'lembaga.id')
             ->leftjoin('correspondents', 'correspondents.user_id', '=', 'approved_by.correspondent_id_approved')
@@ -21,7 +19,25 @@ class CountUserLembagaController extends Controller
             })
             ->groupBy('lembaga.id')
             ->get();
+    }
 
-        return $response->withCollection(collect($result), new CountUserLembaga());
+    protected function getCacheName()
+    {
+        return 'report:lembaga:count:correspondent';
+    }
+
+    protected function getTitle()
+    {
+        return 'Jumlah reponden per lembaga';
+    }
+
+    protected function getTransformer()
+    {
+        return new CountUserLembaga();
+    }
+
+    protected function returnType()
+    {
+        return 'collection';
     }
 }

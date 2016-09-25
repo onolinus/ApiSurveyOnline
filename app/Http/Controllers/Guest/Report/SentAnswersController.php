@@ -4,22 +4,15 @@ namespace App\Http\Controllers\Guest\Report;
 
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\CorrespondentPrivilegeMiddleware;
+use App\Transformer\Report\SentAnswersLembaga;
 use EllipseSynergie\ApiResponse\Laravel\Response;
 use Illuminate\Support\Facades\DB;
 
-class SentAnswersController extends Controller
+class SentAnswersController extends ReportController
 {
-    public function index(Response $response){
-
-//        $result = $result = DB::table('answers')
-//            ->select('lembaga.*', DB::raw('COUNT(1) as count'))
-//            ->join('correspondents', 'correspondents.user_id', '=', 'answers.id_correspondent')
-//            ->join('approved_by', 'approved_by.correspondent_id_approved', '=', 'correspondents.user_id')
-//            ->join('lembaga', 'lembaga.id', '=', 'approved_by.id_lembaga')
-//            ->groupBy('approved_by.id_lembaga')
-//            ->get();
-
-        $result = $result = DB::table('lembaga')
+    protected function getFromDb()
+    {
+        return DB::table('lembaga')
             ->select('lembaga.*', DB::raw('COUNT(answers.id) as count'))
             ->leftjoin('approved_by', 'approved_by.id_lembaga', '=', 'lembaga.id')
             ->leftjoin('correspondents', 'correspondents.user_id', '=', 'approved_by.correspondent_id_approved')
@@ -30,7 +23,25 @@ class SentAnswersController extends Controller
             ->leftjoin('answers', 'answers.id_correspondent', '=', 'correspondents.user_id')
             ->groupBy('lembaga.id')
             ->get();
+    }
 
-        return $response->withArray(['data' => $result]);
+    protected function getCacheName()
+    {
+        return 'report:lembaga:surveysent';
+    }
+
+    protected function getTitle()
+    {
+        return 'Jumlah respondent yang mengirimkan survey';
+    }
+
+    protected function getTransformer()
+    {
+        return new SentAnswersLembaga();
+    }
+
+    protected function returnType()
+    {
+        return 'collection';
     }
 }
