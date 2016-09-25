@@ -177,7 +177,9 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
             'index'
         ]]);
 
-        Route::get('stats/lembaga/countuser', ['as' => 'lembaga.countuser', 'uses' => 'LembagaController@getUserCount']);
+        Route::get('stats/lembaga/countuser', ['as' => 'stats.lembaga.countuser', 'uses' => 'LembagaController@getUserCount']);
+
+        Route::get('stats/lembaga/totalbelanja', ['as' => 'stats.lembaga.totalbelanja', 'uses' => 'Guest\Report\TotalBelanjaLembagaController@index']);
     });
 
 
