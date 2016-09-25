@@ -169,15 +169,15 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
             'show', 'index'
         ]]);
 
-        Route::resource('stats/answers/sent', 'Guest\Report\SentAnswersController', ['only' => [
-            'index'
-        ]]);
+
 
         Route::resource('stats/total/summary', 'Guest\Report\TotalSummaryController', ['only' => [
             'index'
         ]]);
-
-        Route::get('stats/lembaga/countuser', ['as' => 'stats.lembaga.countuser', 'uses' => 'LembagaController@getUserCount']);
+        Route::resource('stats/answers/sent', 'Guest\Report\SentAnswersController', ['only' => [
+            'index'
+        ]]);
+        Route::get('stats/lembaga/countuser', ['as' => 'stats.lembaga.countuser', 'uses' => 'Guest\Report\CountUserLembagaController@index']);
         Route::get('stats/lembaga/totalbelanja', ['as' => 'stats.lembaga.totalbelanja', 'uses' => 'Guest\Report\TotalBelanjaLembagaController@index']);
         Route::get('stats/totalbelanja/jenispengeluaran', ['as' => 'stats.belanja.jenispengeluaran', 'uses' => 'Guest\Report\TotalBelanjaJenisPengeluaranController@index']);
     });
