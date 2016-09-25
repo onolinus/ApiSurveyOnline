@@ -1,11 +1,8 @@
 <?php
 namespace App\Http\Controllers\Guest\Report;
 
-
-use App\Http\Controllers\Controller;
 use App\Http\Middleware\CorrespondentPrivilegeMiddleware;
 use App\Transformer\Report\SentAnswersLembaga;
-use EllipseSynergie\ApiResponse\Laravel\Response;
 use Illuminate\Support\Facades\DB;
 
 class SentAnswersController extends ReportController
