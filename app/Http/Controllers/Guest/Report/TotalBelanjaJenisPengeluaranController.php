@@ -23,12 +23,11 @@ class TotalBelanjaJenisPengeluaranController extends Controller
                SUM(answers4.belanja_operasional_maintenance) AS `belanja_operasional_maintenance`,
                SUM(answers2.jumlah) AS `total`')))
             ->leftjoin('answers2', 'answers2.id_answer', '=', 'answers4.id_answer')
-            ->get();
+            ->first();
 
-        $result = collect($result);
-
-        return $response->withCollection($result, new TotalBelanjaJenisPengeluaran(), null, null, [
-            'title' => 'Distribusi Total Belanja Litbang menurut Jenis Pengeluaran'
+        return $response->withItem(collect($result), new TotalBelanjaJenisPengeluaran(), null, [
+            'title' => 'Distribusi Total Belanja Litbang menurut Jenis Pengeluaran',
+            'total' => doubleval($result->total)
         ]);
     }
 }
