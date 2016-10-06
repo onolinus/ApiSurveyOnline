@@ -10,18 +10,7 @@ class TotalBelanjaJenisPengeluaranController extends ReportController
 {
     protected function getFromDb()
     {
-        return DB::table('answers4')
-            ->select((DB::raw('SUM(answers4.belanja_pegawai_upah)/SUM(answers2.jumlah)*100 AS `percentage_belanja_pegawai_upah`,
-            SUM(answers4.belanja_pegawai_upah) AS `belanja_pegawai_upah`,
-             SUM(answers4.belanja_modal_properti)/SUM(answers2.jumlah)*100 AS `percentage_belanja_modal_properti`,
-             SUM(answers4.belanja_modal_properti) AS `belanja_modal_properti`,
-              SUM(answers4.belanja_modal_mesin)/SUM(answers2.jumlah)*100 AS `percentage_belanja_modal_mesin`,
-              SUM(answers4.belanja_modal_mesin) AS `belanja_modal_mesin`,
-               SUM(answers4.belanja_operasional_maintenance)/SUM(answers2.jumlah)*100 AS `percentage_belanja_operasional_maintenance`,
-               SUM(answers4.belanja_operasional_maintenance) AS `belanja_operasional_maintenance`,
-               SUM(answers2.jumlah) AS `total`')))
-            ->leftjoin('answers2', 'answers2.id_answer', '=', 'answers4.id_answer')
-            ->first();
+        return DB::table('total_belanja_per_jenis_pengeluaran')->first();
     }
 
     protected function getMeta(){

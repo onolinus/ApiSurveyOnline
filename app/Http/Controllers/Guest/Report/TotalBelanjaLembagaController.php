@@ -10,13 +10,7 @@ class TotalBelanjaLembagaController extends ReportController
 {
     protected function getFromDb()
     {
-        return DB::table('lembaga')
-            ->select('lembaga.*', DB::raw('SUM(answers1.total) as total'))
-            ->leftjoin('approved_by', 'approved_by.id_lembaga', '=', 'lembaga.id')
-            ->leftjoin('answers', 'answers.id_correspondent', '=', 'approved_by.correspondent_id_approved')
-            ->leftjoin('answers1', 'answers1.id_answer', '=', 'answers.id')
-            ->groupBy('lembaga.id')
-            ->get();
+        return DB::table('total_belanja_per_lembaga')->get();
     }
 
     protected function getCacheName()

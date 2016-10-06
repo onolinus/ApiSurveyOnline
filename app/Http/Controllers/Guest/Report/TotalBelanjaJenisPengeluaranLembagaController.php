@@ -10,28 +10,7 @@ class TotalBelanjaJenisPengeluaranLembagaController extends ReportController
 {
     protected function getFromDb()
     {
-        return DB::table('lembaga')
-            ->select('lembaga.*', (DB::raw('SUM(answers4.belanja_pegawai_upah)/SUM(answers2.jumlah)
-            *100 AS `percentage_belanja_pegawai_upah`,
-            SUM(answers4.belanja_pegawai_upah) AS `belanja_pegawai_upah`,
-             SUM(answers4.belanja_modal_properti)/SUM(answers2.jumlah)
-             *100 AS `percentage_belanja_modal_properti`,
-             SUM(answers4.belanja_modal_properti) AS `belanja_modal_properti`,
-              SUM(answers4.belanja_modal_mesin)/SUM(answers2.jumlah)
-              *100 AS `percentage_belanja_modal_mesin`,
-              SUM(answers4.belanja_modal_mesin) AS `belanja_modal_mesin`,
-               SUM(answers4.belanja_operasional_maintenance)/SUM(answers2.jumlah)
-               *100 AS `percentage_belanja_operasional_maintenance`,
-               SUM(answers4.belanja_operasional_maintenance) AS `belanja_operasional_maintenance`,
-               SUM(answers2.jumlah)/jumlahbelanja()*100 AS `percentage_total_per_lembaga`,
-               SUM(answers2.jumlah) AS `total_per_lembaga`,
-               jumlahbelanja() AS `total`')))
-            ->leftjoin('approved_by', 'approved_by.id_lembaga', '=', 'lembaga.id')
-            ->leftjoin('answers', 'answers.id_correspondent', '=', 'approved_by.correspondent_id_approved')
-            ->leftjoin('answers4', 'answers4.id_answer', '=', 'answers.id')
-            ->leftjoin('answers2', 'answers2.id_answer', '=', 'answers.id')
-            ->groupBy('lembaga.id')
-            ->get();
+        return DB::table('total_belanja_per_jenis_pengeluaran_per_lembaga')->get();
     }
 
     protected function getMeta(){
