@@ -676,8 +676,8 @@ class AnswerDetail extends Fractal\TransformerAbstract
 
             $detail['answer16a']['data'][] = [
                 'id' => $answers16a->id,
+                'tahun' => $answers16a->tahun,
                 'usulan_paten' => intval($answers16a->usulan_paten),
-                'usulan_patensederhana' => intval($answers16a->usulan_patensederhana),
                 'usulan_patensederhana' => intval($answers16a->usulan_patensederhana),
                 'disetujui_paten' => intval($answers16a->disetujui_paten),
                 'disetujui_patensederhana' => intval($answers16a->disetujui_patensederhana),
@@ -689,7 +689,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
         $detail['answer16a']['links'] = [
             'self' => route("survey.{id_answer}.answers16a.show", $answers16a->id_answer),
             'approve' => route("survey.{id_answer}.answers16a.approve", $answers16a->id_answer),
-                'reject' => route("survey.{id_answer}.answers16a.reject", $answers16a->id_answer),
+            'reject' => route("survey.{id_answer}.answers16a.reject", $answers16a->id_answer),
         ];
 
         return $this;
@@ -729,7 +729,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
 
             $detail['answer17']['data'][] = [
                 'id' => $answers17->id,
-                'lisensi' => intval($answers17->lisensi),
+                'lisensi' => $answers17->lisensi,
                 'tahun' => intval($answers17->tahun),
                 'nilai' => doubleval($answers17->nilai),
             ];
