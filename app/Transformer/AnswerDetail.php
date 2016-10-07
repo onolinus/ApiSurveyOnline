@@ -729,7 +729,7 @@ class AnswerDetail extends Fractal\TransformerAbstract
 
             $detail['answer17']['data'][] = [
                 'id' => $answers17->id,
-                'lisensi' => intval($answers17->lisensi),
+                'lisensi' => $answers17->lisensi,
                 'tahun' => intval($answers17->tahun),
                 'nilai' => doubleval($answers17->nilai),
             ];
