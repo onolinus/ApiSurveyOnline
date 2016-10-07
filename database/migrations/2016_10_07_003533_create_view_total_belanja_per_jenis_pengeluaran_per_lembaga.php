@@ -13,8 +13,8 @@ class CreateViewTotalBelanjaPerJenisPengeluaranPerLembaga extends Migration
     public function up()
     {
         DB::unprepared('CREATE VIEW `total_belanja_per_jenis_pengeluaran_per_lembaga` AS
-            `lembaga`.*,
-            SELECT SUM(`answers4`.`belanja_pegawai_upah`)/SUM(`answers2`.`jumlah`)*100 AS `percentage_belanja_pegawai_upah`,
+            SELECT `lembaga`.*,
+            SUM(`answers4`.`belanja_pegawai_upah`)/SUM(`answers2`.`jumlah`)*100 AS `percentage_belanja_pegawai_upah`,
             SUM(`answers4`.`belanja_pegawai_upah`) AS `belanja_pegawai_upah`,
             SUM(`answers4`.`belanja_modal_properti`)/SUM(`answers2`.`jumlah`)*100 AS `percentage_belanja_modal_properti`,
             SUM(`answers4`.`belanja_modal_properti`) AS `belanja_modal_properti`,
