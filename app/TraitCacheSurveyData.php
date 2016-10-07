@@ -14,11 +14,11 @@ trait TraitCacheSurveyData
     private $CACHE_DRAFT_DATA_PREFIX = 'draft:data:user';
     private $CACHE_DRAFT_STATUS_PREFIX = 'draft:status:user';
 
-    private $CACHE_SURVEY_DATA_PREFIX = 'survey:data:user';
+    private $CACHE_SURVEY_DATA_PREFIX = 'survey:data:v2:user';
     private $CACHE_SURVEY_COMMENT_PREFIX = 'survey:comment:user';
     private $CACHE_SURVEY_STATUS_PREFIX = 'survey:status:user';
 
-    private $CACHE_VALIDATOR_SURVEY_DATA_PREFIX = 'survey:data:validator:user';
+    private $CACHE_VALIDATOR_SURVEY_DATA_PREFIX = 'survey:data:v2:validator:user';
 
     use TraitSessionToken;
 
