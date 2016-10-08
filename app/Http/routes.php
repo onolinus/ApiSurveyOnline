@@ -181,6 +181,7 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::get('stats/lembaga/totalbelanja', ['as' => 'stats.lembaga.totalbelanja', 'uses' => 'Guest\Report\TotalBelanjaLembagaController@index']);
         Route::get('stats/totalbelanja/jenispengeluaran', ['as' => 'stats.belanja.jenispengeluaran', 'uses' => 'Guest\Report\TotalBelanjaJenisPengeluaranController@index']);
         Route::get('stats/totalbelanja/jenispengeluaran/lembaga', ['as' => 'stats.belanja.jenispengeluaran.lembaga', 'uses' => 'Guest\Report\TotalBelanjaJenisPengeluaranLembagaController@index']);
+        Route::get('stats/totalbelanja/jenissumberdana', ['as' => 'stats.belanja.jenissumberdana', 'uses' => 'Guest\Report\TotalBelanjaJenisSumberDanaController@index']);
     });
 
 
