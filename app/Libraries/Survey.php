@@ -183,7 +183,7 @@ class Survey{
 
     private function createNewAnswers1(Answers $answers, Request $request){
         $answers1 =  Answers1::firstOrNew(['id_answer' => $answers->id]);
-        $answers1->status = $answers1->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers1->status;
+        $answers1->status = is_null($answers1->status) || $answers1->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers1->status;
         $answers1->total = $this->getValueFromNominalFormat($request->input('data.answer1_total'));
         $answers1->percentage = $request->input('data.answer1_percentage');
         $answers1->save();
@@ -193,7 +193,7 @@ class Survey{
 
     private function createNewAnswers2(Answers $answers, Request $request){
         $answers2 =  Answers2::firstOrNew(['id_answer' => $answers->id]);
-        $answers2->status = $answers2->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers2->status;
+        $answers2->status = is_null($answers2->status) || $answers2->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers2->status;
         $answers2->jumlah = $this->getValueFromNominalFormat($request->input('data.answer2_jumlah'));
         $answers2->save();
 
@@ -202,7 +202,7 @@ class Survey{
 
     private function createNewAnswers3(Answers $answers, Request $request){
         $answers3 =  Answers3::firstOrNew(['id_answer' => $answers->id]);
-        $answers3->status = $answers3->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers3->status;
+        $answers3->status = is_null($answers3->status) || $answers3->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers3->status;
         $answers3->dipa_danapemerintah = $this->getValueFromNominalFormat($request->input('data.answer3_dipa_danapemerintah'));
         $answers3->dipa_pnbp_perusahaanswasta = $this->getValueFromNominalFormat($request->input('data.answer3_dipa_pnbp_perusahaanswasta'));
         $answers3->dipa_pnbp_instansipemerintah = $this->getValueFromNominalFormat($request->input('data.answer3_dipa_pnbp_instansipemerintah'));
@@ -219,7 +219,7 @@ class Survey{
 
     private function createNewAnswers4(Answers $answers, Request $request){
         $answers4 =  Answers4::firstOrNew(['id_answer' => $answers->id]);
-        $answers4->status = $answers4->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers4->status;
+        $answers4->status = is_null($answers4->status) || $answers4->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers4->status;
         $answers4->belanja_pegawai_upah = $this->getValueFromNominalFormat($request->input('data.answer4_belanja_pegawai_upah'));
         $answers4->belanja_modal_properti = $this->getValueFromNominalFormat($request->input('data.answer4_belanja_modal_properti'));
         $answers4->belanja_modal_mesin = $this->getValueFromNominalFormat($request->input('data.answer4_belanja_modal_mesin'));
@@ -239,7 +239,7 @@ class Survey{
 
         foreach($codes as $row_index => $code){
             $answers5 = new Answers5;
-            $answers5->status = $answers5->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers5->status;
+            $answers5->status = is_null($answers5->status) || $answers5->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers5->status;
             $answers5->code = $code;
             $answers5->percentage = $percentages[$row_index];
             $answers5->id_answer = $answers->id;
@@ -260,7 +260,7 @@ class Survey{
 
         foreach($codes as $row_index => $code){
             $answers6 = new Answers6;
-            $answers6->status = $answers6->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers6->status;
+            $answers6->status = is_null($answers6->status) || $answers6->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers6->status;
             $answers6->code = $code;
             $answers6->percentage = $percentages[$row_index];
             $answers6->id_answer = $answers->id;
@@ -273,7 +273,7 @@ class Survey{
 
     private function createNewAnswers7(Answers $answers, Request $request){
         $answers7 =  Answers7::firstOrNew(['id_answer' => $answers->id]);
-        $answers7->status = $answers7->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers7->status;
+        $answers7->status = is_null($answers7->status) || $answers7->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers7->status;
         $answers7->penelitian_dasar = $this->getValueFromNominalFormat($request->input('data.answer7_penelitian_dasar'));
         $answers7->penelitian_terapan = $this->getValueFromNominalFormat($request->input('data.answer7_penelitian_terapan'));
         $answers7->pengembangan_eksperimental = $this->getValueFromNominalFormat($request->input('data.answer7_pengembangan_eksperimental'));
@@ -293,7 +293,7 @@ class Survey{
 
             foreach ($arr_institusi as $row_index => $institusi) {
                 $answers8 = new Answers8;
-                $answers8->status = $answers8->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers8->status;
+                $answers8->status = is_null($answers8->status) || $answers8->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers8->status;
                 $answers8->institusi = $arr_institusi[$row_index];
                 $answers8->jumlah_dana = $this->getValueFromNominalFormat($arr_jumlah_dana[$row_index]);
                 $answers8->id_answer = $answers->id;
@@ -309,7 +309,7 @@ class Survey{
 
     private function createNewAnswers9a(Answers $answers, Request $request){
         $answers9a =  Answers9a::firstOrNew(['id_answer' => $answers->id]);
-        $answers9a->status = $answers9a->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers9a->status;
+        $answers9a->status = is_null($answers9a->status) || $answers9a->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers9a->status;
         $answers9a->total_pegawai = $request->input('data.answer9a_total_pegawai');
         $answers9a->save();
 
@@ -319,7 +319,7 @@ class Survey{
     private function createNewAnswers9b(Answers $answers, Request $request){
         //1.1 Peneliti dengan jabatan fungsional Peneliti
         $answers9b =  Answers9b::firstOrNew(['id_answer' => $answers->id]);
-        $answers9b->status = $answers9b->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers9b->status;
+        $answers9b->status = is_null($answers9b->status) || $answers9b->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers9b->status;
         $answers9b->peneliti_fungsional_peneliti_s1_l = $request->input('data.answer9b_total_peneliti_fungsional_s1_l');
         $answers9b->peneliti_fungsional_peneliti_s1_p = $request->input('data.answer9b_total_peneliti_fungsional_s1_p');
         $answers9b->peneliti_fungsional_peneliti_s1_fte_l = $request->input('data.answer9b_total_peneliti_fungsional_s1_fte_l');
@@ -418,7 +418,7 @@ class Survey{
 
         foreach($arr_klasifikasi as $row_index => $code){
             $answers9c = new Answers9c;
-            $answers9c->status = $answers9c->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers9c->status;
+            $answers9c->status = is_null($answers9c->status) || $answers9c->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers9c->status;
             $answers9c->code = $arr_klasifikasi[$row_index];
             $answers9c->s1_l = $arr_s1_l[$row_index];
             $answers9c->s1_p = $arr_s1_p[$row_index];
@@ -435,7 +435,7 @@ class Survey{
 
         if($request->input('data.question10_switch') === 'on') {
             $answers10 = Answers10::firstOrNew(['id_answer' => $answers->id]);
-            $answers10->status = $answers10->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers10->status;
+            $answers10->status = is_null($answers10->status) || $answers10->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers10->status;
             $answers10->jumlah_peneliti_pemerintah = $request->input('data.answer10_jumlah_peneliti_pemerintah');
             $answers10->jumlah_peneliti_perguruantinggi = $request->input('data.answer10_jumlah_peneliti_perguruantinggi');
             $answers10->jumlah_peneliti_industri = $request->input('data.answer10_jumlah_peneliti_industri');
@@ -464,7 +464,7 @@ class Survey{
 
             foreach ($arr_code as $row_index => $code) {
                 $answers11 = new Answers11;
-                $answers11->status = $answers11->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers11->status;
+                $answers11->status = is_null($answers11->status) || $answers11->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers11->status;
                 $answers11->nama_jurnal = $arr_nama_jurnal[$row_index];
                 $answers11->code = $arr_code[$row_index];
                 $answers11->jumlah = $arr_jumlah[$row_index];
@@ -493,7 +493,7 @@ class Survey{
 
             foreach ($arr_code as $row_index => $code) {
                 $answers12 = new Answers12;
-                $answers12->status = $answers12->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers12->status;
+                $answers12->status = is_null($answers12->status) || $answers12->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers12->status;
                 $answers12->nama_jurnal = $arr_nama_jurnal[$row_index];
                 $answers12->code = $arr_code[$row_index];
                 $answers12->jumlah = $arr_jumlah[$row_index];
@@ -521,7 +521,7 @@ class Survey{
 
             foreach ($arr_nama_peneliti as $row_index => $code) {
                 $answers13 = new Answers13;
-                $answers13->status = $answers13->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers13->status;
+                $answers13->status = is_null($answers13->status) || $answers13->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers13->status;
                 $answers13->nama_peneliti = $arr_nama_peneliti[$row_index];
                 $answers13->nama_seminar = $arr_nama_seminar[$row_index];
                 $answers13->negara_penyelenggara_seminar = $arr_negara_penyelenggara_seminar[$row_index];
@@ -549,7 +549,7 @@ class Survey{
 
             foreach ($arr_nama_penerima_award as $row_index => $code) {
                 $answers14 = new Answers14;
-                $answers14->status = $answers14->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers14->status;
+                $answers14->status = is_null($answers14->status) || $answers14->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers14->status;
                 $answers14->nama_penerima_award = $arr_nama_penerima_award[$row_index];
                 $answers14->nama_award = $arr_nama_award[$row_index];
                 $answers14->institusi_pemberi_award = $arr_institusi_pemberi_award[$row_index];
@@ -576,7 +576,7 @@ class Survey{
 
             foreach ($arr_nama_barang as $row_index => $code) {
                 $answers15a = new Answers15a;
-                $answers15a->status = $answers15a->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers15a->status;
+                $answers15a->status = is_null($answers15a->status) || $answers15a->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers15a->status;
                 $answers15a->nama_barang = $arr_nama_barang[$row_index];
                 $answers15a->terkomersialisasi = $arr_terkomersialisasi[$row_index];
                 $answers15a->tahun = $arr_tahun[$row_index];
@@ -602,7 +602,7 @@ class Survey{
 
             foreach ($arr_nama_jasa as $row_index => $code) {
                 $answers15b = new Answers15b;
-                $answers15b->status = $answers15b->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers15b->status;
+                $answers15b->status = is_null($answers15b->status) || $answers15b->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers15b->status;
                 $answers15b->nama_jasa = $arr_nama_jasa[$row_index];
                 $answers15b->pengguna_jasa = $arr_pengguna_jasa[$row_index];
                 $answers15b->tahun = $arr_tahun[$row_index];
@@ -633,7 +633,7 @@ class Survey{
 
             foreach ($arr_usulan_paten as $row_index => $code) {
                 $answers16a = new Answers16a;
-                $answers16a->status = $answers16a->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers16a->status;
+                $answers16a->status = is_null($answers16a->status) || $answers16a->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers16a->status;
                 $answers16a->tahun = $arr_tahun[$row_index];
                 $answers16a->usulan_paten = $arr_usulan_paten[$row_index];
                 $answers16a->usulan_patensederhana = $arr_usulan_patensederhana[$row_index];
@@ -655,7 +655,7 @@ class Survey{
     private function createNewAnswers16b(Answers $answers, Request $request){
         if($request->input('data.question16_switch') === 'on') {
             $answers16b = Answers16b::firstOrNew(['id_answer' => $answers->id]);
-            $answers16b->status = $answers16b->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers16b->status;
+            $answers16b->status = is_null($answers16b->status) || $answers16b->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers16b->status;
             $answers16b->jumlah_patenluarnegeri = $request->input('data.answer16b_jumlah_patenluarnegeri');
             $answers16b->save();
 
@@ -679,7 +679,7 @@ class Survey{
 
             foreach ($arr_lisensi as $row_index => $code) {
                 $answers17 = new Answers17;
-                $answers17->status = $answers17->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers17->status;
+                $answers17->status = is_null($answers17->status) || $answers17->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers17->status;
                 $answers17->lisensi = $arr_lisensi[$row_index];
                 $answers17->tahun = $arr_tahun[$row_index];
                 $answers17->nilai = $this->getValueFromNominalFormat($arr_nilai[$row_index]);
@@ -696,7 +696,7 @@ class Survey{
 
     private function createNewAnswers18(Answers $answers, Request $request){
         $answers18 =  Answers18::firstOrNew(['id_answer' => $answers->id]);
-        $answers18->status = $answers18->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers18->status;
+        $answers18->status = is_null($answers18->status) || $answers18->status === self::STATUS_REJECT ? self::STATUS_SENT : $answers18->status;
         $answers18->comment = $request->input('data.answer18_comment');
         $answers18->save();
         return $answers18;
