@@ -61,6 +61,7 @@ class TotalBelanjaJenisSumberDana extends Fractal\TransformerAbstract
                     ],
                 ]
             ],
+            'total' => $compare->total
         ];
     }
 }
