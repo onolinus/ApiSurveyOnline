@@ -19,7 +19,8 @@ class CreateViewTotalBelanjaPerJenisPenelitian extends Migration
         SUM(`penelitian_terapan`) AS `penelitian_terapan`,
         SUM(`penelitian_terapan`)/totalbelanja_per_jenispenelitian()*100 AS `percentage_penelitian_terapan`,
         SUM(`pengembangan_eksperimental`) AS `pengembangan_eksperimental`,
-        SUM(`pengembangan_eksperimental`)/totalbelanja_per_jenispenelitian()*100 AS `percentage_pengembangan_eksperimental`
+        SUM(`pengembangan_eksperimental`)/totalbelanja_per_jenispenelitian()*100 AS `percentage_pengembangan_eksperimental`,
+        totalbelanja_per_jenispenelitian() AS `total`
         FROM `answers7`');
     }
 
