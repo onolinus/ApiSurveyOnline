@@ -180,6 +180,8 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::get('stats/lembaga/countuser', ['as' => 'lembaga.countuser', 'uses' => 'LembagaController@getUserCount']);
     });
 
+    Route::get('stats/puslit', ['as' => 'puslit', 'uses' => 'PuslitController@index']);
+    Route::get('stats/puslit/lembaga/{idLembaga}', ['as' => 'puslit.lembaga', 'uses' => 'PuslitController@lembaga']);
 
     # Correspondent Frontend
     Route::group(['middleware' => ['\App\Http\Middleware\CorrespondentPrivilegeMiddleware']], function () {
