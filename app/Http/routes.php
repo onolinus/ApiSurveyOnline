@@ -186,6 +186,7 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::get('stats/compare/intramural-ekstramural', ['as' => 'stats.compare.intramural.ekstramural', 'uses' => 'Guest\Report\CompareIntramuralEkstramuralController@index']);
         Route::get('stats/totalbelanja/ekstramural/pelaksana', ['as' => 'stats.totalbelanja.ekstramural.pelaksana', 'uses' => 'Guest\Report\PelaksanaBelanjaEkstramuralController@index']);
         Route::get('stats/personil/klasifikasi', ['as' => 'stats.personil.klasifikasi', 'uses' => 'Guest\Report\PersonilKlasifikasiController@index']);
+        Route::get('stats/personil/tingkat-pendidikan', ['as' => 'stats.personil.tingkatpendidikan', 'uses' => 'Guest\Report\PersonilTingkatPendidikanController@index']);
     });
 
 

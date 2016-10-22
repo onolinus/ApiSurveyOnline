@@ -20,16 +20,10 @@ class CreateFunctionJumlahTeknisiPersonilLitbang extends Migration
                     (
                         SUM(teknisi_s1_l)
                         +SUM(teknisi_s1_p)
-                        +SUM(teknisi_s1_fte_l)
-                        +SUM(teknisi_s1_fte_p)
                         +SUM(teknisi_d3_l)
                         +SUM(teknisi_d3_p)
-                        +SUM(teknisi_d3_fte_l)
-                        +SUM(teknisi_d3_fte_p)
                         +SUM(teknisi_belowd3_l)
                         +SUM(teknisi_belowd3_p)
-                        +SUM(teknisi_belowd3_fte_l)
-                        +SUM(teknisi_belowd3_fte_p)
                     ) AS `teknisi`
                     FROM `answers9b`
                 );

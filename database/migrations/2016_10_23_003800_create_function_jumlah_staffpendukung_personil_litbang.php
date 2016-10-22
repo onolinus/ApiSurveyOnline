@@ -20,16 +20,10 @@ class CreateFunctionJumlahStaffpendukungPersonilLitbang extends Migration
                     (
                         SUM(staffpendukung_s1_l)
                         +SUM(staffpendukung_s1_p)
-                        +SUM(staffpendukung_s1_fte_l)
-                        +SUM(staffpendukung_s1_fte_p)
                         +SUM(staffpendukung_d3_l)
                         +SUM(staffpendukung_d3_p)
-                        +SUM(staffpendukung_d3_fte_l)
-                        +SUM(staffpendukung_d3_fte_p)
                         +SUM(staffpendukung_belowd3_l)
                         +SUM(staffpendukung_belowd3_p)
-                        +SUM(staffpendukung_belowd3_fte_l)
-                        +SUM(staffpendukung_belowd3_fte_p)
                     ) AS `staffpendukung`
                     FROM `answers9b`
                 );
