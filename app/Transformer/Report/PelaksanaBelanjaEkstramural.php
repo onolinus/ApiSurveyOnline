@@ -10,23 +10,23 @@ class PelaksanaBelanjaEkstramural extends Fractal\TransformerAbstract
     public function transform(Collection $data)
     {
         return [
-            'jumlah_peneliti_pemerintah' => [
+            'pemerintah' => [
                 'percentage' => doubleval($data->get('percentage_jumlah_peneliti_pemerintah', 0)),
                 'value' => intval($data->get('jumlah_peneliti_pemerintah', 0))
             ],
-            'jumlah_peneliti_perguruantinggi' => [
+            'perguruantinggi' => [
                 'percentage' => doubleval($data->get('percentage_jumlah_peneliti_perguruantinggi', 0)),
                 'value' => intval($data->get('jumlah_peneliti_perguruantinggi', 0))
             ],
-            'jumlah_peneliti_industri' => [
+            'industri' => [
                 'percentage' => doubleval($data->get('percentage_jumlah_peneliti_industri', 0)),
                 'value' => intval($data->get('jumlah_peneliti_industri', 0))
             ],
-            'jumlah_peneliti_lembagaswadaya' => [
+            'lembagaswadaya' => [
                 'percentage' => doubleval($data->get('percentage_jumlah_peneliti_lembagaswadaya', 0)),
                 'value' => intval($data->get('jumlah_peneliti_lembagaswadaya', 0))
             ],
-            'jumlah_peneliti_asing' => [
+            'asing' => [
                 'percentage' => doubleval($data->get('percentage_jumlah_peneliti_asing', 0)),
                 'value' => intval($data->get('jumlah_peneliti_asing', 0))
             ],
