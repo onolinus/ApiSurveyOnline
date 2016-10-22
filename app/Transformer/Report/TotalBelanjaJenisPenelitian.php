@@ -10,15 +10,15 @@ class TotalBelanjaJenisPenelitian extends Fractal\TransformerAbstract
     {
         return [
             'penelitian_dasar' => [
-                'percentage' => $data->get('percentage_penelitian_dasar'),
+                'percentage' => doubleval($data->get('percentage_penelitian_dasar')),
                 'value' => doubleval($data->get('penelitian_dasar)')),
             ],
             'penelitian_terapan' => [
-                'percentage' => $data->get('percentage_penelitian_terapan'),
+                'percentage' => doubleval($data->get('percentage_penelitian_terapan')),
                 'value' => doubleval($data->get('penelitian_terapan'))
             ],
             'pengembangan_eksperimental' => [
-                'percentage' => $data->get('percentage_pengembangan_eksperimental'),
+                'percentage' => doubleval($data->get('percentage_pengembangan_eksperimental')),
                 'value' => doubleval($data->get('pengembangan_eksperimental'))
             ]
         ];

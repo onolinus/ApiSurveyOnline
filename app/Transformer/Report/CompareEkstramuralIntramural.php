@@ -11,11 +11,11 @@ class CompareEkstramuralIntramural extends Fractal\TransformerAbstract
     {
         return [
             'intramural' => [
-                'percentage' => $data->get('percentage_intramural'),
+                'percentage' => doubleval($data->get('percentage_intramural')),
                 'value' => doubleval($data->get('intramural')),
             ],
             'ekstramural' => [
-                'percentage' => $data->get('percentage_ekstramural'),
+                'percentage' => doubleval($data->get('percentage_ekstramural')),
                 'value' => doubleval($data->get('ekstramural')),
             ],
         ];
