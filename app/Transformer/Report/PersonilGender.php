@@ -19,7 +19,7 @@ class PersonilGender extends Fractal\TransformerAbstract
                     'value' => intval($data->get('jumlah_teknisi_lakilaki_personil_litbang')),
                 ],
                 'staffpendukung' => [
-                    'percentage' => doubleval($data->get('jumlah_staffpendukung_lakilaki_personil_litbang')),
+                    'percentage' => doubleval($data->get('percentage_jumlah_staffpendukung_lakilaki_personil_litbang')),
                     'value' => intval($data->get('jumlah_staffpendukung_lakilaki_personil_litbang')),
                 ],
             ],
@@ -33,7 +33,7 @@ class PersonilGender extends Fractal\TransformerAbstract
                     'value' => intval($data->get('jumlah_teknisi_perempuan_personil_litbang')),
                 ],
                 'staffpendukung' => [
-                    'percentage' => doubleval($data->get('jumlah_staffpendukung_perempuan_personil_litbang')),
+                    'percentage' => doubleval($data->get('percentage_jumlah_staffpendukung_perempuan_personil_litbang')),
                     'value' => intval($data->get('jumlah_staffpendukung_perempuan_personil_litbang')),
                 ],
             ],
