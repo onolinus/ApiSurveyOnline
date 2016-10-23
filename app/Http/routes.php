@@ -188,6 +188,9 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::get('stats/personil/klasifikasi', ['as' => 'stats.personil.klasifikasi', 'uses' => 'Guest\Report\PersonilKlasifikasiController@index']);
         Route::get('stats/personil/tingkat-pendidikan', ['as' => 'stats.personil.tingkatpendidikan', 'uses' => 'Guest\Report\PersonilTingkatPendidikanController@index']);
         Route::get('stats/personil/gender', ['as' => 'stats.personil.gender', 'uses' => 'Guest\Report\PersonilGenderController@index']);
+        Route::get('stats/personil/peneliti/tingkat-pendidikan/gender', ['as' => 'stats.personil.peneliti.tingkatpendidikan.gender', 'uses' => 'Guest\Report\Personil\Peneliti\TingkatPendidikanGenderController@index']);
+        Route::get('stats/personil/teknisi/tingkat-pendidikan/gender', ['as' => 'stats.personil.teknisi.tingkatpendidikan.gender', 'uses' => 'Guest\Report\Personil\Teknisi\TingkatPendidikanGenderController@index']);
+        Route::get('stats/personil/staffpendukung/tingkat-pendidikan/gender', ['as' => 'stats.personil.staffpendukung.tingkatpendidikan.gender', 'uses' => 'Guest\Report\Personil\Staffpendukung\TingkatPendidikanGenderController@index']);
     });
 
 

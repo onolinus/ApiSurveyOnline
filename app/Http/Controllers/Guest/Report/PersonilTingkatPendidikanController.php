@@ -35,6 +35,6 @@ class PersonilTingkatPendidikanController extends ReportController
 
     protected function getCacheName()
     {
-        return 'report:personil:tingkat:pendidikan';
+        return 'report:personil:tingkatpendidikan';
     }
 }
