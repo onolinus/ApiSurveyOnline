@@ -193,6 +193,7 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::get('stats/personil/staffpendukung/tingkat-pendidikan/gender', ['as' => 'stats.personil.staffpendukung.tingkatpendidikan.gender', 'uses' => 'Guest\Report\Personil\Staffpendukung\TingkatPendidikanGenderController@index']);
         Route::get('stats/personil/peneliti/jabatan-fungsional', ['as' => 'stats.personil.peneliti.jabatanfungsional', 'uses' => 'Guest\Report\Personil\Peneliti\JabatanFungsionalController@index']);
         Route::get('stats/peneliti-luar', ['as' => 'stats.penelitiluar', 'uses' => 'Guest\Report\PenelitiLuarController@index']);
+        Route::get('stats/paten', ['as' => 'stats.paten', 'uses' => 'Guest\Report\PatenSektorPemerintahController@index']);
     });
 
 
