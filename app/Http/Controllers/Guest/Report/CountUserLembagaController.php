@@ -1,29 +1,29 @@
 <?php
 namespace App\Http\Controllers\Guest\Report;
 
-use App\Transformer\Report\SentAnswersLembaga;
+use App\Transformer\Report\CountUserLembaga;
 use Illuminate\Support\Facades\DB;
 
-class SentAnswersController extends ReportController
+class CountUserLembagaController extends ReportController
 {
     protected function getFromDb()
     {
-        return DB::table('sent_answers')->get();
+        return DB::table('count_user_per_lembaga')->get();
     }
 
     protected function getCacheName()
     {
-        return 'report:lembaga:surveysent';
+        return 'report:lembaga:count:correspondent';
     }
 
     protected function getTitle()
     {
-        return 'Jumlah respondent yang mengirimkan survey';
+        return 'Jumlah reponden per lembaga';
     }
 
     protected function getTransformer()
     {
-        return new SentAnswersLembaga();
+        return new CountUserLembaga();
     }
 
     protected function returnType()

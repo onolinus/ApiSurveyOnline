@@ -1,22 +1,39 @@
 <?php
 namespace App\Http\Controllers\Guest\Report;
 
-
 use App\Answers;
 use App\Correspondents;
-use App\Http\Controllers\Controller;
 use App\Lembaga;
-use EllipseSynergie\ApiResponse\Laravel\Response;
+use App\Transformer\Report\TotalSummary;
 
-class TotalSummaryController extends Controller
+class TotalSummaryController extends ReportController
 {
-    public function index(Response $response){
-        return $response->withArray([
-            'data' => [
-                'lembaga' => Lembaga::count(),
-                'correspondent' => Correspondents::count(),
-                'answers' => Answers::count(),
-            ]
-        ]);
+    protected function getFromDb()
+    {
+        return [
+            'lembaga' => Lembaga::count(),
+            'correspondent' => Correspondents::count(),
+            'answers' => Answers::count(),
+        ];
+    }
+
+    protected function getCacheName()
+    {
+        return 'report:summary:total';
+    }
+
+    protected function getTitle()
+    {
+        return 'Total Summary';
+    }
+
+    protected function getTransformer()
+    {
+        return new TotalSummary();
+    }
+
+    protected function returnType()
+    {
+        return 'item';
     }
 }

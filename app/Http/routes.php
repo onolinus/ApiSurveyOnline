@@ -169,15 +169,34 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
             'show', 'index'
         ]]);
 
-        Route::resource('stats/answers/sent', 'Guest\Report\SentAnswersController', ['only' => [
-            'index'
-        ]]);
+
 
         Route::resource('stats/total/summary', 'Guest\Report\TotalSummaryController', ['only' => [
             'index'
         ]]);
-
-        Route::get('stats/lembaga/countuser', ['as' => 'lembaga.countuser', 'uses' => 'LembagaController@getUserCount']);
+        Route::resource('stats/answers/sent', 'Guest\Report\SentAnswersController', ['only' => [
+            'index'
+        ]]);
+        Route::get('stats/lembaga/countuser', ['as' => 'stats.lembaga.countuser', 'uses' => 'Guest\Report\CountUserLembagaController@index']);
+        Route::get('stats/lembaga/totalbelanja', ['as' => 'stats.lembaga.totalbelanja', 'uses' => 'Guest\Report\TotalBelanjaLembagaController@index']);
+        Route::get('stats/totalbelanja/bidang-penelitian', ['as' => 'stats.belanja.bidangpenelitian', 'uses' => 'Guest\Report\TotalBelanjaBidangPenelitianController@index']);
+        Route::get('stats/totalbelanja/sosial-ekonomi', ['as' => 'stats.belanja.sosialekonomi', 'uses' => 'Guest\Report\TotalBelanjaSosialEkonomiController@index']);
+        Route::get('stats/totalbelanja/jenispengeluaran', ['as' => 'stats.belanja.jenispengeluaran', 'uses' => 'Guest\Report\TotalBelanjaJenisPengeluaranController@index']);
+        Route::get('stats/totalbelanja/jenispengeluaran/lembaga', ['as' => 'stats.belanja.jenispengeluaran.lembaga', 'uses' => 'Guest\Report\TotalBelanjaJenisPengeluaranLembagaController@index']);
+        Route::get('stats/totalbelanja/jenissumberdana', ['as' => 'stats.belanja.jenissumberdana', 'uses' => 'Guest\Report\TotalBelanjaJenisSumberDanaController@index']);
+        Route::get('stats/totalbelanja/jenispenelitian', ['as' => 'stats.belanja.jenispenelitian', 'uses' => 'Guest\Report\TotalBelanjaJenisPenelitianController@index']);
+        Route::get('stats/compare/intramural-ekstramural', ['as' => 'stats.compare.intramural.ekstramural', 'uses' => 'Guest\Report\CompareIntramuralEkstramuralController@index']);
+        Route::get('stats/totalbelanja/ekstramural/pelaksana', ['as' => 'stats.totalbelanja.ekstramural.pelaksana', 'uses' => 'Guest\Report\PelaksanaBelanjaEkstramuralController@index']);
+        Route::get('stats/personil/klasifikasi', ['as' => 'stats.personil.klasifikasi', 'uses' => 'Guest\Report\PersonilKlasifikasiController@index']);
+        Route::get('stats/personil/tingkat-pendidikan', ['as' => 'stats.personil.tingkatpendidikan', 'uses' => 'Guest\Report\PersonilTingkatPendidikanController@index']);
+        Route::get('stats/personil/gender', ['as' => 'stats.personil.gender', 'uses' => 'Guest\Report\PersonilGenderController@index']);
+        Route::get('stats/personil/peneliti/tingkat-pendidikan/gender', ['as' => 'stats.personil.peneliti.tingkatpendidikan.gender', 'uses' => 'Guest\Report\Personil\Peneliti\TingkatPendidikanGenderController@index']);
+        Route::get('stats/personil/teknisi/tingkat-pendidikan/gender', ['as' => 'stats.personil.teknisi.tingkatpendidikan.gender', 'uses' => 'Guest\Report\Personil\Teknisi\TingkatPendidikanGenderController@index']);
+        Route::get('stats/personil/staffpendukung/tingkat-pendidikan/gender', ['as' => 'stats.personil.staffpendukung.tingkatpendidikan.gender', 'uses' => 'Guest\Report\Personil\Staffpendukung\TingkatPendidikanGenderController@index']);
+        Route::get('stats/personil/peneliti/jabatan-fungsional', ['as' => 'stats.personil.peneliti.jabatanfungsional', 'uses' => 'Guest\Report\Personil\Peneliti\JabatanFungsionalController@index']);
+        Route::get('stats/personil/peneliti/bidang-ilmu', ['as' => 'stats.personil.peneliti.bidangilmu', 'uses' => 'Guest\Report\Personil\Peneliti\BidangIlmuController@index']);
+        Route::get('stats/peneliti-luar', ['as' => 'stats.penelitiluar', 'uses' => 'Guest\Report\PenelitiLuarController@index']);
+        Route::get('stats/paten', ['as' => 'stats.paten', 'uses' => 'Guest\Report\PatenSektorPemerintahController@index']);
     });
 
     Route::get('stats/puslit', ['as' => 'puslit', 'uses' => 'PuslitController@index']);
