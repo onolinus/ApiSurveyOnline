@@ -198,6 +198,7 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::get('stats/peneliti-luar', ['as' => 'stats.penelitiluar', 'uses' => 'Guest\Report\PenelitiLuarController@index']);
         Route::get('stats/paten', ['as' => 'stats.paten', 'uses' => 'Guest\Report\PatenSektorPemerintahController@index']);
         Route::get('stats/paten-sederhana', ['as' => 'stats.patensederhana', 'uses' => 'Guest\Report\PatenSederhanaSektorPemerintahController@index']);
+        Route::get('stats/makalah-ilmiah/lembaga', ['as' => 'stats.makalahilmiah.lembaga', 'uses' => 'Guest\Report\MakalahIlmiahLembagaController@index']);
     });
 
     Route::get('stats/puslit', ['as' => 'puslit', 'uses' => 'PuslitController@index']);
