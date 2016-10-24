@@ -10,7 +10,8 @@ class TotalBelanjaJenisPengeluaranController extends ReportController
 {
     protected function getFromDb()
     {
-        return DB::table('total_belanja_per_jenis_pengeluaran')->first();
+        $data = DB::table('total_belanja_per_jenis_pengeluaran')->first();
+        return $data;
     }
 
     protected function getMeta(){

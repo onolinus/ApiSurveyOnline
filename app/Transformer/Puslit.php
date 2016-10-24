@@ -10,7 +10,7 @@ class Puslit extends Fractal\TransformerAbstract
         return [
             'id' => $puslit->puslit,
             'lembaga' => [
-                'id' => $puslit->id,
+                'id' => intval($puslit->id),
                 'name' => $puslit->name,
                 'type' => $puslit->type,
             ]
