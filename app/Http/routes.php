@@ -202,6 +202,7 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::get('stats/makalah-ilmiah/internasional/lembaga', ['as' => 'stats.makalahilmiah.internasional.lembaga', 'uses' => 'Guest\Report\MakalahIlmiahLembagaController@index']);
         Route::get('stats/makalah-ilmiah/nasional/lembaga', ['as' => 'stats.makalahilmiah.nasional.lembaga', 'uses' => 'Guest\Report\MakalahIlmiahNasionalLembagaController@index']);
         Route::get('stats/produk/barang', ['as' => 'stats.produk.barang', 'uses' => 'Guest\Report\ProdukBarangController@index']);
+        Route::get('stats/compare/anggaran-and-dipa', ['as' => 'stats.compare.anggarananddipa', 'uses' => 'Guest\Report\CompareAnggaranAndDipaController@index']);
     });
 
     Route::get('stats/puslit', ['as' => 'puslit', 'uses' => 'PuslitController@index']);
