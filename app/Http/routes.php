@@ -178,6 +178,7 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
             'index'
         ]]);
         Route::get('stats/lembaga/countuser', ['as' => 'stats.lembaga.countuser', 'uses' => 'Guest\Report\CountUserLembagaController@index']);
+        Route::get('stats/lembaga/pemilik-lisensi', ['as' => 'stats.lembaga.pemiliklisensi', 'uses' => 'Guest\Report\LembagaPemilikLisensiController@index']);
         Route::get('stats/lembaga/totalbelanja', ['as' => 'stats.lembaga.totalbelanja', 'uses' => 'Guest\Report\TotalBelanjaLembagaController@index']);
         Route::get('stats/totalbelanja/bidang-penelitian', ['as' => 'stats.belanja.bidangpenelitian', 'uses' => 'Guest\Report\TotalBelanjaBidangPenelitianController@index']);
         Route::get('stats/totalbelanja/sosial-ekonomi', ['as' => 'stats.belanja.sosialekonomi', 'uses' => 'Guest\Report\TotalBelanjaSosialEkonomiController@index']);
@@ -197,6 +198,11 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::get('stats/personil/peneliti/bidang-ilmu', ['as' => 'stats.personil.peneliti.bidangilmu', 'uses' => 'Guest\Report\Personil\Peneliti\BidangIlmuController@index']);
         Route::get('stats/peneliti-luar', ['as' => 'stats.penelitiluar', 'uses' => 'Guest\Report\PenelitiLuarController@index']);
         Route::get('stats/paten', ['as' => 'stats.paten', 'uses' => 'Guest\Report\PatenSektorPemerintahController@index']);
+        Route::get('stats/paten-sederhana', ['as' => 'stats.patensederhana', 'uses' => 'Guest\Report\PatenSederhanaSektorPemerintahController@index']);
+        Route::get('stats/makalah-ilmiah/internasional/lembaga', ['as' => 'stats.makalahilmiah.internasional.lembaga', 'uses' => 'Guest\Report\MakalahIlmiahLembagaController@index']);
+        Route::get('stats/makalah-ilmiah/nasional/lembaga', ['as' => 'stats.makalahilmiah.nasional.lembaga', 'uses' => 'Guest\Report\MakalahIlmiahNasionalLembagaController@index']);
+        Route::get('stats/produk/barang', ['as' => 'stats.produk.barang', 'uses' => 'Guest\Report\ProdukBarangController@index']);
+        Route::get('stats/compare/anggaran-and-dipa', ['as' => 'stats.compare.anggarananddipa', 'uses' => 'Guest\Report\CompareAnggaranAndDipaController@index']);
     });
 
     Route::get('stats/puslit', ['as' => 'puslit', 'uses' => 'PuslitController@index']);

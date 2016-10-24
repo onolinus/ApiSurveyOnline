@@ -1,16 +1,14 @@
 <?php
-
 namespace App\Http\Controllers\Guest\Report;
 
-use App\Transformer\Report\TotalBelanjaJenisPengeluaran;
-use App\Http\Requests;
+use App\Transformer\Report\PatenSederhanaSektorPemerintah;
 use Illuminate\Support\Facades\DB;
 
-class TotalBelanjaJenisPengeluaranController extends ReportController
+class PatenSederhanaSektorPemerintahController extends ReportController
 {
     protected function getFromDb()
     {
-        $data = DB::table('total_belanja_per_jenis_pengeluaran')->first();
+        $data = DB::table('paten_sederhana_sektor_pemerintah')->first();
         return $data;
     }
 
@@ -23,12 +21,12 @@ class TotalBelanjaJenisPengeluaranController extends ReportController
 
     protected function getTitle()
     {
-        return 'Distribusi Total Belanja Litbang menurut Jenis Pengeluaran';
+        return 'Perkembangan Paten Sederhana Sektor Pemerintah Tahun 2015-2013';
     }
 
     protected function getTransformer()
     {
-        return new TotalBelanjaJenisPengeluaran();
+        return new PatenSederhanaSektorPemerintah();
     }
 
     protected function returnType()
@@ -38,6 +36,6 @@ class TotalBelanjaJenisPengeluaranController extends ReportController
 
     protected function getCacheName()
     {
-        return 'report:totalbelanja:jenispengeluaran';
+        return 'report:patensederhana:pemerintah';
     }
 }

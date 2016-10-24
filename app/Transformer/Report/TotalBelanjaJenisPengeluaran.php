@@ -8,10 +8,11 @@ class TotalBelanjaJenisPengeluaran extends Fractal\TransformerAbstract
 {
     public function transform(Collection $data)
     {
+        $result = $data->all();
         return [
             'belanja_pegawai_upah' => [
                 'percentage' => doubleval($data->get('percentage_belanja_pegawai_upah')),
-                'value' => doubleval($data->get('belanja_pegawai_upah)')),
+                'value' => doubleval($result['belanja_pegawai_upah']),
             ],
             'belanja_modal_properti' => [
                 'percentage' => doubleval($data->get('percentage_belanja_modal_properti')),
