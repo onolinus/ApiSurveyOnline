@@ -178,6 +178,7 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
             'index'
         ]]);
         Route::get('stats/lembaga/countuser', ['as' => 'stats.lembaga.countuser', 'uses' => 'Guest\Report\CountUserLembagaController@index']);
+        Route::get('stats/lembaga/pemilik-lisensi', ['as' => 'stats.lembaga.pemiliklisensi', 'uses' => 'Guest\Report\LembagaPemilikLisensiController@index']);
         Route::get('stats/lembaga/totalbelanja', ['as' => 'stats.lembaga.totalbelanja', 'uses' => 'Guest\Report\TotalBelanjaLembagaController@index']);
         Route::get('stats/totalbelanja/bidang-penelitian', ['as' => 'stats.belanja.bidangpenelitian', 'uses' => 'Guest\Report\TotalBelanjaBidangPenelitianController@index']);
         Route::get('stats/totalbelanja/sosial-ekonomi', ['as' => 'stats.belanja.sosialekonomi', 'uses' => 'Guest\Report\TotalBelanjaSosialEkonomiController@index']);
