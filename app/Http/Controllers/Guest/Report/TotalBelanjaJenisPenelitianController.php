@@ -10,7 +10,8 @@ class TotalBelanjaJenisPenelitianController extends ReportController
 {
     protected function getFromDb()
     {
-        return DB::table('total_belanja_per_jenis_penelitian')->first();
+        $data = DB::table('total_belanja_per_jenis_penelitian')->first();
+        return $data;
     }
 
     protected function getMeta(){
