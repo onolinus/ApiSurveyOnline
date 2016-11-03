@@ -21,7 +21,7 @@ class PatenSederhanaSektorPemerintahController extends ReportController
 
     protected function getTitle()
     {
-        return 'Perkembangan Paten Sederhana Sektor Pemerintah Tahun 2015-2013';
+        return 'Perkembangan Paten Sederhana Sektor Pemerintah Tahun 2013-2015';
     }
 
     protected function getTransformer()
