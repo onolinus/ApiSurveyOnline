@@ -20,7 +20,7 @@ class LembagaPemilikLisensiController extends ReportController
 
     protected function getTitle()
     {
-        return 'Lembaga Pemilik Lisensi 2008-2010';
+        return 'Lembaga Pemilik Lisensi 2013-2015';
     }
 
     protected function getTransformer()
