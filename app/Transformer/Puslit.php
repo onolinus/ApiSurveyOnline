@@ -13,6 +13,11 @@ class Puslit extends Fractal\TransformerAbstract
                 'id' => intval($puslit->id),
                 'name' => $puslit->name,
                 'type' => $puslit->type,
+            ],
+            'alamat' => $puslit->alamat,
+            'head' => [
+                'nip' => $puslit->nip,
+                'nama' => $puslit->approved_by_name,
             ]
         ];
     }
