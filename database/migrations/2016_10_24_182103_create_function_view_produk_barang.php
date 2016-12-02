@@ -29,6 +29,6 @@ class CreateFunctionViewProdukBarang extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP VIEW `produk_barang`');
+        DB::unprepared('DROP FUNCTION `produk_barang`');
     }
 }
