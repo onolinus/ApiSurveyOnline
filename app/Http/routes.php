@@ -195,6 +195,7 @@ Route::group(['middleware' => ['apisurveylitbang']], function () {
         Route::get('stats/personil/teknisi/tingkat-pendidikan/gender', ['as' => 'stats.personil.teknisi.tingkatpendidikan.gender', 'uses' => 'Guest\Report\Personil\Teknisi\TingkatPendidikanGenderController@index']);
         Route::get('stats/personil/staffpendukung/tingkat-pendidikan/gender', ['as' => 'stats.personil.staffpendukung.tingkatpendidikan.gender', 'uses' => 'Guest\Report\Personil\Staffpendukung\TingkatPendidikanGenderController@index']);
         Route::get('stats/personil/peneliti/jabatan-fungsional', ['as' => 'stats.personil.peneliti.jabatanfungsional', 'uses' => 'Guest\Report\Personil\Peneliti\JabatanFungsionalController@index']);
+        Route::get('stats/personil/peneliti/jabatan-fungsional-per-lembaga', ['as' => 'stats.personil.peneliti.jabatanfungsional.perlembaga', 'uses' => 'Guest\Report\Personil\Peneliti\JabatanFungsionalPerLembagaController@index']);
         Route::get('stats/personil/peneliti/bidang-ilmu', ['as' => 'stats.personil.peneliti.bidangilmu', 'uses' => 'Guest\Report\Personil\Peneliti\BidangIlmuController@index']);
         Route::get('stats/peneliti-luar', ['as' => 'stats.penelitiluar', 'uses' => 'Guest\Report\PenelitiLuarController@index']);
         Route::get('stats/paten', ['as' => 'stats.paten', 'uses' => 'Guest\Report\PatenSektorPemerintahController@index']);
