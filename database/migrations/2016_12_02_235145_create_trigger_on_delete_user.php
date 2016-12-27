@@ -21,7 +21,6 @@ class CreateTriggerOnDeleteUser extends Migration
 
             DELETE FROM `correspondents` WHERE `user_id` = OLD.id;
             DELETE FROM `approved_by` WHERE `correspondent_id_approved` = OLD.id;
-            DELETE FROM `answers` WHERE `id_correspondent` = OLD.id;
 
             SET id_answer = (SELECT `id` FROM `answers` WHERE `id_correspondent` = OLD.id);
             DELETE FROM `answers` WHERE `id` = id_answer;
